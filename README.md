@@ -147,7 +147,7 @@ After committing changes to GitHub you can deploy the build output to the Genera
    aws s3 sync build/ s3://YOUR_BUCKET_NAME --region eu-central-1 --delete
    ```
 
-The CloudFront distribution (e.g. <https://d1n11wdfy5g0ms.cloudfront.net/>) will serve the updated site once the files are uploaded.
+The CloudFront distribution <https://d1n11wdfy5g0ms.cloudfront.net/> (ID `E3POL8Z7WOOYIC`, ARN `arn:aws:cloudfront::396913703024:distribution/E3POL8Z7WOOYIC`) will serve the updated site once the files are uploaded.
 
 ## CloudFormation Deployment
 
