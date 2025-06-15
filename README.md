@@ -179,3 +179,13 @@ GET /api/catalog/{id} # fetch one track by ID
 
 `preview_url` values are short-lived signed S3 links (30 seconds) so download
 URLs remain hidden.
+
+### Marketing Hub
+
+The `cloudformation/marketing-hub.yml` template provisions DynamoDB tables and
+Lambda functions for ad spend tracking and attribution. After deployment the
+API Gateway provides `/marketing` endpoints used by the dashboard to record
+campaign spend and fetch ROI metrics.
+
+Node scripts are available for social post scheduling and trending topic
+reposts under the `scripts/` directory.
