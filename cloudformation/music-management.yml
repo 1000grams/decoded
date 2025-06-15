@@ -82,11 +82,15 @@ Resources:
     Properties:
       TableName: !Sub '${EnvName}-WeeklyArtistStats'
       AttributeDefinitions:
-        - AttributeName: id
+        - AttributeName: artist_id
+          AttributeType: S
+        - AttributeName: week_start
           AttributeType: S
       KeySchema:
-        - AttributeName: id
+        - AttributeName: artist_id
           KeyType: HASH
+        - AttributeName: week_start
+          KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
 
   StatementsTable:

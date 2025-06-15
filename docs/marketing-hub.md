@@ -8,10 +8,13 @@ This document outlines the new marketing hub features added to the Decoded Music
 - **ActualPayouts** – ingestion of royalty statements.
 - **Reconciliation** – comparison of expected vs actual revenue.
 - **WeeklyArtistStats** – metrics used for attribution calculations.
+  See [weekly-performance-tracking.md](weekly-performance-tracking.md) for the
+  table schema and logging workflow.
 
 ## Lambda Functions
 - `marketingSpendHandler` – CRUD interface for the `MarketingSpend` table.
 - `attributionHandler` – correlates ad campaigns with streaming lifts and returns ROI data.
+- `weeklyStatsLogger` – scheduled every Tuesday to store weekly performance metrics.
 
 These are exposed via API Gateway under `/marketing`.
 

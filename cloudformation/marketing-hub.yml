@@ -77,11 +77,15 @@ Resources:
     Properties:
       TableName: !Sub '${EnvName}-WeeklyArtistStats'
       AttributeDefinitions:
-        - AttributeName: id
+        - AttributeName: artist_id
+          AttributeType: S
+        - AttributeName: week_start
           AttributeType: S
       KeySchema:
-        - AttributeName: id
+        - AttributeName: artist_id
           KeyType: HASH
+        - AttributeName: week_start
+          KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
   MarketingLambdaRole:
     Type: AWS::IAM::Role
@@ -136,6 +140,19 @@ Resources:
         Variables:
           SPEND_TABLE: !Ref MarketingSpendTable
           STATS_TABLE: !Ref WeeklyArtistStatsTable
+  WeeklyStatsLogger:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${EnvName}-weekly-stats-logger'
+      Runtime: nodejs18.x
+      Handler: weeklyStatsLogger.handler
+      Role: !GetAtt MarketingLambdaRole.Arn
+      Code:
+        S3Bucket: placeholder-bucket
+        S3Key: marketing/weeklyStatsLogger.zip
+      Environment:
+        Variables:
+          STATS_TABLE: !Ref WeeklyArtistStatsTable
   ApiGatewayMarketing:
     Type: AWS::ApiGateway::Resource
     Properties:
@@ -164,6 +181,20 @@ Resources:
         IntegrationHttpMethod: POST
         Type: AWS_PROXY
         Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AttributionLambda.Arn}/invocations'
+  WeeklyStatsRule:
+    Type: AWS::Events::Rule
+    Properties:
+      ScheduleExpression: 'cron(0 12 ? * TUE *)'
+      Targets:
+        - Arn: !GetAtt WeeklyStatsLogger.Arn
+          Id: WeeklyStatsLoggerTarget
+  WeeklyStatsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref WeeklyStatsLogger
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt WeeklyStatsRule.Arn
 Outputs:
   MarketingApiUrl:
     Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/marketing'
