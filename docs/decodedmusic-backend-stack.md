@@ -14,3 +14,4 @@ aws cloudformation deploy \
   --stack-name DecodedMusicBackend \
   --capabilities CAPABILITY_NAMED_IAM
 ```
+
