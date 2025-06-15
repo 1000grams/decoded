@@ -1,0 +1,30 @@
+Subject: Pitch: “{{track_title}}” by Rue de Vivre — Perfect for {{brand_or_game}}
+
+From: Rue de Vivre <ops@decodedmusic.com>
+
+Hi {{recipient_name_or_team}},
+
+I’m Rue de Vivre, and I’d love to share my track “{{track_title}}” for your {{brand_or_game}}. Here’s why it fits:
+
+{{theme_bullets}}
+
+Listen: {{preview_link}}
+Full Track (WAV/MP3/Stems): {{download_link}}
+
+ASCAP Publisher Details
+
+IPI Base #: {{ascap_ipi_base}}
+ASCAP Work ID: {{ascap_work_id}}
+
+If you’re interested, just reply with:
+
+Desired license term (e.g. exclusive/non-exclusive)
+Usage details (scene, duration, territories)
+Any special delivery format (stems, stems+dry vocal, stems+wet vocal)
+
+Happy to jump on a quick call or send over alternate edits. Thanks for considering “{{track_title}}”—looking forward to potentially collaborating!
+
+Best,
+Rue de Vivre  
+ops@decodedmusic.com  
+www.decodedmusic.com

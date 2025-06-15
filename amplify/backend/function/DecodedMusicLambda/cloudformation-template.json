@@ -1,0 +1,176 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "DecodedMusic Backend: Lambda + API Gateway + DynamoDB",
+  "Resources": {
+    "DecodedCTATable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "DecodedCTA",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "id",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ],
+        "BillingMode": "PAYPERREQUEST"
+      }
+    },
+    "DecodedLambdaExecutionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": "DecodedLambdaExecutionRole",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "DecodedLambdaPolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:PutItem",
+                    "dynamodb:Scan"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "DecodedLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "FunctionName": "backend",
+        "Runtime": "python3.12",
+        "Handler": "lambda_function.lambda_handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "DecodedLambdaExecutionRole",
+            "Arn"
+          ]
+        },
+        "Code": {
+          "S3Bucket": "decodedmusic.com",
+          "S3Key": "decodedmusic_lambda_package.zip"
+        },
+        "Timeout": 10
+      }
+    },
+    "DecodedApiGateway": {
+      "Type": "AWS::ApiGateway::RestApi",
+      "Properties": {
+        "Name": "DecodedMusicAPI"
+      }
+    },
+    "DecodedApiResource": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "DecodedApiGateway"
+        },
+        "ParentId": {
+          "Fn::GetAtt": [
+            "DecodedApiGateway",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "cta"
+      }
+    },
+    "DecodedApiMethodGET": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "AuthorizationType": "NONE",
+        "ResourceId": {
+          "Ref": "DecodedApiResource"
+        },
+        "RestApiId": {
+          "Ref": "DecodedApiGateway"
+        },
+        "Integration": {
+          "Type": "AWS_PROXY",
+          "IntegrationHttpMethod": "POST",
+          "Uri": {
+            "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DecodedLambdaFunction.Arn}/invocations"
+          }
+        }
+      }
+    },
+    "DecodedApiMethodPOST": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "AuthorizationType": "NONE",
+        "ResourceId": {
+          "Ref": "DecodedApiResource"
+        },
+        "RestApiId": {
+          "Ref": "DecodedApiGateway"
+        },
+        "Integration": {
+          "Type": "AWS_PROXY",
+          "IntegrationHttpMethod": "POST",
+          "Uri": {
+            "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DecodedLambdaFunction.Arn}/invocations"
+          }
+        }
+      }
+    },
+    "DecodedApiDeployment": {
+      "Type": "AWS::ApiGateway::Deployment",
+      "DependsOn": [
+        "DecodedApiMethodGET",
+        "DecodedApiMethodPOST"
+      ],
+      "Properties": {
+        "RestApiId": {
+          "Ref": "DecodedApiGateway"
+        },
+        "StageName": "prod"
+      }
+    },
+    "DecodedLambdaPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "DecodedLambdaFunction"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DecodedApiGateway}/*/*/cta"
+        }
+      }
+    }
+  }
+}

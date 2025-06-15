@@ -1,0 +1,35 @@
+diff --git a/.gitignore b/.gitignore
+index 08ce1e018f7ec4638ff13c5173317aaabae8a88a..a29e666b8ccd6166f888db80c9708f6add1d8be5 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -9,25 +9,30 @@ lerna-debug.log*
+ node_modules/
+ .pnp/
+ 
+ # Build output
+ dist/
+ build/
+ out/
+ 
+ # Temporary files
+ .temp/
+ .tmp/
+ 
+ # Environment files
+ .env.local
+ .env.development.local
+ .env.test.local
+ .env.production.local
+ 
+ # IDE specific files
+ .idea/
+ .vscode/
+ 
+ # OS specific files
+ .DS_Store
+ Thumbs.db
++
++# Remove stray files
++public/\# Python CDK example
++public/\# This Amplify build script ensures Node.yaml
++public/Subject: Pitch: “{{track_title}}” by Rue
