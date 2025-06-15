@@ -82,12 +82,17 @@ These values are read by the front-end to initiate the login process.
 
 ## Running in Codex
 
-If you encounter a message like "Codex couldn't run certain commands due to environment limitations," make sure the container installs dependencies before running tests or other commands. A simple `setup.sh` script can be used:
+If you encounter a message like "Codex couldn't run certain commands due to environment limitations," make sure the container installs dependencies before running tests or other commands. A simple `setup.sh` script can be used. The script uses `npm ci` when a `package-lock.json` file is present, falling back to `npm install` otherwise:
 
 ```bash
 #!/bin/bash
 set -e
-npm install
+
+if [ -f package-lock.json ]; then
+  npm ci
+else
+  npm install
+fi
 ```
 
 Run this script manually or in your CI pipeline so the environment has the required packages when Codex executes your commands.
