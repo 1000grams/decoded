@@ -1,11 +1,4 @@
-#!/bin/bash
-# automate-api-layer-schema.sh
-
-# 1. Ensure the target directory exists
-mkdir -p amplify/backend/catalog/api/appsync_graphql
-
-# 2. Create the GraphQL schema file
-cat > amplify/backend/catalog/api/appsync_graphql/schema.graphql <<'EOF'
+# Example GraphQL schema for the API layer (moved from Amplify directory)
 type ASCAP {
   work_id: String!
   ipi_name: String!
@@ -51,6 +44,3 @@ type Query {
 schema {
   query: Query
 }
-EOF
-
-echo "✅ Created amplify/backend/catalog/api/appsync_graphql/schema.graphql with the API Layer schema."

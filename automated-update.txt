@@ -1,1 +1,1 @@
-Automated update at Wed Jun 11 20:36:35 UTC 2025
+Automated cleanup: Removed obsolete Amplify build scripts, deleted stray notes, and updated backend automation scripts to use backend/... paths instead of amplify/.... Amplify deployment instructions have been dropped.
