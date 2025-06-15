@@ -79,6 +79,8 @@ These values are read by the front-end to initiate the login process.
 *   Add actual icons and refine styling based on detailed design assets.
 *   See [docs/artist-dashboard-plan.md](docs/artist-dashboard-plan.md) for a
     proposed Artist Dashboard backend and adoption strategy.
+*   See [docs/authentication-access-control.md](docs/authentication-access-control.md)
+    for an overview of Spotify OAuth and the Cognito user pool.
 
 ## Running in Codex
 
