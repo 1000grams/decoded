@@ -15,10 +15,3 @@ aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
-For Codex automation you can reference the template file relative to the repo root:
-
-```json
-{
-  "templateFile": "backend/cloudformation/decodedMusicBackend.yaml"
-}
-```
