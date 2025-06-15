@@ -167,6 +167,20 @@ aws cloudformation deploy \
 The `EnvName` parameter defaults to `prod`, but you can override it to create
 multiple environments.
 
+### DecodedMusicBackend Stack
+
+Codex automation uses a backend CloudFormation stack named `DecodedMusicBackend`.
+It provisions a Lambda function, API Gateway and DynamoDB table. Deploy it with:
+
+```bash
+aws cloudformation deploy \
+  --template-file backend/cloudformation/decodedMusicBackend.yaml \
+  --stack-name DecodedMusicBackend \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
+After deployment the CloudFormation console should show a `CREATE_COMPLETE` status.
+
 ### Catalog API
 
 Deploy `cloudformation/catalog-api.yml` to expose a simple REST API for listing
