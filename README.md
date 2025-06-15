@@ -83,6 +83,8 @@ These values are read by the front-end to initiate the login process.
 
 ## Signup Lambda Function
 The backend includes a sample AWS Lambda handler at `backend/lambda/signupHandler.js` which emails signup details via SES. Deploy it using the CloudFormation template at `backend/cloudformation/signupLambda.yml` or wire it up with Amplify.
+The API Gateway and Lambda permission configuration lives in `backend/cloudformation/signupApi.yml`. Deploy this CloudFormation stack after uploading `lambdas/signup-handler.zip` to S3 to expose a `/signup` endpoint.
+
 ## Running in Codex
 
 If you encounter a message like "Codex couldn't run certain commands due to environment limitations," make sure the container installs dependencies before running tests or other commands. A simple `setup.sh` script can be used. The script uses `npm ci` when a `package-lock.json` file is present, falling back to `npm install` otherwise:
