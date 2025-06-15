@@ -161,11 +161,13 @@ aws cloudformation deploy \
   --template-file cloudformation/music-management.yml \
   --stack-name decodedmusic-stack \
   --region eu-central-1 \
-  --capabilities CAPABILITY_NAMED_IAM
+  --capabilities CAPABILITY_NAMED_IAM \
+  --parameter-overrides EnvName=prod
 ```
 
-The `EnvName` parameter defaults to `prod`, but you can override it to create
-multiple environments.
+The `EnvName` parameter defaults to `prod`. The example above explicitly
+passes `EnvName=prod`, but you can set a different value (e.g. `staging`) to
+create additional environments.
 
 ### DecodedMusicBackend Stack
 
