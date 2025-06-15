@@ -2,6 +2,9 @@
 # automate-cloudshell-deploy.sh
 # Automates syncing the repo with AWS Amplify from an AWS CloudShell session.
 
+# Set region for all Amplify commands
+export AWS_REGION=eu-central-1
+
 # 1. Set your repo and Amplify identifiers
 : "${REPO:?Set REPO to your GitHub repository URL}"       # e.g. https://github.com/yourname/yourrepo.git
 : "${AMPLIFY_APP_ID:?Set AMPLIFY_APP_ID to your Amplify app ID}"
@@ -30,12 +33,13 @@ npm install -g @aws-amplify/cli
 amplify pull \
   --appId "$AMPLIFY_APP_ID" \
   --envName "$AMPLIFY_ENV_NAME" \
+  --region eu-central-1 \
   --yes
 
 # 6. Push backend changes
-amplify push --yes
+amplify push --region eu-central-1 --yes
 
 # 7. Build front-end and publish
 cd decodedmusic-frontend
 npm run build
-amplify publish --yes
+amplify publish --region eu-central-1 --yes
