@@ -43,7 +43,7 @@ scans public news sources for updates on labels, sync opportunities, artist
 deals, disputes, catalog sales, and contract releases. Results are summarized
 using AWS Bedrock and saved to `industry_buzz.txt`.
 
-The repository includes a `.env` file containing a default News API key. You can replace this key or set the `NEWS_API_KEY` environment variable and AWS credentials before running:
+Copy `.env.example` to `.env` and fill in the required keys (News API, Stripe, AWS). Alternatively you can set the `NEWS_API_KEY` environment variable and AWS credentials before running:
 
 ```bash
 npm run research
@@ -61,7 +61,7 @@ opened in a browser.
 ## Spotify Login Setup
 
 The Artist Dashboard now uses Spotify's authorization flow. Create a Spotify
-application and add the client ID and redirect URI to a `.env` file:
+application and add the client ID and redirect URI to your `.env` (based on `.env.example`):
 
 ```bash
 REACT_APP_SPOTIFY_CLIENT_ID=your_client_id
@@ -94,39 +94,27 @@ Run this script manually or in your CI pipeline so the environment has the requi
 
 ## Deploying from CloudShell
 
-After committing changes to GitHub you can deploy them from an AWS CloudShell session. The process mirrors the commands in `amplify.yml`:
+After committing changes to GitHub you can deploy the build output to the Generative AI Application Builder stack.
 
 1. **Clone or update the repository**
 
    ```bash
    git clone https://github.com/yourusername/decoded-music-landing-page.git
    cd decoded-music-landing-page
-   # or pull the latest changes if the repo already exists
    git pull
    ```
 
-2. **Clear caches and reinstall dependencies**
+2. **Install dependencies and build**
 
    ```bash
-   npm cache clean --force
-   rm -rf node_modules
    npm ci
-   ```
-
-3. **Install the Amplify CLI and push backend resources**
-
-   ```bash
-   npm install -g @aws-amplify/cli
-   amplify push --yes
-   ```
-
-4. **Build the front-end and deploy**
-
-   ```bash
-   cd decodedmusic-frontend
    npm run build
-   # optionally publish via Amplify
-   amplify publish
    ```
 
-This sequence ensures the CloudShell environment has a fresh install and your latest commit before running the Amplify build and deploy steps. If you prefer an automated approach, use the `automate-cloudshell-deploy.sh` script which wraps these commands. Set `REPO`, `AMPLIFY_APP_ID` and `AMPLIFY_ENV_NAME` before executing it.
+3. **Sync the `build/` directory to the S3 bucket created by the application builder**
+
+   ```bash
+   aws s3 sync build/ s3://YOUR_BUCKET_NAME --region eu-central-1 --delete
+   ```
+
+The CloudFront distribution (e.g. <https://d1n11wdfy5g0ms.cloudfront.net/>) will serve the updated site once the files are uploaded.
