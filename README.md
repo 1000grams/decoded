@@ -164,3 +164,18 @@ aws cloudformation deploy \
 
 The `EnvName` parameter defaults to `prod`, but you can override it to create
 multiple environments.
+
+### Catalog API
+
+Deploy `cloudformation/catalog-api.yml` to expose a simple REST API for listing
+and retrieving catalog tracks. Upload `lambdas/catalog-handler.zip` with the
+code from `backend/lambda/catalogHandler.js` to the referenced S3 bucket.
+The API exposes two endpoints:
+
+```
+GET /api/catalog      # list public track metadata
+GET /api/catalog/{id} # fetch one track by ID
+```
+
+`preview_url` values are short-lived signed S3 links (30 seconds) so download
+URLs remain hidden.
