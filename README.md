@@ -97,6 +97,8 @@ These values are read by the front-end to initiate the login process.
     for an overview of Spotify OAuth and the Cognito user pool.
 *   See [docs/catalog-upload-pipeline.md](docs/catalog-upload-pipeline.md)
     for the catalog upload and metadata extraction pipeline.
+*   See [docs/subscription-system.md](docs/subscription-system.md)
+    for the artist subscription workflow and company revenue reporting.
 
 
 ## Signup Lambda Function
