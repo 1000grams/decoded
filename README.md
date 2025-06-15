@@ -15,6 +15,20 @@ The design is based on a detailed blueprint incorporating specific section struc
 
 The page is built as a sequence of components, each representing a distinct section defined in the blueprint. CSS Modules are used for styling, and layout techniques (Flexbox, Grid) are employed to translate the conceptual "frame ratios" from the design phase into responsive visual structures.
 
+**Project Layout:**
+
+* `src/` – React components and pages.
+* `public/` – static files served by the app such as `index.html` and `favicon.png`.
+* `decodedmusic-frontend/` – a secondary example React project with its own `public/` folder.
+
+To update the site icon, replace `public/favicon.png` with your image and ensure `public/index.html` contains:
+
+```html
+<link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+```
+
+Remove any `favicon.ico` in `public/` before building so the updated icon appears in the browser.
+
 **Conceptual Backend Integration:**
 
 While this repository focuses solely on the front-end UI, the blueprint mentions various backend technologies (AWS services, Stripe, etc.). The front-end code includes placeholder elements and comments indicating where interactions with a backend API would occur (e.g., form submissions, triggering pricing calculations, fetching catalog data). A fully functional application would require implementing these backend services.
