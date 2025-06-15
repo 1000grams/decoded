@@ -81,6 +81,8 @@ These values are read by the front-end to initiate the login process.
     proposed Artist Dashboard backend and adoption strategy.
 *   See [docs/authentication-access-control.md](docs/authentication-access-control.md)
     for an overview of Spotify OAuth and the Cognito user pool.
+*   See [docs/catalog-upload-pipeline.md](docs/catalog-upload-pipeline.md)
+    for the catalog upload and metadata extraction pipeline.
 
 ## Running in Codex
 
