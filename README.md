@@ -118,3 +118,21 @@ After committing changes to GitHub you can deploy the build output to the Genera
    ```
 
 The CloudFront distribution (e.g. <https://d1n11wdfy5g0ms.cloudfront.net/>) will serve the updated site once the files are uploaded.
+
+## CloudFormation Deployment
+
+A starter template for the music management backend is provided at
+`cloudformation/music-management.yml`. This creates S3 buckets, DynamoDB tables,
+a sample Lambda function, and an API Gateway endpoint. Deploy it in the
+Frankfurt region (eu-central-1) with a unique stack name:
+
+```bash
+aws cloudformation deploy \
+  --template-file cloudformation/music-management.yml \
+  --stack-name decodedmusic-stack \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
+The `EnvName` parameter defaults to `prod`, but you can override it to create
+multiple environments.
