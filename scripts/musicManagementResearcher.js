@@ -48,7 +48,7 @@ async function gatherNews() {
 }
 
 async function summarizeWithBedrock(text) {
-  const client = new BedrockRuntimeClient({ region: process.env.AWS_REGION || 'us-east-1' });
+  const client = new BedrockRuntimeClient({ region: process.env.AWS_REGION || 'eu-central-1' });
   const prompt = `Summarize the following news into short bullet points highlighting labels, deals, disputes, catalog sales, contract releases, and unpaid usage.\n${text}`;
   const command = new InvokeModelCommand({
     modelId: process.env.BEDROCK_MODEL_ID || 'anthropic.claude-3-sonnet-20240229-v1:0',
