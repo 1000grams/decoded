@@ -1,0 +1,170 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Marketing & Attribution stack
+Parameters:
+  EnvName:
+    Type: String
+    Default: prod
+Resources:
+  MarketingSpendTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${EnvName}-MarketingSpend'
+      AttributeDefinitions:
+        - AttributeName: artist_id
+          AttributeType: S
+        - AttributeName: campaign_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: artist_id
+          KeyType: HASH
+        - AttributeName: campaign_id
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: campaign_id-index
+          KeySchema:
+            - AttributeName: campaign_id
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+  EstimatedEarningsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${EnvName}-EstimatedEarnings'
+      AttributeDefinitions:
+        - AttributeName: track_id
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+      KeySchema:
+        - AttributeName: track_id
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+  ActualPayoutsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${EnvName}-ActualPayouts'
+      AttributeDefinitions:
+        - AttributeName: track_id
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+      KeySchema:
+        - AttributeName: track_id
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+  ReconciliationTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${EnvName}-Reconciliation'
+      AttributeDefinitions:
+        - AttributeName: track_id
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+      KeySchema:
+        - AttributeName: track_id
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+  WeeklyArtistStatsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${EnvName}-WeeklyArtistStats'
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+  MarketingLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: 'sts:AssumeRole'
+      Policies:
+        - PolicyName: marketing-dynamodb
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:Query
+                  - dynamodb:PutItem
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: '*'
+  MarketingSpendLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${EnvName}-marketing-spend-handler'
+      Runtime: nodejs18.x
+      Handler: marketingSpendHandler.handler
+      Role: !GetAtt MarketingLambdaRole.Arn
+      Code:
+        S3Bucket: placeholder-bucket
+        S3Key: marketing/marketingSpendHandler.zip
+      Environment:
+        Variables:
+          SPEND_TABLE: !Ref MarketingSpendTable
+  AttributionLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${EnvName}-attribution-handler'
+      Runtime: nodejs18.x
+      Handler: attributionHandler.handler
+      Role: !GetAtt MarketingLambdaRole.Arn
+      Code:
+        S3Bucket: placeholder-bucket
+        S3Key: marketing/attributionHandler.zip
+      Environment:
+        Variables:
+          SPEND_TABLE: !Ref MarketingSpendTable
+          STATS_TABLE: !Ref WeeklyArtistStatsTable
+  ApiGatewayMarketing:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGateway.RootResourceId
+      PathPart: marketing
+      RestApiId: !Ref ApiGateway
+  MarketingSpendMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: ANY
+      ResourceId: !Ref ApiGatewayMarketing
+      RestApiId: !Ref ApiGateway
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${MarketingSpendLambda.Arn}/invocations'
+  AttributionMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: GET
+      ResourceId: !Ref ApiGatewayMarketing
+      RestApiId: !Ref ApiGateway
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AttributionLambda.Arn}/invocations'
+Outputs:
+  MarketingApiUrl:
+    Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/marketing'
+    Description: Marketing API endpoint
