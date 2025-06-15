@@ -12,6 +12,7 @@ Deploy with:
 aws cloudformation deploy \
   --template-file backend/cloudformation/decodedMusicBackend.yaml \
   --stack-name DecodedMusicBackend \
+  --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
