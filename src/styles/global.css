@@ -1,0 +1,80 @@
+/* Define CSS Variables */
+:root {
+  --bg-color: #111;
+  --text-color: #fff;
+  --accent-color: #32C1ED;
+  --dark-text-color: #111; /* Used for text on accent background buttons */
+  --footer-text-color: #aaa; /* Lighter grey for standard footer info */
+  --section-padding-v: 4rem; /* Standard vertical padding for sections */
+  --container-max-width: 1200px; /* Standard max width for main containers */
+  --section-gap: 4rem; /* Standard vertical gap between sections */
+}
+
+/* Global Body/HTML Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Helvetica', 'Arial', sans-serif; /* Use Helvetica or a close fallback */
+  scroll-behavior: smooth; /* Optional: smooth scrolling for navigation */
+}
+
+/* Basic Typography Reset/Defaults */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: bold; /* Helvetica is often used boldly */
+  line-height: 1.1; /* Improve readability of large headlines */
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Ensure clickable elements have a sufficient tap target size on mobile */
+button, a[href] {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex; /* Use flex or block to make min-size effective */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em 1em; /* Add some padding to increase the clickable area */
+    box-sizing: border-box;
+    text-align: center; /* Center text/content within buttons */
+}
+
+/* Add some default vertical spacing between sections */
+section {
+    margin-bottom: var(--section-gap);
+}
+
+section:last-of-type {
+    margin-bottom: 0; /* No margin after the last section before footer */
+}
+
+/* Utility class for centering content within sections */
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 1rem; /* Horizontal padding for smaller screens */
+}
+
+/* Mobile adjustments for vertical padding */
+@media (max-width: 768px) {
+  :root {
+     --section-padding-v: 3rem; /* Reduce vertical padding on mobile */
+     --section-gap: 3rem; /* Reduce gap on mobile */
+  }
+}

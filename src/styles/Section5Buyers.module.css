@@ -1,0 +1,49 @@
+/* Use variables from global.css */
+.section {
+  padding: var(--section-padding-v) 1rem; /* Use global variable */
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  text-align: center;
+}
+
+.container {
+    max-width: var(--container-max-width); /* Use global variable */
+    margin: 0 auto;
+}
+
+.headline {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem; /* Adjust spacing */
+}
+
+.introText {
+  font-size: 1.125rem; /* 18px */
+  margin-bottom: 3rem; /* Adjust spacing */
+  opacity: 0.9;
+}
+
+.featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid - Adjust minmax as needed */
+    gap: 2rem; /* Adjust gap */
+    margin-bottom: 3rem; /* Adjust spacing */
+}
+
+.cta {
+    margin-top: 3rem; /* Adjust spacing */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .headline {
+        font-size: 1.8rem; /* Smaller on mobile */
+    }
+    .introText {
+         margin-bottom: 2rem; /* Adjust spacing */
+    }
+    .featuresGrid {
+        grid-template-columns: 1fr; /* Stack on mobile */
+        gap: 1.5rem; /* Adjust gap */
+    }
+}

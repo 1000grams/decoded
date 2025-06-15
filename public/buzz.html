@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buzz - Daily Music Management Research</title>
+  <meta name="description" content="Your daily music industry sweep covering deals, disputes, sync events, and unauthorized music use.">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.24/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800">
+  <div class="max-w-md mx-auto p-4">
+    <header class="mb-4">
+      <h1 id="headline" class="text-xl font-bold text-center">Industry Buzz</h1>
+      <p class="text-center text-sm text-gray-500">Buzz | Music Management Researcher</p>
+      <p id="run-date" class="text-center text-xs text-gray-400"></p>
+    </header>
+
+    <pre id="buzz-content" class="whitespace-pre-wrap text-sm"></pre>
+
+    <footer class="mt-6 text-center text-xs text-gray-500">
+      <p>Find full details in your Google Sheet. Updates emailed to <a href="mailto:ops@decodedmusic.com" class="text-blue-500">ops@decodedmusic.com</a>.</p>
+      <div class="mt-4 space-x-2">
+        <button class="px-4 py-2 bg-blue-600 text-white rounded-xl">Subscribe</button>
+        <button class="px-4 py-2 border border-blue-600 text-blue-600 rounded-xl">Follow Our Playlist</button>
+      </div>
+    </footer>
+  </div>
+  <script>
+    fetch('industry_buzz.txt')
+      .then(res => res.text())
+      .then(text => {
+        document.getElementById('buzz-content').textContent = text.trim();
+        const date = new Date();
+        document.getElementById('run-date').textContent = 'Run date: ' + date.toISOString().split('T')[0];
+      })
+      .catch(() => {
+        document.getElementById('buzz-content').textContent = 'No update available.';
+      });
+  </script>
+</body>
+</html>
