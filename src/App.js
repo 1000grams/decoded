@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import ArtistDashboard from './pages/ArtistDashboard';
 import MarketingHub from './pages/MarketingHub';
+import Accounting from './pages/Accounting';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/dashboard" element={<ArtistDashboard />} />
       <Route path="/marketing" element={<MarketingHub />} />
+      <Route path="/accounting" element={<Accounting />} />
     </Routes>
   );
 }
