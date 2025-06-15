@@ -102,8 +102,25 @@ These values are read by the front-end to initiate the login process.
 
 
 ## Signup Lambda Function
-The backend includes a sample AWS Lambda handler at `backend/lambda/signupHandler.js` which emails signup details via SES. Deploy it using the CloudFormation template at `backend/cloudformation/signupLambda.yml` or wire it up with Amplify.
-The API Gateway and Lambda permission configuration lives in `backend/cloudformation/signupApi.yml`. Deploy this CloudFormation stack after uploading `lambdas/signup-handler.zip` to S3 to expose a `/signup` endpoint.
+The backend includes a sample AWS Lambda handler at `backend/lambda/signupHandler.js` which emails signup details via SES. Deploy it using the CloudFormation template at `backend/cloudformation/signupLambda.yml`:
+
+```bash
+aws cloudformation deploy \
+  --template-file backend/cloudformation/signupLambda.yml \
+  --stack-name DecodedSignupLambda \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
+The API Gateway and Lambda permission configuration lives in `backend/cloudformation/signupApi.yml`. Deploy this CloudFormation stack after uploading `lambdas/signup-handler.zip` to S3 to expose a `/signup` endpoint:
+
+```bash
+aws cloudformation deploy \
+  --template-file backend/cloudformation/signupApi.yml \
+  --stack-name DecodedSignupApi \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+```
 
 ## Running in Codex
 
