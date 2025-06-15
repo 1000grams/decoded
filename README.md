@@ -15,6 +15,20 @@ The design is based on a detailed blueprint incorporating specific section struc
 
 The page is built as a sequence of components, each representing a distinct section defined in the blueprint. CSS Modules are used for styling, and layout techniques (Flexbox, Grid) are employed to translate the conceptual "frame ratios" from the design phase into responsive visual structures.
 
+**Project Layout:**
+
+* `src/` – React components and pages.
+* `public/` – static files served by the app such as `index.html` and `favicon.png`.
+* `decodedmusic-frontend/` – a secondary example React project with its own `public/` folder.
+
+To update the site icon, replace `public/favicon.png` with your image and ensure `public/index.html` contains:
+
+```html
+<link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+```
+
+Remove any `favicon.ico` in `public/` before building so the updated icon appears in the browser.
+
 **Conceptual Backend Integration:**
 
 While this repository focuses solely on the front-end UI, the blueprint mentions various backend technologies (AWS services, Stripe, etc.). The front-end code includes placeholder elements and comments indicating where interactions with a backend API would occur (e.g., form submissions, triggering pricing calculations, fetching catalog data). A fully functional application would require implementing these backend services.
@@ -79,6 +93,10 @@ These values are read by the front-end to initiate the login process.
 *   Add actual icons and refine styling based on detailed design assets.
 *   See [docs/artist-dashboard-plan.md](docs/artist-dashboard-plan.md) for a
     proposed Artist Dashboard backend and adoption strategy.
+*   See [docs/authentication-access-control.md](docs/authentication-access-control.md)
+    for an overview of Spotify OAuth and the Cognito user pool.
+*   See [docs/catalog-upload-pipeline.md](docs/catalog-upload-pipeline.md)
+    for the catalog upload and metadata extraction pipeline.
 
 
 ## Signup Lambda Function
@@ -128,3 +146,21 @@ After committing changes to GitHub you can deploy the build output to the Genera
    ```
 
 The CloudFront distribution (e.g. <https://d1n11wdfy5g0ms.cloudfront.net/>) will serve the updated site once the files are uploaded.
+
+## CloudFormation Deployment
+
+A starter template for the music management backend is provided at
+`cloudformation/music-management.yml`. This creates S3 buckets, DynamoDB tables,
+a sample Lambda function, and an API Gateway endpoint. Deploy it in the
+Frankfurt region (eu-central-1) with a unique stack name:
+
+```bash
+aws cloudformation deploy \
+  --template-file cloudformation/music-management.yml \
+  --stack-name decodedmusic-stack \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
+The `EnvName` parameter defaults to `prod`, but you can override it to create
+multiple environments.
