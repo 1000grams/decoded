@@ -18,8 +18,8 @@ export default function SignupForm({ type }) {
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus("Submitting...");
-    // Replace with your actual API endpoint
-    const response = await fetch("/api/signup", {
+    // Replace with your actual API Gateway endpoint
+    const response = await fetch("https://your-api-id.execute-api.region.amazonaws.com/prod/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
