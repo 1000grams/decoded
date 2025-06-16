@@ -2,11 +2,11 @@
 # automate-track-model.sh
 
 # 1. Ensure the target directory exists
-mkdir -p amplify/backend/catalog/database/dynamodb
+mkdir -p backend/catalog/database/dynamodb
 
 # 2. Create the TypeScript data model file for tracks with ASCAP fields
-cat > amplify/backend/catalog/database/dynamodb/track.model.ts <<'EOF'
-// filepath: amplify/backend/catalog/database/dynamodb/track.model.ts
+cat > backend/catalog/database/dynamodb/track.model.ts <<'EOF'
+// filepath: backend/catalog/database/dynamodb/track.model.ts
 
 // This TypeScript interface defines the data model for a song in the catalog,
 // including ASCAP fields and extensible metadata.
@@ -33,5 +33,5 @@ export interface Track {
 }
 EOF
 
-echo "✅ Created amplify/backend/catalog/database/dynamodb/track.model.ts with ASCAP fields."
+echo "✅ Created backend/catalog/database/dynamodb/track.model.ts with ASCAP fields."
 
