@@ -130,19 +130,35 @@ else
   echo "⚠️  $APPJS not found. Please add About and Contact routes manually."
 fi
 
-# 6. Scaffold backend handler for contact form (no Amplify)
+# 6. Scaffold backend handler for contact form (SES-based)
 mkdir -p backend/function/contactFormHandler/src
 cat > backend/function/contactFormHandler/src/contact_form_handler.py <<'EOF'
-# Example backend handler for contact form submissions
-# Replace with your actual backend logic and email provider
+import boto3
+import os
 
-def handle_contact_form(event):
-    body = event.get("body", {})
-    # Process form data (e.g., send email, store in DB, etc.)
-    return {"statusCode": 200, "body": "Message received."}
+SES = boto3.client("ses")
+TO_EMAIL = "ops@decodedmusic.com"
+FROM_EMAIL = os.environ.get("FROM_EMAIL", "ops@decodedmusic.com")
+
+def lambda_handler(event, context):
+    import json
+    body = event.get("body")
+    if isinstance(body, str):
+        body = json.loads(body)
+    subject = f"Contact Form Submission from {body.get('name', '')}"
+    body_text = f"Name: {body.get('name', '')}\nEmail: {body.get('email', '')}\nMessage:\n{body.get('message', '')}"
+    SES.send_email(
+        Source=FROM_EMAIL,
+        Destination={"ToAddresses": [TO_EMAIL]},
+        Message={
+            "Subject": {"Data": subject},
+            "Body": {"Text": {"Data": body_text}}
+        }
+    )
+    return {"statusCode": 200, "body": "Message sent."}
 EOF
 
-echo "✅ Backend handler for contact form created at backend/function/contactFormHandler/src/contact_form_handler.py"
+echo "✅ Backend Lambda handler for contact form created at backend/function/contactFormHandler/src/contact_form_handler.py"
 
 echo "🚀 Next steps:"
 echo "1. Connect your frontend contact form to the backend handler in backend/function/contactFormHandler/src/contact_form_handler.py."
