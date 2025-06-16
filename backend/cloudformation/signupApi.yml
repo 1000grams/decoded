@@ -9,7 +9,7 @@ Resources:
       Handler: index.handler
       Code:
         S3Bucket: decodedmusic.com
-        S3Key: lambdas/signup-handler.zip
+        S3Key: lambda/signup-handler.zip
 
   SignupApi:
     Type: AWS::ApiGateway::RestApi
