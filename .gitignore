@@ -37,3 +37,8 @@ Thumbs.db
 
 # Ignore zip build files
 src/*.zip
+
+# Remove stray files
+public/# Python CDK example
+public/# This Amplify build script ensures Node.yaml
+public/Subject: Pitch: “{{track_title}}” by Rue
