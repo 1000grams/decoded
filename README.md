@@ -142,6 +142,32 @@ aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
+## Artist Dashboard API
+Several Lambda functions under `backend/lambdas/` implement the `/api/dashboard/*` endpoints.
+Package and upload the code to S3 before deploying:
+
+```bash
+cd backend/lambdas/dashboardEarnings && zip -r earnings.zip . && aws s3 cp earnings.zip s3://decodedmusic-lambda-code/ && cd -
+```
+
+Repeat for the other dashboard lambda directories (`dashboardStreams`, `dashboardCatalog`, etc.).
+
+Deploy the updated CloudFormation stack:
+
+```bash
+aws cloudformation deploy \
+  --template-file backend/cloudformation/decodedMusicBackend.yaml \
+  --stack-name DecodedMusicBackend \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
+Verify the earnings endpoint:
+
+```bash
+curl https://n64vgs0he0.execute-api.eu-central-1.amazonaws.com/prod/dashboard/earnings
+```
+
 ## Running in Codex
 
 If you encounter a message like "Codex couldn't run certain commands due to environment limitations," make sure the container installs dependencies before running tests or other commands. A simple `setup.sh` script can be used. The script uses `npm ci` when a `package-lock.json` file is present, falling back to `npm install` otherwise:

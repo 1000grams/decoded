@@ -147,6 +147,350 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PitchApi}/*/POST/pitch
+
+  DashboardLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: dashboard-dynamo-access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:Scan
+                  - dynamodb:Query
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: '*'
+
+  DashboardEarningsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: dashboardEarnings
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: earnings.zip
+
+  DashboardStreamsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: dashboardStreams
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: streams.zip
+
+  DashboardCatalogLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: dashboardCatalog
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: catalog.zip
+
+  DashboardAnalyticsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: dashboardAnalytics
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: analytics.zip
+
+  DashboardStatementsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: dashboardStatements
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: statements.zip
+
+  DashboardAccountingLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: dashboardAccounting
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: accounting.zip
+
+  DashboardTeamLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: dashboardTeam
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: team.zip
+
+  DashboardCampaignsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: dashboardCampaigns
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: campaigns.zip
+
+  DashboardApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: DashboardAPI
+
+  DashboardResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt DashboardApi.RootResourceId
+      PathPart: dashboard
+      RestApiId: !Ref DashboardApi
+
+  EarningsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: earnings
+      RestApiId: !Ref DashboardApi
+
+  StreamsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: streams
+      RestApiId: !Ref DashboardApi
+
+  CatalogResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: catalog
+      RestApiId: !Ref DashboardApi
+
+  AnalyticsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: analytics
+      RestApiId: !Ref DashboardApi
+
+  StatementsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: statements
+      RestApiId: !Ref DashboardApi
+
+  AccountingResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: accounting
+      RestApiId: !Ref DashboardApi
+
+  TeamResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: team
+      RestApiId: !Ref DashboardApi
+
+  CampaignsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: campaigns
+      RestApiId: !Ref DashboardApi
+
+  EarningsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref EarningsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardEarningsLambda.Arn}/invocations
+
+  StreamsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref StreamsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardStreamsLambda.Arn}/invocations
+
+  CatalogMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref CatalogResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardCatalogLambda.Arn}/invocations
+
+  AnalyticsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref AnalyticsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardAnalyticsLambda.Arn}/invocations
+
+  StatementsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref StatementsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardStatementsLambda.Arn}/invocations
+
+  AccountingMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref AccountingResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardAccountingLambda.Arn}/invocations
+
+  TeamMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref TeamResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardTeamLambda.Arn}/invocations
+
+  CampaignsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref CampaignsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardCampaignsLambda.Arn}/invocations
+
+  DashboardEarningsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardEarningsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/earnings
+
+  DashboardStreamsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardStreamsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/streams
+
+  DashboardCatalogPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardCatalogLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/catalog
+
+  DashboardAnalyticsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardAnalyticsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/analytics
+
+  DashboardStatementsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardStatementsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/statements
+
+  DashboardAccountingPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardAccountingLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/accounting
+
+  DashboardTeamPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardTeamLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/team
+
+  DashboardCampaignsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardCampaignsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/campaigns
 Outputs:
   ApiUrl:
     Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/backend'
@@ -154,3 +498,6 @@ Outputs:
   PitchApiUrl:
     Value: !Sub 'https://${PitchApi}.execute-api.${AWS::Region}.amazonaws.com/prod/pitch'
     Description: Endpoint for sync licensing pitches
+  DashboardApiUrl:
+    Value: !Sub 'https://${DashboardApi}.execute-api.${AWS::Region}.amazonaws.com/prod/dashboard'
+    Description: Base URL for Artist Dashboard endpoints
