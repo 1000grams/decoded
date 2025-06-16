@@ -83,7 +83,74 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/*/backend'
+
+  PitchLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: PitchHandler
+      Handler: index.handler
+      Role: !GetAtt PitchLambdaRole.Arn
+      Runtime: nodejs18.x
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: pitchHandler.zip
+
+  PitchLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: PitchLambdaExecutionRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: AllowSESSend
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ses:SendEmail
+                Resource: "*"
+
+  PitchApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: PitchAPI
+
+  PitchResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt PitchApi.RootResourceId
+      PathPart: pitch
+      RestApiId: !Ref PitchApi
+
+  PitchMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId: !Ref PitchResource
+      RestApiId: !Ref PitchApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PitchLambda.Arn}/invocations
+
+  PitchLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref PitchLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PitchApi}/*/POST/pitch
 Outputs:
   ApiUrl:
     Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/backend'
     Description: Endpoint for the DecodedMusicBackend API
+  PitchApiUrl:
+    Value: !Sub 'https://${PitchApi}.execute-api.${AWS::Region}.amazonaws.com/prod/pitch'
+    Description: Endpoint for sync licensing pitches

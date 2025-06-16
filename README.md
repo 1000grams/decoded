@@ -122,6 +122,26 @@ aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
+## Pitch Lambda Function
+The sync licensing pitch handler at `backend/lambdas/pitchHandler/index.js` sends templated emails via SES.
+Package and upload the code to S3:
+
+```bash
+cd backend/lambdas/pitchHandler
+zip -r pitchHandler.zip .
+aws s3 cp pitchHandler.zip s3://decodedmusic-lambda-code/
+```
+
+Deploy the resources defined in `backend/cloudformation/decodedMusicBackend.yaml` to expose a `/api/pitch` endpoint:
+
+```bash
+aws cloudformation deploy \
+  --template-file backend/cloudformation/decodedMusicBackend.yaml \
+  --stack-name DecodedMusicBackend \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
 ## Running in Codex
 
 If you encounter a message like "Codex couldn't run certain commands due to environment limitations," make sure the container installs dependencies before running tests or other commands. A simple `setup.sh` script can be used. The script uses `npm ci` when a `package-lock.json` file is present, falling back to `npm install` otherwise:
