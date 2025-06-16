@@ -112,7 +112,7 @@ aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
-The API Gateway and Lambda permission configuration lives in `backend/cloudformation/signupApi.yml`. Deploy this CloudFormation stack after uploading `lambdas/signup-handler.zip` to S3 to expose a `/signup` endpoint:
+The API Gateway and Lambda permission configuration lives in `backend/cloudformation/signupApi.yml`. Deploy this CloudFormation stack after uploading `lambda/signup-handler.zip` to S3 to expose a `/signup` endpoint:
 
 ```bash
 aws cloudformation deploy \
@@ -123,11 +123,11 @@ aws cloudformation deploy \
 ```
 
 ## Pitch Lambda Function
-The sync licensing pitch handler at `backend/lambdas/pitchHandler/index.js` sends templated emails via SES.
+The sync licensing pitch handler at `backend/lambda/pitchHandler/index.js` sends templated emails via SES.
 Package and upload the code to S3:
 
 ```bash
-cd backend/lambdas/pitchHandler
+cd backend/lambda/pitchHandler
 zip -r pitchHandler.zip .
 aws s3 cp pitchHandler.zip s3://decodedmusic-lambda-code/
 ```
@@ -143,11 +143,11 @@ aws cloudformation deploy \
 ```
 
 ## Artist Dashboard API
-Several Lambda functions under `backend/lambdas/` implement the `/api/dashboard/*` endpoints.
+Several Lambda functions under `backend/lambda/` implement the `/api/dashboard/*` endpoints.
 Package and upload the code to S3 before deploying:
 
 ```bash
-cd backend/lambdas/dashboardEarnings && zip -r earnings.zip . && aws s3 cp earnings.zip s3://decodedmusic-lambda-code/ && cd -
+cd backend/lambda/dashboardEarnings && zip -r earnings.zip . && aws s3 cp earnings.zip s3://decodedmusic-lambda-code/ && cd -
 ```
 
 Repeat for the other dashboard lambda directories (`dashboardStreams`, `dashboardCatalog`, etc.).
@@ -250,7 +250,7 @@ After deployment the CloudFormation console should show a `CREATE_COMPLETE` stat
 ### Catalog API
 
 Deploy `cloudformation/catalog-api.yml` to expose a simple REST API for listing
-and retrieving catalog tracks. Upload `lambdas/catalog-handler.zip` with the
+and retrieving catalog tracks. Upload `lambda/catalog-handler.zip` with the
 code from `backend/lambda/catalogHandler.js` to the referenced S3 bucket.
 The API exposes two endpoints:
 

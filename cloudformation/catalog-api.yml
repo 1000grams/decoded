@@ -44,7 +44,7 @@ Resources:
       Role: !GetAtt CatalogLambdaRole.Arn
       Code:
         S3Bucket: decodedmusic.com
-        S3Key: lambdas/catalog-handler.zip
+        S3Key: lambda/catalog-handler.zip
       Environment:
         Variables:
           CATALOG_TABLE: !Sub '${EnvName}-DecodedCatalog'
