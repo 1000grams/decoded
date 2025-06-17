@@ -32,8 +32,9 @@ Rue de Vivre
 ops@decodedmusic.com  
 www.decodedmusic.com`;
 
+  const target = process.env.PITCH_TARGET_EMAIL || 'sync@decodedmusic.com';
   const params = {
-    Destination: { ToAddresses: ["sync-target@example.com"] },
+    Destination: { ToAddresses: [target] },
     Message: {
       Subject: { Data: `Pitch: “${data.track_title}” by Rue de Vivre` },
       Body: { Text: { Data: emailBody } },

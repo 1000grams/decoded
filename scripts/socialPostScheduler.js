@@ -26,7 +26,9 @@ async function queueYouTubeShort(mediaUrl, title) {
 }
 
 async function run() {
-  const post = { caption: 'New single out now!', mediaUrl: 'https://example.com/cover.jpg' };
+  const post = { caption: 'New single out now!', mediaUrl: 'https://decodedmusic.com/logo.png' };
+  const mediaUrl = process.env.POST_IMAGE_URL || post.mediaUrl;
+  post.mediaUrl = mediaUrl;
   await postToInstagram(post.caption, post.mediaUrl);
   await scheduleSnapchatPost(post.mediaUrl, post.caption);
   await queueYouTubeShort(post.mediaUrl, post.caption);
