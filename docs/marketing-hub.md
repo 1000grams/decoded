@@ -21,6 +21,7 @@ These are exposed via API Gateway under `/marketing`.
 ## Automation Scripts
 - `scripts/socialPostScheduler.js` queues posts to Instagram, Snapchat and YouTube.
 - `scripts/trendingReposter.js` reposts content with trending hashtags from Twitter, TikTok and Reddit.
+- `scripts/dailyContentAgent.js` generates captions with Bedrock, posts to Meta, and summarizes engagement.
 
 ## CloudFormation
 The stack defined in `cloudformation/marketing-hub.yml` provisions the DynamoDB tables, Lambda functions and API routes required for the marketing dashboard.
