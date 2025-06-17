@@ -13,7 +13,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "research": "node scripts/musicManagementResearcher.js"
+    "research": "node scripts/musicManagementResearcher.js",
+    "content-agent": "node scripts/dailyContentAgent.js"
   },
   "eslintConfig": {
     "extends": [
