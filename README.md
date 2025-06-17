@@ -117,21 +117,21 @@ These URLs are outputs of the `DecodedMusicBackend` CloudFormation stack.
 
 
 ## Signup Lambda Function
-The backend includes a sample AWS Lambda handler at `backend/lambda/signupHandler.js` which emails signup details via SES. Deploy it using the CloudFormation template at `backend/cloudformation/signupLambda.yml`:
+The backend includes a sample AWS Lambda handler at `backend/lambda/signupHandler.js` which emails signup details via SES. Deploy it using the CloudFormation template at `cloudformation/signupLambda.yml`:
 
 ```bash
 aws cloudformation deploy \
-  --template-file backend/cloudformation/signupLambda.yml \
+  --template-file cloudformation/signupLambda.yml \
   --stack-name DecodedSignupLambda \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
-The API Gateway and Lambda permission configuration lives in `backend/cloudformation/signupApi.yml`. Deploy this CloudFormation stack after uploading `lambda/signup-handler.zip` to S3 to expose a `/signup` endpoint:
+The API Gateway and Lambda permission configuration lives in `cloudformation/signupApi.yml`. Deploy this CloudFormation stack after uploading `lambda/signup-handler.zip` to S3 to expose a `/signup` endpoint:
 
 ```bash
 aws cloudformation deploy \
-  --template-file backend/cloudformation/signupApi.yml \
+  --template-file cloudformation/signupApi.yml \
   --stack-name DecodedSignupApi \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
@@ -147,11 +147,11 @@ zip -r pitchHandler.zip .
 aws s3 cp pitchHandler.zip s3://decodedmusic-lambda-code/
 ```
 
-Deploy the resources defined in `backend/cloudformation/decodedMusicBackend.yaml` to expose a `/api/pitch` endpoint:
+Deploy the resources defined in `cloudformation/decodedMusicBackend.yaml` to expose a `/api/pitch` endpoint:
 
 ```bash
 aws cloudformation deploy \
-  --template-file backend/cloudformation/decodedMusicBackend.yaml \
+  --template-file cloudformation/decodedMusicBackend.yaml \
   --stack-name DecodedMusicBackend \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
@@ -171,7 +171,7 @@ Deploy the updated CloudFormation stack:
 
 ```bash
 aws cloudformation deploy \
-  --template-file backend/cloudformation/decodedMusicBackend.yaml \
+  --template-file cloudformation/decodedMusicBackend.yaml \
   --stack-name DecodedMusicBackend \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
@@ -230,7 +230,7 @@ The CloudFront distribution <https://d1n11wdfy5g0ms.cloudfront.net/> (ID `E3POL8
 ## CloudFormation Deployment
 
 A starter template for the music management backend is provided at
-`cloudformation/music-management.yml`. This creates S3 buckets, DynamoDB tables,
+`cloudformation/music-management.yml`. All CloudFormation templates are located in the `cloudformation/` directory. This creates S3 buckets, DynamoDB tables,
 a sample Lambda function, and an API Gateway endpoint. Deploy it in the
 Frankfurt region (eu-central-1) with a unique stack name:
 
@@ -254,7 +254,7 @@ It provisions a Lambda function, API Gateway and DynamoDB table. Deploy it with:
 
 ```bash
 aws cloudformation deploy \
-  --template-file backend/cloudformation/decodedMusicBackend.yaml \
+  --template-file cloudformation/decodedMusicBackend.yaml \
   --stack-name DecodedMusicBackend \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
