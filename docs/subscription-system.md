@@ -10,7 +10,7 @@ This module governs dashboard access for artists and tracks recurring subscripti
 ```json
 {
   "artist_id": "RDV",
-  "email": "artist@example.com",
+  "email": "artist@decodedmusic.com",
   "subscribed_since": "2025-06-01",
   "next_billing_date": "2025-07-01",
   "active": true,

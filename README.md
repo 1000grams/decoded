@@ -92,6 +92,9 @@ configured in your `.env` file:
 ```bash
 REACT_APP_PITCH_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/pitch
 REACT_APP_CATALOG_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/catalog
+REACT_APP_SIGNUP_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/signup
+POST_IMAGE_URL=https://yourdomain.com/default-post.jpg
+PITCH_TARGET_EMAIL=sync@decodedmusic.com
 ```
 
 These URLs are outputs of the `DecodedMusicBackend` CloudFormation stack.

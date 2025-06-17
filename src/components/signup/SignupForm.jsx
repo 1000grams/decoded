@@ -18,8 +18,10 @@ export default function SignupForm({ type }) {
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus("Submitting...");
-    // Submit form data to the UseCaseManagementAPI Gateway endpoint
-    const response = await fetch("https://n64vgs0he0.execute-api.eu-central-1.amazonaws.com/prod/signup", {
+    const apiUrl =
+      process.env.REACT_APP_SIGNUP_API_URL ||
+      "https://n64vgs0he0.execute-api.eu-central-1.amazonaws.com/prod/signup";
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),

@@ -49,7 +49,8 @@ async function postToInstagram(caption) {
   const userId = process.env.INSTAGRAM_USER_ID;
   if (!token || !userId) throw new Error('Instagram credentials missing');
   const url = `https://graph.facebook.com/v19.0/${userId}/media`;
-  await fetch(`${url}?access_token=${token}&caption=${encodeURIComponent(caption)}&image_url=${encodeURIComponent('https://example.com/placeholder.jpg')}`, { method: 'POST' });
+  const imageUrl = process.env.POST_IMAGE_URL || 'https://decodedmusic.com/logo.png';
+  await fetch(`${url}?access_token=${token}&caption=${encodeURIComponent(caption)}&image_url=${encodeURIComponent(imageUrl)}`, { method: 'POST' });
 }
 
 exports.handler = async () => {

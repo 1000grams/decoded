@@ -21,7 +21,7 @@ async function getRedditTrends() {
 
 async function selectRandomInstagramPost() {
   // Placeholder to pick a post from catalog
-  return { caption: 'Listen now', mediaUrl: 'https://example.com/song.jpg' };
+  return { caption: 'Listen now', mediaUrl: process.env.POST_IMAGE_URL || 'https://decodedmusic.com/logo.png' };
 }
 
 async function publishToInstagram(caption) {
