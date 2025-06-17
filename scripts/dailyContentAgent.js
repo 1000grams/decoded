@@ -60,7 +60,7 @@ async function summarizeAnalytics(data) {
 
 async function run() {
   const caption = await generatePostContent('Fireproof');
-  const mediaUrl = 'https://example.com/cover.jpg';
+  const mediaUrl = process.env.POST_IMAGE_URL || 'https://decodedmusic.com/logo.png';
   await postToInstagram(caption, mediaUrl);
   const analytics = await getInstagramInsights();
   const summary = await summarizeAnalytics(analytics);
