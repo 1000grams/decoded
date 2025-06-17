@@ -271,3 +271,16 @@ campaign spend and fetch ROI metrics.
 
 Node scripts are available for social post scheduling and trending topic
 reposts under the `scripts/` directory.
+
+## Daily Content Agent
+
+Run `npm run content-agent` to generate an Instagram caption with AWS Bedrock and
+queue a post via the Meta Graph API. After publishing, the script fetches basic
+insights and sends them back to Bedrock for a short performance summary saved to
+`latest_social_summary.txt`.
+
+Configure `INSTAGRAM_TOKEN` and `INSTAGRAM_USER_ID` in your `.env` along with
+`AWS_REGION` and optional `BEDROCK_MODEL_ID`.
+
+## Trending Joke Poster Lambda
+The `dailyTrendingPost` Lambda fetches the top Google Trends topic, prompts Claude to write a short caption in Carol Leifer's comedic style, and posts it to Instagram with a rotating link to Spotify, YouTube or Instagram. Configure `INSTAGRAM_TOKEN`, `INSTAGRAM_USER_ID` and optional `BEDROCK_MODEL_ID` in the Lambda environment.

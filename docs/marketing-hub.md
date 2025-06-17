@@ -15,12 +15,14 @@ This document outlines the new marketing hub features added to the Decoded Music
 - `marketingSpendHandler` – CRUD interface for the `MarketingSpend` table.
 - `attributionHandler` – correlates ad campaigns with streaming lifts and returns ROI data.
 - `weeklyStatsLogger` – scheduled every Tuesday to store weekly performance metrics.
+- `dailyTrendingPost` – posts a Carol Leifer-style caption about the top Google Trends topic with a rotating artist link.
 
 These are exposed via API Gateway under `/marketing`.
 
 ## Automation Scripts
 - `scripts/socialPostScheduler.js` queues posts to Instagram, Snapchat and YouTube.
 - `scripts/trendingReposter.js` reposts content with trending hashtags from Twitter, TikTok and Reddit.
+- `scripts/dailyContentAgent.js` generates captions with Bedrock, posts to Meta, and summarizes engagement.
 
 ## CloudFormation
 The stack defined in `cloudformation/marketing-hub.yml` provisions the DynamoDB tables, Lambda functions and API routes required for the marketing dashboard.
