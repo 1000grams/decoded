@@ -304,3 +304,8 @@ Meta Graph API. Set `FACEBOOK_TOKEN` and a comma separated list of page IDs in
 `FACEBOOK_PAGE_IDS`. The function optionally uses Bedrock to generate the post
 content.
 
+
+## YouTube Shorts Automation
+
+The `youtubeShortsPipeline.js` script splits a track into three segments and calls the `shortsGenerator` Lambda. The Lambda overlays caption text using Amazon Polly and OpenCV, then saves each short to `SHORTS_BUCKET` ready for manual upload.
+
