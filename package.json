@@ -8,7 +8,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "@aws-sdk/client-lambda": "^3.830.0",
+    "@aws-sdk/client-s3": "^3.830.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -16,7 +18,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "research": "node scripts/musicManagementResearcher.js",
-    "content-agent": "node scripts/dailyContentAgent.js"
+    "content-agent": "node scripts/dailyContentAgent.js",
+    "shorts-pipeline": "node scripts/youtubeShortsPipeline.js"
   },
   "eslintConfig": {
     "extends": [
