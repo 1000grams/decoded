@@ -297,3 +297,10 @@ insights and sends them back to Bedrock for a short performance summary saved to
 Configure `INSTAGRAM_TOKEN` and `INSTAGRAM_USER_ID` in your `.env` along with
 `AWS_REGION` and optional `BEDROCK_MODEL_ID`.
 
+## Facebook Poster Lambda
+
+`backend/lambda/facebookPoster` posts to one or more Facebook Pages using the
+Meta Graph API. Set `FACEBOOK_TOKEN` and a comma separated list of page IDs in
+`FACEBOOK_PAGE_IDS`. The function optionally uses Bedrock to generate the post
+content.
+
