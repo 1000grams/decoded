@@ -84,6 +84,18 @@ REACT_APP_SPOTIFY_REDIRECT_URI=http://localhost:3000/dashboard
 
 These values are read by the front-end to initiate the login process.
 
+## Catalog & Pitch API Setup
+
+The catalog browsing pages and pitch submission form expect API endpoints to be
+configured in your `.env` file:
+
+```bash
+REACT_APP_PITCH_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/pitch
+REACT_APP_CATALOG_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/catalog
+```
+
+These URLs are outputs of the `DecodedMusicBackend` CloudFormation stack.
+
 **Future Development:**
 
 *   Implement backend APIs for user authentication, catalog management, dynamic pricing calculation, licensing, and analytics.
