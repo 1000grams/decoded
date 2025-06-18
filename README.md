@@ -96,7 +96,7 @@ POST_IMAGE_URL=https://yourdomain.com/default-post.jpg
 PITCH_TARGET_EMAIL=sync@decodedmusic.com
 ```
 
-These URLs are outputs of the `DecodedMusicBackend` CloudFormation stack.
+These URLs are outputs of the `decoded-genai-stack` CloudFormation stack.
 
 **Future Development:**
 
@@ -151,7 +151,7 @@ Deploy the resources defined in `cloudformation/decodedMusicBackend.yaml` to exp
 ```bash
 aws cloudformation deploy \
   --template-file cloudformation/decodedMusicBackend.yaml \
-  --stack-name DecodedMusicBackend \
+  --stack-name decoded-genai-stack \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
 ```
@@ -171,7 +171,7 @@ Deploy the updated CloudFormation stack:
 ```bash
 aws cloudformation deploy \
   --template-file cloudformation/decodedMusicBackend.yaml \
-  --stack-name DecodedMusicBackend \
+  --stack-name decoded-genai-stack \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
 ```
@@ -255,20 +255,29 @@ The `EnvName` parameter defaults to `prod`. The example above explicitly
 passes `EnvName=prod`, but you can set a different value (e.g. `staging`) to
 create additional environments.
 
-### DecodedMusicBackend Stack
+### decoded-genai-stack (Active)
 
-Codex automation uses a backend CloudFormation stack named `DecodedMusicBackend`.
+Codex automation uses a backend CloudFormation stack named `decoded-genai-stack`.
 It provisions a Lambda function, API Gateway and DynamoDB table. Deploy it with:
 
 ```bash
 aws cloudformation deploy \
   --template-file cloudformation/decodedMusicBackend.yaml \
-  --stack-name DecodedMusicBackend \
+  --stack-name decoded-genai-stack \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
 After deployment the CloudFormation console should show a `CREATE_COMPLETE` status.
+
+If a previous stack named `DecodedMusicBackend` exists from a failed deployment,
+clean it up with:
+
+```bash
+aws cloudformation delete-stack \
+  --stack-name DecodedMusicBackend \
+  --region eu-central-1
+```
 
 ### Catalog API
 
