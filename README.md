@@ -139,11 +139,13 @@ aws cloudformation deploy \
 ## Pitch Lambda Function
 The sync licensing pitch handler at `backend/lambda/pitchHandler/index.js` sends templated emails via SES.
 Package and upload the code to S3:
+The bucket must already exist. Codex automation uses `decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb`.
 
 ```bash
 cd backend/lambda/pitchHandler
 zip -r pitchHandler.zip .
-aws s3 cp pitchHandler.zip s3://decodedmusic-lambda-code/
+aws s3 mb s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb || true
+aws s3 cp pitchHandler.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/
 ```
 
 Deploy the resources defined in `cloudformation/decodedMusicBackend.yaml` to expose a `/api/pitch` endpoint:
@@ -161,7 +163,7 @@ Several Lambda functions under `backend/lambda/` implement the `/api/dashboard/*
 Package and upload the code to S3 before deploying:
 
 ```bash
-cd backend/lambda/dashboardEarnings && zip -r earnings.zip . && aws s3 cp earnings.zip s3://decodedmusic-lambda-code/ && cd -
+cd backend/lambda/dashboardEarnings && zip -r earnings.zip . && aws s3 cp earnings.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
 ```
 
 Repeat for the other dashboard lambda directories (`dashboardStreams`, `dashboardCatalog`, etc.).
@@ -219,9 +221,10 @@ After committing changes to GitHub you can deploy the build output to the Genera
    ```
 
 3. **Sync the `build/` directory to the S3 bucket created by the application builder**
+   Make sure the bucket exists before running the sync command. For Codex automation the bucket name is `decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb`.
 
    ```bash
-   aws s3 sync build/ s3://YOUR_BUCKET_NAME --region eu-central-1 --delete
+   aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --region eu-central-1 --delete
    ```
 
 ### Automated deploy script
@@ -230,7 +233,7 @@ The repository includes `automate-deploy-sync.sh` to perform the above steps in
 one command. Provide your target bucket via `DEPLOY_BUCKET`:
 
 ```bash
-DEPLOY_BUCKET=YOUR_BUCKET_NAME ./automate-deploy-sync.sh
+DEPLOY_BUCKET=decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb ./automate-deploy-sync.sh
 ```
 
 The CloudFront distribution <https://d1n11wdfy5g0ms.cloudfront.net/> (ID `E3POL8Z7WOOYIC`, ARN `arn:aws:cloudfront::396913703024:distribution/E3POL8Z7WOOYIC`) will serve the updated site once the files are uploaded.

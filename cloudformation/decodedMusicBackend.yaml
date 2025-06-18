@@ -97,7 +97,7 @@ Resources:
       Role: !GetAtt PitchLambdaRole.Arn
       Runtime: nodejs18.x
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: pitchHandler.zip
 
   PitchLambdaRole:
@@ -192,7 +192,7 @@ Resources:
         Variables:
           DYNAMO_TABLE_EARNINGS: !Sub '${EnvName}-DecodedEarnings'
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: earnings.zip
 
   DashboardStreamsLambda:
@@ -206,7 +206,7 @@ Resources:
         Variables:
           DYNAMO_TABLE_STREAMS: !Sub '${EnvName}-DecodedStreams'
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: streams.zip
 
   DashboardCatalogLambda:
@@ -220,7 +220,7 @@ Resources:
         Variables:
           DYNAMO_TABLE_CATALOG: !Sub '${EnvName}-DecodedCatalog'
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: catalog.zip
 
   DashboardAnalyticsLambda:
@@ -234,7 +234,7 @@ Resources:
         Variables:
           DYNAMO_TABLE_ANALYTICS: !Sub '${EnvName}-WeeklyArtistStats'
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: analytics.zip
 
   DashboardStatementsLambda:
@@ -248,7 +248,7 @@ Resources:
         Variables:
           DYNAMO_TABLE_STATEMENTS: !Sub '${EnvName}-Statements'
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: statements.zip
 
   DashboardAccountingLambda:
@@ -263,7 +263,7 @@ Resources:
           REVENUE_TABLE: !Sub '${EnvName}-RevenueLog'
           EXPENSE_TABLE: !Sub '${EnvName}-ExpenseLog'
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: accounting.zip
 
   DashboardTeamLambda:
@@ -277,7 +277,7 @@ Resources:
         Variables:
           TEAM_JSON: '[{"name":"Owner","role":"Admin"},{"name":"Collaborator","role":"Contributor"}]'
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: team.zip
 
   DashboardCampaignsLambda:
@@ -291,7 +291,7 @@ Resources:
         Variables:
           SPEND_TABLE: !Sub '${EnvName}-MarketingSpend'
       Code:
-        S3Bucket: decodedmusic-lambda-code
+        S3Bucket: decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb
         S3Key: campaigns.zip
 
   DashboardApi:
