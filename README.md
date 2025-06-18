@@ -113,6 +113,8 @@ These URLs are outputs of the `decoded-genai-stack` CloudFormation stack.
     for the catalog upload and metadata extraction pipeline.
 *   See [docs/subscription-system.md](docs/subscription-system.md)
     for the artist subscription workflow and company revenue reporting.
+*   See [docs/troubleshooting-cloudformation.md](docs/troubleshooting-cloudformation.md)
+    for tips on diagnosing CloudFormation stack failures.
 
 
 ## Signup Lambda Function
