@@ -224,6 +224,15 @@ After committing changes to GitHub you can deploy the build output to the Genera
    aws s3 sync build/ s3://YOUR_BUCKET_NAME --region eu-central-1 --delete
    ```
 
+### Automated deploy script
+
+The repository includes `automate-deploy-sync.sh` to perform the above steps in
+one command. Provide your target bucket via `DEPLOY_BUCKET`:
+
+```bash
+DEPLOY_BUCKET=YOUR_BUCKET_NAME ./automate-deploy-sync.sh
+```
+
 The CloudFront distribution <https://d1n11wdfy5g0ms.cloudfront.net/> (ID `E3POL8Z7WOOYIC`, ARN `arn:aws:cloudfront::396913703024:distribution/E3POL8Z7WOOYIC`) will serve the updated site once the files are uploaded.
 
 ## CloudFormation Deployment
