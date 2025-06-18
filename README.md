@@ -47,7 +47,7 @@ This will open the landing page in your browser at `http://localhost:3000/`.
 *   **Responsiveness:** The layout is designed to be responsive, stacking sections and grid elements vertically on smaller screens (mobile) and adjusting column layouts for larger screens (desktop).
 *   **Placeholder Content:** Content like specific artist details (Rue de Vivre), catalog items, and pricing calculation logic are placeholders. These would connect to a real backend API in a production application.
 *   **Icons:** Placeholder text like `[Icon]` is used. You would integrate an icon library (like React Icons) or use SVGs.
-  *   **Video:** Ensure `public/p1.mp4` exists for the hero section video.
+*   **Video:** The hero section loads `/p1.mp4` from the `public` folder. Make sure `public/p1.mp4` exists.
 
 ## Industry Buzz Researcher
 
