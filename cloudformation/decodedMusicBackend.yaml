@@ -1,5 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Backend stack for Decoded Music using Lambda, API Gateway and DynamoDB
+Parameters:
+  EnvName:
+    Type: String
+    Default: prod
+    Description: Environment name prefix
 Resources:
   BackendTable:
     Type: AWS::DynamoDB::Table
@@ -183,6 +188,9 @@ Resources:
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_EARNINGS: !Sub '${EnvName}-DecodedEarnings'
       Code:
         S3Bucket: decodedmusic-lambda-code
         S3Key: earnings.zip
@@ -194,6 +202,9 @@ Resources:
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_STREAMS: !Sub '${EnvName}-DecodedStreams'
       Code:
         S3Bucket: decodedmusic-lambda-code
         S3Key: streams.zip
@@ -205,6 +216,9 @@ Resources:
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_CATALOG: !Sub '${EnvName}-DecodedCatalog'
       Code:
         S3Bucket: decodedmusic-lambda-code
         S3Key: catalog.zip
@@ -216,6 +230,9 @@ Resources:
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_ANALYTICS: !Sub '${EnvName}-WeeklyArtistStats'
       Code:
         S3Bucket: decodedmusic-lambda-code
         S3Key: analytics.zip
@@ -227,6 +244,9 @@ Resources:
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_STATEMENTS: !Sub '${EnvName}-Statements'
       Code:
         S3Bucket: decodedmusic-lambda-code
         S3Key: statements.zip
@@ -238,6 +258,10 @@ Resources:
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          REVENUE_TABLE: !Sub '${EnvName}-RevenueLog'
+          EXPENSE_TABLE: !Sub '${EnvName}-ExpenseLog'
       Code:
         S3Bucket: decodedmusic-lambda-code
         S3Key: accounting.zip
@@ -249,6 +273,9 @@ Resources:
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          TEAM_JSON: '[{"name":"Owner","role":"Admin"},{"name":"Collaborator","role":"Contributor"}]'
       Code:
         S3Bucket: decodedmusic-lambda-code
         S3Key: team.zip
@@ -260,6 +287,9 @@ Resources:
       Handler: index.handler
       Runtime: nodejs18.x
       Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          SPEND_TABLE: !Sub '${EnvName}-MarketingSpend'
       Code:
         S3Bucket: decodedmusic-lambda-code
         S3Key: campaigns.zip
