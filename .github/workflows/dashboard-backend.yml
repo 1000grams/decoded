@@ -22,14 +22,14 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
       - name: Package Lambdas
         run: |
-          cd backend/lambda/dashboardEarnings && zip -r earnings.zip . && aws s3 cp earnings.zip s3://decodedmusic-lambda-code/ && cd -
-          cd backend/lambda/dashboardStreams && zip -r streams.zip . && aws s3 cp streams.zip s3://decodedmusic-lambda-code/ && cd -
-          cd backend/lambda/dashboardCatalog && zip -r catalog.zip . && aws s3 cp catalog.zip s3://decodedmusic-lambda-code/ && cd -
-          cd backend/lambda/dashboardAnalytics && zip -r analytics.zip . && aws s3 cp analytics.zip s3://decodedmusic-lambda-code/ && cd -
-          cd backend/lambda/dashboardStatements && zip -r statements.zip . && aws s3 cp statements.zip s3://decodedmusic-lambda-code/ && cd -
-          cd backend/lambda/dashboardAccounting && zip -r accounting.zip . && aws s3 cp accounting.zip s3://decodedmusic-lambda-code/ && cd -
-          cd backend/lambda/dashboardTeam && zip -r team.zip . && aws s3 cp team.zip s3://decodedmusic-lambda-code/ && cd -
-          cd backend/lambda/dashboardCampaigns && zip -r campaigns.zip . && aws s3 cp campaigns.zip s3://decodedmusic-lambda-code/ && cd -
+          cd backend/lambda/dashboardEarnings && zip -r earnings.zip . && aws s3 cp earnings.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
+          cd backend/lambda/dashboardStreams && zip -r streams.zip . && aws s3 cp streams.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
+          cd backend/lambda/dashboardCatalog && zip -r catalog.zip . && aws s3 cp catalog.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
+          cd backend/lambda/dashboardAnalytics && zip -r analytics.zip . && aws s3 cp analytics.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
+          cd backend/lambda/dashboardStatements && zip -r statements.zip . && aws s3 cp statements.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
+          cd backend/lambda/dashboardAccounting && zip -r accounting.zip . && aws s3 cp accounting.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
+          cd backend/lambda/dashboardTeam && zip -r team.zip . && aws s3 cp team.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
+          cd backend/lambda/dashboardCampaigns && zip -r campaigns.zip . && aws s3 cp campaigns.zip s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb/ && cd -
       - name: Deploy CloudFormation
         run: |
           aws cloudformation deploy \
