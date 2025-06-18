@@ -1,0 +1,1204 @@
+{
+    "StackResources": [
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "AppAttributesApplicationAttributeGroupAssociation5d45ed99601285052111",
+            "PhysicalResourceId": "arn:aws:servicecatalog:eu-central-1:396913703024:/applications/00phybd7c1mvdqsuhxxdjka91d|arn:aws:servicecatalog:eu-central-1:396913703024:/attribute-groups/064qqh88j3y9yp7q4gjpl44gt8",
+            "ResourceType": "AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation",
+            "Timestamp": "2025-06-14T18:56:12.649000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "AppAttributesC4C8180E",
+            "PhysicalResourceId": "064qqh88j3y9yp7q4gjpl44gt8",
+            "ResourceType": "AWS::ServiceCatalogAppRegistry::AttributeGroup",
+            "Timestamp": "2025-06-14T18:56:10.278000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "AppRegistryAssociation",
+            "PhysicalResourceId": "arn:aws:servicecatalog:eu-central-1:396913703024:/applications/00phybd7c1mvdqsuhxxdjka91d|arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61|CFN_STACK",
+            "ResourceType": "AWS::ServiceCatalogAppRegistry::ResourceAssociation",
+            "Timestamp": "2025-06-14T18:56:12.705000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "AwsNodeSdkLayer42C7A59C",
+            "PhysicalResourceId": "arn:aws:lambda:eu-central-1:396913703024:layer:AwsNodeSdkLayer42C7A59C:1",
+            "ResourceType": "AWS::Lambda::LayerVersion",
+            "Timestamp": "2025-06-14T18:56:20.908000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "Boto3Layer463A0AEA",
+            "PhysicalResourceId": "arn:aws:lambda:eu-central-1:396913703024:layer:Boto3Layer463A0AEA:1",
+            "ResourceType": "AWS::Lambda::LayerVersion",
+            "Timestamp": "2025-06-14T18:56:14.397000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "CDKMetadata",
+            "PhysicalResourceId": "06c444f0-4951-11f0-822b-06fcce479a61",
+            "ResourceType": "AWS::CDK::Metadata",
+            "Timestamp": "2025-06-14T18:56:09.612000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "CopyUICustomResourceNestedStackCopyUICustomResourceNestedStackResource298D3A15",
+            "PhysicalResourceId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack-CopyUICustomResourceNestedStackCopyUICustomResourceNestedStackReso-1UYUMI7KGDLFS/a4a6dbf0-4952-11f0-b0a0-06083cced0f7",
+            "ResourceType": "AWS::CloudFormation::Stack",
+            "Timestamp": "2025-06-14T19:06:49.100000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "CustomMetricsPolicyAnonymousDataAWSConditionA2CDA901",
+            "PhysicalResourceId": "decod-Custo-uErGTVRoSay6",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T18:56:43.827000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "CustomMetricsPolicyCreateApiRoutesConditionF3852927",
+            "PhysicalResourceId": "decod-Custo-MaktUhudUAsF",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T18:56:44.254000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "CustomMetricsPolicyFE11102D",
+            "PhysicalResourceId": "decod-Custo-5J8RfvSnMvho",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T18:56:44.760000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupAccessLog67D5D503",
+            "PhysicalResourceId": "decoded-genai-stack-deploymentplatformsetupaccessl-6hz6uaogzhbw",
+            "ResourceType": "AWS::S3::Bucket",
+            "Timestamp": "2025-06-14T18:56:23.322000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupAccessLogPolicy2FB262B2",
+            "PhysicalResourceId": "decoded-genai-stack-deploymentplatformsetupaccessl-6hz6uaogzhbw",
+            "ResourceType": "AWS::S3::BucketPolicy",
+            "Timestamp": "2025-06-14T18:56:26.294000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupCustomResourceLambdaRole3C444A9D",
+            "PhysicalResourceId": "decoded-genai-stack-DeploymentPlatformSetupCustomRe-YtCM78hjJnf1",
+            "ResourceType": "AWS::IAM::Role",
+            "Timestamp": "2025-06-14T18:56:26.429000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupCustomResourceLambdaRoleDefaultPolicy1B835079",
+            "PhysicalResourceId": "decod-Deplo-G0NN8367b7Gi",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T18:56:43.668000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupGenUUIDE08D47F0",
+            "PhysicalResourceId": "2025/06/14/[$LATEST]ef73440ad48c4673b613e9c56336ec10",
+            "ResourceType": "Custom::GenUUID",
+            "Timestamp": "2025-06-14T18:56:57.274000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupGetCognitoUserPoolInfo2A3390CD",
+            "PhysicalResourceId": "decod-Deplo-2DYG1M5d6HAx",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T19:05:14.479000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupInfraSetupCustomResource5473231F",
+            "PhysicalResourceId": "decoded-genai-stack-DeploymentPlatformSetupInfraSe-2MYdGBHE98qa",
+            "ResourceType": "AWS::Lambda::Function",
+            "Timestamp": "2025-06-14T18:56:53.402000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupInfraSetupCustomResourceDynamoDBPolicy9530C9CF",
+            "PhysicalResourceId": "decod-Deplo-TlEyoaPWEk2G",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T18:56:44.068000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupInfraSetupCustomResourceLogRetention7B85E9E4",
+            "PhysicalResourceId": "PhysicalResourceId",
+            "ResourceType": "Custom::CW_LOG_RETENTION",
+            "Timestamp": "2025-06-14T18:57:00.541000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupInfraSetupGetMetricsDataPolicy82387FDA",
+            "PhysicalResourceId": "decod-Deplo-vyP4BG7cdmTb",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T18:56:43.981000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupInfraSetupMetricsPublishFrequencyAllowEventRuleDeploymentPlatformStackDeploymentPlatformSetupInfraSetupScheduledAnonymousMetricsCE3BF48507FDD1A2",
+            "PhysicalResourceId": "decoded-genai-stack-DeploymentPlatformSetupInfraSetupMetricsPublishFrequencyAllowEventR-JZ4upufyPe6l",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:05:54.341000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupInfraSetupMetricsPublishFrequencyB2020316",
+            "PhysicalResourceId": "decoded-genai-stack-DeploymentPlatformSetupInfraSet-XS3L9p2oyGU9",
+            "ResourceType": "AWS::Events::Rule",
+            "Timestamp": "2025-06-14T19:06:03.316000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupInfraSetupScheduleLogRetentionF1D0F3ED",
+            "PhysicalResourceId": "PhysicalResourceId",
+            "ResourceType": "Custom::CW_LOG_RETENTION",
+            "Timestamp": "2025-06-14T19:05:12.410000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupInfraSetupScheduledAnonymousMetrics34A8D055",
+            "PhysicalResourceId": "decoded-genai-stack-DeploymentPlatformSetupInfraSe-aNtmBE4Gyf4h",
+            "ResourceType": "AWS::Lambda::Function",
+            "Timestamp": "2025-06-14T19:05:06.433000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupOpsCustomDashboardC1C0C18E",
+            "PhysicalResourceId": "decoded-genai-stack-eu-central-1-Dashboard",
+            "ResourceType": "AWS::CloudWatch::Dashboard",
+            "Timestamp": "2025-06-14T19:05:00.900000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupScheduledMetricsLambdaRole89420F9F",
+            "PhysicalResourceId": "decoded-genai-stack-DeploymentPlatformSetupSchedule-zOBGQL2kbVDe",
+            "ResourceType": "AWS::IAM::Role",
+            "Timestamp": "2025-06-14T18:56:26.330000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupScheduledMetricsLambdaRoleDefaultPolicy7CE81C15",
+            "PhysicalResourceId": "decod-Deplo-QQpB7FaPIqu7",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T18:56:43.427000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupSolutionHelperAnonymousData96B2086D",
+            "PhysicalResourceId": "c0654479",
+            "ResourceType": "Custom::AnonymousData",
+            "Timestamp": "2025-06-14T18:57:00.044000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformSetupWriteToSSMBE1096BE",
+            "PhysicalResourceId": "decod-Deplo-8vJYpcSuORua",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T18:56:44.054000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformStorageDDBUCMLPolicy9154E8BF",
+            "PhysicalResourceId": "decod-Deplo-pJD6khWIUdE7",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T19:05:14.315000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "DeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResourceF56260D3",
+            "PhysicalResourceId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack-DeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeplo-GB5F6BWDW134/56d25950-4951-11f0-9dc7-02c5f16a4f27",
+            "ResourceType": "AWS::CloudFormation::Stack",
+            "Timestamp": "2025-06-14T18:57:42.088000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "NodeUserAgentLayer02526341",
+            "PhysicalResourceId": "arn:aws:lambda:eu-central-1:396913703024:layer:NodeUserAgentLayer02526341:1",
+            "ResourceType": "AWS::Lambda::LayerVersion",
+            "Timestamp": "2025-06-14T18:56:15.645000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "PythonUserAgentLayer6958F3C0",
+            "PhysicalResourceId": "arn:aws:lambda:eu-central-1:396913703024:layer:PythonUserAgentLayer6958F3C0:1",
+            "ResourceType": "AWS::Lambda::LayerVersion",
+            "Timestamp": "2025-06-14T18:56:13.825000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "RegistrySetupCC2515F0",
+            "PhysicalResourceId": "00phybd7c1mvdqsuhxxdjka91d",
+            "ResourceType": "AWS::ServiceCatalogAppRegistry::Application",
+            "Timestamp": "2025-06-14T18:56:10.216000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupFeedbackSetupStackNestedStackFeedbackSetupStackNestedStackResourceCA537136",
+            "PhysicalResourceId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack-UseCaseManagementSetupFeedbackSetupStackNestedStackFeedbackSetupSt-JXXDD19BV8XS/76e4fdf0-4952-11f0-8dd3-0a4e9c1b3053",
+            "ResourceType": "AWS::CloudFormation::Stack",
+            "Timestamp": "2025-06-14T19:05:59.553000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorCognitoAdminGroupPolicyFA8C586D",
+            "PhysicalResourceId": "decod-UseCa-DFSfs22mtyVG",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2025-06-14T19:05:14.632000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorCognitoAdminGroupPolicyTableWriterB481B347",
+            "PhysicalResourceId": "52ea69c7",
+            "ResourceType": "Custom::CognitoAdminGroupPolicyTableWriter",
+            "Timestamp": "2025-06-14T19:05:17.260000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestAuthorizer2B81EC22",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestP-G2kLXqy9rwhI",
+            "ResourceType": "AWS::Lambda::Function",
+            "Timestamp": "2025-06-14T19:05:06.410000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestAuthorizerAPIGatewayInvoke7E420FA2",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestAuthorizerAPIGa-K1mck9nQLtgN",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:05:03.034000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestAuthorizerDeploymentPlatformStackUseCaseManagementSetupRequestProcessorRestCustomRequestAuthorizer537B59D4Permissions3FBB7A58",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestAuthorizerDeplo-rxPVjTEiSCe6",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:05:05.136000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointBadRequestBodyResponseEF90EA9F",
+            "PhysicalResourceId": "n64vgs0he0:BAD_REQUEST_BODY",
+            "ResourceType": "AWS::ApiGateway::GatewayResponse",
+            "Timestamp": "2025-06-14T18:56:17.340000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointBadRequestDefaultResponseE22C6436",
+            "PhysicalResourceId": "n64vgs0he0:DEFAULT_4XX",
+            "ResourceType": "AWS::ApiGateway::GatewayResponse",
+            "Timestamp": "2025-06-14T18:56:12.581000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointBadRequestParametersResponse97FE3D57",
+            "PhysicalResourceId": "n64vgs0he0:BAD_REQUEST_PARAMETERS",
+            "ResourceType": "AWS::ApiGateway::GatewayResponse",
+            "Timestamp": "2025-06-14T18:56:17.416000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeployUseCaseApiBodyModel2E7FF7C8",
+            "PhysicalResourceId": "DeployUseCaseApiBodyModel",
+            "ResourceType": "AWS::ApiGateway::Model",
+            "Timestamp": "2025-06-14T18:56:13.486000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeployUseCaseResponseModel053210C2",
+            "PhysicalResourceId": "DeployUseCaseResponseModel",
+            "ResourceType": "AWS::ApiGateway::Model",
+            "Timestamp": "2025-06-14T18:56:17.356000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentPlatformEndpointWafDeploymentPlatformEndpointWafWebACL048DBCBA",
+            "PhysicalResourceId": "UseCaseManagementSetupRequestProcesso-m8LbAsuWk9i9|3d140df5-453b-4788-899c-610161bfc34c|REGIONAL",
+            "ResourceType": "AWS::WAFv2::WebACL",
+            "Timestamp": "2025-06-14T18:56:10.925000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentPlatformEndpointWafWebACLAssociation37A5F031",
+            "PhysicalResourceId": "arn:aws:apigateway:eu-central-1::/restapis/n64vgs0he0/stages/prod|arn:aws:wafv2:eu-central-1:396913703024:regional/webacl/UseCaseManagementSetupRequestProcesso-m8LbAsuWk9i9/3d140df5-453b-4788-899c-610161bfc34c",
+            "ResourceType": "AWS::WAFv2::WebACLAssociation",
+            "Timestamp": "2025-06-14T19:06:13.491000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointApiAccessLogGroupFB4EFA7D",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointApiAccessLogGroupFB4EFA7D-U62oZgkGwnTV",
+            "ResourceType": "AWS::Logs::LogGroup",
+            "Timestamp": "2025-06-14T18:56:18.323000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiAccount38FC82FE",
+            "PhysicalResourceId": "decode-UseCa-gbxHr0YZqzwz",
+            "ResourceType": "AWS::ApiGateway::Account",
+            "Timestamp": "2025-06-14T18:56:29.384000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiCloudWatchRole15571B15",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestPr-xQVc8iHYvgMs",
+            "ResourceType": "AWS::IAM::Role",
+            "Timestamp": "2025-06-14T18:56:26.432000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiDeployment8CA28FB1a9b78346e213302778bfd9542d49f78f",
+            "PhysicalResourceId": "fp2ker",
+            "ResourceType": "AWS::ApiGateway::Deployment",
+            "Timestamp": "2025-06-14T19:06:05.938000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiDeploymentStageprodE2564A5F",
+            "PhysicalResourceId": "prod",
+            "ResourceType": "AWS::ApiGateway::Stage",
+            "Timestamp": "2025-06-14T19:06:09.942000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F",
+            "PhysicalResourceId": "n64vgs0he0",
+            "ResourceType": "AWS::ApiGateway::RestApi",
+            "Timestamp": "2025-06-14T18:56:10.550000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiUsagePlanD00ABF48",
+            "PhysicalResourceId": "dglnbo",
+            "ResourceType": "AWS::ApiGateway::UsagePlan",
+            "Timestamp": "2025-06-14T19:06:12.277000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsBB1D9109",
+            "PhysicalResourceId": "5hafle",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:16.098000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsGET93EE3992",
+            "PhysicalResourceId": "n64vgs0he0|5hafle|GET",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.432000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsGETApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApi80725706",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-zhPAKgkRrXuv",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:12.172000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsGETApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRes1B0F83BA",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-sVoiS4aOHeuf",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:59.014000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsOPTIONS226E9606",
+            "PhysicalResourceId": "n64vgs0he0|5hafle|OPTIONS",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T18:56:19.451000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsPOST68876F12",
+            "PhysicalResourceId": "n64vgs0he0|5hafle|POST",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.432000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsPOSTApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestAp2440C5F6",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-BsjLT22mAdnf",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:12.187000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsPOSTApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaReB233F758",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-p9grwub5geMc",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:59.354000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseId1B4DA213",
+            "PhysicalResourceId": "5u31ld",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:18.093000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdDELETE1F46F92B",
+            "PhysicalResourceId": "n64vgs0he0|5u31ld|DELETE",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.690000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdDELETEApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLC92042FA",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-9gj5ZEVvBzaS",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:12.290000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdDELETEApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPoF340F832",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-Lv7YbIMue3kv",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:59.107000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdGET49E7D36E",
+            "PhysicalResourceId": "n64vgs0he0|5u31ld|GET",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.522000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdGETApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLamb2FB1BC7D",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-Le695rT5LSC7",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:11.895000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdGETApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointD9FCB66E",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-7soGrsLwlCqF",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:59.013000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdOPTIONS34A36241",
+            "PhysicalResourceId": "n64vgs0he0|5u31ld|OPTIONS",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T18:56:21.637000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdPATCHApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLaEFA75A42",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-BjfeselnFpTL",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:11.831000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdPATCHApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPoiF45B02D6",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-VObtftcPSt3y",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:58.854000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApideploymentsuseCaseIdPATCHB08FB161",
+            "PhysicalResourceId": "n64vgs0he0|5u31ld|PATCH",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.567000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApifeedback61DB2B5B",
+            "PhysicalResourceId": "glwa0y",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:12.921000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApifeedbackuseCaseIdEE4BB80E",
+            "PhysicalResourceId": "nej61e",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:14.965000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApifeedbackuseCaseIdOPTIONS144DB212",
+            "PhysicalResourceId": "n64vgs0he0|nej61e|OPTIONS",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T18:56:18.587000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApifeedbackuseCaseIdPOST3C555B45",
+            "PhysicalResourceId": "n64vgs0he0|nej61e|POST",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:06:02.971000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApifeedbackuseCaseIdPOSTApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaC894672C",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-q1WdF8l1EFGA",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:11.886000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApifeedbackuseCaseIdPOSTApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLaA104131F",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-XPhNnDvibGCY",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:01.718000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfo471EE02C",
+            "PhysicalResourceId": "c8rw2j",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:12.767000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeCC855208",
+            "PhysicalResourceId": "7s0ib4",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:14.839000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNameC996A9BE",
+            "PhysicalResourceId": "f8qbk2",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:16.677000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNameGET6D685A8B",
+            "PhysicalResourceId": "n64vgs0he0|f8qbk2|GET",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.472000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNameGETApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestB185C368",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-jy6V8FX4vybe",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:12.033000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNameGETApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeployment5EF8DE70",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-0bpaPtF1FBVO",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:58.863000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNameOPTIONS481D07FD",
+            "PhysicalResourceId": "n64vgs0he0|f8qbk2|OPTIONS",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T18:56:20.174000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNamemodelId88C0A3B5",
+            "PhysicalResourceId": "xu08r4",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:18.567000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNamemodelIdGET1CDDE10A",
+            "PhysicalResourceId": "n64vgs0he0|xu08r4|GET",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.337000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNamemodelIdGETApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymAD282245",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-qAX3fkbEBVo9",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:12.209000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNamemodelIdGETApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDep21F372CE",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-bdWBYOFaA5rl",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:59.010000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeproviderNamemodelIdOPTIONS7646D3AE",
+            "PhysicalResourceId": "n64vgs0he0|xu08r4|OPTIONS",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T18:56:25.325000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeprovidersD9729BFA",
+            "PhysicalResourceId": "rzaw0s",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:16.924000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeprovidersGET54F880DB",
+            "PhysicalResourceId": "n64vgs0he0|rzaw0s|GET",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.296000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeprovidersGETApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEnd6FD79C86",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-axgJNMPYgSMx",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:12.207000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeprovidersGETApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRes99FB5804",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-QPNbZbP857Ps",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:59.390000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfouseCaseTypeprovidersOPTIONSDD79CF85",
+            "PhysicalResourceId": "n64vgs0he0|rzaw0s|OPTIONS",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T18:56:20.459000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfousecasetypes44F4208C",
+            "PhysicalResourceId": "wua4j6",
+            "ResourceType": "AWS::ApiGateway::Resource",
+            "Timestamp": "2025-06-14T18:56:14.721000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfousecasetypesGETApiPermissionDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLam318D8722",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-U3a5ir0PFEBz",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:06:11.772000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfousecasetypesGETApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPoin17A94506",
+            "PhysicalResourceId": "decoded-genai-stack-UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploym-7mjPaCwmcF4T",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2025-06-14T19:04:59.213000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "decoded-genai-stack",
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/06c444f0-4951-11f0-822b-06fcce479a61",
+            "LogicalResourceId": "UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApimodelinfousecasetypesGETFE1D2400",
+            "PhysicalResourceId": "n64vgs0he0|wua4j6|GET",
+            "ResourceType": "AWS::ApiGateway::Method",
+            "Timestamp": "2025-06-14T19:05:06.498000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        }
+    ]
+}

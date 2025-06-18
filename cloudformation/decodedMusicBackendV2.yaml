@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Nested backend stack for Decoded GenAI Stack
+
+Parameters:
+  EnvName:
+    Type: String
+    Description: Environment name prefix (should match parent stack)
+  WebS3BucketArn:
+    Type: String
+    Description: ARN of the frontend S3 bucket (passed from parent stack)
+  LambdaBucketName:
+    Type: String
+    Description: Name of the S3 bucket storing Lambda zip files
+  LambdaS3Key:
+    Type: String
+    Description: S3 key (file name) for the backend Lambda zip
+
+Resources:
+  BackendLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "${EnvName}-backend-lambda-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: !Sub "${EnvName}-backend-lambda-policy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "*"
+
+  BackendLambdaFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: BackendLambdaRole
+    Properties:
+      FunctionName: !Sub "${EnvName}-backend-lambda"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: !Ref LambdaBucketName
+        S3Key: !Ref LambdaS3Key
+      Runtime: nodejs18.x
+      Timeout: 15
+      MemorySize: 128
+      Environment:
+        Variables:
+          ENV_NAME: !Ref EnvName
+          WEB_BUCKET_ARN: !Ref WebS3BucketArn
+
+Outputs:
+  BackendLambdaFunctionArn:
+    Description: ARN of the backend Lambda function
+    Value: !GetAtt BackendLambdaFunction.Arn
+    Export:
+      Name: !Sub "${EnvName}-BackendLambdaFunctionArn"
