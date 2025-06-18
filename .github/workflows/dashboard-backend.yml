@@ -34,7 +34,7 @@ jobs:
         run: |
           aws cloudformation deploy \
             --template-file cloudformation/decodedMusicBackend.yaml \
-            --stack-name DecodedMusicBackend \
+            --stack-name decoded-genai-stack \
             --region $AWS_REGION \
             --capabilities CAPABILITY_NAMED_IAM
       - name: Test endpoint
