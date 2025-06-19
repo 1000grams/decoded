@@ -42,3 +42,7 @@ src/*.zip
 public/# Python CDK example
 public/# This Amplify build script ensures Node.yaml
 public/Subject: Pitch: “{{track_title}}” by Rue
+*.zip
+decoded/
+decoded-mirror/
+decoded-mirror.bfg-report/
