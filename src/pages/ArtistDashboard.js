@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
-const API_BASE = process.env.REACT_APP_API_BASE || '/api/dashboard';
+import { DashboardAPI } from '../api/dashboard';
 
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI || window.location.origin + '/dashboard';
@@ -29,14 +28,8 @@ function ArtistDashboard() {
 
     async function loadData() {
       try {
-        const res = await fetch(`${API_BASE}/accounting`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ artistId: 'RueDeVivre' })
-        });
-        if (res.ok) {
-          setAccounting(await res.json());
-        }
+        const data = await DashboardAPI.getAccounting({ artistId: 'RueDeVivre' });
+        setAccounting(data);
       } catch (err) {
         console.error('dashboard fetch error', err);
       }
