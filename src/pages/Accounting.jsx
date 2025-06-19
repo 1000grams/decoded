@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { DashboardAPI } from '../api/dashboard';
 
 const API_BASE = process.env.REACT_APP_API_BASE || '/api/dashboard';
 
@@ -8,15 +9,8 @@ function Accounting() {
   useEffect(() => {
     async function fetchAccounting() {
       try {
-        const res = await fetch(`${API_BASE}/accounting`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ artistId: 'RueDeVivre' })
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setSummary(data);
-        }
+        const data = await DashboardAPI.getAccounting({ artistId: 'RueDeVivre' });
+        setSummary(data);
       } catch (err) {
         console.error('fetch accounting error', err);
       }
