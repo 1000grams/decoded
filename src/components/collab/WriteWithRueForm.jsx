@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const API_BASE = process.env.REACT_APP_API_BASE || "/api";
+
 export default function WriteWithRueForm() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
@@ -24,7 +26,7 @@ export default function WriteWithRueForm() {
     e.preventDefault();
     setStatus("Submitting...");
     // Replace with your actual API endpoint
-    const response = await fetch("/api/write-with-rue", {
+    const response = await fetch(`${API_BASE}/write-with-rue`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+
+const API_BASE = process.env.REACT_APP_API_BASE || "/api";
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
@@ -8,7 +10,7 @@ export default function Contact() {
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus("Sending...");
-    const response = await fetch("/api/contact", {
+    const response = await fetch(`${API_BASE}/contact`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
