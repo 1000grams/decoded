@@ -57,6 +57,106 @@ Resources:
           ENV_NAME: !Ref EnvName
           WEB_BUCKET_ARN: !Ref WebS3BucketArn
 
+  # Additional dashboard Lambda functions used by the web application
+  DashboardAccountingLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardAccounting"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardAccounting.zip
+      Runtime: nodejs18.x
+
+  DashboardAnalyticsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardAnalytics"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardAnalytics.zip
+      Runtime: nodejs18.x
+
+  DashboardCampaignsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardCampaigns"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardCampaigns.zip
+      Runtime: nodejs18.x
+
+  DashboardCatalogLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardCatalog"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardCatalog.zip
+      Runtime: nodejs18.x
+
+  DashboardEarningsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardEarnings"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardEarnings.zip
+      Runtime: nodejs18.x
+
+  DashboardStatementsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardStatements"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardStatements.zip
+      Runtime: nodejs18.x
+
+  DashboardStreamsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardStreams"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardStreams.zip
+      Runtime: nodejs18.x
+
+  DashboardTeamLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardTeam"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardTeam.zip
+      Runtime: nodejs18.x
+
+  PitchHandlerLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-pitchHandler"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: pitchHandler.zip
+      Runtime: nodejs18.x
+
 Outputs:
   BackendLambdaFunctionArn:
     Description: ARN of the backend Lambda function
