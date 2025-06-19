@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 *.zip 
+=======
+>>>>>>> 12f2dd8b61cb1987532d0748ca1ce1a91889157e
 # Logs
 npm-debug.log*
 yarn-debug.log*
