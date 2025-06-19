@@ -1,989 +1,512 @@
-- Name: AWS-AWSManagedRulesKnownBadInputsRuleSet
-          - OverrideAction: !!omap
-            - None: !!omap []
-          - Priority: 1
-          - Statement: !!omap
-            - ManagedRuleGroupStatement: !!omap
-              - Name: AWSManagedRulesKnownBadInputsRuleSet
-              - VendorName: AWS
-          - VisibilityConfig: !!omap
-            - CloudWatchMetricsEnabled: true
-            - MetricName: AWSManagedRulesKnownBadInputsRuleSet
-            - SampledRequestsEnabled: true
-        - !!omap
-          - Name: AWS-AWSManagedRulesCommonRuleSet
-          - OverrideAction: !!omap
-            - None: !!omap []
-          - Priority: 2
-          - Statement: !!omap
-            - ManagedRuleGroupStatement: !!omap
-              - Name: AWSManagedRulesCommonRuleSet
-              - RuleActionOverrides:
-                - !!omap
-                  - ActionToUse: !!omap
-                    - Count: !!omap []
-                  - Name: SizeRestrictions_BODY
-              - VendorName: AWS
-          - VisibilityConfig: !!omap
-            - CloudWatchMetricsEnabled: true
-            - MetricName: AWS-AWSManagedRulesCommonRuleSet
-            - SampledRequestsEnabled: true
-        - !!omap
-          - Name: AWS-AWSManagedRulesAnonymousIpList
-          - OverrideAction: !!omap
-            - None: !!omap []
-          - Priority: 3
-          - Statement: !!omap
-            - ManagedRuleGroupStatement: !!omap
-              - Name: AWSManagedRulesAnonymousIpList
-              - VendorName: AWS
-          - VisibilityConfig: !!omap
-            - CloudWatchMetricsEnabled: true
-            - MetricName: AWSManagedRulesAnonymousIpList
-            - SampledRequestsEnabled: true
-        - !!omap
-          - Name: AWS-AWSManagedRulesAmazonIpReputationList
-          - OverrideAction: !!omap
-            - None: !!omap []
-          - Priority: 4
-          - Statement: !!omap
-            - ManagedRuleGroupStatement: !!omap
-              - Name: AWSManagedRulesAmazonIpReputationList
-              - VendorName: AWS
-          - VisibilityConfig: !!omap
-            - CloudWatchMetricsEnabled: true
-            - MetricName: AWSManagedRulesAmazonIpReputationList
-            - SampledRequestsEnabled: true
-        - !!omap
-          - Name: AWS-AWSManagedRulesAdminProtectionRuleSet
-          - OverrideAction: !!omap
-            - None: !!omap []
-          - Priority: 5
-          - Statement: !!omap
-            - ManagedRuleGroupStatement: !!omap
-              - Name: AWSManagedRulesAdminProtectionRuleSet
-              - VendorName: AWS
-          - VisibilityConfig: !!omap
-            - CloudWatchMetricsEnabled: true
-            - MetricName: AWSManagedRulesAdminProtectionRuleSet
-            - SampledRequestsEnabled: true
-        - !!omap
-          - Name: AWS-AWSManagedRulesSQLiRuleSet
-          - OverrideAction: !!omap
-            - None: !!omap []
-          - Priority: 6
-          - Statement: !!omap
-            - ManagedRuleGroupStatement: !!omap
-              - Name: AWSManagedRulesSQLiRuleSet
-              - VendorName: AWS
-          - VisibilityConfig: !!omap
-            - CloudWatchMetricsEnabled: true
-            - MetricName: AWSManagedRulesSQLiRuleSet
-            - SampledRequestsEnabled: true
-        - !!omap
-          - Action: !!omap
-            - Block: !!omap
-              - CustomResponse: !!omap
-                - CustomResponseBodyKey: HeadersNotAllowed
-                - ResponseCode: 403
-          - Name: Custom-BlockRequestHeaders
-          - Priority: 7
-          - Statement: !!omap
-            - SizeConstraintStatement: !!omap
-              - ComparisonOperator: GE
-              - FieldToMatch: !!omap
-                - SingleHeader: !!omap
-                  - Name: x-amzn-requestid
-              - Size: 0
-              - TextTransformations:
-                - !!omap
-                  - Priority: 0
-                  - Type: NONE
-          - VisibilityConfig: !!omap
-            - CloudWatchMetricsEnabled: true
-            - MetricName: Custom-BlockRequestHeaders
-            - SampledRequestsEnabled: true
-        - !!omap
-          - Action: !!omap
-            - Block: !!omap []
-          - Name: Custom-BlockOversizedBodyNotInDeploy
-          - Priority: 8
-          - Statement: !!omap
-            - AndStatement: !!omap
-              - Statements:
-                - !!omap
-                  - LabelMatchStatement: !!omap
-                    - Key: awswaf:managed:aws:core-rule-set:SizeRestrictions_Body
-                    - Scope: LABEL
-                - !!omap
-                  - NotStatement: !!omap
-                    - Statement: !!omap
-                      - ByteMatchStatement: !!omap
-                        - FieldToMatch: !!omap
-                          - UriPath: !!omap []
-                        - PositionalConstraint: ENDS_WITH
-                        - SearchString: /deployments
-                        - TextTransformations:
-                          - !!omap
-                            - Priority: 0
-                            - Type: NONE
-          - VisibilityConfig: !!omap
-            - CloudWatchMetricsEnabled: true
-            - MetricName: Custom-BlockOversizedBodyNotInDeploy
-            - SampledRequestsEnabled: true
-      - Scope: REGIONAL
-      - VisibilityConfig: !!omap
-        - CloudWatchMetricsEnabled: true
-        - MetricName: webACL
-        - SampledRequestsEnabled: true
-    - Condition: UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointUseCaseEndpointWafWebACLAssociation3ACF4622: !!omap
-    - Type: AWS::WAFv2::WebACLAssociation
-    - Properties: !!omap
-      - ResourceArn: !!omap
-        - Fn::Join:
-          - ''
-          - - 'arn:'
-            - !!omap
-              - Ref: AWS::Partition
-            - ':apigateway:'
-            - !!omap
-              - Ref: AWS::Region
-            - ::/restapis/
-            - !!omap
-              - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-            - /stages/
-            - !!omap
-              - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApiDeploymentStageprodDFECD10F
-      - WebACLArn: !!omap
-        - Fn::GetAtt:
-          - UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointUseCaseEndpointWafUseCaseEndpointWafWebACL3FBA7C55
-          - Arn
-    - Condition: UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointBadRequestDefaultResponse63BE5DCD: !!omap
-    - Type: AWS::ApiGateway::GatewayResponse
-    - Properties: !!omap
-      - ResponseParameters: !!omap
-        - gatewayresponse.header.gatewayresponse.header.Access-Control-Allow-Origin: '''*'''
-        - gatewayresponse.header.gatewayresponse.header.Access-Control-Allow-Headers: '''*'''
-      - ResponseType: DEFAULT_4XX
-      - RestApiId: !!omap
-        - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-      - StatusCode: '400'
-    - Condition: UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointInternalServerErrorDefaultResponseFE8D9460: !!omap
-    - Type: AWS::ApiGateway::GatewayResponse
-    - Properties: !!omap
-      - ResponseParameters: !!omap
-        - gatewayresponse.header.gatewayresponse.header.Access-Control-Allow-Origin: '''*'''
-        - gatewayresponse.header.gatewayresponse.header.Access-Control-Allow-Headers: '''*'''
-      - ResponseType: DEFAULT_5XX
-      - RestApiId: !!omap
-        - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-      - StatusCode: '400'
-    - Condition: UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointBadRequestBodyResponse0F38C01A: !!omap
-    - Type: AWS::ApiGateway::GatewayResponse
-    - Properties: !!omap
-      - ResponseParameters: !!omap
-        - gatewayresponse.header.gatewayresponse.header.Access-Control-Allow-Origin: '''*'''
-        - gatewayresponse.header.gatewayresponse.header.Access-Control-Allow-Headers: '''*'''
-      - ResponseTemplates: !!omap
-        - application/json: '{"error":{"message":"$context.error.messageString","errors":"$context.error.validationErrorString"}}'
-      - ResponseType: BAD_REQUEST_BODY
-      - RestApiId: !!omap
-        - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-      - StatusCode: '400'
-    - Condition: UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointBadRequestParametersResponse73682B10: !!omap
-    - Type: AWS::ApiGateway::GatewayResponse
-    - Properties: !!omap
-      - ResponseParameters: !!omap
-        - gatewayresponse.header.gatewayresponse.header.Access-Control-Allow-Origin: '''*'''
-        - gatewayresponse.header.gatewayresponse.header.Access-Control-Allow-Headers: '''*'''
-      - ResponseTemplates: !!omap
-        - application/json: '{"error":{"message":"$context.error.messageString","errors":"$context.error.validationErrorString"}}'
-      - ResponseType: BAD_REQUEST_PARAMETERS
-      - RestApiId: !!omap
-        - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-      - StatusCode: '400'
-    - Condition: UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetails554F399A: !!omap
-    - Type: AWS::ApiGateway::Resource
-    - Properties: !!omap
-      - ParentId: !!omap
-        - Fn::If:
-          - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-          - !!omap
-            - Fn::GetAtt:
-              - UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-              - RootResourceId
-          - !!omap
-            - Fn::GetAtt:
-              - UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-              - RootResourceId
-      - PathPart: details
-      - RestApiId: !!omap
-        - Fn::If:
-          - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-          - !!omap
-            - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-          - !!omap
-            - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-    - Condition: UseCaseManagementSetupUseCaseEndpointSetupCreateApiRoutesCondition0060F23A
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetailsuseCaseConfigKeyEF5B18C2: !!omap
-    - Type: AWS::ApiGateway::Resource
-    - Properties: !!omap
-      - ParentId: !!omap
-        - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetails554F399A
-      - PathPart: '{useCaseConfigKey}'
-      - RestApiId: !!omap
-        - Fn::If:
-          - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-          - !!omap
-            - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-          - !!omap
-            - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-    - Condition: UseCaseManagementSetupUseCaseEndpointSetupCreateApiRoutesCondition0060F23A
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetailsuseCaseConfigKeyOPTIONS0A3DA395: !!omap
-    - Type: AWS::ApiGateway::Method
-    - Properties: !!omap
-      - ApiKeyRequired: false
-      - AuthorizationType: NONE
-      - HttpMethod: OPTIONS
-      - Integration: !!omap
-        - IntegrationResponses:
-          - !!omap
-            - ResponseParameters: !!omap
-              - method.response.header.Access-Control-Allow-Headers: '''Content-Type,
-                  Access-Control-Allow-Headers, X-Requested-With, Authorization'''
-              - method.response.header.Access-Control-Allow-Origin: '''*'''
-              - method.response.header.Access-Control-Allow-Methods: '''GET,OPTIONS'''
-            - StatusCode: '204'
-        - RequestTemplates: !!omap
-          - application/json: '{ statusCode: 200 }'
-        - Type: MOCK
-      - MethodResponses:
-        - !!omap
-          - ResponseParameters: !!omap
-            - method.response.header.Access-Control-Allow-Headers: true
-            - method.response.header.Access-Control-Allow-Origin: true
-            - method.response.header.Access-Control-Allow-Methods: true
-          - StatusCode: '204'
-      - ResourceId: !!omap
-        - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetailsuseCaseConfigKeyEF5B18C2
-      - RestApiId: !!omap
-        - Fn::If:
-          - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-          - !!omap
-            - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-          - !!omap
-            - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-    - Condition: UseCaseManagementSetupUseCaseEndpointSetupCreateApiRoutesCondition0060F23A
-  - ? UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetailsuseCaseConfigKeyGETApiPermissionDeploymentPlatformStackUseCaseManagementSetupUseCaseEndpointSetupUseCaseApi3645B980GETdetailsuseCaseConfigKey414322C3
-    : !!omap
-    - Type: AWS::Lambda::Permission
-    - Properties: !!omap
-      - Action: lambda:InvokeFunction
-      - FunctionName: !!omap
-        - Fn::GetAtt:
-          - UseCaseManagementSetupUseCaseEndpointSetupUseCaseDetailsLambdaB2D6F726
-          - Arn
-      - Principal: apigateway.amazonaws.com
-      - SourceArn: !!omap
-        - Fn::Join:
-          - ''
-          - - 'arn:'
-            - !!omap
-              - Ref: AWS::Partition
-            - ':execute-api:'
-            - !!omap
-              - Ref: AWS::Region
-            - ':'
-            - !!omap
-              - Ref: AWS::AccountId
-            - ':'
-            - !!omap
-              - Fn::If:
-                - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-                - !!omap
-                  - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-                - !!omap
-                  - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-            - /*/GET/details/*
-    - Condition: UseCaseManagementSetupUseCaseEndpointSetupCreateApiRoutesCondition0060F23A
-  - ? UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetailsuseCaseConfigKeyGETApiPermissionTestDeploymentPlatformStackUseCaseManagementSetupUseCaseEndpointSetupUseCaseApi3645B980GETdetailsuseCaseConfigKeyCF030818
-    : !!omap
-    - Type: AWS::Lambda::Permission
-    - Properties: !!omap
-      - Action: lambda:InvokeFunction
-      - FunctionName: !!omap
-        - Fn::GetAtt:
-          - UseCaseManagementSetupUseCaseEndpointSetupUseCaseDetailsLambdaB2D6F726
-          - Arn
-      - Principal: apigateway.amazonaws.com
-      - SourceArn: !!omap
-        - Fn::Join:
-          - ''
-          - - 'arn:'
-            - !!omap
-              - Ref: AWS::Partition
-            - ':execute-api:'
-            - !!omap
-              - Ref: AWS::Region
-            - ':'
-            - !!omap
-              - Ref: AWS::AccountId
-            - ':'
-            - !!omap
-              - Fn::If:
-                - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-                - !!omap
-                  - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-                - !!omap
-                  - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-            - /test-invoke-stage/GET/details/*
-    - Condition: UseCaseManagementSetupUseCaseEndpointSetupCreateApiRoutesCondition0060F23A
-  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetailsuseCaseConfigKeyGET9A40C024: !!omap
-    - Type: AWS::ApiGateway::Method
-    - Properties: !!omap
-      - AuthorizationType: CUSTOM
-      - AuthorizerId: !!omap
-        - Fn::If:
-          - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-          - !!omap
-            - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointUseCaseEndpointAuthorizer0B1A9B7A
-          - !!omap
-            - Ref: UseCaseManagementSetupRequestProcessorRestCustomRequestAuthorizerCDD89059
-      - HttpMethod: GET
-      - Integration: !!omap
-        - IntegrationHttpMethod: POST
-        - PassthroughBehavior: NEVER
-        - Type: AWS_PROXY
-        - Uri: !!omap
-          - Fn::Join:
-            - ''
-            - - 'arn:'
-              - !!omap
-                - Ref: AWS::Partition
-              - ':apigateway:'
-              - !!omap
-                - Ref: AWS::Region
-              - :lambda:path/2015-03-31/functions/
-              - !!omap
-                - Fn::GetAtt:
-                  - UseCaseManagementSetupUseCaseEndpointSetupUseCaseDetailsLambdaB2D6F726
-                  - Arn
-              - /invocations
-      - OperationName: UseCaseDetails
-      - RequestParameters: !!omap
-        - method.request.header.authorization: true
-      - RequestValidatorId: !!omap
-        - Fn::If:
-          - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-          - !!omap
-            - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointUseCaseRequestValidator2EA7C91E
-          - !!omap
-            - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointRequestValidator38E09551
-      - ResourceId: !!omap
-        - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseApidetailsuseCaseConfigKeyEF5B18C2
-      - RestApiId: !!omap
-        - Fn::If:
-          - UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-          - !!omap
-            - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointDeploymentRestEndPointLambdaRestApi9C23F7C7
-          - !!omap
-            - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-    - Metadata: !!omap
-      - cdk_nag: !!omap
-        - rules_to_suppress:
-          - !!omap
-            - reason: A Custom authorizer must be used in order to authenticate using
-                Cognito user groups
-            - id: AwsSolutions-COG4
-    - Condition: UseCaseManagementSetupUseCaseEndpointSetupCreateApiRoutesCondition0060F23A
-  - UseCaseManagementSetupFeedbackSetupStackNestedStackFeedbackSetupStackNestedStackResourceCA537136: !!omap
-    - Type: AWS::CloudFormation::Stack
-    - Properties: !!omap
-      - Parameters: !!omap
-        - ExistingPrivateSubnetIds: !!omap
-          - Fn::If:
-            - DeployVPCCondition
-            - !!omap
-              - Fn::GetAtt:
-                - VPCDeploymentPlatformVPCNestedStackDeploymentPlatformVPCNestedStackResource186D2208
-                - Outputs.PrivateSubnetIds
-            - !!omap
-              - Fn::Join:
-                - ','
-                - !!omap
-                  - Ref: ExistingPrivateSubnetIds
-        - ExistingSecurityGroupIds: !!omap
-          - Fn::If:
-            - DeployVPCCondition
-            - !!omap
-              - Fn::GetAtt:
-                - VPCDeploymentPlatformVPCNestedStackDeploymentPlatformVPCNestedStackResource186D2208
-                - Outputs.SecurityGroupIds
-            - !!omap
-              - Fn::Join:
-                - ','
-                - !!omap
-                  - Ref: ExistingSecurityGroupIds
-        - CustomResourceLambdaArn: !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformSetupInfraSetupCustomResource5473231F
-            - Arn
-        - CustomResourceRoleArn: !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformSetupCustomResourceLambdaRole3C444A9D
-            - Arn
-        - AccessLoggingBucketArn: !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformSetupAccessLog67D5D503
-            - Arn
-        - FeedbackEnabled: Yes
-        - ExistingRestApiId: !!omap
-          - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-        - ExistingApiRootResourceId: !!omap
-          - Fn::GetAtt:
-            - UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-            - RootResourceId
-        - StackDeploymentSource: DeploymentPlatform
-        - ? referencetoDeploymentPlatformStackUseCaseManagementSetupUseCaseManagementNestedStackUseCaseManagementNestedStackResource1C4303B0OutputsDeploymentPlatformStackUseCaseManagementSetupUseCaseManagementUseCaseManagementDLQ5E4F3FEAArn
-          : !!omap
-          - Fn::GetAtt:
-            - UseCaseManagementSetupUseCaseManagementNestedStackUseCaseManagementNestedStackResource7ED7E421
-            - Outputs.DeploymentPlatformStackUseCaseManagementSetupUseCaseManagementUseCaseManagementDLQ5E4F3FEAArn
-        - ? referencetoDeploymentPlatformStackDeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResource0080A447OutputsDeploymentPlatformStackDeploymentPlatformStorageLLMConfigTable9EB214F1Arn
-          : !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResourceF56260D3
-            - Outputs.DeploymentPlatformStackDeploymentPlatformStorageLLMConfigTable9EB214F1Arn
-        - ? referencetoDeploymentPlatformStackDeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResource0080A447OutputsDeploymentPlatformStackDeploymentPlatformStorageUseCasesTable8AE1DCF5Arn
-          : !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResourceF56260D3
-            - Outputs.DeploymentPlatformStackDeploymentPlatformStorageUseCasesTable8AE1DCF5Arn
-        - ? referencetoDeploymentPlatformStackDeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResource0080A447OutputsDeploymentPlatformStackDeploymentPlatformStorageLLMConfigTable9EB214F1Ref
-          : !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResourceF56260D3
-            - Outputs.DeploymentPlatformStackDeploymentPlatformStorageLLMConfigTable9EB214F1Ref
-        - ? referencetoDeploymentPlatformStackDeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResource0080A447OutputsDeploymentPlatformStackDeploymentPlatformStorageUseCasesTable8AE1DCF5Ref
-          : !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResourceF56260D3
-            - Outputs.DeploymentPlatformStackDeploymentPlatformStorageUseCasesTable8AE1DCF5Ref
-        - referencetoDeploymentPlatformStackAwsNodeSdkLayer390CBFFFRef: !!omap
-          - Ref: AwsNodeSdkLayer42C7A59C
-        - referencetoDeploymentPlatformStackNodeUserAgentLayer24384C79Ref: !!omap
-          - Ref: NodeUserAgentLayer02526341
-        - ? referencetoDeploymentPlatformStackUseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApi854B9E90Ref
-          : !!omap
-          - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-        - referencetoDeploymentPlatformStackRegistrySetup483F1675Id: !!omap
-          - Fn::GetAtt:
-            - RegistrySetupCC2515F0
-            - Id
-      - TemplateURL: !!omap
-        - Fn::Join:
-          - ''
-          - - https://solutions-reference.s3.
-            - !!omap
-              - Ref: AWS::URLSuffix
-            - /
-            - generative-ai-application-builder-on-aws/v3.0.0/DeploymentPlatformStackUseCaseManagementSetupFeedbackSetupStack5DB20D5D.nested.template
-    - DependsOn:
-      - RegistrySetupCC2515F0
-    - UpdateReplacePolicy: Delete
-    - DeletionPolicy: Delete
-    - Metadata: !!omap
-      - aws:asset:path: DeploymentPlatformStackUseCaseManagementSetupFeedbackSetupStack5DB20D5D.nested.template.json
-      - aws:asset:property: TemplateURL
-  - WebConfig: !!omap
-    - Type: Custom::WriteWebConfig
-    - Properties: !!omap
-      - ServiceToken: !!omap
-        - Fn::GetAtt:
-          - DeploymentPlatformSetupInfraSetupCustomResource5473231F
-          - Arn
-      - Resource: WEBCONFIG
-      - SSMKey: !!omap
-        - Fn::Join:
-          - ''
-          - - /gaab-webconfig/
-            - !!omap
-              - Ref: AWS::StackName
-      - UserPoolId: !!omap
-        - Fn::GetAtt:
-          - UseCaseManagementSetupUseCaseManagementNestedStackUseCaseManagementNestedStackResource7ED7E421
-          - Outputs.DeploymentPlatformCognitoSetupUserPoolId0A73EB1C
-      - UserPoolClientId: !!omap
-        - Fn::GetAtt:
-          - UseCaseManagementSetupUseCaseManagementNestedStackUseCaseManagementNestedStackResource7ED7E421
-          - Outputs.DeploymentPlatformCognitoSetupUserPoolClientIdFE2BD0AE
-      - CognitoRedirectUrl: !!omap
-        - Fn::If:
-          - DeployWebAppUIInfrastructureCondition
-          - !!omap
-            - Fn::Join:
-              - ''
-              - - https://
-                - !!omap
-                  - Fn::GetAtt:
-                    - WebAppNestedStackWebAppNestedStackResource4E994CA7
-                    - Outputs.DeploymentPlatformStackWebAppWebsiteUICloudFrontDistribution38CBCDC5DomainName
-          - !!omap
-            - Ref: AWS::NoValue
-      - IsInternalUser: !!omap
-        - Fn::If:
-          - IsInternalUserCondition
-          - true
-          - false
-      - RestApiEndpoint: !!omap
-        - Fn::Join:
-          - ''
-          - - https://
-            - !!omap
-              - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-            - .execute-api.
-            - !!omap
-              - Ref: AWS::Region
-            - .
-            - !!omap
-              - Ref: AWS::URLSuffix
-            - /
-            - !!omap
-              - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiDeploymentStageprodE2564A5F
-            - /
-    - DependsOn:
-      - DeploymentPlatformSetupGetCognitoUserPoolInfo2A3390CD
-      - DeploymentPlatformSetupWriteToSSMBE1096BE
-      - UseCaseManagementSetupUseCaseManagementNestedStackUseCaseManagementNestedStackResource7ED7E421
-    - UpdateReplacePolicy: Delete
-    - DeletionPolicy: Delete
-  - CopyUICustomResourceNestedStackCopyUICustomResourceNestedStackResource298D3A15: !!omap
-    - Type: AWS::CloudFormation::Stack
-    - Properties: !!omap
-      - Parameters: !!omap
-        - CustomResourceRoleArn: !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformSetupCustomResourceLambdaRole3C444A9D
-            - Arn
-        - CustomResourceLambdaArn: !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformSetupInfraSetupCustomResource5473231F
-            - Arn
-        - WebConfigKey: !!omap
-          - Fn::Join:
-            - ''
-            - - /gaab-webconfig/
-              - !!omap
-                - Ref: AWS::StackName
-        - WebS3BucketArn: !!omap
-          - Fn::GetAtt:
-            - WebAppNestedStackWebAppNestedStackResource4E994CA7
-            - Outputs.DeploymentPlatformStackWebAppWebsiteBucketF87806D4Arn
-        - AccessLoggingBucketArn: !!omap
-          - Fn::GetAtt:
-            - DeploymentPlatformSetupAccessLog67D5D503
-            - Arn
-        - referencetoDeploymentPlatformStackRegistrySetup483F1675Id: !!omap
-          - Fn::GetAtt:
-            - RegistrySetupCC2515F0
-            - Id
-      - TemplateURL: !!omap
-        - Fn::Join:
-          - ''
-          - - https://solutions-reference.s3.
-            - !!omap
-              - Ref: AWS::URLSuffix
-            - /
-            - generative-ai-application-builder-on-aws/v3.0.0/DeploymentPlatformStackCopyUICustomResource964AC335.nested.template
-    - DependsOn:
-      - DeploymentPlatformSetupAccessLogPolicy2FB262B2
-      - RegistrySetupCC2515F0
-      - WebConfig
-    - UpdateReplacePolicy: Delete
-    - DeletionPolicy: Delete
-    - Metadata: !!omap
-      - aws:asset:path: DeploymentPlatformStackCopyUICustomResource964AC335.nested.template.json
-      - aws:asset:property: TemplateURL
-    - Condition: DeployWebAppUIInfrastructureCondition
-  - RegistrySetupCC2515F0: !!omap
-    - Type: AWS::ServiceCatalogAppRegistry::Application
-    - Properties: !!omap
-      - Description: Service Catalog application to track and manage all your resources
-          for the solution generative-ai-application-builder-on-aws
-      - Name: !!omap
-        - Fn::Join:
-          - ''
-          - - App-GAAB-Dashboard-
-            - !!omap
-              - Ref: AWS::StackName
-      - Tags: !!omap
-        - Solutions:ApplicationType: AWS-Solutions
-        - Solutions:SolutionID: SO0276
-        - Solutions:SolutionName: generative-ai-application-builder-on-aws
-        - Solutions:SolutionVersion: v3.0.0
-  - AppRegistryAssociation: !!omap
-    - Type: AWS::ServiceCatalogAppRegistry::ResourceAssociation
-    - Properties: !!omap
-      - Application: !!omap
-        - Fn::GetAtt:
-          - RegistrySetupCC2515F0
-          - Id
-      - Resource: !!omap
-        - Ref: AWS::StackId
-      - ResourceType: CFN_STACK
-  - AppAttributesC4C8180E: !!omap
-    - Type: AWS::ServiceCatalogAppRegistry::AttributeGroup
-    - Properties: !!omap
-      - Attributes: !!omap
-        - applicationType: AWS-Solutions
-        - version: v3.0.0
-        - solutionID: SO0276
-        - solutionName: generative-ai-application-builder-on-aws
-      - Description: Attributes for Solutions Metadata
-      - Name: !!omap
-        - Fn::Join:
-          - ''
-          - - AttrGrp-
-            - !!omap
-              - Ref: AWS::StackName
-  - AppAttributesApplicationAttributeGroupAssociation5d45ed99601285052111: !!omap
-    - Type: AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation
-    - Properties: !!omap
-      - Application: !!omap
-        - Fn::GetAtt:
-          - RegistrySetupCC2515F0
-          - Id
-      - AttributeGroup: !!omap
-        - Fn::GetAtt:
-          - AppAttributesC4C8180E
-          - Id
-  - CustomMetricsPolicyFE11102D: !!omap
-    - Type: AWS::IAM::Policy
-    - Properties: !!omap
-      - PolicyDocument: !!omap
-        - Statement:
-          - !!omap
-            - Action: cloudwatch:PutMetricData
-            - Condition: !!omap
-              - StringEquals: !!omap
-                - cloudwatch:namespace:
-                  - AWS/ApiGateway
-                  - AWS/Kendra
-                  - AWS/Cognito
-                  - Langchain/LLM
-                  - AWS/Bedrock
-            - Effect: Allow
-            - Resource: '*'
-        - Version: '2012-10-17'
-      - PolicyName: CustomMetricsPolicyFE11102D
-      - Roles:
-        - !!omap
-          - Ref: DeploymentPlatformSetupCustomResourceLambdaRole3C444A9D
-        - !!omap
-          - Ref: UseCaseManagementSetupRequestProcessorRestAuthorizerRole9B42FEFC
-    - Metadata: !!omap
-      - cdk_nag: !!omap
-        - rules_to_suppress:
-          - !!omap
-            - reason: This policy allows put metric data to CloudWatch. The policy
-                is restricted using policy conditions.
-            - id: AwsSolutions-IAM5
-            - applies_to:
-              - Resource::*
-  - PythonUserAgentLayer6958F3C0: !!omap
-    - Type: AWS::Lambda::LayerVersion
-    - Properties: !!omap
-      - CompatibleRuntimes:
-        - python3.11
-        - python3.13
-      - Content: !!omap
-        - S3Bucket: !!omap
-          - Fn::Sub: solutions-${AWS::Region}
-        - S3Key: generative-ai-application-builder-on-aws/v3.0.0/assetb93f4b1b7284d404b083509917b72f550054d82f02c86eb9ac55b1c6cc618ad3.zip
-      - Description: This layer configures AWS Python SDK initialization to send user-agent
-          information
-    - Metadata: !!omap
-      - aws:asset:path: asset.b93f4b1b7284d404b083509917b72f550054d82f02c86eb9ac55b1c6cc618ad3
-      - aws:asset:is-bundled: true
-      - aws:asset:property: Content
-  - Boto3Layer463A0AEA: !!omap
-    - Type: AWS::Lambda::LayerVersion
-    - Properties: !!omap
-      - CompatibleRuntimes:
-        - python3.11
-        - python3.13
-      - Content: !!omap
-        - S3Bucket: !!omap
-          - Fn::Sub: solutions-${AWS::Region}
-        - S3Key: generative-ai-application-builder-on-aws/v3.0.0/asset9d2cc5e521e687f30ba9f3a3eed99ba7ee9c6be0117b77d7d52c937ebc24db58.zip
-      - Description: Boto3 layer to be bundled with python lambda functions
-    - Metadata: !!omap
-      - aws:asset:path: asset.9d2cc5e521e687f30ba9f3a3eed99ba7ee9c6be0117b77d7d52c937ebc24db58
-      - aws:asset:is-bundled: true
-      - aws:asset:property: Content
-  - CustomMetricsPolicyAnonymousDataAWSConditionA2CDA901: !!omap
-    - Type: AWS::IAM::Policy
-    - Properties: !!omap
-      - PolicyDocument: !!omap
-        - Statement:
-          - !!omap
-            - Action: cloudwatch:PutMetricData
-            - Condition: !!omap
-              - StringEquals: !!omap
-                - cloudwatch:namespace:
-                  - AWS/ApiGateway
-                  - AWS/Kendra
-                  - AWS/Cognito
-                  - Langchain/LLM
-                  - AWS/Bedrock
-            - Effect: Allow
-            - Resource: '*'
-        - Version: '2012-10-17'
-      - PolicyName: CustomMetricsPolicyAnonymousDataAWSConditionA2CDA901
-      - Roles:
-        - !!omap
-          - Ref: DeploymentPlatformSetupScheduledMetricsLambdaRole89420F9F
-    - Metadata: !!omap
-      - cdk_nag: !!omap
-        - rules_to_suppress:
-          - !!omap
-            - reason: This policy allows put metric data to CloudWatch. The policy
-                is restricted using policy conditions.
-            - id: AwsSolutions-IAM5
-            - applies_to:
-              - Resource::*
-    - Condition: AnonymousDataAWSCondition
-  - NodeUserAgentLayer02526341: !!omap
-    - Type: AWS::Lambda::LayerVersion
-    - Properties: !!omap
-      - CompatibleRuntimes:
-        - nodejs18.x
-        - nodejs22.x
-      - Content: !!omap
-        - S3Bucket: !!omap
-          - Fn::Sub: solutions-${AWS::Region}
-        - S3Key: generative-ai-application-builder-on-aws/v3.0.0/asseta295706e8a7d55b013ae2416ecd8dc9d10120055dab2fa7702de18897b268c99.zip
-      - Description: This layer configures AWS Node SDK initialization to send user-agent
-          information
-    - Metadata: !!omap
-      - aws:asset:path: asset.a295706e8a7d55b013ae2416ecd8dc9d10120055dab2fa7702de18897b268c99
-      - aws:asset:is-bundled: true
-      - aws:asset:property: Content
-  - AwsNodeSdkLayer42C7A59C: !!omap
-    - Type: AWS::Lambda::LayerVersion
-    - Properties: !!omap
-      - CompatibleRuntimes:
-        - nodejs18.x
-        - nodejs22.x
-      - Content: !!omap
-        - S3Bucket: !!omap
-          - Fn::Sub: solutions-${AWS::Region}
-        - S3Key: generative-ai-application-builder-on-aws/v3.0.0/asset3fad5600efa590db28dd1a04dbbfe499fdf4b2fdb9db96999034d909b5ab2725.zip
-      - Description: AWS Javascript SDK v3 to be bundled with lambda functions as
-          a layer
-    - Metadata: !!omap
-      - aws:asset:path: asset.3fad5600efa590db28dd1a04dbbfe499fdf4b2fdb9db96999034d909b5ab2725
-      - aws:asset:is-bundled: true
-      - aws:asset:property: Content
-  - CustomMetricsPolicyCreateApiRoutesConditionF3852927: !!omap
-    - Type: AWS::IAM::Policy
-    - Properties: !!omap
-      - PolicyDocument: !!omap
-        - Statement:
-          - !!omap
-            - Action: cloudwatch:PutMetricData
-            - Condition: !!omap
-              - StringEquals: !!omap
-                - cloudwatch:namespace:
-                  - AWS/ApiGateway
-                  - AWS/Kendra
-                  - AWS/Cognito
-                  - Langchain/LLM
-                  - AWS/Bedrock
-            - Effect: Allow
-            - Resource: '*'
-        - Version: '2012-10-17'
-      - PolicyName: CustomMetricsPolicyCreateApiRoutesConditionF3852927
-      - Roles:
-        - !!omap
-          - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseDetailsRole5FD36A48
-    - Metadata: !!omap
-      - cdk_nag: !!omap
-        - rules_to_suppress:
-          - !!omap
-            - reason: This policy allows put metric data to CloudWatch. The policy
-                is restricted using policy conditions.
-            - id: AwsSolutions-IAM5
-            - applies_to:
-              - Resource::*
-    - Condition: UseCaseManagementSetupUseCaseEndpointSetupCreateApiRoutesCondition0060F23A
-  - CustomMetricsPolicyCreateApiResourcesCondition3E7A1DEA: !!omap
-    - Type: AWS::IAM::Policy
-    - Properties: !!omap
-      - PolicyDocument: !!omap
-        - Statement:
-          - !!omap
-            - Action: cloudwatch:PutMetricData
-            - Condition: !!omap
-              - StringEquals: !!omap
-                - cloudwatch:namespace:
-                  - AWS/ApiGateway
-                  - AWS/Kendra
-                  - AWS/Cognito
-                  - Langchain/LLM
-                  - AWS/Bedrock
-            - Effect: Allow
-            - Resource: '*'
-        - Version: '2012-10-17'
-      - PolicyName: CustomMetricsPolicyCreateApiResourcesCondition3E7A1DEA
-      - Roles:
-        - !!omap
-          - Ref: UseCaseManagementSetupUseCaseEndpointSetupUseCaseRestEndpointUseCaseRestAuthorizerRoleB2D1238D
-    - Metadata: !!omap
-      - cdk_nag: !!omap
-        - rules_to_suppress:
-          - !!omap
-            - reason: This policy allows put metric data to CloudWatch. The policy
-                is restricted using policy conditions.
-            - id: AwsSolutions-IAM5
-            - applies_to:
-              - Resource::*
-    - Condition: UseCaseManagementSetupCreateApiResourcesConditionF9F71A85
-  - CDKMetadata: !!omap
-    - Type: AWS::CDK::Metadata
-    - Properties: !!omap
-      - Analytics: v2:deflate64:H4sIAAAAAAAA/3VTwW7bMAz9lt5ltU2HdbvNTbBeUixzs/VY0DLrqJElV5QSZIL/fbCkJG6xXaL3nhmRfKRmPFx/nfGrC9hTIZptoWTNw6MDsWXzF70CCx06tCOZG91IJ40eSeUVMtjTc6AbHu682KIb9YzSsTJKisNZzjyROyAcmISOh3NcRpVRGLMYhQNT0NUN8PDda3HMP8UrtJ0kGtlRHi9nSzig/Y2WctyUD4xunoEIHfFyPBjuUDviIXaWOxyYUMY3e3Biw8MCaFMbsM34+UQGBr1sweEeDjxU+OaRXOndxlj5Jzk3YcvYSzWG9DKmyXCBvTKHDnW0ccIeHbSxoAQqJOOtwNjhkeSLEn5AtzGxxox+EbS4UhBNeEdKIYzXjuWqf4OSDThj030ftPvUY4XUG00x50fpwTSoYuYIcm9p0sq0xMPStPfW+D7OI+OB7eFlN+Nh/qKfsC7nS3ZCJZERElwa2Rvx8NOjj8kTiL/nBZrQgTUHDZ1par6GWiXHCO1OChTgQJkW+t5iK8nZQ8xe9r2SAk5Lni2dFBFdc87K2js8dfJemdY8sLhd4+ykbtnckzPdP8c2FU8P8Id3vY8b8QB9L3U7sNtP/Ori2/heySg/JqFCGE3OeuHocvwQ0ospTv2nrVubRRQWd5OVLfLrKnuZp7k2KXycyh5rEKqYbPjTUVyb818Gdv35ls8KUP0GjuWJZhur+a/lOTxMXX/v5DAwbRrkr3S5m13x6y98dvFKUhbWayc75FU6/wJbOYJMxwQAAA==
-    - Condition: CDKMetadataAvailable
-- Outputs: !!omap
-  - VpcId: !!omap
-    - Description: The ID of the VPC
-    - Value: !!omap
-      - Fn::If:
-        - DeployVPCCondition
-        - !!omap
-          - Fn::GetAtt:
-            - VPCDeploymentPlatformVPCNestedStackDeploymentPlatformVPCNestedStackResource186D2208
-            - Outputs.VpcId
-        - !!omap
-          - Ref: ExistingVpcId
-    - Condition: VPCEnabledCondition
-  - PrivateSubnetIds: !!omap
-    - Description: Comma separated list of private subnet ids
-    - Value: !!omap
-      - Fn::If:
-        - DeployVPCCondition
-        - !!omap
-          - Fn::GetAtt:
-            - VPCDeploymentPlatformVPCNestedStackDeploymentPlatformVPCNestedStackResource186D2208
-            - Outputs.PrivateSubnetIds
-        - !!omap
-          - Fn::Join:
-            - ','
-            - !!omap
-              - Ref: ExistingPrivateSubnetIds
-    - Condition: VPCEnabledCondition
-  - SecurityGroupIds: !!omap
-    - Description: Security group for the lambda functions in the VPC
-    - Value: !!omap
-      - Fn::If:
-        - DeployVPCCondition
-        - !!omap
-          - Fn::GetAtt:
-            - VPCDeploymentPlatformVPCNestedStackDeploymentPlatformVPCNestedStackResource186D2208
-            - Outputs.SecurityGroupIds
-        - !!omap
-          - Fn::Join:
-            - ','
-            - !!omap
-              - Ref: ExistingSecurityGroupIds
-    - Condition: VPCEnabledCondition
-  - AvailabilityZones: !!omap
-    - Description: Comma separated list of AZs in which subnets of the VPCs are created
-    - Value: !!omap
-      - Fn::If:
-        - DeployVPCCondition
-        - !!omap
-          - Fn::GetAtt:
-            - VPCDeploymentPlatformVPCNestedStackDeploymentPlatformVPCNestedStackResource186D2208
-            - Outputs.AvailabilityZones
-        - !!omap
-          - Fn::Join:
-            - ','
-            - !!omap
-              - Ref: VpcAzs
-    - Condition: VPCEnabledCondition
-  - WebConfigKey: !!omap
-    - Value: !!omap
-      - Fn::Join:
-        - ''
-        - - /gaab-webconfig/
-          - !!omap
-            - Ref: AWS::StackName
-  - CloudFrontWebUrl: !!omap
-    - Value: !!omap
-      - Fn::Join:
-        - ''
-        - - https://
-          - !!omap
-            - Fn::GetAtt:
-              - WebAppNestedStackWebAppNestedStackResource4E994CA7
-              - Outputs.DeploymentPlatformStackWebAppWebsiteUICloudFrontDistribution38CBCDC5DomainName
-    - Condition: DeployWebAppUIInfrastructureCondition
-  - CognitoClientId: !!omap
-    - Value: !!omap
-      - Fn::GetAtt:
-        - UseCaseManagementSetupUseCaseManagementNestedStackUseCaseManagementNestedStackResource7ED7E421
-        - Outputs.DeploymentPlatformCognitoSetupUserPoolClientIdFE2BD0AE
-  - CognitoUserPoolId: !!omap
-    - Value: !!omap
-      - Fn::GetAtt:
-        - UseCaseManagementSetupUseCaseManagementNestedStackUseCaseManagementNestedStackResource7ED7E421
-        - Outputs.DeploymentPlatformCognitoSetupUserPoolId0A73EB1C
-  - RestEndpointUrl: !!omap
-    - Value: !!omap
-      - Fn::Join:
-        - ''
-        - - https://
-          - !!omap
-            - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiF86B015F
-          - .execute-api.
-          - !!omap
-            - Ref: AWS::Region
-          - .
-          - !!omap
-            - Ref: AWS::URLSuffix
-          - /
-          - !!omap
-            - Ref: UseCaseManagementSetupRequestProcessorDeploymentRestEndpointDeploymentRestEndPointLambdaRestApiDeploymentStageprodE2564A5F
-          - /
-  - LLMConfigTableName: !!omap
-    - Value: !!omap
-      - Fn::GetAtt:
-        - DeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResourceF56260D3
-        - Outputs.DeploymentPlatformStackDeploymentPlatformStorageLLMConfigTable9EB214F1Ref
-  - UseCasesTableName: !!omap
-    - Value: !!omap
-      - Fn::GetAtt:
-        - DeploymentPlatformStorageDeploymentPlatformStorageNestedStackDeploymentPlatformStorageNestedStackResourceF56260D3
-        - Outputs.DeploymentPlatformStackDeploymentPlatformStorageUseCasesTable8AE1DCF5Ref
-- Mappings: !!omap
-  - Solution: !!omap
-    - Data: !!omap
-      - SendAnonymousUsageData: Yes
-      - ID: SO0276
-      - Version: v3.0.0
-      - SolutionName: generative-ai-application-builder-on-aws
-  - FeaturesToDeploy: !!omap
-    - Deploy: !!omap
-      - CustomDashboard: Yes
-  - SourceCode: !!omap
-    - General: !!omap
-      - S3Bucket: solutions
-      - KeyPrefix: generative-ai-application-builder-on-aws/v3.0.0
-      - SolNamePrefix: generative-ai-application-builder-on-aws
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Backend stack for Decoded Music using Lambda, API Gateway and DynamoDB
+Parameters:
+  EnvName:
+    Type: String
+    Default: prod
+    Description: Environment name prefix
+Resources:
+  BackendTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: DecodedMusicItems
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+  BackendLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: dynamodb-access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:Scan
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: '*'
+  BackendLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: DecodedMusicBackendHandler
+      Runtime: nodejs18.x
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref BackendTable
+      Code:
+        ZipFile: |
+          exports.handler = async (event) => {
+            console.log('request:', JSON.stringify(event));
+            return { statusCode: 200, body: 'ok' };
+          };
+  ApiGateway:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: DecodedMusicBackendApi
+  ApiResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGateway.RootResourceId
+      PathPart: backend
+      RestApiId: !Ref ApiGateway
+  ApiMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: ANY
+      ResourceId: !Ref ApiResource
+      RestApiId: !Ref ApiGateway
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${BackendLambda.Arn}/invocations'
+  LambdaPermissionApi:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref BackendLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/*/backend'
+
+  PitchHandlerLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-pitchHandler"
+      Handler: index.handler
+      Role: !GetAtt BackendLambdaRole.Arn
+      Runtime: nodejs18.x
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: pitchHandler.zip
+
+  PitchApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: PitchAPI
+
+  PitchResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt PitchApi.RootResourceId
+      PathPart: pitch
+      RestApiId: !Ref PitchApi
+
+  PitchMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId: !Ref PitchResource
+      RestApiId: !Ref PitchApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PitchHandlerLambda.Arn}/invocations
+
+  PitchHandlerLambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref PitchHandlerLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PitchApi}/*/POST/pitch
+
+  DashboardLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: dashboard-dynamo-access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:Scan
+                  - dynamodb:Query
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: '*'
+
+  DashboardEarningsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardEarnings"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_EARNINGS: !Sub '${EnvName}-DecodedEarnings'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardEarnings.zip
+
+  DashboardStreamsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardStreams"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_STREAMS: !Sub '${EnvName}-DecodedStreams'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardStreams.zip
+
+  DashboardCatalogLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardCatalog"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_CATALOG: !Sub '${EnvName}-DecodedCatalog'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardCatalog.zip
+
+  DashboardAnalyticsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardAnalytics"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_ANALYTICS: !Sub '${EnvName}-WeeklyArtistStats'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardAnalytics.zip
+
+  DashboardStatementsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardStatements"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          DYNAMO_TABLE_STATEMENTS: !Sub '${EnvName}-Statements'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardStatements.zip
+
+  DashboardAccountingLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardAccounting"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          REVENUE_TABLE: !Sub '${EnvName}-RevenueLog'
+          EXPENSE_TABLE: !Sub '${EnvName}-ExpenseLog'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardAccounting.zip
+
+  DashboardTeamLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardTeam"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          TEAM_JSON: '[{"name":"Owner","role":"Admin"},{"name":"Collaborator","role":"Contributor"}]'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardTeam.zip
+
+  DashboardCampaignsLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardCampaigns"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          SPEND_TABLE: !Sub '${EnvName}-MarketingSpend'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardCampaigns.zip
+
+  DashboardApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: DashboardAPI
+
+  DashboardResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt DashboardApi.RootResourceId
+      PathPart: dashboard
+      RestApiId: !Ref DashboardApi
+
+  EarningsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: earnings
+      RestApiId: !Ref DashboardApi
+
+  StreamsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: streams
+      RestApiId: !Ref DashboardApi
+
+  CatalogResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: catalog
+      RestApiId: !Ref DashboardApi
+
+  AnalyticsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: analytics
+      RestApiId: !Ref DashboardApi
+
+  StatementsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: statements
+      RestApiId: !Ref DashboardApi
+
+  AccountingResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: accounting
+      RestApiId: !Ref DashboardApi
+
+  TeamResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: team
+      RestApiId: !Ref DashboardApi
+
+  CampaignsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: campaigns
+      RestApiId: !Ref DashboardApi
+
+  EarningsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref EarningsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardEarningsLambda.Arn}/invocations
+
+  StreamsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref StreamsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardStreamsLambda.Arn}/invocations
+
+  CatalogMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref CatalogResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardCatalogLambda.Arn}/invocations
+
+  AnalyticsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref AnalyticsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardAnalyticsLambda.Arn}/invocations
+
+  StatementsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref StatementsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardStatementsLambda.Arn}/invocations
+
+  AccountingMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref AccountingResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardAccountingLambda.Arn}/invocations
+
+  TeamMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref TeamResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardTeamLambda.Arn}/invocations
+
+  CampaignsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref CampaignsResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardCampaignsLambda.Arn}/invocations
+
+  DashboardEarningsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardEarningsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/earnings
+
+  DashboardStreamsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardStreamsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/streams
+
+  DashboardCatalogPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardCatalogLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/catalog
+
+  DashboardAnalyticsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardAnalyticsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/analytics
+
+  DashboardStatementsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardStatementsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/statements
+
+  DashboardAccountingPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardAccountingLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/accounting
+
+  DashboardTeamPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardTeamLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/team
+
+  DashboardCampaignsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardCampaignsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/campaigns
+Outputs:
+  ApiUrl:
+    Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/backend'
+    Description: Endpoint for the DecodedMusicBackend API
+  PitchApiUrl:
+    Value: !Sub 'https://${PitchApi}.execute-api.${AWS::Region}.amazonaws.com/prod/pitch'
+    Description: Endpoint for sync licensing pitches
+  DashboardApiUrl:
+    Value: !Sub 'https://${DashboardApi}.execute-api.${AWS::Region}.amazonaws.com/prod/dashboard'
+    Description: Base URL for Artist Dashboard endpoints
