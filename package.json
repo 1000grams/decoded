@@ -12,6 +12,7 @@
     "@aws-sdk/client-lambda": "^3.830.0",
     "@aws-sdk/client-s3": "^3.830.0"
   },
+  "homepage": ".",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
