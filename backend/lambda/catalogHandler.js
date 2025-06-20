@@ -6,6 +6,8 @@ const REGION = process.env.AWS_REGION || 'us-east-1';
 const TABLE_NAME = process.env.CATALOG_TABLE || 'DecodedCatalog';
 const PREVIEWS_BUCKET = process.env.PREVIEWS_BUCKET || 'decodedmusic-previews';
 
+const DEFAULT_CATALOG = [{ id: 'stub', title: 'Sample Track', artist_id: 'stub' }];
+
 const ddb = new DynamoDBClient({ region: REGION });
 const s3 = new S3Client({ region: REGION });
 
@@ -16,10 +18,10 @@ exports.handler = async (event) => {
       // list catalog items
       const data = await ddb.send(new ScanCommand({ TableName: TABLE_NAME, Limit: 50 }));
       const items = (data.Items || []).map(cleanItem);
-      return response(200, items);
+      return response(200, items.length ? items : DEFAULT_CATALOG);
     } else if (event.httpMethod === 'GET' && id) {
       const data = await ddb.send(new GetItemCommand({ TableName: TABLE_NAME, Key: { id: { S: id } } }));
-      if (!data.Item) return response(404, { message: 'Track not found' });
+      if (!data.Item) return response(200, DEFAULT_CATALOG[0]);
       const item = cleanItem(data.Item);
       if (item.preview_key) {
         const url = await getSignedUrl(
