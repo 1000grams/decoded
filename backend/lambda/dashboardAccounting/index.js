@@ -4,6 +4,13 @@ const REGION = process.env.AWS_REGION || 'eu-central-1';
 const REV_TABLE = process.env.REVENUE_TABLE || 'RevenueLog';
 const EXP_TABLE = process.env.EXPENSE_TABLE || 'ExpenseLog';
 const ddb = new DynamoDBClient({ region: REGION });
+const DEFAULT_ACCOUNTING = {
+  totalRevenue: 0,
+  totalExpenses: 0,
+  netRevenue: 0,
+  outstandingInvoices: 0,
+  lastPaymentDate: null,
+};
 
 exports.handler = async (event) => {
   try {
@@ -36,13 +43,15 @@ exports.handler = async (event) => {
       .sort()
       .pop() || null;
 
-    return response(200, {
+    const result = {
       totalRevenue,
       totalExpenses,
       netRevenue: totalRevenue - totalExpenses,
       outstandingInvoices,
       lastPaymentDate,
-    });
+    };
+    const hasData = revenue.length || expenses.length;
+    return response(200, hasData ? result : DEFAULT_ACCOUNTING);
   } catch (err) {
     console.error('accounting error', err);
     return response(500, { message: 'Internal Server Error' });

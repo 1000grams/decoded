@@ -3,6 +3,7 @@ const { DynamoDBClient, QueryCommand } = require('@aws-sdk/client-dynamodb');
 const REGION = process.env.AWS_REGION || 'eu-central-1';
 const TABLE = process.env.DYNAMO_TABLE_ANALYTICS || 'WeeklyArtistStats';
 const ddb = new DynamoDBClient({ region: REGION });
+const DEFAULT_STATS = [{ week_start: '2025-01-01', spotify_streams: 0, youtube_views: 0 }];
 
 exports.handler = async (event) => {
   try {
@@ -20,7 +21,7 @@ exports.handler = async (event) => {
     }));
 
     const items = (data.Items || []).map(clean);
-    return response(200, items);
+    return response(200, items.length ? items : DEFAULT_STATS);
   } catch (err) {
     console.error('analytics error', err);
     return response(500, { message: 'Internal Server Error' });
