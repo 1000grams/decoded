@@ -238,7 +238,7 @@ one command. Provide your target bucket via `DEPLOY_BUCKET`:
 DEPLOY_BUCKET=decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb ./automate-deploy-sync.sh
 ```
 
-The CloudFront distribution <https://d1n11wdfy5g0ms.cloudfront.net/> (ID `E3POL8Z7WOOYIC`, ARN `arn:aws:cloudfront::396913703024:distribution/E3POL8Z7WOOYIC`) will serve the updated site once the files are uploaded.
+The CloudFront distribution <https://d340ynz7yytwls.cloudfront.net/> (ID `E11YR13TCZW98X`, ARN `arn:aws:cloudfront::396913703024:distribution/E11YR13TCZW98X`) will serve the updated site once the files are uploaded.
 
 ## CloudFormation Deployment
 
