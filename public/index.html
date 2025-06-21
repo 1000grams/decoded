@@ -2,63 +2,91 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#111111" />
     <meta
       name="description"
       content="Decoded Music: Dynamic Music Licenses for Brands, Creators, and Artists. Price Revolution starting from $0.99!"
     />
+
+    <!-- Icons -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Open Graph / Twitter Metadata -->
+    <meta property="og:title" content="Decoded Music | Price Revolution" />
+    <meta property="og:description" content="Dynamic Music Licenses for Brands, Creators, and Artists. Starting from $0.99!" />
+    <meta property="og:image" content="%PUBLIC_URL%/thumbnail.png" />
+    <meta property="og:url" content="https://decodedmusic.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <title>Decoded Music | Price Revolution</title>
-    <!-- Use Helvetica or a close fallback -->
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- ✅ Fonts and Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+    />
+
+    <!-- Optional font face fallback for FA (avoids FOUC) -->
     <style>
-      /* Basic reset and body styles */
+      @font-face {
+        font-family: 'Font Awesome 6 Free';
+        font-style: normal;
+        font-weight: 900;
+        font-display: block;
+      }
+    </style>
+
+    <!-- ✅ Base Styles -->
+    <style>
       body {
         margin: 0;
-        font-family: 'Helvetica', 'Arial', sans-serif;
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
         background-color: #111;
         color: #fff;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
-      /* Add a CSS variable for the accent color */
+
       :root {
         --accent-color: #32C1ED;
       }
     </style>
 
-    <!-- === TRACKING TAGS START === -->
-
-    <!-- Google tag (gtag.js) -->
+    <!-- ✅ Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-11CHYW3K6Z"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
-
       gtag('config', 'G-11CHYW3K6Z');
     </script>
 
-    <!-- Snap Pixel Code -->
-    <script type='text/javascript'>
-    (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
-    {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
-    a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
-    r.src=n;var u=t.getElementsByTagName(s)[0];
-    u.parentNode.insertBefore(r,u);})(window,document,
-    'https://sc-static.net/scevent.min.js');
+    <!-- ✅ Snap Pixel -->
+    <script type="text/javascript">
+      (function (e, t, n) {
+        if (e.snaptr) return;
+        var a = (e.snaptr = function () {
+          a.handleRequest ? a.handleRequest.apply(a, arguments) : a.queue.push(arguments);
+        });
+        a.queue = [];
+        var s = 'script';
+        r = t.createElement(s);
+        r.async = !0;
+        r.src = n;
+        var u = t.getElementsByTagName(s)[0];
+        u.parentNode.insertBefore(r, u);
+      })(window, document, 'https://sc-static.net/scevent.min.js');
 
-    snaptr('init', '0e29f2de-37c1-4e4f-8274-c4d2f40d4bd7');
-
-    snaptr('track', 'PAGE_VIEW');
-
+      snaptr('init', '0e29f2de-37c1-4e4f-8274-c4d2f40d4bd7');
+      snaptr('track', 'PAGE_VIEW');
     </script>
-    <!-- End Snap Pixel Code -->
-
-    <!-- === TRACKING TAGS END === -->
 
   </head>
   <body>
