@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DashboardAPI } from '../api/dashboard';
+import SpotifyModule from '../components/SpotifyModule';
 
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI || window.location.origin + '/dashboard';
@@ -52,16 +53,21 @@ function ArtistDashboard() {
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>Artist Dashboard</h1>
-      <p>You are logged in with Spotify.</p>
-      {accounting && (
-        <div style={{ marginTop: '1rem' }}>
-          <div>Total Revenue: ${(accounting.totalRevenue / 100).toFixed(2)}</div>
-          <div>Total Expenses: ${(accounting.totalExpenses / 100).toFixed(2)}</div>
-          <div>Net Revenue: ${(accounting.netRevenue / 100).toFixed(2)}</div>
-        </div>
-      )}
+    <div style={{ padding: '2rem', display: 'flex', gap: '1rem' }}>
+      <div style={{ flex: '0 0 280px' }}>
+        <SpotifyModule />
+      </div>
+      <div style={{ flex: 1 }}>
+        <h1>Artist Dashboard</h1>
+        <p>You are logged in with Spotify.</p>
+        {accounting && (
+          <div style={{ marginTop: '1rem' }}>
+            <div>Total Revenue: {(accounting.totalRevenue / 100).toFixed(2)}</div>
+            <div>Total Expenses: {(accounting.totalExpenses / 100).toFixed(2)}</div>
+            <div>Net Revenue: {(accounting.netRevenue / 100).toFixed(2)}</div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
