@@ -35,7 +35,7 @@ Resources:
         Type: AWS_PROXY
         Uri: !Sub
           - arn:aws:apigateway:${Region}:lambda:path/2015-03-31/functions/${LambdaArn}/invocations
-          - { Region: !Ref "AWS::Region", LambdaArn: !GetAtt SignupLambdaFunction.Arn }
+          - {Region: !Ref "AWS::Region", LambdaArn: !GetAtt SignupLambdaFunction.Arn}
 
   LambdaPermissionForSignup:
     Type: AWS::Lambda::Permission
