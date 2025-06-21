@@ -93,7 +93,7 @@ REACT_APP_PITCH_API_URL=https://your-api-id.execute-api.region.amazonaws.com/pro
 REACT_APP_CATALOG_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/catalog
 REACT_APP_SIGNUP_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/signup
 POST_IMAGE_URL=https://yourdomain.com/default-post.jpg
-PITCH_TARGET_EMAIL=sync@decodedmusic.com
+PITCH_TARGET_EMAIL=ops@decodedmusic.com
 ```
 
 These URLs are outputs of the `decoded-genai-stack` CloudFormation stack.
