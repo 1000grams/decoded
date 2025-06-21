@@ -318,8 +318,14 @@ queue a post via the Meta Graph API. After publishing, the script fetches basic
 insights and sends them back to Bedrock for a short performance summary saved to
 `latest_social_summary.txt`.
 
+The prompt pulls trending topics from Google Trends, TikTok Discover, and recent
+Instagram comments. These keywords are injected so captions ride current social
+waves.
+
+Set `BEDROCK_MODEL_ID` to either `meta.llama3-70b-instruct-v1:0` or
+`anthropic.claude-3-sonnet-20240229-v1:0` depending on which model you want.
 Configure `INSTAGRAM_TOKEN` and `INSTAGRAM_USER_ID` in your `.env` along with
-`AWS_REGION` and optional `BEDROCK_MODEL_ID`.
+`AWS_REGION`.
 
 ## Facebook Poster Lambda
 
