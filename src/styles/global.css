@@ -1,7 +1,7 @@
 /* Define CSS Variables */
 :root {
   --bg-color: #111;
-  --text-color: #fff;
+  --text-color: #f5f5f5;
   --accent-color: #32C1ED;
   --dark-text-color: #111; /* Used for text on accent background buttons */
   --footer-text-color: #aaa; /* Lighter grey for standard footer info */
@@ -16,15 +16,15 @@ html, body {
   padding: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: 'Helvetica', 'Arial', sans-serif; /* Use Helvetica or a close fallback */
+  font-family: 'Roboto', sans-serif;
   scroll-behavior: smooth; /* Optional: smooth scrolling for navigation */
 }
 
 /* Basic Typography Reset/Defaults */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
   margin-top: 0;
-  margin-bottom: 0.5em;
-  font-weight: bold; /* Helvetica is often used boldly */
+  margin-bottom: 1rem;
+  font-weight: bold;
   line-height: 1.1; /* Improve readability of large headlines */
 }
 
@@ -70,6 +70,67 @@ section:last-of-type {
     margin: 0 auto;
     padding: 0 1rem; /* Horizontal padding for smaller screens */
 }
+
+/* Centered placeholder for empty sections */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  text-align: center;
+  font-size: 1.25rem;
+  color: #ccc;
+  border: 1px dashed #444;
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 600px;
+  background-color: #1a1a1a;
+}
+
+/* Form input styling */
+input[type="text"],
+input[type="email"],
+textarea {
+  padding: 10px;
+  margin: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #1c1c1c;
+  color: #f0f0f0;
+  width: 200px;
+  font-size: 1rem;
+}
+
+textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+/* Button styling */
+button,
+input[type="submit"] {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: #1db954;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-left: 0.5rem;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #17a64a;
+}
+
+/* Section spacing */
+section {
+  padding: 2rem;
+}
+
 
 /* Mobile adjustments for vertical padding */
 @media (max-width: 768px) {
