@@ -10,15 +10,20 @@ export default function Contact() {
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus("Sending...");
-    const response = await fetch(`${API_BASE}/contact`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    if (response.ok) {
-      setStatus("Thank you! We'll be in touch soon.");
-    } else {
-      setStatus("There was an error sending your message.");
+    try {
+      const response = await fetch(`${API_BASE}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (response.ok) {
+        setStatus("Thank you! We'll be in touch soon.");
+      } else {
+        throw new Error("Request failed");
+      }
+    } catch (err) {
+      window.localStorage.setItem(`contact_${Date.now()}`, JSON.stringify(form));
+      setStatus("Saved locally (no backend)");
     }
   }
   return (

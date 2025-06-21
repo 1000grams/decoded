@@ -21,15 +21,20 @@ export default function SignupForm({ type }) {
     const apiUrl =
       process.env.REACT_APP_SIGNUP_API_URL ||
       "https://n64vgs0he0.execute-api.eu-central-1.amazonaws.com/prod/signup";
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    if (response.ok) {
-      setStatus("Thank you! We'll be in touch soon.");
-    } else {
-      setStatus("There was an error submitting your info.");
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (response.ok) {
+        setStatus("Thank you! We'll be in touch soon.");
+      } else {
+        throw new Error("Request failed");
+      }
+    } catch (err) {
+      window.localStorage.setItem(`signup_${Date.now()}`, JSON.stringify(form));
+      setStatus("Saved locally (no network)");
     }
   }
 
