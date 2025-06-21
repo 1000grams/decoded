@@ -1,10 +1,12 @@
 const fetch = require('node-fetch');
 const { BedrockRuntimeClient, InvokeModelCommand } = require('@aws-sdk/client-bedrock-runtime');
 
+const { getSecretValue, getParameter } = require('../utils/secrets');
+
 const REGION = process.env.AWS_REGION || 'us-east-1';
 const MODEL_ID = process.env.BEDROCK_MODEL_ID || 'anthropic.claude-3-sonnet-20240229-v1:0';
-const PAGE_IDS = (process.env.FACEBOOK_PAGE_IDS || '').split(',').map(s => s.trim()).filter(Boolean);
-const TOKEN = process.env.FACEBOOK_TOKEN;
+let PAGE_IDS;
+let TOKEN;
 
 async function generateMessage(topic) {
   const client = new BedrockRuntimeClient({ region: REGION });
@@ -25,7 +27,27 @@ async function postToPage(pageId, message) {
   await fetch(`${url}?access_token=${TOKEN}&message=${encodeURIComponent(message)}`, { method: 'POST' });
 }
 
+async function loadConfig() {
+  if (!TOKEN) {
+    if (process.env.FACEBOOK_TOKEN_SECRET) {
+      const val = await getSecretValue(process.env.FACEBOOK_TOKEN_SECRET);
+      TOKEN = typeof val === 'string' ? val : val.token || val.value;
+    } else {
+      TOKEN = process.env.FACEBOOK_TOKEN;
+    }
+  }
+  if (!PAGE_IDS) {
+    if (process.env.FACEBOOK_PAGE_IDS_PARAM) {
+      const val = await getParameter(process.env.FACEBOOK_PAGE_IDS_PARAM);
+      PAGE_IDS = val.split(',').map(s => s.trim()).filter(Boolean);
+    } else {
+      PAGE_IDS = (process.env.FACEBOOK_PAGE_IDS || '').split(',').map(s => s.trim()).filter(Boolean);
+    }
+  }
+}
+
 exports.handler = async (event = {}) => {
+  await loadConfig();
   if (!TOKEN) throw new Error('FACEBOOK_TOKEN not set');
   if (PAGE_IDS.length === 0) throw new Error('FACEBOOK_PAGE_IDS not configured');
 
