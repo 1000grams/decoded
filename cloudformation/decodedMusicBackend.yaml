@@ -273,6 +273,20 @@ Resources:
         S3Bucket: decodedmusic-lambda-code
         S3Key: dashboardCampaigns.zip
 
+  DashboardSpotifyLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "${EnvName}-dashboardSpotify"
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: !GetAtt DashboardLambdaRole.Arn
+      Environment:
+        Variables:
+          SPOTIFY_TABLE: !Sub '${EnvName}-SpotifyArtistData'
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: dashboardSpotify.zip
+
   DashboardApi:
     Type: AWS::ApiGateway::RestApi
     Properties:
@@ -339,6 +353,13 @@ Resources:
     Properties:
       ParentId: !Ref DashboardResource
       PathPart: campaigns
+      RestApiId: !Ref DashboardApi
+
+  SpotifyResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref DashboardResource
+      PathPart: spotify
       RestApiId: !Ref DashboardApi
 
   EarningsMethod:
@@ -437,6 +458,18 @@ Resources:
         Type: AWS_PROXY
         Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardCampaignsLambda.Arn}/invocations
 
+  SpotifyMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: ANY
+      ResourceId: !Ref SpotifyResource
+      RestApiId: !Ref DashboardApi
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DashboardSpotifyLambda.Arn}/invocations
+
   DashboardEarningsPermission:
     Type: AWS::Lambda::Permission
     Properties:
@@ -500,6 +533,14 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/campaigns
+
+  DashboardSpotifyPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref DashboardSpotifyLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${DashboardApi}/*/*/dashboard/spotify
 Outputs:
   ApiUrl:
     Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/backend'

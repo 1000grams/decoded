@@ -42,4 +42,11 @@ export const DashboardAPI = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     }).then((res) => res.json()),
+
+  getSpotifyData: (payload) =>
+    fetch(`${API_BASE}/spotify`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).then((res) => res.json()),
 };

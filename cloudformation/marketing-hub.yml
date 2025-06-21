@@ -87,6 +87,22 @@ Resources:
         - AttributeName: week_start
           KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
+
+  SpotifyArtistDataTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${EnvName}-SpotifyArtistData'
+      AttributeDefinitions:
+        - AttributeName: artist_id
+          AttributeType: S
+        - AttributeName: week_start
+          AttributeType: S
+      KeySchema:
+        - AttributeName: artist_id
+          KeyType: HASH
+        - AttributeName: week_start
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
   MarketingLambdaRole:
     Type: AWS::IAM::Role
     Properties:
@@ -153,6 +169,20 @@ Resources:
       Environment:
         Variables:
           STATS_TABLE: !Ref WeeklyArtistStatsTable
+
+  SpotifyArtistFetcher:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${EnvName}-spotify-artist-fetcher'
+      Runtime: nodejs18.x
+      Handler: index.handler
+      Role: !GetAtt MarketingLambdaRole.Arn
+      Code:
+        S3Bucket: placeholder-bucket
+        S3Key: marketing/spotifyArtistFetcher.zip
+      Environment:
+        Variables:
+          SPOTIFY_TABLE: !Ref SpotifyArtistDataTable
   ApiGatewayMarketing:
     Type: AWS::ApiGateway::Resource
     Properties:
@@ -195,6 +225,22 @@ Resources:
       FunctionName: !Ref WeeklyStatsLogger
       Principal: events.amazonaws.com
       SourceArn: !GetAtt WeeklyStatsRule.Arn
+
+  SpotifyFetchRule:
+    Type: AWS::Events::Rule
+    Properties:
+      ScheduleExpression: 'cron(0 12 ? * WED *)'
+      Targets:
+        - Arn: !GetAtt SpotifyArtistFetcher.Arn
+          Id: SpotifyArtistFetcherTarget
+
+  SpotifyFetchPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref SpotifyArtistFetcher
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt SpotifyFetchRule.Arn
 Outputs:
   MarketingApiUrl:
     Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/marketing'

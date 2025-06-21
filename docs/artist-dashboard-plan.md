@@ -64,5 +64,6 @@ This document outlines a proposed backend structure for the Artist Dashboard and
 | `/api/dashboard/analytics` | Detailed analytics data |
 | `/api/dashboard/statements` | Downloadable royalty statements |
 | `/api/dashboard/team` | Manage team roles and permissions |
+| `/api/dashboard/spotify` | Weekly Spotify stats and trending genres |
 
 These endpoints are placeholders to demonstrate how the dashboard might interact with a backend service. They can be implemented using serverless functions or a traditional API depending on infrastructure choices.

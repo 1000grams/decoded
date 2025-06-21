@@ -18,6 +18,8 @@ declare -A lambdas=(
   [DashboardStatementsLambda]="dashboardStatements.zip"
   [DashboardStreamsLambda]="dashboardStreams.zip"
   [DashboardTeamLambda]="dashboardTeam.zip"
+  [DashboardSpotifyLambda]="dashboardSpotify.zip"
+  [SpotifyArtistFetcherLambda]="spotifyArtistFetcher.zip"
   [PitchLambda]="pitchHandler.zip"
 )
 

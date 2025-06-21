@@ -12,6 +12,8 @@ lambdas=(
   dashboardAccounting
   dashboardTeam
   dashboardCampaigns
+  dashboardSpotify
+  spotifyArtistFetcher
 )
 
 for fn in "${lambdas[@]}"; do
