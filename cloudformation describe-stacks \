@@ -2836,3 +2836,45 @@
         }
     ]
 }
+{
+    "Stacks": [
+        {
+            "StackId": "arn:aws:cloudformation:eu-central-1:396913703024:stack/decoded-genai-stack/b6fee990-4f07-11f0-aa28-0267f832c80f",
+            "StackName": "decoded-genai-stack",
+            "ChangeSetId": "arn:aws:cloudformation:eu-central-1:396913703024:changeSet/awscli-cloudformation-package-deploy-1750555499/a46b6aa2-f482-477c-b0f6-28ed19dbf8c7",
+            "Description": "Backend stack for Decoded Music using Lambda, API Gateway and DynamoDB",
+            "Parameters": [
+                {
+                    "ParameterKey": "ExistingTableName",
+                    "ParameterValue": "prod-DecodedMusicItems"
+                },
+                {
+                    "ParameterKey": "EnvName",
+                    "ParameterValue": "prod"
+                }
+            ],
+            "CreationTime": "2025-06-22T01:25:00.281000+00:00",
+            "LastUpdatedTime": "2025-06-22T01:25:06.051000+00:00",
+            "RollbackConfiguration": {},
+            "StackStatus": "CREATE_COMPLETE",
+            "DisableRollback": false,
+            "NotificationARNs": [],
+            "Capabilities": [
+                "CAPABILITY_NAMED_IAM",
+                "CAPABILITY_AUTO_EXPAND"
+            ],
+            "Outputs": [
+                {
+                    "OutputKey": "ApiUrl",
+                    "OutputValue": "https://m5vfcsuueh.execute-api.eu-central-1.amazonaws.com/prod/backend",
+                    "Description": "Endpoint for the DecodedMusicBackend API"
+                }
+            ],
+            "Tags": [],
+            "EnableTerminationProtection": false,
+            "DriftInformation": {
+                "StackDriftStatus": "NOT_CHECKED"
+            }
+        }
+    ]
+}
