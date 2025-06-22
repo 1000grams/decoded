@@ -17,7 +17,7 @@ function Section1Hero() {
         <div className={styles.overlay}></div> {/* Dark overlay */}
       </div>
       <div className={styles.framedContent}> {/* New container for the "framed" look */}
-        <img src={decodedMusicLogo} alt="Decoded Music Logo" className="h-10 w-auto" />
+        <img src={decodedMusicLogo} alt="Decoded Music Logo" className={styles.logo} />
         <h1 className={styles.headline}>{content.hero.headline}</h1>
         <p className={styles.tagline}>{content.hero.tagline}</p> {/* Use tagline from JSON */}
         <p className={styles.hypeText}>
