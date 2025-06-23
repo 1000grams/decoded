@@ -6,6 +6,8 @@ const AUTH_URL =
     ? `${process.env.REACT_APP_AUTH_API_URL}/signin`
     : "/api/auth/signin";
 
+const CHECK_URL = process.env.REACT_APP_COGNITO_CHECK_URL;
+
 export default function SignIn() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [status, setStatus] = useState("");
@@ -17,28 +19,6 @@ export default function SignIn() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setStatus("Signing in...");
-    try {
-      const response = await fetch(AUTH_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        window.localStorage.setItem("cognito_id_token", data.idToken);
-        window.localStorage.setItem("cognito_groups", JSON.stringify(data.groups));
-        setStatus("Signed in!");
-        if (data.groups && data.groups.includes("artist")) {
-          navigate("/dashboard");
-        }
-      } else {
-        throw new Error("Request failed");
-      }
-    } catch (err) {
-      window.localStorage.setItem("demo_user", JSON.stringify(form));
-      setStatus("Signed in locally (no backend)");
-    }
   }
 
   return (

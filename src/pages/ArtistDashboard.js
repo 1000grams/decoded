@@ -3,7 +3,9 @@ import { DashboardAPI } from '../api/dashboard';
 import SpotifyModule from '../components/SpotifyModule';
 
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI || window.location.origin + '/dashboard';
+const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI ||
+  window.location.origin + '/dashboard';
+const AUTH_URL = process.env.REACT_APP_SPOTIFY_AUTH_URL;
 const SCOPES = ['user-read-email'];
 
 function buildAuthUrl() {
@@ -43,11 +45,11 @@ function ArtistDashboard() {
   const token = spotifyToken || cognitoToken;
 
   if (!token) {
+    const loginHref = AUTH_URL || buildAuthUrl();
     return (
       <div style={{ padding: '2rem' }}>
         <h1>Artist Dashboard Login</h1>
-        <p>Sign in to continue.</p>
-        <a href={buildAuthUrl()} style={{ padding: '0.5rem 1rem', background: '#1DB954', color: '#fff', borderRadius: '4px', marginRight: '1rem' }}>
+
           Log in with Spotify
         </a>
         <a href="/signin" style={{ padding: '0.5rem 1rem', background: '#2563eb', color: '#fff', borderRadius: '4px' }}>
