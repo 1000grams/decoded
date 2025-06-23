@@ -74,11 +74,12 @@ opened in a browser.
 ## Spotify Login Setup
 
 The Artist Dashboard now uses Spotify's authorization flow. Create a Spotify
-application and add the client ID and redirect URI to your `.env` (based on `.env.example`):
+application and add the client ID, redirect URI, and the backend auth URL to your `.env` (based on `.env.example`):
 
 ```bash
 REACT_APP_SPOTIFY_CLIENT_ID=your_client_id
 REACT_APP_SPOTIFY_REDIRECT_URI=http://localhost:3000/dashboard
+REACT_APP_SPOTIFY_AUTH_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/spotify-auth
 ```
 
 These values are read by the front-end to initiate the login process.
@@ -107,6 +108,15 @@ PITCH_TARGET_EMAIL=ops@decodedmusic.com
 ```
 
 These URLs are outputs of the `decoded-genai-stack` CloudFormation stack.
+
+## Cognito Access Check
+
+The sign-in page posts the user's email to a backend endpoint which verifies the
+`artist` group membership in Cognito. Add the URL to your `.env`:
+
+```bash
+REACT_APP_COGNITO_CHECK_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/auth/check-artist
+```
 
 **Future Development:**
 
