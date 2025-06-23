@@ -89,8 +89,4 @@ Resources:
 Outputs:
   ApiUrl:
     Description: Endpoint for the DecodedMusicBackend API
-<<<<<<< HEAD
     Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/backend'
-=======
-    Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/backend'
->>>>>>> 9844caf (Save all recent changes)
