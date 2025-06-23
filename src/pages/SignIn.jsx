@@ -19,6 +19,26 @@ export default function SignIn() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setStatus("Signing in...");
+    try {
+      const res = await fetch(AUTH_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        if (data.idToken) {
+          window.localStorage.setItem("cognito_id_token", data.idToken);
+        }
+        navigate("/dashboard");
+      } else {
+        throw new Error(data.message || "Sign in failed");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("Sign in failed");
+    }
   }
 
   return (
