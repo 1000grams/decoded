@@ -67,9 +67,8 @@ Schedule this command to run daily (for example using `cron` or AWS EventBridge)
 The generated summary can be shared to social platforms via the
 [Threads Graph API](https://developers.facebook.com/docs/threads-api).
 
-The latest summary is displayed in `public/buzz.html`. This page uses Tailwind
-via CDN and fetches `industry_buzz.txt` to populate the bullet points when
-opened in a browser.
+The latest summary is displayed in the app at `/buzz`. This page fetches
+`industry_buzz.txt` and shows the bullet points when opened in a browser.
 
 ## Spotify Login Setup
 
