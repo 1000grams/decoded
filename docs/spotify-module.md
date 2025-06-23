@@ -18,7 +18,7 @@ Partition key is `artist_id` with `week_start` as a sort key so historical snaps
 
 ## Weekly Fetch Lambda
 
-`spotifyArtistFetcher` runs every **Wednesday** via EventBridge. It authenticates using `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`, pulls profile, top tracks and a sample of trending categories for each `ARTIST_IDS` entry and writes the data to `SpotifyArtistData`.
+`spotifyArtistFetcher` runs every **Wednesday** via EventBridge. It loads Spotify credentials from the secret named by `SPOTIFY_CREDENTIALS_SECRET`, pulls profile, top tracks and a sample of trending categories for each `ARTIST_IDS` entry and writes the data to `SpotifyArtistData`.
 
 ## Dashboard Endpoint
 

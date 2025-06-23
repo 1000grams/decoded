@@ -1,14 +1,32 @@
 const fetch = require('node-fetch');
 const { DynamoDBClient, PutItemCommand } = require('@aws-sdk/client-dynamodb');
+const { SecretsManagerClient, GetSecretValueCommand } = require('@aws-sdk/client-secrets-manager');
 
 const REGION = process.env.AWS_REGION || 'eu-central-1';
 const TABLE = process.env.SPOTIFY_TABLE || 'SpotifyArtistData';
 const ARTIST_IDS = (process.env.ARTIST_IDS || '').split(',').map(s => s.trim()).filter(Boolean);
 const ddb = new DynamoDBClient({ region: REGION });
+const secretsClient = new SecretsManagerClient({ region: REGION });
+let creds;
+
+async function getCreds() {
+  if (creds) return creds;
+  if (process.env.SPOTIFY_CREDENTIALS_SECRET) {
+    const { SecretString } = await secretsClient.send(
+      new GetSecretValueCommand({ SecretId: process.env.SPOTIFY_CREDENTIALS_SECRET })
+    );
+    creds = JSON.parse(SecretString);
+  } else {
+    creds = {
+      client_id: process.env.SPOTIFY_CLIENT_ID,
+      client_secret: process.env.SPOTIFY_CLIENT_SECRET
+    };
+  }
+  return creds;
+}
 
 async function getToken() {
-  const id = process.env.SPOTIFY_CLIENT_ID;
-  const secret = process.env.SPOTIFY_CLIENT_SECRET;
+  const { client_id: id, client_secret: secret } = await getCreds();
   const auth = Buffer.from(`${id}:${secret}`).toString('base64');
   const res = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
