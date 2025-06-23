@@ -1,4 +1,6 @@
 const API_BASE = process.env.REACT_APP_API_BASE;
+const ANALYTICS_URL =
+  process.env.REACT_APP_ANALYTICS_API_URL || `${API_BASE}/analytics`;
 
 export const DashboardAPI = {
   getAccounting: (payload) =>
@@ -9,7 +11,7 @@ export const DashboardAPI = {
     }).then((res) => res.json()),
 
   getAnalytics: (payload) =>
-    fetch(`${API_BASE}/analytics`, {
+    fetch(ANALYTICS_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

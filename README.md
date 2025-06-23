@@ -100,6 +100,7 @@ configured in your `.env` file:
 ```bash
 REACT_APP_PITCH_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/pitch
 REACT_APP_CATALOG_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/catalog
+REACT_APP_ANALYTICS_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/analytics
 REACT_APP_SIGNUP_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/signup
 REACT_APP_CONTACT_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/contact
 REACT_APP_AUTH_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/auth
