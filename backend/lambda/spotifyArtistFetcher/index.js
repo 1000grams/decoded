@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const { DynamoDBClient, PutItemCommand } = require('@aws-sdk/client-dynamodb');
 
-const REGION = process.env.AWS_REGION || 'us-east-1';
+const REGION = process.env.AWS_REGION || 'eu-central-1';
 const TABLE = process.env.SPOTIFY_TABLE || 'SpotifyArtistData';
 const ARTIST_IDS = (process.env.ARTIST_IDS || '').split(',').map(s => s.trim()).filter(Boolean);
 const ddb = new DynamoDBClient({ region: REGION });

@@ -2,7 +2,7 @@ const { DynamoDBClient, ScanCommand, GetItemCommand } = require('@aws-sdk/client
 const { S3Client, GetObjectCommand } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
-const REGION = process.env.AWS_REGION || 'us-east-1';
+const REGION = process.env.AWS_REGION || 'eu-central-1';
 const TABLE_NAME = process.env.CATALOG_TABLE || 'DecodedCatalog';
 const PREVIEWS_BUCKET = process.env.PREVIEWS_BUCKET || 'decodedmusic-previews';
 

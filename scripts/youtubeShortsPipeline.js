@@ -7,7 +7,7 @@ const { promisify } = require('util');
 const child_process = require('child_process');
 const streamPipeline = promisify(pipeline);
 
-const REGION = process.env.AWS_REGION || 'us-east-1';
+const REGION = process.env.AWS_REGION || 'eu-central-1';
 const S3_BUCKET = process.env.S3_BUCKET;
 const SHORTS_BUCKET = process.env.SHORTS_BUCKET;
 const LAMBDA_NAME = process.env.SHORTS_LAMBDA || 'shortsGenerator';

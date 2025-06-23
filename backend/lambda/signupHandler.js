@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const ses = new AWS.SES({ region: "us-east-1" });
+const ses = new AWS.SES({ region: "eu-central-1" });
 
 exports.handler = async (event) => {
   const body = JSON.parse(event.body);

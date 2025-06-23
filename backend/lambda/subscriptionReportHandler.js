@@ -1,6 +1,6 @@
 const { DynamoDBClient, ScanCommand } = require('@aws-sdk/client-dynamodb');
 
-const REGION = process.env.AWS_REGION || 'us-east-1';
+const REGION = process.env.AWS_REGION || 'eu-central-1';
 const TABLE = process.env.SUB_TABLE || 'ArtistSubscriptions';
 const ddb = new DynamoDBClient({ region: REGION });
 
