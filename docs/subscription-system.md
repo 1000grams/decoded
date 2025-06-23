@@ -4,6 +4,8 @@ This module governs dashboard access for artists and tracks recurring subscripti
 
 ## Access Control
 - Artists must exist in Cognito user pool `5fxmkd` to reach any `/api/dashboard/*` endpoint.
+- Users are organised into groups like `admin`, `artist`, `buyer`, `catalog_curator`, `content_creator`, `music_supervisor`, and `review_only`.
+- Only members of the `artist` group with an active subscription will see the dashboard.
 - Each artist record stores `artist_id`, `email` and `active_subscriber` status.
 
 ## DynamoDB – `ArtistSubscriptions`

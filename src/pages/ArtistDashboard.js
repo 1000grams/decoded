@@ -40,16 +40,20 @@ function ArtistDashboard() {
     loadData();
   }, []);
 
-  const token = window.localStorage.getItem('spotify_token');
+  const spotifyToken = window.localStorage.getItem('spotify_token');
+  const cognitoToken = window.localStorage.getItem('cognito_id_token');
+  const token = spotifyToken || cognitoToken;
 
   if (!token) {
     const loginHref = AUTH_URL || buildAuthUrl();
     return (
       <div style={{ padding: '2rem' }}>
         <h1>Artist Dashboard Login</h1>
-        <p>Sign in with Spotify to continue.</p>
-        <a href={loginHref} style={{ padding: '0.5rem 1rem', background: '#1DB954', color: '#fff', borderRadius: '4px' }}>
+
           Log in with Spotify
+        </a>
+        <a href="/signin" style={{ padding: '0.5rem 1rem', background: '#2563eb', color: '#fff', borderRadius: '4px' }}>
+          Sign in with Email
         </a>
       </div>
     );
@@ -62,7 +66,7 @@ function ArtistDashboard() {
       </div>
       <div style={{ flex: 1 }}>
         <h1>Artist Dashboard</h1>
-        <p>You are logged in with Spotify.</p>
+        <p>You are logged in.</p>
         {accounting && (
           <div style={{ marginTop: '1rem' }}>
             <div>Total Revenue: {(accounting.totalRevenue / 100).toFixed(2)}</div>

@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const AUTH_URL =
+  process.env.REACT_APP_AUTH_API_URL
+    ? `${process.env.REACT_APP_AUTH_API_URL}/signin`
+    : "/api/auth/signin";
 
 const CHECK_URL = process.env.REACT_APP_COGNITO_CHECK_URL;
 
 export default function SignIn() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [status, setStatus] = useState("");
+  const navigate = useNavigate();
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -12,23 +19,6 @@ export default function SignIn() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setStatus("Checking access...");
-    try {
-      const res = await fetch(CHECK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: form.email })
-      });
-      const data = await res.json();
-      if (data.authorized) {
-        window.location.href = "/dashboard";
-      } else {
-        setStatus("Access denied");
-      }
-    } catch (err) {
-      console.error("check error", err);
-      setStatus("Error validating user");
-    }
   }
 
   return (

@@ -13,6 +13,8 @@ This document outlines how the Artist Dashboard handles user authentication and 
 
 ### Cognito User Pools
 - The project uses an Amazon Cognito User Pool to manage logins. The current pool for **Rue de Vivre** is `5fxmkd`.
+- Groups within the pool include `admin`, `artist`, `buyer`, `catalog_curator`, `content_creator`, `music_supervisor`, and `review_only`.
+- After a successful login, members of the `artist` group are redirected to the dashboard.
 - This setup can be expanded in the future to allow multiple artist accounts.
 
 ### Artist Group Check Endpoint
