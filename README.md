@@ -102,6 +102,11 @@ configured in your `.env` file:
 REACT_APP_PITCH_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/pitch
 REACT_APP_CATALOG_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/catalog
 REACT_APP_SIGNUP_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/signup
+REACT_APP_CONTACT_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/contact
+REACT_APP_AUTH_API_URL=https://your-api-id.execute-api.region.amazonaws.com/prod/auth
+# Cognito configuration for the sign-in Lambda
+COGNITO_USER_POOL_ID=5fxmkd
+COGNITO_USER_POOL_CLIENT_ID=your_client_id
 POST_IMAGE_URL=https://yourdomain.com/default-post.jpg
 PITCH_TARGET_EMAIL=ops@decodedmusic.com
 ```
@@ -149,6 +154,48 @@ aws cloudformation deploy \
   --region eu-central-1 \
   --capabilities CAPABILITY_NAMED_IAM
 ```
+
+## Contact Lambda Function
+Handle simple contact submissions with the Lambda at `backend/lambda/contactHandler.js`.
+Deploy the function and API Gateway using the templates provided:
+
+```bash
+aws cloudformation deploy \
+  --template-file cloudformation/contactLambda.yml \
+  --stack-name DecodedContactLambda \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+
+aws cloudformation deploy \
+  --template-file cloudformation/contactApi.yml \
+  --stack-name DecodedContactApi \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
+## Sign‑in Lambda Function
+The sign‑in handler at `backend/lambda/signinHandler.js` demonstrates a minimal
+authentication endpoint. Deploy it with:
+
+```bash
+aws cloudformation deploy \
+  --template-file cloudformation/signinLambda.yml \
+  --stack-name DecodedSigninLambda \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+
+aws cloudformation deploy \
+  --template-file cloudformation/signinApi.yml \
+  --stack-name DecodedSigninApi \
+  --region eu-central-1 \
+  --capabilities CAPABILITY_NAMED_IAM
+```
+
+The Lambda expects a Cognito User Pool and client ID configured via
+`COGNITO_USER_POOL_ID` and `COGNITO_USER_POOL_CLIENT_ID`. Users are assigned to
+groups such as `admin`, `artist`, `buyer`, `catalog_curator`, `content_creator`,
+`music_supervisor`, and `review_only`. Artists in the `artist` group are
+redirected to the dashboard after signing in.
 
 ## Pitch Lambda Function
 The sync licensing pitch handler at `backend/lambda/pitchHandler/index.js` sends templated emails via SES.

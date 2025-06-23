@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-const API_BASE = process.env.REACT_APP_API_BASE || "/api";
+const API_URL =
+  process.env.REACT_APP_CONTACT_API_URL ||
+  (process.env.REACT_APP_API_BASE ? `${process.env.REACT_APP_API_BASE}/contact` : "/api/contact");
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
@@ -11,7 +13,7 @@ export default function Contact() {
     e.preventDefault();
     setStatus("Sending...");
     try {
-      const response = await fetch(`${API_BASE}/contact`, {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
