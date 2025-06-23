@@ -1,12 +1,13 @@
 #!/bin/bash
 # automate-verify-spotify-env.sh
 # Verify Spotify-related environment variables for the spotifyArtistFetcher Lambda
-# and optionally update them if missing. Intended for AWS CloudShell.
+# and optionally update them if missing. Intended for AWS CloudShell. The Lambda
+# now expects SPOTIFY_CREDENTIALS_SECRET instead of separate ID/secret values.
 
 set -euo pipefail
 
 LAMBDA_NAME="${LAMBDA_NAME:-spotifyArtistFetcher}"
-REQUIRED_VARS=(SPOTIFY_CLIENT_ID SPOTIFY_CLIENT_SECRET ARTIST_IDS SPOTIFY_TABLE)
+REQUIRED_VARS=(SPOTIFY_CREDENTIALS_SECRET ARTIST_IDS SPOTIFY_TABLE)
 
 # Fetch current Lambda environment variables
 current=$(aws lambda get-function-configuration \

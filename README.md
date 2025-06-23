@@ -85,11 +85,10 @@ REACT_APP_SPOTIFY_AUTH_URL=https://your-api-id.execute-api.region.amazonaws.com/
 These values are read by the front-end to initiate the login process.
 
 
-For the backend, the `spotifyArtistFetcher` Lambda also requires `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `ARTIST_IDS` and `SPOTIFY_TABLE` environment variables. Verify and update them from CloudShell using:
+For the backend, the `spotifyArtistFetcher` Lambda expects `SPOTIFY_CREDENTIALS_SECRET`, `ARTIST_IDS` and `SPOTIFY_TABLE` environment variables. The secret should contain JSON like `{ "client_id": "...", "client_secret": "..." }`. Verify and update them from CloudShell using:
 
 ```bash
-SPOTIFY_CLIENT_ID=your_client_id \
-SPOTIFY_CLIENT_SECRET=your_client_secret \
+SPOTIFY_CREDENTIALS_SECRET=my/spotifyCreds \
 ARTIST_IDS=your_artist_ids \
 ./automate-verify-spotify-env.sh
 ```
