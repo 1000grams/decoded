@@ -18,14 +18,13 @@ export default function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      if (response.ok) {
-        setStatus("Thank you! We'll be in touch soon.");
-      } else {
+      if (!response.ok) {
         throw new Error("Request failed");
       }
+      setStatus("Thank you! We'll be in touch soon.");
     } catch (err) {
-      window.localStorage.setItem(`contact_${Date.now()}`, JSON.stringify(form));
-      setStatus("Saved locally (no backend)");
+      console.error("Contact error", err);
+      setStatus("Submission failed");
     }
   }
   return (

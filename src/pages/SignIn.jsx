@@ -6,17 +6,16 @@ const AUTH_URL =
     ? `${process.env.REACT_APP_AUTH_API_URL}/signin`
     : "/api/auth/signin";
 
-const CHECK_URL = process.env.REACT_APP_COGNITO_CHECK_URL;
-
-export default function SignIn() {
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [status, setStatus] = useState("");
-  const navigate = useNavigate();
-
-  function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
+      if (!response.ok) {
+      const data = await response.json();
+      window.localStorage.setItem("cognito_id_token", data.idToken);
+      window.localStorage.setItem("cognito_groups", JSON.stringify(data.groups));
+      setStatus("Signed in!");
+      if (data.groups && data.groups.includes("artist")) {
+        navigate("/dashboard");
+      }
+      console.error("Sign-in error", err);
+      setStatus("Sign in failed");
   async function handleSubmit(e) {
     e.preventDefault();
   }
