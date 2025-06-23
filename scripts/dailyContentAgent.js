@@ -15,7 +15,7 @@ try {
   // ignore missing .env
 }
 
-const REGION = process.env.AWS_REGION || 'us-east-1';
+const REGION = process.env.AWS_REGION || 'eu-central-1';
 const MODEL_ID = process.env.BEDROCK_MODEL_ID || 'meta.llama3-70b-instruct-v1:0';
 
 const GRAPH_VERSION = 'v19.0';

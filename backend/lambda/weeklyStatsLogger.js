@@ -1,6 +1,6 @@
 const { DynamoDBClient, PutItemCommand } = require('@aws-sdk/client-dynamodb');
 
-const REGION = process.env.AWS_REGION || 'us-east-1';
+const REGION = process.env.AWS_REGION || 'eu-central-1';
 const TABLE = process.env.STATS_TABLE || 'WeeklyArtistStats';
 const ARTIST_IDS = (process.env.ARTIST_IDS || 'RDV').split(',');
 
