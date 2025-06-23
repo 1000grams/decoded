@@ -24,6 +24,9 @@ export default function Footer() {
           <a href="/about" className="underline">
             About Us
           </a>
+          <a href="/buzz" className="underline">
+            Buzz
+          </a>
           <a
             href="/policies.html"
             target="_blank"

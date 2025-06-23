@@ -49,7 +49,7 @@ function ArtistDashboard() {
     return (
       <div style={{ padding: '2rem' }}>
         <h1>Artist Dashboard Login</h1>
-
+        <a href={loginHref} style={{ padding: '0.5rem 1rem', background: '#1db954', color: '#fff', borderRadius: '4px', display: 'inline-block', marginRight: '0.5rem' }}>
           Log in with Spotify
         </a>
         <a href="/signin" style={{ padding: '0.5rem 1rem', background: '#2563eb', color: '#fff', borderRadius: '4px' }}>
