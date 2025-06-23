@@ -3,6 +3,17 @@ const { BedrockRuntimeClient, InvokeModelCommand } = require('@aws-sdk/client-be
 
 const { getSecretValue, getParameter } = require('../utils/secrets');
 
+const LINKS = [
+  'https://music.apple.com/us/artist/rue-de-vivre/1802574638',
+  'https://www.youtube.com/@ruedevivre',
+  'https://open.spotify.com/artist/293x3NAIGPR4RCJrFkzs0P'
+];
+
+function pickLink() {
+  const index = Math.floor(Math.random() * LINKS.length);
+  return LINKS[index];
+}
+
 const REGION = process.env.AWS_REGION || 'eu-central-1';
 const MODEL_ID = process.env.BEDROCK_MODEL_ID || 'anthropic.claude-3-sonnet-20240229-v1:0';
 let PAGE_IDS;
@@ -10,7 +21,8 @@ let TOKEN;
 
 async function generateMessage(topic) {
   const client = new BedrockRuntimeClient({ region: REGION });
-  const prompt = `Write a short Facebook post about ${topic}. Include a playful call to action.`;
+  const link = pickLink();
+  const prompt = `Write a short Facebook post about ${topic}. Include a playful call to action and end with this link: ${link}`;
   const command = new InvokeModelCommand({
     modelId: MODEL_ID,
     contentType: 'application/json',
@@ -19,12 +31,15 @@ async function generateMessage(topic) {
   });
   const res = await client.send(command);
   const completion = JSON.parse(new TextDecoder().decode(res.body)).completion;
-  return completion.trim();
+  const message = completion.trim();
+  return `${message}\n${link}`;
 }
 
 async function postToPage(pageId, message) {
   const url = `https://graph.facebook.com/v19.0/${pageId}/feed`;
+  console.log(`Posting to ${pageId}: ${message}`);
   await fetch(`${url}?access_token=${TOKEN}&message=${encodeURIComponent(message)}`, { method: 'POST' });
+  console.log(`Posted to ${pageId}`);
 }
 
 async function loadConfig() {
@@ -53,6 +68,7 @@ exports.handler = async (event = {}) => {
 
   const topic = event.topic || 'latest news';
   const message = await generateMessage(topic);
+  console.log(`Generated message for topic "${topic}": ${message}`);
   for (const pageId of PAGE_IDS) {
     await postToPage(pageId, message);
   }
