@@ -205,6 +205,11 @@ groups such as `admin`, `artist`, `buyer`, `catalog_curator`, `content_creator`,
 `music_supervisor`, and `review_only`. Artists in the `artist` group are
 redirected to the dashboard after signing in.
 
+## Login Lambda Function
+`backend/lambda/loginHandler.js` exposes the same sign‑in logic under an
+`/auth/login` endpoint. Deploy it with the same CloudFormation templates used
+for the sign‑in handler if you want both routes available.
+
 ## Pitch Lambda Function
 The sync licensing pitch handler at `backend/lambda/pitchHandler/index.js` sends templated emails via SES.
 Package and upload the code to S3:
