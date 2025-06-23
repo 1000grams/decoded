@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const CHECK_URL = process.env.REACT_APP_COGNITO_CHECK_URL;
+
 export default function SignIn() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [status, setStatus] = useState("");
@@ -8,10 +10,25 @@ export default function SignIn() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    window.localStorage.setItem("demo_user", JSON.stringify(form));
-    setStatus("Signed in locally (no backend)");
+    setStatus("Checking access...");
+    try {
+      const res = await fetch(CHECK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: form.email })
+      });
+      const data = await res.json();
+      if (data.authorized) {
+        window.location.href = "/dashboard";
+      } else {
+        setStatus("Access denied");
+      }
+    } catch (err) {
+      console.error("check error", err);
+      setStatus("Error validating user");
+    }
   }
 
   return (
