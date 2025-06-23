@@ -83,6 +83,16 @@ REACT_APP_SPOTIFY_REDIRECT_URI=http://localhost:3000/dashboard
 
 These values are read by the front-end to initiate the login process.
 
+
+For the backend, the `spotifyArtistFetcher` Lambda also requires `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `ARTIST_IDS` and `SPOTIFY_TABLE` environment variables. Verify and update them from CloudShell using:
+
+```bash
+SPOTIFY_CLIENT_ID=your_client_id \
+SPOTIFY_CLIENT_SECRET=your_client_secret \
+ARTIST_IDS=your_artist_ids \
+./automate-verify-spotify-env.sh
+```
+
 ## Catalog & Pitch API Setup
 
 The catalog browsing pages and pitch submission form expect API endpoints to be
