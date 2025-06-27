@@ -1,54 +1,71 @@
-const API_BASE = process.env.REACT_APP_API_BASE;
-const ANALYTICS_URL =
-  process.env.REACT_APP_ANALYTICS_API_URL || `${API_BASE}/analytics`;
+const API_BASE = '';
+
+function getToken() {
+  return localStorage.getItem('cognito_id_token') || localStorage.getItem('spotify_token');
+}
+
+async function fetchWithAuth(url, options = {}) {
+  const token = getToken();
+  const headers = {
+    ...(options.headers || {}),
+    Authorization: token ? `Bearer ${token}` : '',
+    'Content-Type': 'application/json',
+  };
+  const res = await fetch(url, { ...options, headers });
+  if (!res.ok) {
+    throw new Error(`API error: ${res.status}`);
+  }
+  return await res.json();
+}
 
 export const DashboardAPI = {
-  getAccounting: (payload) =>
-    fetch(`${API_BASE}/accounting`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }).then((res) => res.json()),
+  getAccounting: async ({ artistId }) => {
+    const token = window.localStorage.getItem('cognito_id_token');
+    const res = await fetch(
+      `${process.env.REACT_APP_DASHBOARD_ACCOUNTING}?artistId=${artistId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (!res.ok) throw new Error('Failed to fetch accounting');
+    return res.json();
+  },
 
   getAnalytics: (payload) =>
-    fetch(ANALYTICS_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetchWithAuth(`${API_BASE}/analytics`, {
+      method: 'POST',
       body: JSON.stringify(payload),
-    }).then((res) => res.json()),
+    }),
 
   getCampaigns: (payload) =>
-    fetch(`${API_BASE}/campaigns`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetchWithAuth(`${API_BASE}/campaigns`, {
+      method: 'POST',
       body: JSON.stringify(payload),
-    }).then((res) => res.json()),
+    }),
 
   getTeam: (payload) =>
-    fetch(`${API_BASE}/team`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetchWithAuth(`${API_BASE}/team`, {
+      method: 'POST',
       body: JSON.stringify(payload),
-    }).then((res) => res.json()),
+    }),
 
   getStreams: (payload) =>
-    fetch(`${API_BASE}/streams`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetchWithAuth(`${API_BASE}/streams`, {
+      method: 'POST',
       body: JSON.stringify(payload),
-    }).then((res) => res.json()),
+    }),
 
   getStatements: (payload) =>
-    fetch(`${API_BASE}/statements`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetchWithAuth(`${API_BASE}/statements`, {
+      method: 'POST',
       body: JSON.stringify(payload),
-    }).then((res) => res.json()),
+    }),
 
   getSpotifyData: (payload) =>
-    fetch(`${API_BASE}/spotify`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    fetchWithAuth(`${API_BASE}/spotify`, {
+      method: 'POST',
       body: JSON.stringify(payload),
-    }).then((res) => res.json()),
+    }),
 };

@@ -1,9 +1,13 @@
 /* Use variables from global.css */
 .section {
-  padding: 3rem 1rem; /* Adjust vertical padding, less than full sections */
+  padding: 3rem 1rem;
+  min-height: 320px;
   background-color: #1a1a1a; /* Slightly different dark background */
   color: var(--text-color);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .container {
@@ -12,6 +16,11 @@
   display: flex;
   align-items: center;
   gap: 2rem; /* Space between logo and text - Adjust as needed */
+  min-height: 220px;
+  padding: 2rem 1rem;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.01);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
 }
 
 .logoBlock {

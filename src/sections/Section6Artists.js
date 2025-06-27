@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from '../styles/Section6Artists.module.css';
-import Button from '../components/Button';
-import FeatureBlock from '../components/FeatureBlock';
+import Button from '../components/Button.js';
+import FeatureBlock from '../components/FeatureBlock.js';
 import content from '../content/landingPage.json'; // Import content
+import SuggestionTile from '../components/SuggestionTile.jsx';
+import { FaMicrophone, FaGlobe, FaStar } from 'react-icons/fa';
 
 function Section6Artists() {
   return (
@@ -20,6 +22,7 @@ function Section6Artists() {
               iconName={feature.iconName}
               title={feature.title}
               description={feature.description}
+              className="card"
             />
           ))}
         </div>
@@ -27,6 +30,17 @@ function Section6Artists() {
           <Button variant="fill" color="accent" href={content.artists.ctaHref}>
             {content.artists.ctaText}
           </Button>
+        </div>
+        <div style={{ display: 'flex', gap: '1.2rem', marginTop: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <SuggestionTile icon={<FaMicrophone />}>
+            For artists, by artists
+          </SuggestionTile>
+          <SuggestionTile icon={<FaGlobe />}>
+            Global reach, instant impact
+          </SuggestionTile>
+          <SuggestionTile icon={<FaStar />}>
+            Stand out, get discovered
+          </SuggestionTile>
         </div>
       </div>
     </section>

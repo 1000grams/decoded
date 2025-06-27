@@ -1,9 +1,13 @@
 /* Use variables from global.css */
 .section {
-  padding: var(--section-padding-v) 1rem; /* Use global variable */
+  padding: 3rem 1rem; /* Use global variable */
+  min-height: 480px;
   background-color: var(--bg-color);
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sectionHeadline {
@@ -25,16 +29,19 @@
   display: flex;
   gap: 2rem; /* Space between blocks - Adjust as needed */
   align-items: stretch; /* Ensure equal height visually */
+  min-height: 320px;
 }
 
 .problemBlock,
 .solutionBlock {
   flex: 1; /* Allow blocks to take equal space */
   padding: 2rem; /* Adjust padding */
-  border-radius: 8px;
-  text-align: left;
-  /* Optional: add subtle background/border if needed, currently in CSS */
+  border-radius: 16px;
+  min-height: 320px;
   background-color: rgba(255, 255, 255, 0.05); /* Using one style for both */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 /* Keep distinct borders if desired, example: */
 /* .problemBlock { border: 1px solid rgba(255, 0, 0, 0.2); } */

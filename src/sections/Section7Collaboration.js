@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from '../styles/Section7Collaboration.module.css';
-import Button from '../components/Button';
+import Button from '../components/Button.js';
 import content from '../content/landingPage.json'; // Import content
 // Placeholder image for collaboration section
 import collaborationImage from '../assets/collaboration-placeholder.jpg';
+import SuggestionTile from '../components/SuggestionTile.jsx';
+import { FaUsers, FaLightbulb, FaHandshake } from 'react-icons/fa';
 
 function Section7Collaboration() {
   return (
@@ -21,6 +23,17 @@ function Section7Collaboration() {
               {content.collaboration.ctaText}
             </Button>
          </div>
+      </div>
+      <div style={{ display: 'flex', gap: '1.2rem', marginTop: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <SuggestionTile icon={<FaUsers />}>
+          Connect with creators
+        </SuggestionTile>
+        <SuggestionTile icon={<FaLightbulb />}>
+          Spark new ideas
+        </SuggestionTile>
+        <SuggestionTile icon={<FaHandshake />}>
+          Seamless collaboration
+        </SuggestionTile>
       </div>
     </section>
   );

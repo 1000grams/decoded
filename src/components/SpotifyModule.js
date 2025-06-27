@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DashboardAPI } from '../api/dashboard';
+import { DashboardAPI } from '../api/dashboard.js';
 
 function SpotifyModule() {
   const [data, setData] = useState(null);

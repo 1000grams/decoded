@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../styles/FeatureBlock.module.css';
-import Icon from './Icon';
+import Icon from './Icon.js';
 
 function FeatureBlock({ iconName, title, description }) {
   return (

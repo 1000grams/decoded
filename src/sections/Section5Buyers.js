@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from '../styles/Section5Buyers.module.css';
-import Button from '../components/Button';
-import FeatureBlock from '../components/FeatureBlock';
+import Button from '../components/Button.js';
+import FeatureBlock from '../components/FeatureBlock.js';
 import content from '../content/landingPage.json'; // Import content
+import SuggestionTile from '../components/SuggestionTile.jsx';
+import { FaShoppingCart, FaHandshake, FaShieldAlt } from 'react-icons/fa';
 
 function Section5Buyers() {
   return (
@@ -19,6 +21,7 @@ function Section5Buyers() {
               iconName={feature.iconName}
               title={feature.title}
               description={feature.description}
+              className="card"
             />
           ))}
         </div>
@@ -26,6 +29,17 @@ function Section5Buyers() {
           <Button variant="fill" color="accent" href={content.buyers.ctaHref}>
             {content.buyers.ctaText}
           </Button>
+        </div>
+        <div style={{ display: 'flex', gap: '1.2rem', marginTop: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <SuggestionTile icon={<FaShoppingCart />}>
+            Effortless checkout
+          </SuggestionTile>
+          <SuggestionTile icon={<FaHandshake />}>
+            Trusted by top brands
+          </SuggestionTile>
+          <SuggestionTile icon={<FaShieldAlt />}>
+            100% rights-cleared
+          </SuggestionTile>
         </div>
       </div>
     </section>

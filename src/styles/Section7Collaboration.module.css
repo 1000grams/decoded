@@ -1,8 +1,12 @@
 /* Use variables from global.css */
 .section {
-  padding: var(--section-padding-v) 1rem; /* Use global variable */
+  padding: 3rem 1rem;
+  min-height: 420px;
   background-color: var(--bg-color);
   color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .frameContainer {
@@ -11,6 +15,7 @@
   display: flex;
   gap: 2rem; /* Space between blocks - Adjust as needed */
   align-items: center;
+  min-height: 320px;
 }
 
 .imageBlock {

@@ -29,34 +29,129 @@ export default function Contact() {
     }
   }
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-8 border rounded bg-white shadow">
-      <h1 className="text-2xl font-bold mb-4">Contact Us</h1>
-      <input
-        name="name"
-        placeholder="Your Name"
-        value={form.name}
-        onChange={handleChange}
-        className="block mb-3 p-2 border rounded w-full"
-        required
-      />
-      <input
-        name="email"
-        placeholder="Your Email"
-        value={form.email}
-        onChange={handleChange}
-        className="block mb-3 p-2 border rounded w-full"
-        required
-      />
-      <textarea
-        name="message"
-        placeholder="Your Message"
-        value={form.message}
-        onChange={handleChange}
-        className="block mb-3 p-2 border rounded w-full"
-        required
-      />
-      <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Send</button>
-      {status && <div className="mt-3">{status}</div>}
-    </form>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "linear-gradient(135deg, #111827 0%, #1e293b 100%)",
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          background: "#fff",
+          borderRadius: 32,
+          boxShadow: "0 8px 48px #0004",
+          padding: "3.5rem 3rem 2.5rem 3rem",
+          minWidth: 420,
+          maxWidth: 520,
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: "Georgia, serif",
+            fontSize: "3rem",
+            fontWeight: 900,
+            color: "#1e293b",
+            marginBottom: 32,
+            letterSpacing: "0.01em",
+            textAlign: "center",
+          }}
+        >
+          Contact Us
+        </h1>
+        <input
+          name="name"
+          placeholder="Your Name"
+          value={form.name}
+          onChange={handleChange}
+          required
+          style={{
+            fontSize: "1.5rem",
+            padding: "1.1rem 1.2rem",
+            borderRadius: 16,
+            border: "1.5px solid #cbd5e1",
+            marginBottom: 24,
+            width: "100%",
+            fontFamily: "inherit",
+            background: "#f8fafc",
+          }}
+        />
+        <input
+          name="email"
+          placeholder="Your Email"
+          value={form.email}
+          onChange={handleChange}
+          required
+          style={{
+            fontSize: "1.5rem",
+            padding: "1.1rem 1.2rem",
+            borderRadius: 16,
+            border: "1.5px solid #cbd5e1",
+            marginBottom: 24,
+            width: "100%",
+            fontFamily: "inherit",
+            background: "#f8fafc",
+          }}
+        />
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          value={form.message}
+          onChange={handleChange}
+          required
+          rows={5}
+          style={{
+            fontSize: "1.5rem",
+            padding: "1.1rem 1.2rem",
+            borderRadius: 16,
+            border: "1.5px solid #cbd5e1",
+            marginBottom: 32,
+            width: "100%",
+            fontFamily: "inherit",
+            background: "#f8fafc",
+            resize: "vertical",
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            fontSize: "2rem",
+            fontWeight: 700,
+            padding: "1.2rem 3.5rem",
+            borderRadius: 16,
+            background: "#2563eb",
+            color: "#fff",
+            border: "none",
+            boxShadow: "0 2px 16px #2563eb55",
+            cursor: "pointer",
+            marginBottom: 16,
+            letterSpacing: "0.01em",
+          }}
+        >
+          Send
+        </button>
+        {status && (
+          <div
+            style={{
+              marginTop: 18,
+              fontSize: "1.3rem",
+              color: status.startsWith("Thank") ? "#22c55e" : "#ef4444",
+              fontWeight: 600,
+              textAlign: "center",
+            }}
+          >
+            {status}
+          </div>
+        )}
+      </form>
+    </div>
   );
 }

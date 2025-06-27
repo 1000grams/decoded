@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from '../styles/Section4DynamicPricing.module.css';
-import Button from '../components/Button';
-import Icon from '../components/Icon';
+import Button from '../components/Button.js';
+import Icon from '../components/Icon.js';
 import content from '../content/landingPage.json'; // Import content
+import SuggestionTile from '../components/SuggestionTile.jsx';
+import { FaDollarSign, FaChartLine, FaGem } from 'react-icons/fa';
 
 function Section4DynamicPricing() {
   return (
@@ -15,7 +17,7 @@ function Section4DynamicPricing() {
 
         <div className={styles.howItWorksGrid}>
           {content.dynamicPricing.howItWorksItems.map((item, index) => (
-             <div key={index} className={styles.howItWorksItem}>
+             <div key={index} className={`${styles.howItWorksItem} card`}>
                 <Icon name={item.icon} size="32px" color="var(--accent-color)" />
                 <p>{item.text}</p>
              </div>
@@ -32,7 +34,7 @@ function Section4DynamicPricing() {
 
         <div className={styles.useCasesGrid}>
           {content.dynamicPricing.useCases.map((useCase, index) => (
-            <div key={index} className={styles.useCaseBlock}>
+            <div key={index} className={`${styles.useCaseBlock} card`}>
               <Icon name={useCase.icon} size="40px" color="var(--accent-color)" />
               <h4 className={styles.useCaseTitle}>{useCase.title}</h4>
               <p className={styles.useCaseDescription}>{useCase.description}</p>
@@ -59,6 +61,17 @@ function Section4DynamicPricing() {
            <Button variant="fill" color="accent" href={content.dynamicPricing.finalCtaHref}>
              {content.dynamicPricing.finalCtaText}
            </Button>
+        </div>
+        <div style={{ display: 'flex', gap: '1.2rem', marginTop: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <SuggestionTile icon={<FaDollarSign />}>
+            Dynamic pricing, fair for all
+          </SuggestionTile>
+          <SuggestionTile icon={<FaChartLine />}>
+            Transparent, real-time rates
+          </SuggestionTile>
+          <SuggestionTile icon={<FaGem />}>
+            Premium value, no compromise
+          </SuggestionTile>
         </div>
       </div>
     </section>

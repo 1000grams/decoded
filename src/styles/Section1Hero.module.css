@@ -1,6 +1,7 @@
 .hero {
   position: relative;
   width: 100%;
+  min-height: 600px; /* Ensures a minimum height for the hero section */
   height: 100vh; /* Full viewport height */
   display: flex;
   align-items: center;
@@ -8,6 +9,7 @@
   text-align: center;
   overflow: hidden; /* Hide video overflow */
   color: var(--text-color);
+  padding: 2rem 0; /* Standardized vertical padding */
 }
 
 .videoBackground {
@@ -48,42 +50,54 @@
   width: 90%; /* Take 90% of parent width, up to max-width */
   padding: 3rem 2rem; /* Add internal padding - Adjust for frame thickness */
   border: 2px solid rgba(255, 255, 255, 0.3); /* Subtle white border for frame look */
-  border-radius: 8px; /* Optional: rounded corners for the frame */
+  border-radius: 16px; /* More pronounced rounding for luxury feel */
   background-color: rgba(17, 17, 17, 0.2); /* Very subtle dark background inside frame */
   backdrop-filter: blur(5px); /* Optional: blur effect behind the frame */
   -webkit-backdrop-filter: blur(5px); /* Safari support */
+  min-height: 420px; /* Standardized min-height for content area */
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18); /* Soft shadow for depth */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo {
-  max-width: 50vw;
+  max-width: 220px;
+  min-width: 120px;
   height: auto;
+  margin-bottom: 2rem;
   display: inline-block;
 }
 
 .headline {
-  font-size: 3rem; /* Adjust size for 'Decoded Music' */
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem; /* Adjust size for 'Decoded Music' */
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.01em;
   line-height: 1.1;
 }
 
 .tagline { /* Style for "License Music • Join the Movement" */
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--accent-color); /* Use accent color */
-    margin-bottom: 1.5rem; /* Space below tagline */
+    font-size: 1.25rem;
+    color: #e0e7ef;
+    margin-bottom: 1.2rem; /* Space below tagline */
 }
 
 
 .hypeText {
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.1rem; /* 18px */
+  color: #cbd5e1;
   margin-bottom: 2rem;
+  max-width: 600px;
   opacity: 0.9;
 }
 
 .ctaButtons {
   display: flex;
-  gap: 1.5rem; /* Adjust gap */
+  gap: 1.2rem; /* Adjust gap */
   justify-content: center;
+  margin-top: 1.5rem;
   flex-wrap: wrap;
 }
 

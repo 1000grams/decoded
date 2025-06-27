@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from '../styles/Section9CTA.module.css';
-import Button from '../components/Button';
+import Button from '../components/Button.js';
 import content from '../content/landingPage.json'; // Import content
+import SuggestionTile from '../components/SuggestionTile.jsx';
+import { FaArrowRight } from 'react-icons/fa';
 
 function Section9CTA() {
   return (
@@ -15,6 +17,17 @@ function Section9CTA() {
           <Button variant="outline" color="accent" href={content.finalCta.cta2Href}>
             {content.finalCta.cta2Text}
           </Button>
+        </div>
+        <div style={{ display: 'flex', gap: '1.5rem', marginTop: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <SuggestionTile icon={<FaArrowRight />}>
+            Zero friction onboarding
+          </SuggestionTile>
+          <SuggestionTile icon={<FaArrowRight />}>
+            Scale your playlist reach
+          </SuggestionTile>
+          <SuggestionTile icon={<FaArrowRight />}>
+            Upload tracks instantly
+          </SuggestionTile>
         </div>
       </div>
     </section>

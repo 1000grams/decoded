@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from '../styles/Section2ProblemSolution.module.css';
-import Icon from '../components/Icon';
+import Icon from '../components/Icon.js'; // Updated import for Icon
 import content from '../content/landingPage.json'; // Import content
+import SuggestionTile from '../components/SuggestionTile.jsx';
+import { FaBolt, FaShieldAlt, FaCrown } from 'react-icons/fa';
 
 function Section2ProblemSolution() {
   return (
@@ -37,6 +39,17 @@ function Section2ProblemSolution() {
        <p className={styles.techMention}>
           {content.problemSolution.techMention}
        </p>
+       <div style={{ display: 'flex', gap: '1.2rem', marginTop: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+         <SuggestionTile icon={<FaBolt />}>
+           Instant access, zero hassle
+         </SuggestionTile>
+         <SuggestionTile icon={<FaShieldAlt />}>
+           Secure, rights-cleared music
+         </SuggestionTile>
+         <SuggestionTile icon={<FaCrown />}>
+           Premium experience, always
+         </SuggestionTile>
+       </div>
     </section>
   );
 }

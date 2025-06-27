@@ -1,69 +1,45 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-const AUTH_URL =
-  process.env.REACT_APP_AUTH_API_URL
-    ? `${process.env.REACT_APP_AUTH_API_URL}/signin`
-    : "/api/auth/signin";
-
-const CHECK_URL = process.env.REACT_APP_COGNITO_CHECK_URL;
+import React from "react";
+import SignInButton from "./SignInButton.jsx";
 
 export default function SignIn() {
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [status, setStatus] = useState("");
-  const navigate = useNavigate();
-
-  function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("Signing in...");
-    try {
-      const res = await fetch(AUTH_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        if (data.idToken) {
-          window.localStorage.setItem("cognito_id_token", data.idToken);
-        }
-        navigate("/dashboard");
-      } else {
-        throw new Error(data.message || "Sign in failed");
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus("Sign in failed");
-    }
-  }
-
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto p-6 bg-white rounded shadow">
-      <h1 className="text-xl font-bold mb-4">Sign In</h1>
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        className="block mb-3 p-2 border rounded w-full"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={handleChange}
-        className="block mb-3 p-2 border rounded w-full"
-        required
-      />
-      <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Sign In</button>
-      {status && <div className="mt-3">{status}</div>}
-    </form>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "linear-gradient(135deg, #111827 0%, #1e293b 100%)",
+        color: "#fff",
+        fontFamily: "Georgia, serif",
+      }}
+    >
+      <h1
+        style={{
+          fontSize: "3.5rem",
+          fontWeight: 900,
+          letterSpacing: "0.01em",
+          textShadow: "0 4px 32px #2563eb55, 0 2px 0 #fff2",
+          marginBottom: 24,
+          textAlign: "center",
+        }}
+      >
+        SIGN IN
+      </h1>
+      <SignInButton />
+      <div
+        style={{
+          fontSize: "1.7rem",
+          color: "#60a5fa",
+          fontWeight: 600,
+          fontStyle: "italic",
+          textAlign: "center",
+          letterSpacing: "0.02em",
+        }}
+      >
+        created By Artist, for Artist
+      </div>
+    </div>
   );
 }

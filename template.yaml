@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: >
-  Decoded Music Management stack - region EU-Central (Frankfurt)
+  Decoded Music Backend - DynamoDB Table Setup and Spotify Auth Lambdas
 
 Parameters:
   EnvName:
@@ -9,30 +9,10 @@ Parameters:
     Description: Environment name prefix
 
 Resources:
-  UploadsBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub '${EnvName}-decodedmusic-uploads'
-
-  PreviewsBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub '${EnvName}-decodedmusic-previews'
-
-  StatementsBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub '${EnvName}-decodedmusic-statements'
-
-  IndustryBuzzBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub '${EnvName}-decodedmusic-industrybuzz'
-
   DecodedCatalogTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '${EnvName}-DecodedCatalog'
+      TableName: !Sub '${EnvName}-DecodedCatalog-${AWS::StackName}'
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
@@ -44,7 +24,7 @@ Resources:
   DecodedCTATable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '${EnvName}-DecodedCTA'
+      TableName: !Sub '${EnvName}-DecodedCTA-${AWS::StackName}'
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
@@ -56,7 +36,7 @@ Resources:
   RevenueLogTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '${EnvName}-RevenueLog'
+      TableName: !Sub '${EnvName}-RevenueLog-${AWS::StackName}'
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
@@ -68,7 +48,7 @@ Resources:
   ExpenseLogTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '${EnvName}-ExpenseLog'
+      TableName: !Sub '${EnvName}-ExpenseLog-${AWS::StackName}'
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
@@ -80,7 +60,7 @@ Resources:
   WeeklyArtistStatsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '${EnvName}-WeeklyArtistStats'
+      TableName: !Sub '${EnvName}-WeeklyArtistStats-${AWS::StackName}'
       AttributeDefinitions:
         - AttributeName: artist_id
           AttributeType: S
@@ -96,7 +76,7 @@ Resources:
   StatementsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: !Sub '${EnvName}-Statements'
+      TableName: !Sub '${EnvName}-Statements-${AWS::StackName}'
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
@@ -105,79 +85,37 @@ Resources:
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
 
-  CatalogLambdaRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: lambda.amazonaws.com
-            Action: 'sts:AssumeRole'
-      Policies:
-        - PolicyName: catalog-access
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - dynamodb:GetItem
-                  - dynamodb:Query
-                Resource: '*'
-              - Effect: Allow
-                Action:
-                  - logs:CreateLogGroup
-                  - logs:CreateLogStream
-                  - logs:PutLogEvents
-                Resource: '*'
-
-  CatalogLambda:
+  SpotifyAuthHandler:
     Type: AWS::Lambda::Function
     Properties:
-      FunctionName: !Sub '${EnvName}-catalog-handler'
-      Runtime: nodejs18.x
+      FunctionName: !Sub '${EnvName}-spotifyAuthHandler'
       Handler: index.handler
-      Role: !GetAtt CatalogLambdaRole.Arn
+      Runtime: nodejs18.x
+      Role: arn:aws:iam::396913703024:role/decoded-genai-stack-BackendLambdaRole-7PvuaEMzpSHR
       Code:
-        ZipFile: |
-          exports.handler = async (event) => {
-            return { statusCode: 200, body: 'catalog response' };
-          };
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: spotifyAuthHandler.zip
+      Environment:
+        Variables:
+          SPOTIFY_CLIENT_ID: 5866a38ab59f46b2b8ceebfa17540d32
+          SPOTIFY_REDIRECT_URI: https://decodedmusic.com/dashboard
+      Timeout: 10
+      MemorySize: 128
 
-  ApiGateway:
-    Type: AWS::ApiGateway::RestApi
+  SpotifyCallbackHandler:
+    Type: AWS::Lambda::Function
     Properties:
-      Name: !Sub '${EnvName}-decoded-api'
-
-  CatalogResource:
-    Type: AWS::ApiGateway::Resource
-    Properties:
-      ParentId: !GetAtt ApiGateway.RootResourceId
-      PathPart: catalog
-      RestApiId: !Ref ApiGateway
-
-  CatalogMethod:
-    Type: AWS::ApiGateway::Method
-    Properties:
-      AuthorizationType: NONE
-      HttpMethod: GET
-      ResourceId: !Ref CatalogResource
-      RestApiId: !Ref ApiGateway
-      Integration:
-        Type: AWS
-        IntegrationHttpMethod: POST
-        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CatalogLambda.Arn}/invocations'
-
-  LambdaPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: lambda:InvokeFunction
-      FunctionName: !Ref CatalogLambda
-      Principal: apigateway.amazonaws.com
-      SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*/GET/catalog'
-
-Outputs:
-  ApiUrl:
-    Description: Base URL of API Gateway
-    Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod'
+      FunctionName: !Sub '${EnvName}-spotifyCallbackHandler'
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Role: arn:aws:iam::396913703024:role/decoded-genai-stack-BackendLambdaRole-7PvuaEMzpSHR
+      Code:
+        S3Bucket: decodedmusic-lambda-code
+        S3Key: spotifyCallbackHandler.zip
+      Environment:
+        Variables:
+          SPOTIFY_CLIENT_ID: 5866a38ab59f46b2b8ceebfa17540d32
+          SPOTIFY_CLIENT_SECRET: YOUR_SPOTIFY_SECRET
+          SPOTIFY_REDIRECT_URI: https://decodedmusic.com/dashboard
+      Timeout: 10
+      MemorySize: 128

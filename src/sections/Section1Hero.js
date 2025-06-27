@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from '../styles/Section1Hero.module.css';
-import Button from '../components/Button';
+import Button from '../components/Button.js'; // Updated import statement
 import content from '../content/landingPage.json'; // Import content
 // Import your logo image here
 import decodedMusicLogo from '../assets/decoded-music-logo.png';
+import SuggestionTile from '../components/SuggestionTile.jsx';
+import { FaStar, FaRocket, FaMusic } from 'react-icons/fa';
 
 function Section1Hero() {
   return (
@@ -30,6 +32,17 @@ function Section1Hero() {
           <Button variant="outline" color="accent" href={content.hero.secondaryCtaHref}>
             {content.hero.secondaryCtaText}
           </Button>
+        </div>
+        <div style={{ display: 'flex', gap: '1.2rem', marginTop: 32, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <SuggestionTile icon={<FaStar />}>
+            Curated for creators
+          </SuggestionTile>
+          <SuggestionTile icon={<FaRocket />}>
+            Fast-track your music journey
+          </SuggestionTile>
+          <SuggestionTile icon={<FaMusic />}>
+            Luxury sound, instantly licensed
+          </SuggestionTile>
         </div>
       </div>
     </section>
