@@ -1,4 +1,4 @@
-﻿mport React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DashboardAPI } from '../api/dashboard.js';
 
 function SpotifyModule() {

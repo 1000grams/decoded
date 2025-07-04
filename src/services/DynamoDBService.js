@@ -1,4 +1,4 @@
-﻿import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
+import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
 import { API_ENDPOINTS } from '../config/api-endpoints';
 
 class DynamoDBService {
@@ -67,4 +67,4 @@ class DynamoDBService {
     }
 }
 
-export default new (class DynamoDBService {})();
+export default new DynamoDBService();

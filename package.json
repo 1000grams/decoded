@@ -1,4 +1,4 @@
-﻿
+{
     "version": "1.0.0",
     "dependencies": {
         "amazon-cognito-identity-js": "^6.3.15",

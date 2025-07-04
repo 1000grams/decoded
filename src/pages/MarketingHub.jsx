@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+import React from 'react';
 import SuggestionTile from '../components/SuggestionTile.jsx';
 import { FaChartPie, FaBullhorn, FaCalendarAlt, FaFire } from 'react-icons/fa';
 

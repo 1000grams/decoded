@@ -1,4 +1,4 @@
-﻿mport React, { useState } from 'react';
+import React, { useState } from 'react';
 
 const Header = ({ user, onLogin, onLogout }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);

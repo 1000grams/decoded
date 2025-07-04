@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+import React from 'react';
 import styles from '../styles/Section6Artists.module.css';
 import Button from '../components/Button.js';
 import FeatureBlock from '../components/FeatureBlock.js';

@@ -1,4 +1,4 @@
-﻿mport React, { useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../styles/Section3ArtistShowcase.module.css';
 import Button from '../components/Button.js';
 import Icon from '../components/Icon.js';

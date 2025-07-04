@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Button from './Button';
 import styles from '../styles/Button.module.css';

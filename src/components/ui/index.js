@@ -1,2 +1,2 @@
-﻿xport { default as Button } from '../Button.js';
+xport { default as Button } from '../Button.js';
 export * from './Card';

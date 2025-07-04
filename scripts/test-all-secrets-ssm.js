@@ -1,4 +1,4 @@
-﻿onst AWS = require("aws-sdk");
+const AWS = require("aws-sdk");
 const ssm = new AWS.SSM();
 const secretsManager = new AWS.SecretsManager();
 

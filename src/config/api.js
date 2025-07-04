@@ -1,4 +1,4 @@
-﻿onst API_CONFIG = {
+const API_CONFIG = {
   baseURL: 'https://y1zthsd7l0.execute-api.eu-central-1.amazonaws.com/prod',
   endpoints: {
     login: '/auth/login',

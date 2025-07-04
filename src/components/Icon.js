@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+import React from 'react';
 import styles from '../styles/Icon.module.css'; // Optional: for size/color styling
 
 function Icon({ name, size = '24px', color = 'var(--accent-color)' }) {
