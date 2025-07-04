@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
 import PageLayout from '../layouts/PageLayout.js';
 import Section2ProblemSolution from '../sections/Section2ProblemSolution.js';

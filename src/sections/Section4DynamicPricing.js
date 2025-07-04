@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+import React from 'react';
 import styles from '../styles/Section4DynamicPricing.module.css';
 import Button from '../components/Button.js';
 import Icon from '../components/Icon.js';

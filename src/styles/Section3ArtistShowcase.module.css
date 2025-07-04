@@ -1,4 +1,4 @@
-﻿* Use variables from global.css */
+* Use variables from global.css */
 .section {
   padding: var(--section-padding-v) 1rem; /* Use global variable */
   background-color: var(--bg-color);

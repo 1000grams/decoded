@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+import React from 'react';
 import styles from '../styles/FeatureBlock.module.css';
 import Icon from './Icon.js';
 

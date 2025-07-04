@@ -1,4 +1,4 @@
-﻿* Use variables from global.css */
+* Use variables from global.css */
 .footer {
   background-color: var(--bg-color);
   color: var(--footer-text-color);

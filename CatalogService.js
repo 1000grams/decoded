@@ -1,4 +1,4 @@
-﻿lass CatalogService {
+class CatalogService {
   async getCatalog(artistId = 'ruedevivre') {
     try {
       // Mock catalog data for demo

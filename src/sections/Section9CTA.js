@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+import React from 'react';
 import styles from '../styles/Section9CTA.module.css';
 import Button from '../components/Button.js';
 import content from '../content/landingPage.json'; // Import content

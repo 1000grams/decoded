@@ -1,4 +1,4 @@
-﻿/ Rue de Vivre Analytics API Service
+/ Rue de Vivre Analytics API Service
 class RueDeVivreAPI {
   constructor() {
     this.baseURL = process.env.REACT_APP_DASHBOARD_API || 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';

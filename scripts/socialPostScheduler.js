@@ -1,4 +1,4 @@
-﻿/ Social Posting Scheduler
+/ Social Posting Scheduler
 // Uses Meta Graph API, Snapchat API, and YouTube to queue posts.
 // Requires access tokens via environment variables.
 

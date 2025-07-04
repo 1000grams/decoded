@@ -1,4 +1,4 @@
-﻿/ Music Management Researcher
+/ Music Management Researcher
 // Sweeps public news sources for industry activity and posts summaries as "Industry Buzz".
 // Configure with NEWS_API_KEY for newsapi.org and AWS credentials for Bedrock.
 // Threads API info: https://developers.facebook.com/docs/threads-api
