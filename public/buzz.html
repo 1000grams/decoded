@@ -1,68 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buzz - Daily Music Management Research</title>
-  <meta name="description" content="Your daily music industry sweep covering deals, disputes, sync events, and unauthorized music use.">
-  <!-- Inline styles to avoid third-party stylesheets -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Decoded Buzz - Weekly Music Intelligence</title>
+  <meta name="description" content="Weekly music industry research: deals, syncs, lawsuits, and indie breakthroughs. Powered by DECODED.">
+
   <style>
-    body { background:#fff; color:#1F2937; font-family: Arial, sans-serif; }
-    .container { max-width:28rem; margin:0 auto; padding:1rem; }
-    .max-w-md { max-width:28rem; }
-    .mx-auto { margin-left:auto; margin-right:auto; }
-    .p-4 { padding:1rem; }
-    .mb-4 { margin-bottom:1rem; }
-    .mt-4 { margin-top:1rem; }
-    .mt-6 { margin-top:1.5rem; }
-    .text-center { text-align:center; }
-    .text-xl { font-size:1.25rem; }
-    .text-sm { font-size:0.875rem; }
-    .text-xs { font-size:0.75rem; }
-    .text-gray-500 { color:#6B7280; }
-    .text-gray-400 { color:#9CA3AF; }
-    .font-bold { font-weight:bold; }
-    .whitespace-pre-wrap { white-space:pre-wrap; }
-    .space-x-2 > * + * { margin-left:0.5rem; }
-    .px-4 { padding-left:1rem; padding-right:1rem; }
-    .py-2 { padding-top:0.5rem; padding-bottom:0.5rem; }
-    .rounded-xl { border-radius:0.75rem; }
-    button { padding:0.5rem 1rem; border-radius:0.75rem; }
-    .bg-blue-600 { background-color:#2563eb; color:#fff; }
-    .text-blue-600 { color:#2563eb; }
-    .text-blue-500 { color:#3B82F6; }
-    .border { border:1px solid; }
-    .border-blue-600 { border-color:#2563eb; }
+    body {
+      background: #111827;
+      color: #e5e7eb;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem;
+      margin: 0;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #60a5fa;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      color: #93c5fd;
+    }
+    p {
+      font-size: 1rem;
+    }
+    pre {
+      background: #1f2937;
+      padding: 1.5rem;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      font-size: 1rem;
+      margin-top: 1rem;
+      color: #f9fafb;
+    }
+    .text-sm { font-size: 0.85rem; color: #9ca3af; text-align: center; margin-top: 2rem; }
   </style>
 </head>
-<body class="bg-white text-gray-800">
-  <div class="max-w-md mx-auto p-4">
-    <header class="mb-4">
-      <h1 id="headline" class="text-xl font-bold text-center">Industry Buzz</h1>
-      <p class="text-center text-sm text-gray-500">Buzz | Music Management Researcher</p>
-      <p id="run-date" class="text-center text-xs text-gray-400"></p>
-    </header>
+<body>
+  <div class="container">
+    <h1>🎧 DECODED: This Week’s Industry Buzz</h1>
+    <p>
+      Whether through blockbuster acquisitions, sync strategy sessions, or courtroom showdowns, this week’s headlines underscore a vibrant—and often volatile—music business.
+      As labels and artists navigate regulatory hurdles, legal battlegrounds, and ever-evolving tech landscapes, one thing remains certain: in 2025, music’s movers and shakers are writing the playbook in real time.
+    </p>
 
-    <pre id="buzz-content" class="whitespace-pre-wrap text-sm"></pre>
+    <h2>[ S3 Buzz Summary ]</h2>
+    <pre id="buzz-content">Loading industry intelligence...</pre>
 
-    <footer class="mt-6 text-center text-xs text-gray-500">
-      <p>Find full details in your Google Sheet. Updates emailed to <a href="mailto:ops@decodedmusic.com" class="text-blue-500">ops@decodedmusic.com</a>.</p>
-      <div class="mt-4 space-x-2">
-        <button class="px-4 py-2 bg-blue-600 text-white rounded-xl">Subscribe</button>
-        <button class="px-4 py-2 border border-blue-600 text-blue-600 rounded-xl">Follow Our Playlist</button>
-      </div>
-    </footer>
+    <p class="text-sm" id="run-date">Run date: ...</p>
   </div>
+
   <script>
-    fetch('industry_buzz.txt')
+    fetch('https://decodedmusic-buzz-files.s3.eu-central-1.amazonaws.com/june2025_summary.txt')
       .then(res => res.text())
       .then(text => {
         document.getElementById('buzz-content').textContent = text.trim();
-        const date = new Date();
-        document.getElementById('run-date').textContent = 'Run date: ' + date.toISOString().split('T')[0];
+        const today = new Date();
+        document.getElementById('run-date').textContent = "Run date: " + today.toISOString().split('T')[0];
       })
       .catch(() => {
-        document.getElementById('buzz-content').textContent = 'No update available.';
+        document.getElementById('buzz-content').textContent = "⚠️ No update available. Check S3 bucket or upload failed.";
       });
   </script>
 </body>
