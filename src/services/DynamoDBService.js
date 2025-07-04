@@ -1,5 +1,5 @@
 ﻿import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
-// Removed AWS SDK usage; using API Gateway endpoints instead
+import { API_ENDPOINTS } from '../config/api-endpoints';
 
 class DynamoDBService {
     // No constructor needed for fetch-based service
@@ -9,7 +9,7 @@ class DynamoDBService {
         // Ensure token is captured
         getCognitoTokenFromUrl();
         const token = localStorage.getItem('cognito_id_token');
-        const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/artist/portfolio`, {
+        const response = await fetch(`${API_ENDPOINTS.DASHBOARD_BASE}/artist/portfolio`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ class DynamoDBService {
     async getTrackAnalytics(artistId) {
         getCognitoTokenFromUrl();
         const token = localStorage.getItem('cognito_id_token');
-        const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/track/analytics`, {
+        const response = await fetch(`${API_ENDPOINTS.DASHBOARD_BASE}/track/analytics`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ class DynamoDBService {
     async getAIRecommendations(artistId) {
         getCognitoTokenFromUrl();
         const token = localStorage.getItem('cognito_id_token');
-        const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/artist/recommendations`, {
+        const response = await fetch(`${API_ENDPOINTS.DASHBOARD_BASE}/artist/recommendations`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ class DynamoDBService {
     async updateArtistData(artistId, data) {
         getCognitoTokenFromUrl();
         const token = localStorage.getItem('cognito_id_token');
-        const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/artist/update`, {
+        const response = await fetch(`${API_ENDPOINTS.DASHBOARD_BASE}/artist/update`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

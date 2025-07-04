@@ -1,4 +1,4 @@
-﻿lass CognitoAuthService {
+﻿class CognitoAuthService {
     constructor() {
         this.currentUser = null;
         this.jwtToken = null;
