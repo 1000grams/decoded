@@ -8,7 +8,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.30.1",
-    "react-scripts": "^0.0.0"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,10 +27,7 @@
     "deploy-complete": "npm run fix-dashboard && npm run build && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app", "react-app/jest"]
   },
   "homepage": ".",
   "browserslist": {

@@ -1,4 +1,4 @@
-﻿import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
+import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
 // Removed AWS SDK usage; using API Gateway endpoints instead
 
 class DynamoDBService {

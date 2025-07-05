@@ -1,19 +1,19 @@
-﻿- onst fs = require('fs');
-+ const fs   = require('fs');
-+ const path = require('path');
+const fs   = require('fs');
+const path = require('path');
 
 function integrateDashboard() {
   console.log('🔧 Integrating Dashboard with React Build...');
-  
+
   try {
-    // Copy generated files from parent directory to public folder
+    // Look for static dashboard files in the project root (e.g., C:\decoded)
+    const projectRoot = path.resolve(__dirname, '..', '..');
     const generatedFiles = [
-      { from: '../dashboard.html', to: 'public/dashboard-standalone.html' },
-      { from: '../dashboard.js', to: 'public/dashboard-standalone.js' },
-      { from: '../dashboard.css', to: 'public/dashboard-standalone.css' },
-      { from: '../test-dashboard.html', to: 'public/test-dashboard.html' }
+      { from: path.join(projectRoot, 'dashboard.html'),       to: 'public/dashboard-standalone.html' },
+      { from: path.join(projectRoot, 'dashboard.js'),         to: 'public/dashboard-standalone.js'   },
+      { from: path.join(projectRoot, 'dashboard.css'),        to: 'public/dashboard-standalone.css'  },
+      { from: path.join(projectRoot, 'test-dashboard.html'),  to: 'public/test-dashboard.html'       }
     ];
-    
+
     generatedFiles.forEach(file => {
       if (fs.existsSync(file.from)) {
         const targetDir = path.dirname(file.to);
@@ -21,18 +21,18 @@ function integrateDashboard() {
           fs.mkdirSync(targetDir, { recursive: true });
         }
         fs.copyFileSync(file.from, file.to);
-        console.log(`✅ Copied ${file.from} to ${file.to}`);
+        console.log(`✅ Copied ${path.basename(file.from)} → ${file.to}`);
       } else {
-        console.log(`⚠️ Source file not found: ${file.from}`);
+        console.warn(`⚠️ Missing at project root: ${path.basename(file.from)}`);
       }
     });
-    
-    // Create React API service for backend integration
+
+    // Create RueDeVivreAPI.js if it doesn't exist
     const servicesDir = 'src/services';
     if (!fs.existsSync(servicesDir)) {
       fs.mkdirSync(servicesDir, { recursive: true });
     }
-    
+
     const rueDeVivreAPIPath = path.join(servicesDir, 'RueDeVivreAPI.js');
     if (!fs.existsSync(rueDeVivreAPIPath)) {
       const apiServiceContent = `// Rue de Vivre Analytics API Service
@@ -43,7 +43,6 @@ class RueDeVivreAPI {
 
   async makeRequest(endpoint, options = {}) {
     const token = localStorage.getItem('cognito_access_token') || localStorage.getItem('decodedmusic_user');
-    
     try {
       const response = await fetch(\`\${this.baseURL}\${endpoint}\`, {
         headers: {
@@ -54,11 +53,9 @@ class RueDeVivreAPI {
         },
         ...options
       });
-
       if (!response.ok) {
         throw new Error(\`API Error: \${response.status} - \${response.statusText}\`);
       }
-
       return await response.json();
     } catch (error) {
       console.error(\`RueDeVivre API Error (\${endpoint}):\`, error);
@@ -91,11 +88,7 @@ class RueDeVivreAPI {
     try {
       return await this.makeRequest('/spotify');
     } catch (error) {
-      return { 
-        monthlyListeners: 0, 
-        followers: 0, 
-        recentStreams: { thisMonth: 0 } 
-      };
+      return { monthlyListeners: 0, followers: 0, recentStreams: { thisMonth: 0 } };
     }
   }
 
@@ -104,15 +97,15 @@ class RueDeVivreAPI {
       return await this.makeRequest('/trends');
     } catch (error) {
       return {
-        viralPredictions: { 
-          platformReadiness: { 
-            tiktok_ready: [], 
-            instagram_ready: [], 
-            youtube_ready: [] 
-          } 
+        viralPredictions: {
+          platformReadiness: {
+            tiktok_ready: [],
+            instagram_ready: [],
+            youtube_ready: []
+          }
         },
-        marketTrends: { 
-          marketSaturation: { opportunityScore: 0 } 
+        marketTrends: {
+          marketSaturation: { opportunityScore: 0 }
         },
         actionableInsights: {
           immediateActions: [
@@ -131,7 +124,6 @@ class RueDeVivreAPI {
       { name: 'Spotify API', url: '/spotify' },
       { name: 'Trends API', url: '/trends' }
     ];
-
     const results = [];
     for (const endpoint of endpoints) {
       try {
@@ -146,13 +138,12 @@ class RueDeVivreAPI {
 }
 
 export default new RueDeVivreAPI();`;
-      
+
       fs.writeFileSync(rueDeVivreAPIPath, apiServiceContent);
       console.log('✅ Created RueDeVivreAPI.js');
     }
-    
+
     console.log('🎉 Dashboard integration complete!');
-    
   } catch (error) {
     console.error('❌ Integration failed:', error);
   }
