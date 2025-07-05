@@ -1,6 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: 'Serverless stack for DecodedMusic backend'
+
 Globals:
   Function:
     Timeout: 10
@@ -8,37 +9,51 @@ Globals:
     MemorySize: 128
 
 Resources:
+  CatalogBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: decodedmusic-artist-catalog
+
+  DecodedMusicApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: DecodedMusicApi
+      StageName: Prod
+      Cors:
+        AllowOrigins: "'https://decodedmusic.com'"
+        AllowMethods: "'GET,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+
   S3CatalogIngestFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: lambda/s3CatalogIngest/
+      CodeUri: ../lambda/s3CatalogIngest/
       Environment:
         Variables:
           TABLE_NAME: prod-DecodedCatalog-decodedmusic-backend
-          AWS_REGION: eu-central-1
       Policies:
         - AWSLambdaBasicExecutionRole
         - S3ReadPolicy:
             BucketName: decodedmusic-artist-catalog
         - DynamoDBCrudPolicy:
             TableName: prod-DecodedCatalog-decodedmusic-backend
-      Events:
-        OnCatalogUpload:
-          Type: S3
-          Properties:
-            Bucket: decodedmusic-artist-catalog
-            Events: s3:ObjectCreated:*
+    Events:
+      OnCatalogUpload:
+        Type: S3
+        Properties:
+          Bucket:
+            Ref: CatalogBucket
+          Events: s3:ObjectCreated:*
 
   ViralPredictionsFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      CodeUri: lambda/viralPredictionsFunction/
+      CodeUri: ../lambda/viralPredictionsFunction/
       Environment:
         Variables:
           VIRAL_TABLE_NAME: prod-ViralPrediction-decodedmusic-backend
-          AWS_REGION: eu-central-1
       Policies:
         - AWSLambdaBasicExecutionRole
         - DynamoDBReadPolicy:
@@ -47,18 +62,18 @@ Resources:
         GetViralPredictionsApi:
           Type: Api
           Properties:
+            RestApiId:
+              Ref: DecodedMusicApi
             Path: /viral-predictions
             Method: get
-            Cors: true
 
   EnhancedSpotifyDashboardFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: enhanced-spotify-dashboard.handler
-      CodeUri: lambda/
+      CodeUri: ../lambda/
       Environment:
         Variables:
-          AWS_REGION: eu-central-1
       Policies:
         - AWSLambdaBasicExecutionRole
         - DynamoDBReadPolicy:
@@ -67,12 +82,13 @@ Resources:
         GetSpotifyDataApi:
           Type: Api
           Properties:
+            RestApiId:
+              Ref: DecodedMusicApi
             Path: /spotify-data
             Method: get
-            Cors: true
 
 Outputs:
   ApiUrl:
     Description: 'Base URL for API endpoints'
     Value:
-      Fn::Sub: 'https://${ServerlessRestApi}.execute-api.eu-central-1.amazonaws.com/Prod'
+      Fn::Sub: 'https://${DecodedMusicApi}.execute-api.eu-central-1.amazonaws.com/Prod'
