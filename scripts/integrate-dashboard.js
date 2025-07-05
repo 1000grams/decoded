@@ -1,5 +1,6 @@
-﻿onst fs = require('fs');
-const path = require('path');
+﻿- onst fs = require('fs');
++ const fs   = require('fs');
++ const path = require('path');
 
 function integrateDashboard() {
   console.log('🔧 Integrating Dashboard with React Build...');

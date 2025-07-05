@@ -1,9 +1,14 @@
-﻿mport React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+﻿import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import CognitoLogin from './components/CognitoLogin';
+import MarketingPanel from './components/MarketingPanel';
+import CatalogPanel from './components/CatalogPanel';
+import AnalyticsPanel from './components/AnalyticsPanel';
 import cognitoAuthService from './services/CognitoAuthService';
+
 import './App.css';
 
 function App() {
@@ -34,7 +39,7 @@ function App() {
         setIsAuthenticated(true);
         setUser(authenticatedUser);
         setUsername(userEmail);
-        console.log(' Authentication successful for:', userEmail);
+        console.log('Authentication successful for:', userEmail);
     };
 
     const handleSignOut = async () => {
@@ -56,13 +61,24 @@ function App() {
     return (
         <Router>
             <div className="App">
+                {/* top‐level nav */}
+                <nav className="main-nav">
+                    <Link to="/"><button>Home</button></Link>
+                    {isAuthenticated && (
+                        <>
+                            <Link to="/dashboard"><button>Dashboard</button></Link>
+                            <Link to="/marketing"><button>Marketing</button></Link>
+                            <Link to="/catalog"><button>Catalog</button></Link>
+                            <Link to="/analytics"><button>Analytics</button></Link>
+                            <button onClick={handleSignOut}>Sign Out</button>
+                        </>
+                    )}
+                </nav>
+
                 <Routes>
                     {/* Public landing page route */}
-                    <Route 
-                        path="/" 
-                        element={<LandingPage />} 
-                    />
-                    
+                    <Route path="/" element={<LandingPage />} />
+
                     {/* Login route */}
                     <Route 
                         path="/login" 
@@ -72,7 +88,7 @@ function App() {
                             <CognitoLogin onAuthSuccess={handleAuthSuccess} />
                         } 
                     />
-                    
+
                     {/* Protected dashboard route */}
                     <Route 
                         path="/dashboard" 
@@ -82,7 +98,37 @@ function App() {
                             <Navigate to="/login" replace />
                         } 
                     />
-                    
+
+                    {/* Protected marketing panel */}
+                    <Route 
+                        path="/marketing" 
+                        element={
+                            isAuthenticated ? 
+                            <MarketingPanel user={user} /> : 
+                            <Navigate to="/login" replace />
+                        } 
+                    />
+
+                    {/* Protected catalog panel */}
+                    <Route 
+                        path="/catalog" 
+                        element={
+                            isAuthenticated ? 
+                            <CatalogPanel user={user} /> : 
+                            <Navigate to="/login" replace />
+                        } 
+                    />
+
+                    {/* Protected analytics panel */}
+                    <Route 
+                        path="/analytics" 
+                        element={
+                            isAuthenticated ? 
+                            <AnalyticsPanel user={user} /> : 
+                            <Navigate to="/login" replace />
+                        } 
+                    />
+
                     {/* Redirect unknown routes to home */}
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>

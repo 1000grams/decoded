@@ -42,3 +42,12 @@
   width: auto;
   display: inline-block;
 }
+
+/* nav bar */
+.main-nav {
+  display: flex;
+  gap: 1rem;
+  background: #222;
+  padding: 0.5rem;
+  align-items: center;
+}
