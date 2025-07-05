@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'SAM template for viral-predictions API'
+Resources:
+  ViralFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs18.x
+      CodeUri: backend/lambda/viralPredictionsFunction/
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+          VIRAL_TABLE_NAME: prod-ViralPrediction-decodedmusic-backend
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - DynamoDBReadPolicy:
+            TableName: prod-ViralPrediction-decodedmusic-backend
+      Events:
+        GetViralPredictions:
+          Type: Api
+          Properties:
+            Path: /viral-predictions
+            Method: get
+            Cors: true
+            Auth:
+              Authorizer: AWS_IAM
+Outputs:
+  ViralApiUrl:
+    Description: 'URL for viral-predictions endpoint'
+    Value:
+      Fn::Sub: 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/viral-predictions'
