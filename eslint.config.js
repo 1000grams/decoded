@@ -2,25 +2,27 @@
 import js from '@eslint/js';
 import react from 'eslint-plugin-react';
 import babelParser from '@babel/eslint-parser';
+import globals from 'globals';
 
 export default [
-  // In the new flat config, each object is one config "layer"
+  js.configs.recommended,
   {
     files: ['**/*.js', '**/*.jsx'],
     languageOptions: {
       parser: babelParser,
       parserOptions: {
         requireConfigFile: false,
+        sourceType: 'module',
+        ecmaVersion: 2022,
         babelOptions: {
           presets: ['@babel/preset-react']
         }
+      },
+      globals: {
+        ...globals.es2021,
+        ...globals.browser,
+        ...globals.node
       }
-    },
-    env: {
-      // Enable browser + Node globals
-      browser: true,
-      node: true,
-      es2022: true
     },
     plugins: {
       react
@@ -28,7 +30,17 @@ export default [
     rules: {
       // Optional overrides
       'react/jsx-uses-react': 'off',
-      'react/react-in-jsx-scope': 'off'
+      'react/react-in-jsx-scope': 'off',
+      'no-unused-vars': 'off'
+    }
+  }
+  ,
+  {
+    files: ['**/*.test.js', '**/*.test.jsx'],
+    languageOptions: {
+      globals: {
+        ...globals.jest
+      }
     }
   }
 ];

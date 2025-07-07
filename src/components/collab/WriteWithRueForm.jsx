@@ -3,7 +3,6 @@ import React, { useState } from "react";
 const API_BASE = process.env.REACT_APP_API_BASE || "/api";
 
 export default function WriteWithRueForm() {
-  const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
     productionType: "",
     projectTitle: "",
@@ -17,15 +16,12 @@ export default function WriteWithRueForm() {
   const [status, setStatus] = useState("");
 
   function handleChange(e) {
-  const [showForm, setShowForm] = useState(false);
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
   async function handleSubmit(e) {
-  const [showForm, setShowForm] = useState(false);
     e.preventDefault();
     setStatus("Submitting...");
-    // Replace with your actual API endpoint
     const response = await fetch(`${API_BASE}/write-with-rue`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -40,16 +36,16 @@ export default function WriteWithRueForm() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-6 border rounded bg-white shadow">
-      <h2 className="text-2xl font-bold mb-4">Write with Rue de Vivre.</h2>
-      <p className="mb-4">Producers, topliners, and lyricists—pitch ideas, co-write, and get credited on future releases.<br />
-      <span className="font-semibold">Sign Up to Collaborate</button>
-      <button onClick={() => setShowForm(!showForm)} style={{display: "none"}}></button></button>
-      <button onClick={() => setShowForm(!showForm)} style={{display: "none"}}></button> →</span> Please fill out the form and include your project details. We’ll review and get back within 24 hours.</p>
-{showForm && <WriteWithRueForm />}
+      <h2 className="text-2xl font-bold mb-4">Write with Rue de Vivre</h2>
+      <p className="mb-4">
+        Producers, topliners, and lyricists—pitch ideas, co-write, and get credited on future releases.{' '}
+        <span className="font-semibold">Sign Up to Collaborate</span> → Please fill out the form and include your
+        project details. We'll review and get back within 24 hours.
+      </p>
       <div className="mb-3">
         <label className="block font-semibold mb-1">Production Type</label>
         <div className="flex gap-4">
-          {["Film", "TV Series", "Video Game", "Ad"].map(type => (
+          {['Film', 'TV Series', 'Video Game', 'Ad'].map(type => (
             <label key={type}>
               <input
                 type="radio"
@@ -120,7 +116,9 @@ export default function WriteWithRueForm() {
         className="block mb-3 p-2 border rounded w-full"
         required
       />
-      <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Submit</button>
+      <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">
+        Submit
+      </button>
       {status && <div className="mt-3">{status}</div>}
     </form>
   );
