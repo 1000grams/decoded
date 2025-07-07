@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+﻿AWSTemplateFormatVersion: '2010-09-09'
 Description: 'decodedmusic Lambda Functions - S3 Deployment'
 
 Parameters:
@@ -33,9 +33,9 @@ Resources:
       Role: !GetAtt AuthLambdaRole.Arn
       Code:
         ZipFile: |
-          exports.handler = async (event) => {
-              console.log('Auth Login - decodedmusic Platform');
-              
+
+
+
               if (event.httpMethod === 'OPTIONS') {
                   return {
                       statusCode: 200,
@@ -47,15 +47,15 @@ Resources:
                       body: ''
                   };
               }
-              
+
               try {
                   const body = event.body ? JSON.parse(event.body) : {};
                   const { email, password } = body;
-                  
+    
                   if (!email || !password) {
                       throw new Error('Email and password required');
                   }
-                  
+    
                   return {
                       statusCode: 200,
                       headers: {
@@ -92,9 +92,9 @@ Resources:
       Role: !GetAtt AuthLambdaRole.Arn
       Code:
         ZipFile: |
-          exports.handler = async (event) => {
-              console.log('Auth Signup - decodedmusic Platform');
-              
+
+
+
               if (event.httpMethod === 'OPTIONS') {
                   return {
                       statusCode: 200,
@@ -106,15 +106,15 @@ Resources:
                       body: ''
                   };
               }
-              
+
               try {
                   const body = event.body ? JSON.parse(event.body) : {};
                   const { name, email, password } = body;
-                  
+    
                   if (!name || !email || !password) {
                       throw new Error('Name, email and password required');
                   }
-                  
+    
                   return {
                       statusCode: 200,
                       headers: {
@@ -151,9 +151,9 @@ Resources:
       Role: !GetAtt AuthLambdaRole.Arn
       Code:
         ZipFile: |
-          exports.handler = async (event) => {
-              console.log('Subscription Create - decodedmusic Platform');
-              
+
+
+
               if (event.httpMethod === 'OPTIONS') {
                   return {
                       statusCode: 200,
@@ -165,23 +165,23 @@ Resources:
                       body: ''
                   };
               }
-              
+
               try {
                   const body = event.body ? JSON.parse(event.body) : {};
                   const { userId, planType } = body;
-                  
+    
                   if (!userId || !planType) {
                       throw new Error('userId and planType required');
                   }
-                  
+    
                   const plans = {
                       'artist-starter': { name: 'Artist Starter', price: 19 },
                       'pro-creator': { name: 'Pro Creator', price: 89 },
                       'industry-pro': { name: 'Industry Pro', price: 249 }
                   };
-                  
+    
                   const plan = plans[planType] || plans['artist-starter'];
-                  
+    
                   return {
                       statusCode: 200,
                       headers: {
@@ -234,3 +234,6 @@ Outputs:
     Value: !GetAtt AuthLambdaRole.Arn
     Export:
       Name: !Sub "${Environment}-AuthLambdaRoleArn"
+
+
+

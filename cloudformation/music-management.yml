@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+﻿AWSTemplateFormatVersion: '2010-09-09'
 Description: >
   Decoded Music Management stack - region EU-Central (Frankfurt)
 
@@ -157,8 +157,8 @@ Resources:
       Role: !GetAtt CatalogLambdaRole.Arn
       Code:
         ZipFile: |
-          exports.handler = async (event) => {
-            return { statusCode: 200, body: 'catalog response' };
+
+
           };
 
   ApiGateway:
@@ -197,3 +197,7 @@ Outputs:
   ApiUrl:
     Description: Base URL of API Gateway
     Value: !Sub 'https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod'
+
+
+
+

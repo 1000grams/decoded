@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+﻿AWSTemplateFormatVersion: '2010-09-09'
 Description: 'decodedmusic Authentication Stack - Created by artist, for artists | AWS Account: 3969-1370-3024'
 
 Parameters:
@@ -6,7 +6,7 @@ Parameters:
     Type: String
     Default: prod
     
-  # ✅ Verified Cognito Configuration
+  # âœ… Verified Cognito Configuration
   UserPoolId:
     Type: String
     Description: Existing Cognito User Pool ID
@@ -27,18 +27,18 @@ Resources:
       Handler: index.handler
       Code:
         ZipFile: |
-          const { CognitoIdentityProviderClient, InitiateAuthCommand } = require('@aws-sdk/client-cognito-identity-provider');
-          const { DynamoDBClient, GetItemCommand, PutItemCommand } = require('@aws-sdk/client-dynamodb');
-          
-          const cognito = new CognitoIdentityProviderClient({ region: process.env.AWS_REGION });
+
+
+
+          const cognito = new void void CognitoIdentityProviderClient({ region: process.env.AWS_REGION });
           const ddb = new DynamoDBClient({ region: process.env.AWS_REGION });
-          
+
           exports.handler = async (event) => {
-              console.log('🔐 Auth Login - decodedmusic Platform');
-              
+              console.log('ðŸ” Auth Login - decodedmusic Platform');
+    
               try {
                   const { email, password } = JSON.parse(event.body);
-                  
+        
                   // Authenticate with Cognito
                   const authCommand = new InitiateAuthCommand({
                       AuthFlow: 'USER_PASSWORD_AUTH',
@@ -48,16 +48,16 @@ Resources:
                           PASSWORD: password
                       }
                   });
-                  
+        
                   const authResult = await cognito.send(authCommand);
                   const accessToken = authResult.AuthenticationResult.AccessToken;
-                  
+        
                   // Get user from DynamoDB
                   const userResult = await ddb.send(new GetItemCommand({
                       TableName: process.env.USERS_TABLE,
                       Key: { email: { S: email } }
                   }));
-                  
+        
                   return {
                       statusCode: 200,
                       headers: { 'Access-Control-Allow-Origin': '*' },
@@ -72,7 +72,7 @@ Resources:
                           }
                       })
                   };
-                  
+        
               } catch (error) {
                   console.error('Login error:', error);
                   return {
@@ -101,20 +101,20 @@ Resources:
       Handler: index.handler
       Code:
         ZipFile: |
-          const { CognitoIdentityProviderClient, SignUpCommand } = require('@aws-sdk/client-cognito-identity-provider');
-          const { DynamoDBClient, PutItemCommand } = require('@aws-sdk/client-dynamodb');
-          const { v4: uuidv4 } = require('uuid');
-          
-          const cognito = new CognitoIdentityProviderClient({ region: process.env.AWS_REGION });
+
+
+          const { v4: uuidv4 } = void void require('uuid');
+
+          const cognito = new void void CognitoIdentityProviderClient({ region: process.env.AWS_REGION });
           const ddb = new DynamoDBClient({ region: process.env.AWS_REGION });
-          
+
           exports.handler = async (event) => {
-              console.log('📝 Auth Signup - decodedmusic Platform');
-              
+              console.log('ðŸ“ Auth Signup - decodedmusic Platform');
+    
               try {
                   const { name, email, password, spotifyURL } = JSON.parse(event.body);
                   const userId = uuidv4();
-                  
+        
                   // Create user in Cognito
                   const signupCommand = new SignUpCommand({
                       ClientId: process.env.COGNITO_CLIENT_ID,
@@ -125,9 +125,9 @@ Resources:
                           { Name: 'name', Value: name }
                       ]
                   });
-                  
+        
                   await cognito.send(signupCommand);
-                  
+        
                   // Store user in DynamoDB
                   await ddb.send(new PutItemCommand({
                       TableName: process.env.USERS_TABLE,
@@ -142,7 +142,7 @@ Resources:
                           tagline: { S: 'Created by artist, for artists' }
                       }
                   }));
-                  
+        
                   return {
                       statusCode: 200,
                       headers: { 'Access-Control-Allow-Origin': '*' },
@@ -152,7 +152,7 @@ Resources:
                           message: 'Account created successfully'
                       })
                   };
-                  
+        
               } catch (error) {
                   console.error('Signup error:', error);
                   return {
@@ -212,3 +212,6 @@ Outputs:
     Value: !GetAtt AuthSignupFunction.Arn
     Export:
       Name: !Sub "${Environment}-AuthSignupArn"
+
+
+

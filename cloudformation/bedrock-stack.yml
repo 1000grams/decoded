@@ -17,8 +17,8 @@ Resources:
       Handler: index.handler
       Code:
         ZipFile: |
-          exports.handler = async (event) => {
-            return {
+
+
               statusCode: 200,
               body: JSON.stringify({ message: 'Bedrock Lambda placeholder' })
             };
@@ -130,3 +130,7 @@ Outputs:
     Value: !GetAtt BedrockInsightsLambda.Arn
     Export:
       Name: !Sub '${EnvName}-bedrock-lambda-arn'
+
+
+
+

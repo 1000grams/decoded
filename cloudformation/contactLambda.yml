@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+﻿AWSTemplateFormatVersion: '2010-09-09'
 Resources:
   ContactFunction:
     Type: AWS::Lambda::Function
@@ -8,8 +8,8 @@ Resources:
       Role: !GetAtt ContactFunctionRole.Arn
       Code:
         ZipFile: |
-          const AWS = require('aws-sdk');
-          const ses = new AWS.SES({ region: 'eu-central-1' });
+
+
           exports.handler = async (event) => {
             const body = JSON.parse(event.body || '{}');
             const { name, email, message } = body;
@@ -42,3 +42,7 @@ Resources:
               - Effect: Allow
                 Action: ses:SendEmail
                 Resource: '*'
+
+
+
+

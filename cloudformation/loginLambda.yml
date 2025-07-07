@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+﻿AWSTemplateFormatVersion: '2010-09-09'
 Resources:
   LoginFunction:
     Type: AWS::Lambda::Function
@@ -8,8 +8,8 @@ Resources:
       Role: !GetAtt LoginFunctionRole.Arn
       Code:
         ZipFile: |
-          exports.handler = async (event) => {
-            const body = JSON.parse(event.body || '{}');
+
+
             const { email, password } = body;
             if (!email || !password) {
               return { statusCode: 400, body: 'Missing credentials' };
@@ -26,3 +26,7 @@ Resources:
             Principal:
               Service: lambda.amazonaws.com
             Action: sts:AssumeRole
+
+
+
+
