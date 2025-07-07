@@ -11,20 +11,21 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "integrate-dashboard": "node scripts/integrate-dashboard.js",
-    "test-backend": "node scripts/test-backend-connection.js",
-    "fix-powershell": "powershell -ExecutionPolicy Bypass -File ../FIXED-FRONTEND-GENERATOR.ps1",
     "build-with-dashboard": "npm run integrate-dashboard && npm run build",
     "deploy": "npm run build-with-dashboard && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1",
-    "integrate": "node scripts/complete-integration.js",
+    "deploy-complete": "npm run fix-dashboard && npm run build && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1",
+    "eject": "react-scripts eject",
     "fix-dashboard": "powershell -ExecutionPolicy Bypass -File ../FIXED-DASHBOARD-GENERATOR.ps1 && npm run integrate",
-    "test-apis": "echo 'Open http://localhost:3000/api-test.html after running npm start'",
+    "fix-powershell": "powershell -ExecutionPolicy Bypass -File ../FIXED-FRONTEND-GENERATOR.ps1",
     "health-check": "echo 'Check http://localhost:3000/health.json after running npm start'",
-    "deploy-complete": "npm run fix-dashboard && npm run build && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1"
+    "integrate": "node scripts/complete-integration.js",
+    "integrate-dashboard": "node scripts/integrate-dashboard.js",
+    "lint": "eslint . --fix",
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "test-apis": "echo 'Open http://localhost:3000/api-test.html after running npm start'",
+    "test-backend": "node scripts/test-backend-connection.js"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +47,9 @@
     ]
   },
   "devDependencies": {
-    "package-name": "^0.1.0"
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "@eslint/js": "^9.30.1"
   }
 }
