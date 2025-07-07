@@ -1,4 +1,4 @@
-﻿/ utils/getCognitoToken.js
+// utils/getCognitoToken.js
 export function getCognitoTokenFromUrl() {
   const hash = window.location.hash;
   const token = new URLSearchParams(hash.substring(1)).get("id_token");

@@ -27,7 +27,10 @@
     "deploy-complete": "npm run fix-dashboard && npm run build && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "homepage": ".",
   "browserslist": {
@@ -41,5 +44,8 @@
       "not dead",
       "not op_mini all"
     ]
+  },
+  "devDependencies": {
+    "package-name": "^0.1.0"
   }
 }

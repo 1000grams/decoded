@@ -1,4 +1,4 @@
-﻿/ COMPLETELY FIXED AnalyticsService.js with CORS and missing methods
+// COMPLETELY FIXED AnalyticsService.js with CORS and missing methods
 class AnalyticsService {
     constructor() {
         this.baseURL = process.env.REACT_APP_API_URL || 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
@@ -320,4 +320,5 @@ class AnalyticsService {
     }
 }
 
-export default new AnalyticsService();
+const analyticsServiceInstance = new AnalyticsService();
+export default analyticsServiceInstance;

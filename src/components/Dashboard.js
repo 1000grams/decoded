@@ -1,15 +1,17 @@
-﻿mport React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamoDBService from '../services/DynamoDBService';
 import './Dashboard.css';
+import SpotifyModule from './SpotifyModule';
 
 const Dashboard = ({ user, username, onSignOut }) => {
     const [dashboardData, setDashboardData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [spotifyConnected, setSpotifyConnected] = useState(false);
-    const [error, setError] = useState(null);
+    const [, setError] = useState(null); // Removed unused 'error' variable
 
     useEffect(() => {
         loadDashboardData();
+        // eslint-disable-next-line
     }, []);
 
     const loadDashboardData = async () => {
@@ -258,6 +260,9 @@ const Dashboard = ({ user, username, onSignOut }) => {
                     </div>
                 </section>
             </main>
+
+            {/* Add this where you want the module to appear */}
+            {spotifyConnected && <SpotifyModule />}
         </div>
     );
 };

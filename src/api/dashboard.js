@@ -1,4 +1,4 @@
-﻿onst API_BASE = '';
+const API_BASE = '';
 
 function getToken() {
   return localStorage.getItem('cognito_id_token') || localStorage.getItem('spotify_token');

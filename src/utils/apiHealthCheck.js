@@ -1,4 +1,4 @@
-﻿xport async function verifyBackendConnection(apiUrl) {
+export async function verifyBackendConnection(apiUrl) {
   try {
     const response = await fetch(`${apiUrl}/health`, { method: "GET" });
     if (!response.ok) {

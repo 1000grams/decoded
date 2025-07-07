@@ -1,4 +1,4 @@
-﻿mport { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export const useAuth = () => {
   const [user, setUser] = useState(null);
@@ -22,17 +22,17 @@ export const useAuth = () => {
     try {
       setLoading(true);
       setError(null);
-      
+
       // Mock successful login for demo
       const mockUser = {
         email: email,
         name: email.split('@')[0],
         id: 'mock-user-' + Date.now()
       };
-      
+
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       localStorage.setItem('decodedmusic_user', JSON.stringify(mockUser));
       setUser(mockUser);
       return mockUser;

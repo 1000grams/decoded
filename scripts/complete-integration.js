@@ -1,9 +1,9 @@
-﻿onst fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 
 console.log(' COMPLETE FRONTEND INTEGRATION & REPAIR');
 console.log(' Fixing all CORS, service, and manifest issues...');
-console.log('=' * 60);
+console.log('============================================================');
 
 function copyGeneratedFiles() {
     // Copy dashboard files from parent directory to public folder

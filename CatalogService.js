@@ -1,9 +1,13 @@
-﻿lass CatalogService {
+class CatalogService {
+  // If you have live DynamoDB tables, replace these mock methods with real API/database calls.
+  // Remove the dummy/mock data and implement actual fetch logic as needed.
+
   async getCatalog(artistId = 'ruedevivre') {
+    // Example: Replace this block with a real fetch from your backend or DynamoDB
+    // return fetch(`/api/catalog?artistId=${artistId}`).then(res => res.json());
     try {
-      // Mock catalog data for demo
+      // Mock catalog data for demo (REMOVE if using live data)
       await new Promise(resolve => setTimeout(resolve, 500));
-      
       return [
         {
           title: 'Summer Nights',
@@ -55,10 +59,10 @@
   }
 
   async getSpotifyData(artistId = 'ruedevivre') {
+    // Replace with real Spotify API call if available
     try {
-      // Mock Spotify data for demo
+      // Mock Spotify data for demo (REMOVE if using live data)
       await new Promise(resolve => setTimeout(resolve, 300));
-      
       return {
         followers: 1250,
         monthlyListeners: 8430,
@@ -73,10 +77,10 @@
   }
 
   async getAccountingData(artistId = 'RueDeVivre') {
+    // Replace with real accounting data fetch if available
     try {
-      // Mock accounting data for demo
+      // Mock accounting data for demo (REMOVE if using live data)
       await new Promise(resolve => setTimeout(resolve, 400));
-      
       return {
         totalRevenue: 2847.50,
         monthlyRevenue: 485.20,
@@ -96,4 +100,6 @@
   }
 }
 
-export default new CatalogService();
+// Fix ESLint warning: assign instance to a variable before export default
+const catalogService = new CatalogService();
+export default catalogService;

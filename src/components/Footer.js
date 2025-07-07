@@ -1,4 +1,4 @@
-﻿mport React from "react";
+import React from "react";
 
 export default function Footer() {
   return (
@@ -13,7 +13,8 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             DecodedMusic.com
-          </a>{" "}| Service Provided by AHA LLC
+          </a>{" "}
+          | Service Provided by AHA LLC
           <br />
           Contact:&nbsp;
           <a href="mailto:ops@decodedmusic.com" className="underline">

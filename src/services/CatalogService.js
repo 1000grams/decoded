@@ -1,4 +1,4 @@
-﻿/ COMPLETELY FIXED CatalogService.js - All methods included
+// COMPLETELY FIXED CatalogService.js - All methods included
 class CatalogService {
     constructor() {
         this.baseURL = process.env.REACT_APP_API_URL || 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
@@ -251,4 +251,5 @@ class CatalogService {
     }
 }
 
-export default new CatalogService();
+const catalogServiceInstance = new CatalogService();
+export default catalogServiceInstance;

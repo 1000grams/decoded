@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+import React from 'react';
 import styles from '../styles/Section2ProblemSolution.module.css';
 import Icon from '../components/Icon.js'; // Updated import for Icon
 import content from '../content/landingPage.json'; // Import content

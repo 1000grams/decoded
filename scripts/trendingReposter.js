@@ -1,4 +1,4 @@
-﻿/ Trending Topic Reposter
+// Trending Topic Reposter
 // Gathers trending topics and reposts content with hashtags.
 
 const fetch = require('node-fetch');

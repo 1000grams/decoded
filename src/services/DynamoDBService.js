@@ -67,4 +67,5 @@ class DynamoDBService {
     }
 }
 
-export default new (class DynamoDBService {})();
+const dynamoDBServiceInstance = new DynamoDBService();
+export default dynamoDBServiceInstance;

@@ -1,4 +1,4 @@
-﻿mport React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import cognitoAuthService from '../services/CognitoAuthService';
 
 const CognitoLogin = ({ onAuthSuccess }) => {
@@ -7,6 +7,7 @@ const CognitoLogin = ({ onAuthSuccess }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         checkCurrentUser();
     }, []);
