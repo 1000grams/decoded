@@ -9,7 +9,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="landing-page">
+    <div className="landing-page" style={{ backgroundColor: '#191970', color: '#ffffff' }}>
       <header className="navbar">
         <div className="nav-container">
           <div className="logo">
@@ -17,50 +17,75 @@ const LandingPage = () => {
             <span className="logo-text">decoded music</span>
           </div>
           <nav className="nav-links">
-            <a href="#features">Why Artists Choose Us</a>
-            <a href="#pricing">Join the Movement</a>
+            <a href="#features" style={{ color: '#ffffff' }}>Why Artists Choose Us</a>
+            <a href="#pricing" style={{ color: '#ffffff' }}>Join the Movement</a>
             <Link to="/login" className="artist-login-btn">Artist Dashboard</Link>
           </nav>
         </div>
       </header>
 
-      <section className="hero">
-        <div className="hero-content">
-          <div className="hero-text">
-            <h1 className="hero-title">
-              <span className="brand-name">decoded music</span>
-              <span className="tagline">created by artists, for artists</span>
-            </h1>
+      {/* Hero Section */}
+      {/* Hero Section */}
+      <section className="hero" style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+        {/* Background Video */}
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          className="hero-video"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: -1,
+          }}
+        >
+          <source src="/p1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
-            <p className="hero-description">
-              <strong>We're artists who got tired of the system.</strong> No more begging playlist curators. 
-              No more gambling on algorithms. No more industry gatekeepers deciding your worth.
-              <br /><br />
-              This is <strong>your platform</strong>. Built by independent artists who understand the hustle, 
-              the late nights, and the dream. Get AI insights that actually help you eat, not just stream.
-            </p>
+        {/* Hero Content */}
+        <div className="hero-content" style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '20px' }}>
+          <h1 className="hero-title" style={{ fontSize: '3rem', fontWeight: 'bold' }}>
+            <span className="brand-name">decoded music</span>
+            <br />
+            <span className="tagline">empowering artists to own their journey</span>
+          </h1>
 
-            <div className="hero-cta">
-              <Link to="/login" className="cta-primary">
-                Access Your Artist Dashboard
-              </Link>
-              <a href="#features" className="cta-secondary">
-                See What Artists Are Saying
-              </a>
-            </div>
-          </div>
+          <p className="hero-description" style={{ fontSize: '1.2rem', marginTop: '20px' }}>
+            <strong>We’re artists who broke free from the system.</strong> No more begging playlist curators. 
+            No more gambling on algorithms. No more gatekeepers deciding your worth.
+            <br /><br />
+            This is <strong>your platform</strong>. Built by independent artists who understand the grind, 
+            the late nights, and the dream. Get insights that help you thrive, not just survive.
+          </p>
 
-          <div className="hero-video">
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
-              className="hero-video-player"
-            >
-              <source src="/p1.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+          <div className="hero-cta" style={{ marginTop: '30px' }}>
+            <Link to="/login" className="cta-primary" style={{
+              backgroundColor: '#ff4500',
+              color: '#ffffff',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              marginRight: '10px',
+            }}>
+              Access Your Artist Dashboard
+            </Link>
+            <a href="#features" className="cta-secondary" style={{
+              backgroundColor: '#ffffff',
+              color: '#191970',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+            }}>
+              See What Artists Are Saying
+            </a>
           </div>
         </div>
       </section>
@@ -69,15 +94,15 @@ const LandingPage = () => {
         <div className="container">
           <h2 className="section-title">Why Independent Artists Trust Us</h2>
           <p className="section-subtitle">
-            We've been where you are. We know what it's like to create amazing music 
-            and watch it get buried. That's why we built this.
+            We’ve been where you are. We know what it’s like to create amazing music 
+            and watch it get buried. That’s why we built this.
           </p>
 
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon" />
               <h3>Real Artist Insights</h3>
-              <p>Our AI was trained by independent artists. Get insights that actually help you grow your fanbase and income.</p>
+              <p>Get insights that actually help you grow your fanbase and income.</p>
             </div>
 
             <div className="feature-card">
@@ -95,7 +120,7 @@ const LandingPage = () => {
             <div className="feature-card">
               <div className="feature-icon" />
               <h3>Artist-First Philosophy</h3>
-              <p>Keep your rights. Keep your dignity. We're here to amplify your voice, not change it.</p>
+              <p>Keep your rights. Keep your dignity. We’re here to amplify your voice, not change it.</p>
             </div>
           </div>
         </div>
@@ -106,7 +131,7 @@ const LandingPage = () => {
           <h2 className="section-title">Join the Independent Artist Revolution</h2>
           <p className="section-subtitle">
             Connect with fellow artists who are taking control of their careers.
-            Follow our journey and be part of the movement that's changing the game.
+            Follow our journey and be part of the movement that’s changing the game.
           </p>
 
           <div className="pricing-cta">
@@ -147,8 +172,8 @@ const LandingPage = () => {
           </div>
 
           <div className="footer-bottom">
-            <p>© 2024 Decoded Music. Built with love by Avril Hue and independent artists worldwide.</p>
-            <p className="footer-motto">By artists, for artists, always.</p>
+            <p>© 2025 Decoded Music. Empowering independent artists worldwide.</p>
+            <p className="footer-motto">By artist, for artists.</p>
           </div>
         </div>
       </footer>
