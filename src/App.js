@@ -8,6 +8,11 @@ import MarketingPanel from './components/MarketingPanel';
 import CatalogPanel from './components/CatalogPanel';
 import AnalyticsPanel from './components/AnalyticsPanel';
 import cognitoAuthService from './services/CognitoAuthService';
+import MarketingHub from './pages/MarketingHub';
+import Spotifymodule from './components/spotifymodule';
+import BuzzPage from './pages/BuzzPage';
+import ContactForm from './components/ContactForm'; // Adjust the path if necessary
+import About from './pages/About'; // Adjust the path if necessary
 
 import './App.css';
 
@@ -70,6 +75,8 @@ function App() {
                             <Link to="/marketing"><button>Marketing</button></Link>
                             <Link to="/catalog"><button>Catalog</button></Link>
                             <Link to="/analytics"><button>Analytics</button></Link>
+                            <Link to="/spotify"><button>Spotify</button></Link>
+                            <Link to="/buzz"><button>Buzz</button></Link> {/* Added Buzz link */}
                             <button onClick={handleSignOut}>Sign Out</button>
                         </>
                     )}
@@ -127,6 +134,44 @@ function App() {
                             <AnalyticsPanel user={user} /> : 
                             <Navigate to="/login" replace />
                         } 
+                    />
+
+                    {/* Protected marketing hub */}
+                    <Route 
+                        path="/marketing-hub" 
+                        element={
+                            isAuthenticated ? 
+                            <MarketingHub user={user} /> : 
+                            <Navigate to="/login" replace />
+                        } 
+                    />
+
+                    {/* Protected Spotify route */}
+                    <Route 
+                        path="/spotify" 
+                        element={
+                            isAuthenticated ? 
+                            <Spotifymodule user={user} /> : 
+                            <Navigate to="/login" replace />
+                        } 
+                    />
+
+                    {/* Public Buzz page */}
+                    <Route 
+                        path="/buzz" 
+                        element={<BuzzPage />} 
+                    />
+
+                    {/* Contact form route */}
+                    <Route 
+                        path="/contact" 
+                        element={<ContactForm />} 
+                    />
+
+                    {/* About page route */}
+                    <Route 
+                        path="/about" 
+                        element={<About />} 
                     />
 
                     {/* Redirect unknown routes to home */}

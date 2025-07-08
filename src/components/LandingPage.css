@@ -63,7 +63,7 @@ body {
 
 .artist-login-btn {
   padding: 0.5rem 1rem;
-  background-color: var(--accent-color);
+  background-color: var(--accent-orange);
   color: #fff;
   border-radius: 5px;
   margin-left: 2rem;
@@ -152,12 +152,132 @@ body {
   color: var(--primary-bg);
 }
 
+/* Added Missing CTA Button Classes */
+.cta-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.cta-btn:hover {
+  transform: scale(1.05);
+}
+
+.get-started-btn,
+.hoodie-peeps-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.get-started-btn:hover,
+.hoodie-peeps-btn:hover {
+  opacity: 0.9;
+}
+
 /* Features Section */
 .features {
   padding: 4rem 2rem;
   background-color: var(--primary-bg);
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature-card {
+  flex: 1 1 calc(33.333% - 2rem);
+  min-width: 280px;
+  background-color: #000000; /* Black background */
+  border: 1px solid #ffffff; /* White border */
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: center;
+  color: #ffffff; /* White font */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card h3 {
+  color: #ffffff; /* White font for headings */
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #e0e0e0; /* Light gray for descriptions */
+}
+
+/* Optional responsive tweak */
+@media (max-width: 768px) {
+  .feature-card {
+    flex: 1 1 100%;
+  }
+}
+
+/* === Hero Section CTA Alignment === */
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* === Pill Card with Background Frame Overlays === */
+.pill-card {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2rem;
+  padding: 2rem;
+  color: #fff;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pill-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.pill-card h3 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.pill-card p {
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
+/* === Section Title Styling === */
 .section-title {
   font-size: 2rem;
   font-weight: 700;
@@ -171,21 +291,6 @@ body {
   color: var(--text-muted);
   text-align: center;
   margin-bottom: 2rem;
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.feature-card {
-  background: var(--accent-cyan);
-  border: 1px solid var(--text-muted);
-  border-radius: 10px;
-  padding: 2rem;
-  text-align: center;
-  color: var(--primary-bg);
 }
 
 /* Footer */

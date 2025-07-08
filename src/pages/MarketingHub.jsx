@@ -1,4 +1,4 @@
-﻿mport React from 'react';
+﻿import React from 'react';
 import SuggestionTile from '../components/SuggestionTile.jsx';
 import { FaChartPie, FaBullhorn, FaCalendarAlt, FaFire } from 'react-icons/fa';
 
@@ -13,6 +13,7 @@ function MarketingHub() {
         padding: '0',
       }}
     >
+      {/* Header Section */}
       <section
         style={{
           padding: '4rem 0 2rem 0',
@@ -45,6 +46,8 @@ function MarketingHub() {
           All your campaign data, tools, and insights—decoded for growth.
         </p>
       </section>
+
+      {/* Feature Cards Section */}
       <section
         style={{
           display: 'flex',
@@ -131,17 +134,19 @@ function MarketingHub() {
           <p style={{ color: '#222', fontSize: '1rem' }}>Ride the wave—automatically boost what’s hot.</p>
         </div>
       </section>
+
+      {/* Suggestion Tiles Section */}
       <div style={{ display: 'flex', gap: '1.2rem', margin: '2.5rem 0 0 0', flexWrap: 'wrap', justifyContent: 'center' }}>
-        <SuggestionTile icon={<FaChartPie />}>
+        <SuggestionTile key="analytics" icon={<FaChartPie />}>
           Unified campaign analytics
         </SuggestionTile>
-        <SuggestionTile icon={<FaBullhorn />}>
+        <SuggestionTile key="marketing" icon={<FaBullhorn />}>
           Multi-channel marketing
         </SuggestionTile>
-        <SuggestionTile icon={<FaCalendarAlt />}>
+        <SuggestionTile key="scheduling" icon={<FaCalendarAlt />}>
           Automated scheduling
         </SuggestionTile>
-        <SuggestionTile icon={<FaFire />}>
+        <SuggestionTile key="trends" icon={<FaFire />}>
           Real-time trend insights
         </SuggestionTile>
       </div>
