@@ -8,6 +8,7 @@ import MarketingPanel from './components/MarketingPanel';
 import CatalogPanel from './components/CatalogPanel';
 import AnalyticsPanel from './components/AnalyticsPanel';
 import cognitoAuthService from './services/CognitoAuthService';
+import SpotifyModule from './components/spotifymodule'; // Updated import to match the file name
 
 import './App.css';
 
