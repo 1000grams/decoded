@@ -1,9 +1,14 @@
-﻿import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+﻿import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import CognitoLogin from './components/CognitoLogin';
+import MarketingPanel from './components/MarketingPanel';
+import CatalogPanel from './components/CatalogPanel';
+import AnalyticsPanel from './components/AnalyticsPanel';
 import cognitoAuthService from './services/CognitoAuthService';
+
 import './App.css';
 
 function App() {
@@ -34,7 +39,7 @@ function App() {
         setIsAuthenticated(true);
         setUser(authenticatedUser);
         setUsername(userEmail);
-        console.log(' Authentication successful for:', userEmail);
+        console.log('Authentication successful for:', userEmail);
     };
 
     const handleSignOut = async () => {
@@ -46,16 +51,8 @@ function App() {
 
     if (loading) {
         return (
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '100vh',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white'
-            }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}></div>
+            <div className="loading-container">
+                <div className="loading-spinner"></div>
                 <p>Loading DecodedMusic...</p>
             </div>
         );
@@ -64,6 +61,20 @@ function App() {
     return (
         <Router>
             <div className="App">
+                {/* Top-level navigation */}
+                <nav className="main-nav">
+                    <Link to="/"><button>Home</button></Link>
+                    {isAuthenticated && (
+                        <>
+                            <Link to="/dashboard"><button>Dashboard</button></Link>
+                            <Link to="/marketing"><button>Marketing</button></Link>
+                            <Link to="/catalog"><button>Catalog</button></Link>
+                            <Link to="/analytics"><button>Analytics</button></Link>
+                            <button onClick={handleSignOut}>Sign Out</button>
+                        </>
+                    )}
+                </nav>
+
                 <Routes>
                     <Route path="/" element={<LandingPage />} />
                     <Route 
@@ -79,6 +90,30 @@ function App() {
                         element={
                             isAuthenticated ? 
                             <Dashboard user={user} username={username} onSignOut={handleSignOut} /> : 
+                            <Navigate to="/login" replace />
+                        } 
+                    />
+                    <Route 
+                        path="/marketing" 
+                        element={
+                            isAuthenticated ? 
+                            <MarketingPanel user={user} /> : 
+                            <Navigate to="/login" replace />
+                        } 
+                    />
+                    <Route 
+                        path="/catalog" 
+                        element={
+                            isAuthenticated ? 
+                            <CatalogPanel user={user} /> : 
+                            <Navigate to="/login" replace />
+                        } 
+                    />
+                    <Route 
+                        path="/analytics" 
+                        element={
+                            isAuthenticated ? 
+                            <AnalyticsPanel user={user} /> : 
                             <Navigate to="/login" replace />
                         } 
                     />
