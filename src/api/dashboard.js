@@ -1,4 +1,4 @@
-const API_BASE = '';
+const API_BASE = process.env.REACT_APP_API_URL || 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
 
 function getToken() {
   return localStorage.getItem('cognito_id_token') || localStorage.getItem('spotify_token');
