@@ -10,7 +10,7 @@ const CognitoLogin = ({ onAuthSuccess }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         checkCurrentUser();
-    }, []);
+    }, [checkCurrentUser]);
 
     const checkCurrentUser = async () => {
         try {

@@ -24,7 +24,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (token) {
       // Step 2: Use token to call secured backend (e.g. /api/dashboard)
-      fetch("https://your-api-url.amazonaws.com/prod/dashboard", {
+      fetch("https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/dashboard", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('cognito_id_token')}`,
           'Content-Type': 'application/json'

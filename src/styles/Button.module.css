@@ -4,12 +4,14 @@
   justify-content: center;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 500; /* Changed from bold to 500 */
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
   /* min-width/height handled by global styles - adjust padding for visual size */
+  color: #111 !important; /* Override text color for legibility */
+  opacity: 1 !important; /* Ensure full opacity */
 }
 
 /* Variants */

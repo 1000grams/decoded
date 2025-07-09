@@ -7,7 +7,7 @@ const fetchDashboardData = async () => {
   }
 
   try {
-    const response = await fetch("https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/api/dashboard", {
+    const response = await fetch("https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/dashboard", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,

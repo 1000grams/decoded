@@ -1,8 +1,8 @@
-﻿mport React, { useState } from "react";
+﻿import React, { useState } from "react";
 
 const API_URL =
   process.env.REACT_APP_CONTACT_API_URL ||
-  (process.env.REACT_APP_API_BASE ? `${process.env.REACT_APP_API_BASE}/contact` : "/api/contact");
+  (process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}/contact` : "/api/contact");
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");

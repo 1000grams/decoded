@@ -42,6 +42,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: #111 !important;
+  opacity: 1 !important;
+  font-weight: 500;
 }
 /* Keep distinct borders if desired, example: */
 /* .problemBlock { border: 1px solid rgba(255, 0, 0, 0.2); } */

@@ -1,23 +1,69 @@
 import React, { useEffect, useState } from 'react';
-import { DashboardAPI } from '../api/dashboard.js';
 
 function SpotifyModule() {
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchSpotify() {
+      const token = localStorage.getItem('cognito_id_token');
+      
+      if (!token) {
+        setError('No authentication token found');
+        setLoading(false);
+        return;
+      }
+
       try {
-        const res = await DashboardAPI.getSpotifyData({ artistId: 'RueDeVivre' });
-        setData(res);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/spotify`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(`Spotify fetch failed: ${text}`);
+        }
+        const spotifyData = await response.json();
+        setData(spotifyData);
       } catch (err) {
         console.error('spotify fetch error', err);
+        setError(err.message);
+        
+        // Fallback data for demo purposes
+        const fallbackData = {
+          name: 'Demo Artist',
+          followers: 1000,
+          popularity: 75,
+          top_tracks: [
+            { id: '1', name: 'Demo Track 1' },
+            { id: '2', name: 'Demo Track 2' },
+          ],
+          trending: ['Indie Pop', 'Alternative Rock'],
+        };
+        setData(fallbackData);
+      } finally {
+        setLoading(false);
       }
     }
     fetchSpotify();
   }, []);
 
-  if (!data) {
+  if (loading) {
     return <div style={{ border: '1px solid #ccc', padding: '1rem' }}>Loading Spotify data...</div>;
+  }
+
+  if (error) {
+    return (
+      <div style={{ border: '1px solid #ccc', padding: '1rem' }}>
+        <h2>Spotify Profile</h2>
+        <div style={{ color: 'red' }}>Error: {error}</div>
+      </div>
+    );
   }
 
   return (

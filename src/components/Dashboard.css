@@ -1,11 +1,11 @@
-﻿dashboard-container { min-height: 100vh; background: #f7fafc; }
+﻿dashboard-container { min-height: 100vh; background: #ffffff !important; color: #111111 !important; }
 .dashboard-header { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 1rem 0; }
 .dashboard-nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
 .user-controls { display: flex; align-items: center; gap: 1rem; }
 .spotify-connect-btn { background: #1db954; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; cursor: pointer; font-weight: 600; }
 .sign-out-btn { background: #e53e3e; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; cursor: pointer; font-weight: 600; }
 .analytics-grid { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
-.portfolio-card, .spotify-card, .trends-card, .recommendations-card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+.portfolio-card, .spotify-card, .trends-card, .recommendations-card { background: #f0f0f0 !important; color: #111111 !important; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 .portfolio-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
 .metric-card { background: #f7fafc; padding: 1.5rem; border-radius: 10px; text-align: center; }
 .metric-card h3 { font-size: 0.9rem; color: #718096; margin-bottom: 0.5rem; }
