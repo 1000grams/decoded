@@ -61,6 +61,23 @@
       };
     }
   }
+
+  async authenticateSpotify() {
+    try {
+      const response = await fetch("https://decodedmusic.com/spotify/auth");
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Spotify API error:", errorText);
+        throw new Error("Spotify API failed");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error during Spotify authentication:", error);
+      throw error;
+    }
+  }
 }
 
 const spotifyService = new SpotifyService();
