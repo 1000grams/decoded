@@ -1,4 +1,4 @@
-﻿
+﻿{
   "short_name": "Decoded Music",
   "name": "Decoded Music - By Artists, For Artists",
   "icons": [
@@ -18,7 +18,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#7877c6",
   "background_color": "#0a0a0a"
