@@ -84,19 +84,25 @@ class CognitoAuthService {
                 throw new Error('No current user found');
             }
 
-            const email = currentUser.user.username;
-            const response = await fetch(`${process.env.REACT_APP_GET_ARTIST_ID_URL}?email=${email}`, {
-                headers: {
-                    Authorization: `Bearer ${this.jwtToken}`
-                }
-            });
+            // Hardcoded artist ID for Rue de Vivre
+            const artistId = 'rue-de-vivre-id';
+            console.log('Using hardcoded artist ID:', artistId);
+            return artistId;
 
-            const data = await response.json();
+            // Uncomment below for dynamic fetching
+            // const email = currentUser.user.username;
+            // const response = await fetch(`${process.env.REACT_APP_GET_ARTIST_ID_URL}?email=${email}`, {
+            //     headers: {
+            //         Authorization: `Bearer ${this.jwtToken}`
+            //     }
+            // });
 
-            if (!data.artistId) throw new Error('Artist ID not found');
-            return data.artistId;
+            // const data = await response.json();
+
+            // if (!data.artistId) throw new Error('Artist ID not found');
+            // return data.artistId;
         } catch (error) {
-            console.error('Error fetching artist ID from API:', error);
+            console.error('Error fetching artist ID:', error);
             throw error;
         }
     }
@@ -104,4 +110,4 @@ class CognitoAuthService {
 
 const cognitoAuthService = new CognitoAuthService();
 export default cognitoAuthService;
-export { CognitoAuthService };
+export { CognitoAuthService, cognitoAuthService };

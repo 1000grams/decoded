@@ -1,9 +1,10 @@
 ﻿import React, { useEffect, useState } from 'react';
 import SuggestionTile from '../components/SuggestionTile.jsx';
 import { FaChartPie, FaBullhorn, FaCalendarAlt, FaFire } from 'react-icons/fa';
-import { getArtistIdFromCognito } from '../services/CognitoAuthService';
+import cognitoAuthService from '../services/CognitoAuthService';
 import { fetchArtistData } from '../services/ArtistService';
 import { generateContent } from '../services/BedrockService';
+import './MarketingHub.css';
 
 function MarketingHub() {
   const [artistId, setArtistId] = useState('');
@@ -14,7 +15,7 @@ function MarketingHub() {
   useEffect(() => {
     async function fetchArtistId() {
       try {
-        const id = await getArtistIdFromCognito();
+        const id = await cognitoAuthService.getArtistIdFromCognito();
         setArtistId(id);
 
         // Fetch artist data after getting the artist ID
