@@ -76,7 +76,8 @@ function App() {
                             <Link to="/catalog"><button>Catalog</button></Link>
                             <Link to="/analytics"><button>Analytics</button></Link>
                             <Link to="/spotify"><button>Spotify</button></Link>
-                            <Link to="/buzz"><button>Buzz</button></Link> {/* Added Buzz link */}
+                            <Link to="/buzz"><button>Buzz</button></Link>
+                            <Link to="/marketing-hub"><button>Marketing Hub</button></Link> {/* Added Marketing Hub link */}
                             <button onClick={handleSignOut}>Sign Out</button>
                         </>
                     )}
