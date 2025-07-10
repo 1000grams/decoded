@@ -1,32 +1,43 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
+import { useAuth } from '../context/AuthContext';
 import './LandingPage.css';
 
 const LandingPage = () => {
+  const { isAuthenticated } = useAuth();
+
   useEffect(() => {
-    getCognitoTokenFromUrl();
+    try {
+      getCognitoTokenFromUrl();
+    } catch (err) {
+      console.error('Token parsing failed:', err);
+    }
   }, []);
 
   return (
     <div className="landing-page">
       {/* Header */}
-      <header className="navbar" style={{ backgroundColor: '#000000', borderBottom: '2px solid #00FF84' }}>
+      <header className="navbar dark-bg green-border">
         <div className="nav-container">
           <div className="logo">
             <img src="/logo.svg" alt="Decoded Music Logo" className="logo-img" />
-            <span className="logo-text" style={{ color: '#FF3B3F' }}>decoded music</span>
+            <span className="logo-text red-accent">decoded music</span>
           </div>
           <nav className="nav-links">
-            <a href="#features" style={{ color: '#00FF84' }}>Why Artists Choose Us</a>
-            <a href="#pricing" style={{ color: '#00FF84' }}>Join the Movement</a>
-            <Link to="/buzz" style={{ color: '#00FF84' }}>Buzz</Link> {/* Added Buzz link */}
-            <Link to="/login" className="artist-login-btn" style={{ color: '#00FF84' }}>Artist Dashboard</Link>
+            <a href="#features" className="green-text">Why Artists Choose Us</a>
+            <a href="#pricing" className="green-text">Join the Movement</a>
+            <Link to="/buzz" className="green-text">Buzz</Link>
+            {isAuthenticated ? (
+              <Link to="/dashboard" className="artist-login-btn green-text">Go to Dashboard</Link>
+            ) : (
+              <Link to="/login" className="artist-login-btn green-text">Artist Login</Link>
+            )}
           </nav>
         </div>
       </header>
 
-      {/* Hero Section with Background Video */}
+      {/* Hero Section */}
       <section className="hero-section">
         <video autoPlay loop muted playsInline className="hero-video">
           <source src="/p1.mp4" type="video/mp4" />
@@ -52,35 +63,35 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="features" style={{ backgroundColor: '#111111', color: '#ffffff' }}>
+      <section id="features" className="features dark-bg white-text">
         <div className="container">
-          <h2 className="section-title" style={{ color: '#00FF84' }}>Why Independent Artists Trust Us</h2>
+          <h2 className="section-title green-text">Why Independent Artists Trust Us</h2>
           <p className="section-subtitle">
             We’ve been where you are. We know what it’s like to create amazing music and watch it get buried.
             That’s why we built this.
           </p>
 
           <div className="features-grid">
-            <div className="feature-card" style={{ backgroundColor: '#1A1A1A', border: '1px solid #00FF84' }}>
-              <h3 style={{ color: '#FFFFFF' }}>Real Artist Insights</h3>
+            <div className="feature-card card-dark green-border">
+              <h3 className="white-text">Real Artist Insights</h3>
               <p>Get insights that actually help you grow your fanbase and income.</p>
             </div>
-            <div className="feature-card" style={{ backgroundColor: '#1A1A1A', border: '1px solid #00FF84' }}>
-              <h3 style={{ color: '#FFFFFF' }}>Multiple Revenue Streams</h3>
+            <div className="feature-card card-dark green-border">
+              <h3 className="white-text">Multiple Revenue Streams</h3>
               <p>Discover sync, brand, fan monetization, and merch opportunities that work for indie artists.</p>
             </div>
-            <div className="feature-card" style={{ backgroundColor: '#1A1A1A', border: '1px solid #00FF84' }}>
-              <h3 style={{ color: '#FFFFFF' }}>Viral Potential Tracking</h3>
+            <div className="feature-card card-dark green-border">
+              <h3 className="white-text">Viral Potential Tracking</h3>
               <p>Know which tracks are ready for TikTok, Instagram, and YouTube based on real data.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing/Join Section */}
-      <section id="pricing" className="pricing" style={{ backgroundColor: '#000000', color: '#ffffff' }}>
+      {/* Join Section */}
+      <section id="pricing" className="pricing black-bg white-text">
         <div className="container">
-          <h2 className="section-title" style={{ color: '#FF3B3F' }}>Join the Independent Artist Revolution</h2>
+          <h2 className="section-title red-accent">Join the Independent Artist Revolution</h2>
           <p className="section-subtitle">
             Connect with fellow artists who are taking control of their careers.
             Follow our journey and be part of the movement that’s changing the game.
@@ -91,12 +102,11 @@ const LandingPage = () => {
               href="https://open.spotify.com/playlist/7sU1PGsAAmF5y7bW6tAPsY" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="hoodie-peeps-btn" 
-              style={{ backgroundColor: '#00FF84', color: '#111' }}
+              className="hoodie-peeps-btn green-bg dark-text"
             >
               Follow Our Artist Journey
             </a>
-            <Link to="/login" className="get-started-btn" style={{ backgroundColor: '#FF3B3F', color: '#fff' }}>
+            <Link to="/login" className="get-started-btn red-bg white-text">
               Start Your Artist Dashboard
             </Link>
           </div>
@@ -108,11 +118,11 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="footer" style={{ backgroundColor: '#111111', color: '#ffffff' }}>
+      <footer className="footer dark-bg white-text">
         <div className="container">
           <div className="footer-content">
             <div className="footer-brand">
-              <span className="footer-logo" style={{ color: '#00FF84' }}>decoded music</span>
+              <span className="footer-logo green-text">decoded music</span>
               <span className="footer-tagline">created by artists, for artists</span>
             </div>
             <div className="footer-links">

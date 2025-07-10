@@ -10,6 +10,16 @@
   --text-secondary: #e0e0e0; /* Light Gray */
   --text-muted: rgba(255, 255, 255, 0.7); /* Muted White */
 }
+.dark-bg { background-color: #111111; }
+.black-bg { background-color: #000000; }
+.green-text { color: #00FF84; }
+.red-accent { color: #FF3B3F; }
+.white-text { color: #ffffff; }
+.green-border { border-bottom: 2px solid #00FF84; }
+.card-dark { background-color: #1A1A1A; border: 1px solid #00FF84; }
+.green-bg { background-color: #00FF84; }
+.red-bg { background-color: #FF3B3F; }
+.dark-text { color: #111111; }
 
 /* General Styles */
 body {
