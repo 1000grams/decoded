@@ -3,13 +3,14 @@ $LambdaFunctions = @(
     "prod-dashboardStreams",
     "prod-dashboardEarnings"
 )
+$Region = "eu-central-1"
 
 # Update Lambda functions to include CORS headers
 foreach ($lambda in $LambdaFunctions) {
     Write-Host "🔄 Updating Lambda function: $lambda"
 
     # Download the current function code
-    $functionCodeUrl = aws lambda get-function --function-name $lambda --query 'Code.Location' --output text
+    $functionCodeUrl = aws lambda get-function --function-name $lambda --region $Region --query 'Code.Location' --output text
     Invoke-WebRequest -Uri $functionCodeUrl -OutFile function_code.zip
 
     # Unzip, modify, and re-zip the function code
@@ -18,7 +19,7 @@ foreach ($lambda in $LambdaFunctions) {
     Compress-Archive -Path function_code\* -DestinationPath function_code.zip -Force
 
     # Update the Lambda function with the modified code
-    aws lambda update-function-code --function-name $lambda --zip-file fileb://function_code.zip
+    aws lambda update-function-code --function-name $lambda --region $Region --zip-file fileb://function_code.zip
 
     Write-Host "✅ Updated Lambda function: $lambda"
 
@@ -28,7 +29,6 @@ foreach ($lambda in $LambdaFunctions) {
 
 # Enable CORS in API Gateway
 $ApiId = "2h2oj7u446"
-$Region = "eu-central-1"
 
 $Endpoints = @(
     "/dashboard/streams",
@@ -38,12 +38,39 @@ $Endpoints = @(
 foreach ($endpoint in $Endpoints) {
     Write-Host "🔄 Enabling CORS for endpoint: $endpoint"
 
-    $resourceId = aws apigateway get-resources --rest-api-id $ApiId --query "items[?path=='$endpoint'].id" --output text
+    $resourceId = aws apigateway get-resources --rest-api-id $ApiId --region $Region --query "items[?path=='$endpoint'].id" --output text
+
+    # Update the put-integration-response block to use a valid response template
+    aws apigateway put-integration-response `
+      --rest-api-id $ApiId `
+      --resource-id $resourceId `
+      --http-method OPTIONS `
+      --region $Region `
+      --status-code 200 `
+      --response-templates '{"application/json": ""}'
+
+    # Update the put-method-response block to skip if it already exists
+    try {
+        aws apigateway put-method-response `
+            --rest-api-id $ApiId `
+            --resource-id $resourceId `
+            --http-method OPTIONS `
+            --region $Region `
+            --status-code 200 `
+            --response-parameters "method.response.header.Access-Control-Allow-Origin=true"
+    } catch {
+        if ($_.Exception.Message -like "*Response already exists*") {
+            Write-Host "⚠️ Method response already exists — skipping."
+        } else {
+            throw $_
+        }
+    }
 
     aws apigateway put-method-response `
         --rest-api-id $ApiId `
         --resource-id $resourceId `
         --http-method GET `
+        --region $Region `
         --status-code 200 `
         --response-parameters "method.response.header.Access-Control-Allow-Origin=true"
 
@@ -51,6 +78,7 @@ foreach ($endpoint in $Endpoints) {
         --rest-api-id $ApiId `
         --resource-id $resourceId `
         --http-method GET `
+        --region $Region `
         --status-code 200 `
         --response-parameters "method.response.header.Access-Control-Allow-Origin='*'"
 
@@ -59,6 +87,6 @@ foreach ($endpoint in $Endpoints) {
 
 # Deploy the API Gateway changes
 Write-Host "🔄 Deploying API Gateway changes"
-aws apigateway create-deployment --rest-api-id $ApiId --stage-name prod
+aws apigateway create-deployment --rest-api-id $ApiId --region $Region --stage-name prod
 
 Write-Host "✅ CORS fix automation complete."
