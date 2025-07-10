@@ -7,21 +7,20 @@ const CognitoLogin = ({ onAuthSuccess }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        checkCurrentUser();
-    }, [checkCurrentUser]);
-
-    const checkCurrentUser = async () => {
-        try {
-            const result = await cognitoAuthService.getCurrentUser();
-            if (result.success) {
-                onAuthSuccess(result.user, result.token, result.username);
+        const checkCurrentUser = async () => {
+            try {
+                const result = await cognitoAuthService.getCurrentUser();
+                if (result.success) {
+                    onAuthSuccess(result.user, result.token, result.username);
+                }
+            } catch (error) {
+                console.log('No current user found');
             }
-        } catch (error) {
-            console.log('No current user found');
-        }
-    };
+        };
+
+        checkCurrentUser();
+    }, [onAuthSuccess]);
 
     const handleSignIn = async (e) => {
         e.preventDefault();

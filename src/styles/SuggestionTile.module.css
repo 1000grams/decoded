@@ -1,23 +1,25 @@
 ﻿suggestionTile {
-  background-color: #f5f5f5;
-  border-radius: 18px;
-  padding: 18px 28px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1e293b;
+  background-color: #1e3a8a; /* Dark blue background */
+  border-radius: 12px; /* Smaller border radius */
+  padding: 12px 20px; /* Reduced padding */
+  font-size: 1rem; /* Smaller font size */
+  font-weight: 500; /* Medium font weight */
+  color: #ffffff; /* White text for contrast */
   cursor: pointer;
   transition: background 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s cubic-bezier(.4,0,.2,1);
-  box-shadow: 0 2px 8px rgba(30,41,59,0.07);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Slightly darker shadow */
   display: flex;
   align-items: center;
-  gap: 0.75em;
+  gap: 0.5em; /* Reduced gap */
   margin: 0.5em 0;
   border: none;
 }
+
 .suggestionTile:hover {
-  background-color: #e8e8e8;
-  box-shadow: 0 4px 16px rgba(30,41,59,0.10);
+  background-color: #374151; /* Slightly lighter dark blue on hover */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Enhanced shadow on hover */
 }
+
 .suggestionTileIcon {
   font-size: 1.5em;
   opacity: 0.7;
