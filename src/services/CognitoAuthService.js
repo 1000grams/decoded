@@ -1,9 +1,3 @@
-import AWS from 'aws-sdk';
-
-AWS.config.update({ region: 'us-east-1' }); // Update with your region
-const dynamodb = new AWS.DynamoDB.DocumentClient();
-const DYNAMO_TABLE = 'prod-DecodedCatalog-decodedmusic-backend';
-
 class CognitoAuthService {
     constructor() {
         this.currentUser = null;
@@ -91,21 +85,18 @@ class CognitoAuthService {
             }
 
             const email = currentUser.user.username;
-            const params = {
-                TableName: DYNAMO_TABLE,
-                Key: {
-                    email: email
+            const response = await fetch(`${process.env.REACT_APP_GET_ARTIST_ID_URL}?email=${email}`, {
+                headers: {
+                    Authorization: `Bearer ${this.jwtToken}`
                 }
-            };
+            });
 
-            const result = await dynamodb.get(params).promise();
-            if (!result.Item || !result.Item.artistId) {
-                throw new Error('Artist ID not found for the current user');
-            }
+            const data = await response.json();
 
-            return result.Item.artistId;
+            if (!data.artistId) throw new Error('Artist ID not found');
+            return data.artistId;
         } catch (error) {
-            console.error('Error fetching artist ID from DynamoDB:', error);
+            console.error('Error fetching artist ID from API:', error);
             throw error;
         }
     }
