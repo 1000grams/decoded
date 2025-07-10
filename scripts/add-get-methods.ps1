@@ -1,4 +1,4 @@
-# Add GET and OPTIONS methods to /catalog and /dashboard/catalog
+d/catalog
 $ApiId = "2h2oj7u446"
 $Region = "eu-central-1"
 $Endpoints = @(
