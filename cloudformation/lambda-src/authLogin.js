@@ -1,22 +1,12 @@
-﻿Write-Host " CREATING AUTH LAMBDA FUNCTIONS FOR S3" -ForegroundColor Cyan
-Write-Host "🪣 Using existing bucket: decodedmusic-lambda-code" -ForegroundColor Yellow
+﻿const AWS = require('aws-sdk');
+const cognitoIdentityServiceProvider = new AWS.CognitoIdentityServiceProvider();
+const USER_POOL_ID = 'eu-central-1_d9JNeVdni';
+const ARTIST_GROUP = 'artist';
 
-$region = "eu-central-1"
-$bucketName = "decodedmusic-lambda-code"
-
-# Create Lambda source directory
-if (!(Test-Path "lambda-src")) {
-    New-Item -ItemType Directory -Path "lambda-src" -Force
-    Write-Host " Created lambda-src directory" -ForegroundColor Green
-}
-
-# Create authLogin Lambda function
-Write-Host "`n Creating authLogin function..." -ForegroundColor Green
-$loginCode = @'
 exports.handler = async (event) => {
-    console.log(' Auth Login - decodedmusic Platform');
+    console.log('Auth Login - DecodedMusic Platform');
     console.log('Event:', JSON.stringify(event, null, 2));
-    
+
     // Handle CORS preflight
     if (event.httpMethod === 'OPTIONS') {
         return {
@@ -29,43 +19,60 @@ exports.handler = async (event) => {
             body: ''
         };
     }
-    
+
     try {
         const body = event.body ? JSON.parse(event.body) : {};
         const { email, password } = body;
-        
-        console.log('Login attempt for:', email);
-        
+
         if (!email || !password) {
             throw new Error('Email and password are required');
         }
-        
-        // Mock authentication - replace with real auth logic
-        const token = 'jwt-token-' + Date.now();
-        const userId = 'user-' + Math.random().toString(36).substr(2, 9);
-        
-        const response = {
-            success: true,
-            token: token,
-            user: {
-                id: userId,
-                email: email,
-                name: 'Artist User',
-                platform: 'decodedmusic'
-            },
-            message: 'Login successful - Welcome to decodedmusic!',
-            timestamp: new Date().toISOString()
+
+        // Authenticate user with Cognito
+        const authParams = {
+            AuthFlow: 'USER_PASSWORD_AUTH',
+            ClientId: process.env.COGNITO_CLIENT_ID,
+            AuthParameters: {
+                USERNAME: email,
+                PASSWORD: password
+            }
         };
-        
-        console.log('Login successful for:', email);
-        
+
+        const authResult = await cognitoIdentityServiceProvider.initiateAuth(authParams).promise();
+        const idToken = authResult.AuthenticationResult.IdToken;
+
+        // Decode token and check group membership
+        const decodedToken = JSON.parse(Buffer.from(idToken.split('.')[1], 'base64').toString('utf-8'));
+        const username = decodedToken['cognito:username'];
+
+        const groupParams = {
+            UserPoolId: USER_POOL_ID,
+            Username: username
+        };
+
+        const userGroups = await cognitoIdentityServiceProvider.adminListGroupsForUser(groupParams).promise();
+        const isArtist = userGroups.Groups.some(group => group.GroupName === ARTIST_GROUP);
+
+        if (!isArtist) {
+            throw new Error('User is not in the artist group');
+        }
+
         return {
             statusCode: 200,
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(response)
+            body: JSON.stringify({
+                success: true,
+                token: idToken,
+                user: {
+                    email,
+                    username,
+                    groups: userGroups.Groups.map(group => group.GroupName)
+                },
+                message: 'Login successful - Welcome to DecodedMusic!'
+            })
         };
     } catch (error) {
         console.error('Login error:', error.message);
@@ -77,8 +84,7 @@ exports.handler = async (event) => {
             },
             body: JSON.stringify({
                 success: false,
-                message: error.message,
-                platform: 'decodedmusic'
+                message: error.message
             })
         };
     }
