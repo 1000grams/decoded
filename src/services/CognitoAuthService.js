@@ -1,3 +1,9 @@
+import AWS from 'aws-sdk';
+
+AWS.config.update({ region: 'us-east-1' }); // Update with your region
+const dynamodb = new AWS.DynamoDB.DocumentClient();
+const DYNAMO_TABLE = 'prod-DecodedCatalog-decodedmusic-backend';
+
 class CognitoAuthService {
     constructor() {
         this.currentUser = null;
@@ -76,7 +82,35 @@ class CognitoAuthService {
         const result = await this.getCurrentUser();
         return result.success ? result.token : null;
     }
+
+    async getArtistIdFromCognito() {
+        try {
+            const currentUser = await this.getCurrentUser();
+            if (!currentUser.success) {
+                throw new Error('No current user found');
+            }
+
+            const email = currentUser.user.username;
+            const params = {
+                TableName: DYNAMO_TABLE,
+                Key: {
+                    email: email
+                }
+            };
+
+            const result = await dynamodb.get(params).promise();
+            if (!result.Item || !result.Item.artistId) {
+                throw new Error('Artist ID not found for the current user');
+            }
+
+            return result.Item.artistId;
+        } catch (error) {
+            console.error('Error fetching artist ID from DynamoDB:', error);
+            throw error;
+        }
+    }
 }
 
 const cognitoAuthService = new CognitoAuthService();
 export default cognitoAuthService;
+export { CognitoAuthService };

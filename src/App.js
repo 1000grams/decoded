@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 
-import LandingPage from './components/LandingPage';
-import Dashboard from './components/Dashboard';
-import CognitoLogin from './components/CognitoLogin';
-import MarketingPanel from './components/MarketingPanel';
-import CatalogPanel from './components/CatalogPanel';
-import AnalyticsPanel from './components/AnalyticsPanel';
-import cognitoAuthService from './services/CognitoAuthService';
-import MarketingHub from './pages/MarketingHub';
-import Spotifymodule from './components/spotifymodule';
+import LandingPage from './components/LandingPage.js';
+import Dashboard from './components/Dashboard.js';
+import CognitoLogin from './components/CognitoLogin.js';
+import MarketingPanel from './components/MarketingPanel.jsx';
+import CatalogPanel from './components/CatalogPanel.jsx';
+import AnalyticsPanel from './components/AnalyticsPanel.jsx';
+import cognitoAuthService from './services/CognitoAuthService.js';
+import SpotifyModule from './components/SpotifyModule.js';
 import BuzzPage from './pages/BuzzPage';
-import ContactForm from './components/ContactForm'; // Adjust the path if necessary
+import ContactForm from './components/ContactForm.jsx'; // Adjust the path if necessary
 import About from './pages/About'; // Adjust the path if necessary
+import MarketingHub from './pages/MarketingHub.jsx';
 
 import './App.css';
 
@@ -151,7 +151,7 @@ function App() {
                         path="/spotify" 
                         element={
                             isAuthenticated ? 
-                            <Spotifymodule user={user} /> : 
+                            <SpotifyModule user={user} /> : 
                             <Navigate to="/login" replace />
                         } 
                     />
