@@ -1,26 +1,12 @@
-﻿import React, { useState, useEffect } from 'react';
-import cognitoAuthService from '../services/CognitoAuthService';
+import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
-const CognitoLogin = ({ onAuthSuccess }) => {
+const CognitoLogin = () => {
+    const { signIn } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-
-    useEffect(() => {
-        checkCurrentUser();
-    }, []);
-
-    const checkCurrentUser = async () => {
-        try {
-            const result = await cognitoAuthService.getCurrentUser();
-            if (result.success) {
-                onAuthSuccess(result.user, result.token, result.username);
-            }
-        } catch (error) {
-            console.log('No current user found');
-        }
-    };
 
     const handleSignIn = async (e) => {
         e.preventDefault();
@@ -28,17 +14,14 @@ const CognitoLogin = ({ onAuthSuccess }) => {
         setError('');
 
         try {
-            const result = await cognitoAuthService.signIn(email, password);
-            
-            if (result.success) {
-                onAuthSuccess(result.user, result.token, result.username);
-            } else {
+            const result = await signIn(email, password);
+            if (!result.success) {
                 setError(result.error);
             }
         } catch (error) {
             setError('Login failed. Please try again.');
         }
-        
+
         setLoading(false);
     };
 
