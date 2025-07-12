@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
     async function checkAuthStatus() {
       try {
         const result = await cognitoAuthService.getCurrentUser();
-        if (result.success) {
+        if (result && result.success) {
           setUser(result.user);
           setUsername(result.username);
           setIsAuthenticated(true);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import CognitoLogin from './components/CognitoLogin';
@@ -17,7 +18,7 @@ import './App.css';
 import './index.css';
 
 const Header = () => {
-  const { user, logout } = useAuth();
+  const { user, signOut } = useAuth();
 
   return (
     <header style={{
@@ -54,7 +55,7 @@ const Header = () => {
               <Link to="/spotify"><button>🎧 Spotify</button></Link>
               <Link to="/buzz"><button>🐝 Buzz</button></Link>
               <Link to="/marketing-hub"><button>📚 Marketing Hub</button></Link>
-              <button onClick={logout}>🚪 Logout</button>
+              <button onClick={signOut}>🚪 Logout</button>
             </>
           ) : (
             <Link to="/login"><button>🔑 Login</button></Link>
@@ -85,34 +86,13 @@ const AppContent = () => {
         <Route path="/buzz" element={<BuzzPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactForm />} />
-        <Route
-          path="/login"
-          element={user ? <Navigate to="/dashboard" replace /> : <CognitoLogin />}
-        />
-        <Route
-          path="/dashboard"
-          element={user ? <Dashboard /> : <Navigate to="/login" replace />}
-        />
-        <Route
-          path="/catalog"
-          element={user ? <CatalogPanel /> : <Navigate to="/login" replace />}
-        />
-        <Route
-          path="/analytics"
-          element={user ? <AnalyticsPanel /> : <Navigate to="/login" replace />}
-        />
-        <Route
-          path="/marketing"
-          element={user ? <MarketingPanel /> : <Navigate to="/login" replace />}
-        />
-        <Route
-          path="/spotify"
-          element={user ? <SpotifyModule /> : <Navigate to="/login" replace />}
-        />
-        <Route
-          path="/marketing-hub"
-          element={user ? <MarketingHub /> : <Navigate to="/login" replace />}
-        />
+        <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <CognitoLogin />} />
+        <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" replace />} />
+        <Route path="/catalog" element={user ? <CatalogPanel /> : <Navigate to="/login" replace />} />
+        <Route path="/analytics" element={user ? <AnalyticsPanel /> : <Navigate to="/login" replace />} />
+        <Route path="/marketing" element={user ? <MarketingPanel /> : <Navigate to="/login" replace />} />
+        <Route path="/spotify" element={user ? <SpotifyModule /> : <Navigate to="/login" replace />} />
+        <Route path="/marketing-hub" element={user ? <MarketingHub /> : <Navigate to="/login" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
