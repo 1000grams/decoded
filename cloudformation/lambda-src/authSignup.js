@@ -1,4 +1,4 @@
-﻿exports.handler = async (event) => {
+exports.handler = async (event) => {
     console.log('📝 Auth Signup - decodedmusic Platform');
     console.log('Event:', JSON.stringify(event, null, 2));
     

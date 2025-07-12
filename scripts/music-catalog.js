@@ -1,4 +1,4 @@
-﻿// Music Catalog System
+// Music Catalog System
 class MusicCatalog {
     constructor() {
         this.baseURL = 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
@@ -290,17 +290,3 @@ class MusicCatalog {
 
 // Global catalog instance
 window.musicCatalog = new MusicCatalog();
-
-// Event handlers
-function showPitchModal(trackId) {
-    window.musicCatalog.showPitchModal(trackId);
-}
-
-function sendPitch(trackId) {
-    window.musicCatalog.sendPitch(trackId);
-}
-
-function playTrack(trackId) {
-    // Implement audio player functionality
-    console.log('Playing track:', trackId);
-}

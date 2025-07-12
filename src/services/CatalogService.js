@@ -117,4 +117,30 @@ class CatalogService {
                     releaseDate: '2024-02-01',
                     streams: 38000,
                     revenue: 2234,
-                    platforms: ['Spotify', 'Apple
+                    platforms: ['Spotify', 'Apple Music', 'YouTube'],
+                    mood: 'chill',
+                    genre: 'Lo-fi Hip Hop',
+                    duration: '2:45',
+                    bpm: 90,
+                    key: 'A Minor'
+                }
+            ],
+            analytics: {
+                totalStreams: 125000,
+                totalRevenue: 1247.89,
+                streamsByPlatform: {
+                    'Spotify': 50000,
+                    'Apple Music': 30000,
+                    'YouTube': 45000
+                },
+                revenueByPlatform: {
+                    'Spotify': 300,
+                    'Apple Music': 200,
+                    'YouTube': 747.89
+                }
+            }
+        };
+    }
+}
+
+export default CatalogService;

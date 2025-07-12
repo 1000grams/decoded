@@ -1,40 +1,17 @@
-﻿// Authentication System
+// Authentication System
+import { useAuth } from '../src/hooks/useAuth';
+
 class AuthSystem {
     constructor() {
         this.baseURL = 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
-        this.currentUser = null;
-        this.subscription = null;
-        this.init();
-    }
-
-    init() {
-        // Check if user is already logged in
-        const token = localStorage.getItem('auth_token');
-        if (token) {
-            this.validateToken(token);
-        }
+        this.authContext = useAuth();
     }
 
     async handleLogin(email, password) {
         try {
-            const response = await fetch(`${this.baseURL}/auth/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await response.json();
-            
-            if (response.ok) {
-                localStorage.setItem('auth_token', data.token);
-                this.currentUser = data.user;
-                this.subscription = data.subscription;
-                
-                // Redirect to dashboard
-                window.location.href = '/dashboard.html';
-            } else {
-                throw new Error(data.message || 'Login failed');
-            }
+            await this.authContext.login({ email, password });
+            // Redirect to dashboard
+            window.location.href = '/dashboard.html';
         } catch (error) {
             console.error('Login error:', error);
             alert('Login failed: ' + error.message);
@@ -50,7 +27,7 @@ class AuthSystem {
             });
 
             const data = await response.json();
-            
+
             if (response.ok) {
                 // Show subscription selection
                 this.showSubscriptionFlow(data.userId);
@@ -162,43 +139,14 @@ class AuthSystem {
         }
     }
 
-    async validateToken(token) {
-        try {
-            const response = await fetch(`${this.baseURL}/auth/validate`, {
-                method: 'POST',
-                headers: { 
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json' 
-                }
-            });
-
-            const data = await response.json();
-            
-            if (response.ok) {
-                this.currentUser = data.user;
-                this.subscription = data.subscription;
-                return true;
-            } else {
-                localStorage.removeItem('auth_token');
-                return false;
-            }
-        } catch (error) {
-            console.error('Token validation error:', error);
-            localStorage.removeItem('auth_token');
-            return false;
-        }
-    }
-
     logout() {
-        localStorage.removeItem('auth_token');
-        this.currentUser = null;
-        this.subscription = null;
+        this.authContext.logout();
         window.location.href = '/index.html';
     }
 
     requireAuth() {
-        const token = localStorage.getItem('auth_token');
-        if (!token) {
+        const { user } = this.authContext;
+        if (!user) {
             window.location.href = '/index.html';
             return false;
         }
@@ -206,7 +154,8 @@ class AuthSystem {
     }
 
     requireSubscription() {
-        if (!this.subscription || !this.subscription.active) {
+        const { user } = this.authContext;
+        if (!user?.subscription?.active) {
             window.location.href = '/subscription.html';
             return false;
         }
@@ -214,32 +163,4 @@ class AuthSystem {
     }
 }
 
-// Global auth instance
-window.authSystem = new AuthSystem();
-
-// Event handlers for forms
-function handleLogin(event) {
-    event.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    window.authSystem.handleLogin(email, password);
-}
-
-function handleSignup(event) {
-    event.preventDefault();
-    const userData = {
-        name: document.getElementById('signupName').value,
-        email: document.getElementById('signupEmail').value,
-        password: document.getElementById('signupPassword').value,
-        spotifyURL: document.getElementById('spotifyURL').value
-    };
-    window.authSystem.handleSignup(userData);
-}
-
-function selectSubscription(userId, planType, amount) {
-    window.authSystem.selectSubscription(userId, planType, amount);
-}
-
-function startFreeTrial(userId) {
-    window.authSystem.startFreeTrial(userId);
-}
+export default AuthSystem;

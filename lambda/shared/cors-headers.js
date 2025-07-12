@@ -1,4 +1,4 @@
-﻿module.exports = {
+module.exports = {
     headers: {
         'Access-Control-Allow-Origin': 'https://decodedmusic.com',
         'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',

@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 // Add this to your dashboard component to debug Spotify loading
 
 class SpotifyDebugger {

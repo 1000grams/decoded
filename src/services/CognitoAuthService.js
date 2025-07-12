@@ -1,4 +1,4 @@
-﻿// Simple mock authentication service for demo purposes
+// Simple mock authentication service for demo purposes
 class CognitoAuthService {
     constructor() {
         this.currentUser = null;

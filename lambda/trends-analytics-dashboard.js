@@ -1,4 +1,4 @@
-﻿const AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const DYNAMO_MOOD_TABLE = 'prod-MoodContextAnalysis-decodedmusic-backend';

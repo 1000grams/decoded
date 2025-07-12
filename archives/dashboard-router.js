@@ -1,4 +1,4 @@
-﻿// Dashboard Router with Authentication Check
+// Dashboard Router with Authentication Check
 class DashboardRouter {
     constructor() {
         this.init();

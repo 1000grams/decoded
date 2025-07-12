@@ -1,4 +1,4 @@
-﻿class RueDeVivreAnalytics {
+class RueDeVivreAnalytics {
     constructor() {
         this.baseURL = 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
         this.spotifyConnected = localStorage.getItem('spotify_connected') === 'true';
