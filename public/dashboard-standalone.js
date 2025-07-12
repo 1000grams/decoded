@@ -1,7 +1,10 @@
+import { useAuth } from '../src/hooks/useAuth';
+
 class RueDeVivreAnalytics {
     constructor() {
         this.baseURL = 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
-        this.spotifyConnected = localStorage.getItem('spotify_connected') === 'true';
+        this.authContext = useAuth();
+        this.spotifyConnected = this.authContext.user?.spotifyConnected || false;
         this.init();
     }
 
@@ -288,12 +291,10 @@ class RueDeVivreAnalytics {
     }
 
     handleSpotifyConnect() {
-        localStorage.setItem('spotify_connected', 'true');
-        this.spotifyConnected = true;
-        
+        this.authContext.user.spotifyConnected = true;
         document.getElementById('spotify-connect-btn').style.display = 'none';
         document.getElementById('spotify-status').classList.remove('hidden');
-        
+
         this.loadSpotifyData();
     }
 

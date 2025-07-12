@@ -1,63 +1,81 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import cognitoAuthService from '../services/CognitoAuthService';
-import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
 
-const AuthContext = createContext();
+// Create context
+const AuthContext = createContext(null);
 
+// Custom hook for consuming
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+// API call to check group membership
+const checkArtistGroup = async (email) => {
+  try {
+    const res = await fetch("https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/auth/groupcheck", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    return data.authorized === true;
+  } catch (err) {
+    console.error("❌ Failed to check artist group:", err);
+    return false;
+  }
+};
+
+// AuthProvider component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [username, setUsername] = useState('');
-  const [token, setToken] = useState('');
+  const [user, setUser] = useState(null);        // Basic user info
+  const [username, setUsername] = useState(null); // New state for username
+  const [authorized, setAuthorized] = useState(false); // Artist group check
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // New state for authentication
 
   useEffect(() => {
-    try {
-      getCognitoTokenFromUrl(); // Parse token from URL if redirected
-    } catch (err) {
-      console.error('Token parse error:', err);
+    const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("mockToken");
+
+    if (storedUser && token) {
+      const parsed = JSON.parse(storedUser);
+      setUser(parsed);
+      setIsAuthenticated(true);
+      const email = parsed.email || parsed.username || 'rdv@decodedmusic.com'; // Ensure fallback values for email
+      checkArtistGroup(email).then((isAuth) => {
+        console.log("✅ Group check:", isAuth); // Debug logging for group check
+        setAuthorized(isAuth);
+      }).finally(() => {
+        setLoading(false);
+      });
+    } else {
+      setIsAuthenticated(false);
+      setLoading(false); // Handle case with no user
     }
-
-    const checkUser = async () => {
-      try {
-        const result = await cognitoAuthService.getCurrentUser();
-        if (result.success) {
-          setUser(result.user);
-          setUsername(result.username);
-          setToken(result.token);
-          setIsAuthenticated(true);
-        }
-      } catch (error) {
-        console.log('No authenticated user found');
-      }
-      setLoading(false);
-    };
-
-    checkUser();
   }, []);
 
-  const signOut = async () => {
-    await cognitoAuthService.signOut();
-    setIsAuthenticated(false);
+  const login = (userObj) => {
+    localStorage.setItem("user", JSON.stringify(userObj));
+    localStorage.setItem("mockToken", "mock-jwt-token");
+    setUser(userObj);
+    setIsAuthenticated(true);
+    checkArtistGroup(userObj.email).then(setAuthorized);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("mockToken");
     setUser(null);
-    setUsername('');
-    setToken('');
+    setAuthorized(false);
+    setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        user,
-        username,
-        token,
-        signOut,
-        loading
-      }}
-    >
+    <AuthContext.Provider value={{ user, setUser, username, setUsername, login, logout, authorized, loading, isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);

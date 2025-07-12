@@ -12,6 +12,7 @@ const CognitoLogin = ({ onAuthSuccess }) => {
             try {
                 const result = await cognitoAuthService.getCurrentUser();
                 if (result.success) {
+                    console.log("✅ Current user detected:", result);
                     onAuthSuccess(result.user, result.token, result.username);
                 }
             } catch (error) {
@@ -29,6 +30,7 @@ const CognitoLogin = ({ onAuthSuccess }) => {
 
         try {
             const result = await cognitoAuthService.signIn(email, password);
+            console.log("✅ Logged in:", result);
             
             if (result.success) {
                 onAuthSuccess(result.user, result.token, result.username);

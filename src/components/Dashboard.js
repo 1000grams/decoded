@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import './Dashboard.css';
 import SpotifyModule from './SpotifyModule';
 
@@ -10,14 +11,19 @@ const Dashboard = ({ username, onSignOut }) => {
   useEffect(() => {
     const token = localStorage.getItem('cognito_id_token');
 
-    if (token) {
-      fetch("https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/dashboard", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        }
-      })
+    if (!token) {
+      setError("No Cognito token found. Redirecting to login...");
+      setLoading(false);
+      return;
+    }
+
+    fetch("https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/dashboard", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    })
       .then(res => {
         if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
         return res.json();
@@ -33,11 +39,11 @@ const Dashboard = ({ username, onSignOut }) => {
       .finally(() => {
         setLoading(false);
       });
-    } else {
-      setError("No Cognito token found. Please log in.");
-      setLoading(false);
-    }
   }, []);
+
+  if (!localStorage.getItem('cognito_id_token')) {
+    return <Navigate to="/login" />;
+  }
 
   if (loading) {
     return (
