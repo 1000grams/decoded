@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext.js';
 
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
@@ -16,6 +16,10 @@ import MarketingHub from './pages/MarketingHub';
 
 import './App.css';
 import './index.css';
+
+const clientId = '5pb29tja8gkqm3jb43oimd5qjt';
+const redirectUri = 'https://decodedmusic.com/dashboard';
+const cognitoDomain = 'https://auth.decodedmusic.com';
 
 const Header = () => {
   const { user, signOut } = useAuth();

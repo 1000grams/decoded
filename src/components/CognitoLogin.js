@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext.js';
+import { getCognitoTokenFromUrl } from '../utils/getCognitoToken.js';
 
 const CognitoLogin = () => {
   const { signIn } = useAuth();
@@ -7,6 +8,13 @@ const CognitoLogin = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const token = getCognitoTokenFromUrl();
+    if (token) {
+      console.log('Token captured:', token);
+    }
+  }, []);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
