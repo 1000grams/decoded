@@ -4,13 +4,14 @@ import { FaChartPie, FaBullhorn, FaCalendarAlt, FaFire } from 'react-icons/fa';
 import cognitoAuthService from '../services/CognitoAuthService';
 import { fetchArtistData } from '../services/ArtistService';
 import { generateContent } from '../services/BedrockService';
+import { getArtistId } from '../state/ArtistManager';
 import './MarketingHub.css';
 
 function MarketingHub() {
   const [artistId, setArtistId] = useState('');
   const [weeklyGrowth, setWeeklyGrowth] = useState({ subscribers: 0, streams: 0 });
   const [metaLlamaResult, setMetaLlamaResult] = useState('');
-  const [contentPlan, setContentPlan] = useState([]);
+  const [contentPlan] = useState([]);
 
   useEffect(() => {
     async function fetchArtistId() {
@@ -42,6 +43,9 @@ function MarketingHub() {
     // Fetch weekly growth tracking data (mocked for now)
     setWeeklyGrowth({ subscribers: 120, streams: 4500 });
   }, []);
+
+  // Use artistId in API calls or data-fetching logic
+  const artistIdFromState = getArtistId();
 
   return (
     <div

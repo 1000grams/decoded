@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
-import { useAuth } from '../hooks/useAuth';
 import './LandingPage.css';
 
 const LandingPage = () => {
-  const { isAuthenticated } = useAuth();
-
   useEffect(() => {
     try {
       getCognitoTokenFromUrl();
@@ -15,24 +12,62 @@ const LandingPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    // Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-11CHYW3K6Z');
+
+    // Meta Pixel
+    if (!window.fbq) {
+      window.fbq = function () {
+        window.fbq.callMethod
+          ? window.fbq.callMethod.apply(window.fbq, arguments)
+          : window.fbq.queue.push(arguments);
+      };
+      window.fbq.queue = [];
+      window.fbq.loaded = true;
+      window.fbq.version = '2.0';
+      const fbqScript = document.createElement('script');
+      fbqScript.async = true;
+      fbqScript.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.getElementsByTagName('head')[0].appendChild(fbqScript);
+    }
+    window.fbq('init', '727105113056303');
+    window.fbq('track', 'PageView');
+
+    // Snap Pixel
+    if (!window.snaptr) {
+      window.snaptr = function () {
+        window.snaptr.handleRequest
+          ? window.snaptr.handleRequest.apply(window.snaptr, arguments)
+          : window.snaptr.queue.push(arguments);
+      };
+      window.snaptr.queue = [];
+      const snaptrScript = document.createElement('script');
+      snaptrScript.async = true;
+      snaptrScript.src = 'https://sc-static.net/scevent.min.js';
+      document.getElementsByTagName('head')[0].appendChild(snaptrScript);
+    }
+    window.snaptr('init', '0e29f2de-37c1-4e4f-8274-c4d2f40d4bd7');
+    window.snaptr('track', 'PAGE_VIEW');
+  }, []);
+
   return (
     <div className="landing-page">
       {/* Header */}
       <header className="navbar dark-bg green-border">
         <div className="nav-container">
           <div className="logo">
-            <img src="/logo.svg" alt="Decoded Music Logo" className="logo-img" />
+            <img src="https://eu-central-1.console.aws.amazon.com/s3/object/decoded-logo?region=eu-central-1&bucketType=general&prefix=logo.svg" alt="Decoded Music Logo" className="logo-img" />
             <span className="logo-text red-accent">decoded music</span>
           </div>
           <nav className="nav-links">
             <a href="#features" className="green-text">Why Artists Choose Us</a>
             <a href="#pricing" className="green-text">Join the Movement</a>
             <Link to="/buzz" className="green-text">Buzz</Link>
-            {isAuthenticated ? (
-              <Link to="/dashboard" className="artist-login-btn green-text">Go to Dashboard</Link>
-            ) : (
-              <Link to="/login" className="artist-login-btn green-text">Artist Login</Link>
-            )}
+            <Link to="/login" className="artist-login-btn green-text">Artist Login</Link>
           </nav>
         </div>
       </header>
@@ -55,9 +90,24 @@ const LandingPage = () => {
             the late nights, and the dream. Get insights that help you thrive, not just survive.
           </p>
           <div className="hero-cta">
-            <Link to="/login" className="cta-btn cta-red">Access Your Artist Dashboard</Link>
-            <a href="#features" className="cta-btn cta-white">See What Artists Are Saying</a>
-            <a href="#pricing" className="cta-btn cta-outline">Join the Movement</a>
+            <Link
+              to="/login"
+              className="cta-btn cta-red"
+            >
+              Access Your Artist Dashboard
+            </Link>
+            <a
+              href="#features"
+              className="cta-btn cta-white"
+            >
+              See What Artists Are Saying
+            </a>
+            <a
+              href="#pricing"
+              className="cta-btn cta-outline"
+            >
+              Join the Movement
+            </a>
           </div>
         </div>
       </section>
@@ -98,15 +148,18 @@ const LandingPage = () => {
           </p>
 
           <div className="pricing-cta">
-            <a 
-              href="https://open.spotify.com/playlist/7sU1PGsAAmF5y7bW6tAPsY" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://open.spotify.com/playlist/7sU1PGsAAmF5y7bW6tAPsY"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hoodie-peeps-btn green-bg dark-text"
             >
               Follow Our Artist Journey
             </a>
-            <Link to="/login" className="get-started-btn red-bg white-text">
+            <Link
+              to="/login"
+              className="get-started-btn red-bg white-text"
+            >
               Start Your Artist Dashboard
             </Link>
           </div>

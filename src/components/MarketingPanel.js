@@ -1,6 +1,10 @@
 import React from 'react';
+import { getArtistId } from '../state/ArtistManager';
 
 const MarketingPanel = ({ user }) => {
+  // Use artistId in API calls or data-fetching logic
+  const artistId = getArtistId();
+
   return (
     <div>
       <h1>Marketing Panel</h1>

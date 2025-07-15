@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { getArtistId } from '../state/ArtistManager';
 
 function SpotifyModule() {
   const [data, setData] = useState(null);
@@ -7,6 +8,7 @@ function SpotifyModule() {
 
   useEffect(() => {
     async function fetchSpotify() {
+      const artistId = getArtistId(); // Get the current artist ID
       const token = localStorage.getItem('cognito_id_token');
       
       if (!token) {
@@ -16,7 +18,7 @@ function SpotifyModule() {
       }
 
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/spotify`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/artist?artistId=${artistId}`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -33,19 +35,6 @@ function SpotifyModule() {
       } catch (err) {
         console.error('spotify fetch error', err);
         setError(err.message);
-        
-        // Fallback data for demo purposes
-        const fallbackData = {
-          name: 'Demo Artist',
-          followers: 1000,
-          popularity: 75,
-          top_tracks: [
-            { id: '1', name: 'Demo Track 1' },
-            { id: '2', name: 'Demo Track 2' },
-          ],
-          trending: ['Indie Pop', 'Alternative Rock'],
-        };
-        setData(fallbackData);
       } finally {
         setLoading(false);
       }

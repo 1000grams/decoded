@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext'; // From AuthContext.js
+import { AuthProvider, useAuth } from './context/AuthContext.js';
 
 import CatalogService from './services/CatalogService';
 import AnalyticsService from './services/AnalyticsService';
@@ -17,8 +17,14 @@ import MarketingHub from './pages/MarketingHub.jsx';
 import PrivateRoute from './components/PrivateRoute';
 import SpotifyModule from './components/SpotifyModule.js';
 
+import { getArtistId, setArtistId, setArtistIdFromUser } from './state/ArtistManager';
+
 import './index.css';
 import './App.css';
+
+const clientId = '5pb29tja8gkqm3jb43oimd5qjt';
+const redirectUri = 'https://decodedmusic.com/dashboard';
+const cognitoDomain = 'https://auth.decodedmusic.com';
 
 function App() {
   return (
@@ -31,11 +37,7 @@ function App() {
 }
 
 function AppContent() {
-  const { user, login, logout, authorized, loading } = useAuth();
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
-  const [loginLoading, setLoginLoading] = useState(false);
-  const [loginError, setLoginError] = useState(null);
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -43,34 +45,17 @@ function AppContent() {
     const fetchData = async () => {
       if (user) {
         try {
-          await CatalogService.getUserCatalog(user.id);
-          await AnalyticsService.getUserAnalytics(user.id);
-          await SpotifyService.getUserPlaylists(user.id);
+          const artistId = getArtistId(user.id);
+          await CatalogService.getCatalog(artistId);
+          await AnalyticsService.getUserAnalytics(artistId);
+          await SpotifyService.getUserPlaylists(artistId);
         } catch (error) {
-          console.error('Error fetching user data:', error);
+          console.error('Error fetching artist data:', error);
         }
       }
     };
     fetchData();
   }, [user]);
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoginLoading(true);
-    setLoginError(null);
-
-    try {
-      const userObj = { email: loginForm.email };
-      await login(userObj);
-      setShowLoginModal(false);
-      setLoginForm({ email: '', password: '' });
-      navigate('/dashboard');
-    } catch (err) {
-      setLoginError('Login failed');
-    } finally {
-      setLoginLoading(false);
-    }
-  };
 
   if (loading) return <div className="loading">Loading DecodedMusic...</div>;
 
@@ -94,9 +79,9 @@ function AppContent() {
           justifyContent: 'space-between', 
           alignItems: 'center' 
         }}>
-          <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-            <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>🎵</span>
-            <span style={{ marginLeft: '0.5rem', fontSize: '1.2rem', fontWeight: 'bold', color: '#ffffff' }}>
+          <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+            <img src="/path-to-logo/logo.png" alt="DecodedMusic Logo" style={{ height: '40px', marginRight: '0.5rem' }} />
+            <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#ffffff' }}>
               decodedmusic
             </span>
           </div>
@@ -153,7 +138,7 @@ function AppContent() {
                     Welcome, {user.name}
                   </span>
                   <button 
-                    onClick={logout} 
+                    onClick={() => navigate('/logout')} 
                     style={{
                       background: 'rgba(255,255,255,0.1)',
                       border: '1px solid rgba(255,255,255,0.3)',
@@ -168,7 +153,7 @@ function AppContent() {
                 </div>
               ) : (
                 <button 
-                  onClick={() => setShowLoginModal(true)} 
+                  onClick={() => window.location.href = `${cognitoDomain}/login?client_id=${clientId}&response_type=code&scope=openid+email+profile&redirect_uri=${redirectUri}`} 
                   style={{
                     background: 'linear-gradient(135deg, #00ff88 0%, #00d4ff 100%)',
                     border: 'none',
@@ -187,183 +172,20 @@ function AppContent() {
         </div>
       </header>
 
-      {/* Login Modal */}
-      {showLoginModal && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(0,0,0,0.9)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 2000
-        }}>
-          <div style={{
-            background: '#1a1a1a',
-            padding: '2rem',
-            borderRadius: '1rem',
-            width: '400px',
-            maxWidth: '90vw',
-            border: '1px solid rgba(255,255,255,0.1)'
-          }}>
-            <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#fff' }}>
-              🔑 Login to decodedmusic
-            </h2>
-
-            {loginError && (
-              <div style={{
-                background: 'rgba(255,0,0,0.1)',
-                border: '1px solid rgba(255,0,0,0.3)',
-                color: '#ff6b6b',
-                padding: '1rem',
-                borderRadius: '0.5rem',
-                marginBottom: '1rem',
-                textAlign: 'center'
-              }}>
-                {loginError}
-              </div>
-            )}
-
-            <form onSubmit={handleLogin}>
-              <input
-                type="email"
-                placeholder="✉️ Email"
-                value={loginForm.email}
-                onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  marginBottom: '1rem',
-                  background: 'rgba(255,255,255,0.1)',
-                  border: '1px solid rgba(255,255,255,0.3)',
-                  borderRadius: '0.5rem',
-                  color: '#fff',
-                  boxSizing: 'border-box'
-                }}
-                required
-                disabled={loginLoading}
-              />
-              <input
-                type="password"
-                placeholder="🔒 Password"
-                value={loginForm.password}
-                onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  marginBottom: '2rem',
-                  background: 'rgba(255,255,255,0.1)',
-                  border: '1px solid rgba(255,255,255,0.3)',
-                  borderRadius: '0.5rem',
-                  color: '#fff',
-                  boxSizing: 'border-box'
-                }}
-                required
-                disabled={loginLoading}
-              />
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                <button 
-                  type="submit" 
-                  disabled={loginLoading}
-                  style={{
-                    flex: 1,
-                    background: loginLoading ? 'rgba(0,255,136,0.5)' : 'linear-gradient(135deg, #00ff88 0%, #00d4ff 100%)',
-                    border: 'none',
-                    color: '#000',
-                    padding: '0.75rem',
-                    borderRadius: '0.5rem',
-                    cursor: loginLoading ? 'not-allowed' : 'pointer',
-                    fontWeight: 'bold'
-                  }}
-                >
-                  {loginLoading ? '🔄 Logging in...' : '🚀 Login'}
-                </button>
-                <button 
-                  type="button" 
-                  onClick={() => setShowLoginModal(false)} 
-                  disabled={loginLoading}
-                  style={{
-                    flex: 1,
-                    background: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.3)',
-                    color: '#fff',
-                    padding: '0.75rem',
-                    borderRadius: '0.5rem',
-                    cursor: loginLoading ? 'not-allowed' : 'pointer'
-                  }}
-                >
-                  ❌ Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/buzz" element={
-          <div>
-            <h1>Testing Buzz Page</h1>
-            <BuzzPage />
-          </div>
-        } />
-        <Route path="/login" element={!user ? <CognitoLogin /> : <Navigate to="/dashboard" replace />} />
+        <Route path="/buzz" element={<BuzzPage />} />
+        <Route path="/login" element={<Navigate to={`${cognitoDomain}/login?client_id=${clientId}&response_type=code&scope=openid+email+profile&redirect_uri=${redirectUri}`} replace />} />
 
         {/* Protected Routes */}
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/marketing"
-          element={
-            <PrivateRoute>
-              <MarketingPanel user={user} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/catalog"
-          element={
-            <PrivateRoute>
-              <CatalogPanel />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/analytics"
-          element={
-            <PrivateRoute>
-              <AnalyticsPanel user={user} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/marketing-hub"
-          element={
-            <PrivateRoute>
-              <MarketingHub user={user} />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/spotify"
-          element={
-            <PrivateRoute>
-              <SpotifyModule user={user} />
-            </PrivateRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/buzz" replace />} />
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/marketing" element={<PrivateRoute><MarketingPanel user={user} /></PrivateRoute>} />
+        <Route path="/catalog" element={<PrivateRoute><CatalogPanel /></PrivateRoute>} />
+        <Route path="/analytics" element={<PrivateRoute><AnalyticsPanel user={user} /></PrivateRoute>} />
+        <Route path="/marketing-hub" element={<PrivateRoute><MarketingHub user={user} /></PrivateRoute>} />
+        <Route path="/spotify" element={<PrivateRoute><SpotifyModule user={user} /></PrivateRoute>} />
+        
       </Routes>
     </div>
   );

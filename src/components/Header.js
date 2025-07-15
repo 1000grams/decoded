@@ -27,10 +27,10 @@ const Header = ({ user, onLogout }) => {
         </div>
 
         <nav style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-          <a href="#dashboard" style={{ color: 'white', textDecoration: 'none', fontSize: '16px' }}>Dashboard</a>
-          <a href="#analytics" style={{ color: 'white', textDecoration: 'none', fontSize: '16px' }}>Analytics</a>
-          <a href="#uploads" style={{ color: 'white', textDecoration: 'none', fontSize: '16px' }}>Uploads</a>
-          <a href="#pricing" style={{ color: 'white', textDecoration: 'none', fontSize: '16px' }}>Pricing</a>
+          <a href="https://decodedmusic.com/dashboard" style={{ color: 'white', textDecoration: 'none', fontSize: '16px' }}>Dashboard</a>
+          <a href="https://decodedmusic.com/analytics" style={{ color: 'white', textDecoration: 'none', fontSize: '16px' }}>Analytics</a>
+          <a href="https://decodedmusic.com/catalog-upload" style={{ color: 'white', textDecoration: 'none', fontSize: '16px' }}>Uploads</a>
+          <a href="https://decodedmusic.com" style={{ color: 'white', textDecoration: 'none', fontSize: '16px' }}>Pricing</a>
         </nav>
 
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>

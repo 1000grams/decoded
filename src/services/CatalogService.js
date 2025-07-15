@@ -18,14 +18,10 @@ class CatalogService {
                 ...options
             });
 
-            if (!response.ok) {
-                throw new Error(`API Error: ${response.status} - ${response.statusText}`);
-            }
-
-            return await response.json();
+            return response.json();
         } catch (error) {
-            console.error(`Catalog API Error (${endpoint}):`, error);
-            throw error;
+            console.error('Error making request:', error);
+            return null;
         }
     }
 
@@ -175,3 +171,5 @@ class CatalogService {
         };
     }
 }
+
+export default CatalogService;
