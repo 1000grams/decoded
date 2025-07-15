@@ -8,7 +8,6 @@ import SpotifyService from './services/SpotifyService.js';
 
 import LandingPage from './components/LandingPage.js';
 import Dashboard from './components/Dashboard.js';
-import CognitoLogin from './components/CognitoLogin.js';
 import MarketingPanel from './components/MarketingPanel.jsx';
 import CatalogPanel from './components/catalog/CatalogPanel.jsx';
 import AnalyticsPanel from './components/AnalyticsPanel.jsx';
@@ -17,7 +16,7 @@ import MarketingHub from './pages/MarketingHub.jsx';
 import PrivateRoute from './components/PrivateRoute';
 import SpotifyModule from './components/SpotifyModule.js';
 
-import { getArtistId, setArtistId, setArtistIdFromUser } from './state/ArtistManager';
+import { getArtistId } from './state/ArtistManager';
 
 import './index.css';
 import './App.css';

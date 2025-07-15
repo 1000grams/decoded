@@ -1,10 +1,9 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SuggestionTile from '../components/SuggestionTile.jsx';
 import { FaChartPie, FaBullhorn, FaCalendarAlt, FaFire } from 'react-icons/fa';
 import cognitoAuthService from '../services/CognitoAuthService';
 import { fetchArtistData } from '../services/ArtistService';
 import { generateContent } from '../services/BedrockService';
-import { getArtistId } from '../state/ArtistManager';
 import './MarketingHub.css';
 
 function MarketingHub() {
@@ -43,9 +42,6 @@ function MarketingHub() {
     // Fetch weekly growth tracking data (mocked for now)
     setWeeklyGrowth({ subscribers: 120, streams: 4500 });
   }, []);
-
-  // Use artistId in API calls or data-fetching logic
-  const artistIdFromState = getArtistId();
 
   return (
     <div

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import styles from './SuggestionTile.module.css';
 
 function SuggestionTile({ icon, children, ...props }) {

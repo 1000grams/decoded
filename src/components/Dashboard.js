@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import './Dashboard.css';
-import SpotifyModule from './SpotifyModule';
 import * as jwtDecode from 'jwt-decode';
-import { getArtistId } from '../state/ArtistManager';
 
 const CognitoDomain = 'https://auth.decodedmusic.com';
 const ClientId = '5pb29tja8gkqm3jb43oimd5qjt';
@@ -12,9 +10,6 @@ const Dashboard = ({ username, onSignOut }) => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Use artistId in API calls or data-fetching logic
-  const artistId = getArtistId();
 
   useEffect(() => {
     const token = localStorage.getItem('cognito_id_token');
