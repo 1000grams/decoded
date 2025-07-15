@@ -1,4 +1,4 @@
-import React from 'react';
+﻿mport React from 'react';
 
 const SignInButton = () => {
   const domain = "https://auth.decodedmusic.com"; // ✅ use Cognito custom domain once validated

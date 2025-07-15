@@ -1,48 +1,64 @@
-# Logs
+﻿# Dependencies
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
-.pnpm-debug.log*
 
-# Dependencies
-node_modules/
-.pnp/
-
-# Build output
-dist/
+# Production build
 build/
-out/
+dist/
 
-# Temporary files
-.temp/
-.tmp/
-*.bak
-*.save
-
-# Environment files
+# Environment variables
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# IDE specific files
-.idea/
+# IDE files
 .vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# OS specific files
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-# Ignore zip build files
-src/*.zip
+# Logs
+logs
+*.log
 
-# Remove stray files
-public/# Python CDK example
-public/# This Amplify build script ensures Node.yaml
-public/Subject: Pitch: “{{track_title}}” by Rue
-*.zip
-decoded/
-decoded-mirror/
-decoded-mirror.bfg-report/
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# AWS credentials (keep sensitive data out)
+aws-credentials.json
+config.json
+
+# Temporary files
+tmp/
+temp/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Build artifacts
+.next/
+out/
+
+# Deployment files
+deploy.sh
+deployment-config.json

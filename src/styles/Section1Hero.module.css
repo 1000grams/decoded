@@ -1,4 +1,10 @@
-.hero {
+﻿* {
+  color: #111 !important;
+  opacity: 1 !important;
+  font-weight: 500;
+}
+
+hero {
   position: relative;
   width: 100%;
   min-height: 600px; /* Ensures a minimum height for the hero section */

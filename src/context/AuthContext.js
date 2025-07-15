@@ -1,56 +1,81 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import cognitoAuthService from '../services/CognitoAuthService';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext();
+// Create context
+const AuthContext = createContext(null);
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [username, setUsername] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+// Custom hook for consuming
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+// API call to check group membership
+const checkArtistGroup = async (email) => {
+  try {
+    const res = await fetch("https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/auth/groupcheck", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    return data.authorized === true;
+  } catch (err) {
+    console.error("❌ Failed to check artist group:", err);
+    return false;
+  }
+};
+
+// AuthProvider component
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);        // Basic user info
+  const [username, setUsername] = useState(null); // New state for username
+  const [authorized, setAuthorized] = useState(false); // Artist group check
   const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // New state for authentication
 
   useEffect(() => {
-    async function checkAuthStatus() {
-      try {
-        const result = await cognitoAuthService.getCurrentUser();
-        if (result.success) {
-          setUser(result.user);
-          setUsername(result.username);
-          setIsAuthenticated(true);
-        }
-      } catch {
-        // ignore
-      }
-      setLoading(false);
-    }
+    const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("mockToken");
 
-    checkAuthStatus();
+    if (storedUser && token) {
+      const parsed = JSON.parse(storedUser);
+      setUser(parsed);
+      setIsAuthenticated(true);
+      const email = parsed.email || parsed.username || 'rdv@decodedmusic.com'; // Ensure fallback values for email
+      checkArtistGroup(email).then((isAuth) => {
+        console.log("✅ Group check:", isAuth); // Debug logging for group check
+        setAuthorized(isAuth);
+      }).finally(() => {
+        setLoading(false);
+      });
+    } else {
+      setIsAuthenticated(false);
+      setLoading(false); // Handle case with no user
+    }
   }, []);
 
-  const signIn = async (email, password) => {
-    const result = await cognitoAuthService.signIn(email, password);
-    if (result.success) {
-      setUser(result.user);
-      setUsername(result.username);
-      setIsAuthenticated(true);
-    }
-    return result;
+  const login = (userObj) => {
+    localStorage.setItem("user", JSON.stringify(userObj));
+    localStorage.setItem("mockToken", "mock-jwt-token");
+    setUser(userObj);
+    setIsAuthenticated(true);
+    checkArtistGroup(userObj.email).then(setAuthorized);
   };
 
-  const signOut = async () => {
-    await cognitoAuthService.signOut();
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("mockToken");
     setUser(null);
-    setUsername('');
+    setAuthorized(false);
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ user, username, isAuthenticated, loading, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, setUser, username, setUsername, login, logout, authorized, loading, isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
-}
+};

@@ -1,4 +1,4 @@
-.featureBlock {
+﻿featureBlock {
   background-color: rgba(255, 255, 255, 0.05); /* Slightly lighter background for the block */
   padding: 1.5rem; /* Adjust padding */
   border-radius: 8px;
@@ -20,7 +20,9 @@
 
 .description {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8); /* Slightly lighter text for body */
+  color: #111 !important;
+  opacity: 1 !important;
+  font-weight: 500;
   margin-bottom: 1.5rem; /* Space before potential button/link inside block */
   flex-grow: 1; /* Push content down if flex container */
 }

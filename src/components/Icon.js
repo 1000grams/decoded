@@ -16,4 +16,4 @@ function Icon({ name, size = '24px', color = 'var(--accent-color)' }) {
   );
 }
 
-export default Icon; 
+export default Icon;

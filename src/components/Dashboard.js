@@ -1,224 +1,174 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import './Dashboard.css';
+import SpotifyModule from './SpotifyModule';
+import * as jwtDecode from 'jwt-decode';
+import { getArtistId } from '../state/ArtistManager';
 
-const Dashboard = ({ user, username, onSignOut }) => {
-    const [dashboardData, setDashboardData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [spotifyConnected, setSpotifyConnected] = useState(false);
+const CognitoDomain = 'https://auth.decodedmusic.com';
+const ClientId = '5pb29tja8gkqm3jb43oimd5qjt';
 
-    useEffect(() => {
-        loadDashboardData();
-    }, []);
+const Dashboard = ({ username, onSignOut }) => {
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const loadDashboardData = async () => {
-        setLoading(true);
-        console.log(' Loading dashboard data...');
+  // Use artistId in API calls or data-fetching logic
+  const artistId = getArtistId();
 
-        try {
-            // Use fallback data for demo
-            const fallbackData = {
-                catalog: {
-                    artist: 'Rue De Vivre',
-                    totalTracks: 40,
-                    totalStreams: 125000,
-                    monthlyRevenue: 1247.89
-                },
-                analytics: {
-                    portfolioValue: '45,782.33',
-                    monthlyRevenue: '1,247.89',
-                    growthRate: '+15.3%',
-                    riskProfile: 'Medium-Low',
-                    spotify: {
-                        monthlyListeners: 8500,
-                        followers: 1250,
-                        recentStreams: { thisMonth: 15000 }
-                    },
-                    topPerformers: [
-                        { title: 'Hump Day', revenue: '2,847', roi: '+18.5%' },
-                        { title: 'Friday Flex', revenue: '2,234', roi: '+12.3%' },
-                        { title: 'Big Fish', revenue: '1,956', roi: '+9.8%' }
-                    ],
-                    recommendations: [
-                        {
-                            priority: 'High',
-                            action: 'Focus on TikTok marketing for viral potential',
-                            timeline: '2-4 weeks',
-                            investment: '$500-1000',
-                            expectedROI: '15-25%'
-                        },
-                        {
-                            priority: 'Medium',
-                            action: 'Expand Spotify playlist placements',
-                            timeline: '1-2 months',
-                            investment: '$300-600',
-                            expectedROI: '10-18%'
-                        }
-                    ]
-                }
-            };
-
-            setDashboardData(fallbackData);
-            console.log(' Dashboard data loaded');
-        } catch (error) {
-            console.error(' Failed to load dashboard data:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleSpotifyConnect = () => {
-        setSpotifyConnected(true);
-        console.log(' Spotify connected (UI simulation)');
-    };
-
-    if (loading) {
-        return (
-            <div className="dashboard-loading">
-                <div className="loading-spinner"></div>
-                <p>Loading your analytics dashboard...</p>
-            </div>
-        );
+  useEffect(() => {
+    const token = localStorage.getItem('cognito_id_token');
+    if (token) {
+      const decoded = jwtDecode(token);
+      console.log("Token expires at:", new Date(decoded.exp * 1000));
     }
+  }, []);
 
+  // Added Cognito group verification
+  useEffect(() => {
+    const token = localStorage.getItem("cognito_id_token");
+    if (token) {
+      const decoded = JSON.parse(atob(token.split('.')[1]));
+      console.log("Cognito groups:", decoded["cognito:groups"]);
+
+      // Check if user belongs to the 'artist' group
+      if (!decoded["cognito:groups"]?.includes("artist")) {
+        console.error("User is not in the required Cognito group: artist");
+        setError("Access denied: You are not authorized to view this dashboard.");
+        setLoading(false);
+        return;
+      }
+
+      // Further check if 'rue_de_vivre' is associated with the 'artist' group
+      if (!decoded["cognito:groups"]?.includes("rue_de_vivre")) {
+        console.error("User is not in the required subgroup: rue_de_vivre");
+        setError("Access denied: You are not authorized to view this dashboard.");
+        setLoading(false);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const token = localStorage.getItem('cognito_id_token');
+
+      if (!token) {
+        setError("No Cognito token found. Redirecting to login...");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/dashboard`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        const data = await res.json();
+
+        setDashboardData(data);
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!localStorage.getItem('cognito_id_token')) {
+    // Ensure proper encoding of redirectUri in Cognito login URL
+    const redirectUri = encodeURIComponent("https://decodedmusic.com/dashboard");
+    const loginUrl = `https://${CognitoDomain}/login?client_id=${ClientId}&response_type=code&scope=openid+email+profile&redirect_uri=${redirectUri}`;
+
+    return <Navigate to={loginUrl} />;
+  }
+
+  if (loading) {
     return (
-        <div className="dashboard-container">
-            {/* Dashboard Header */}
-            <header className="dashboard-header">
-                <div className="dashboard-nav">
-                    <div className="dashboard-logo">
-                        <h1> Rue De Vivre Analytics</h1>
-                    </div>
-                    <div className="user-controls">
-                        <span className="welcome-text">Welcome, {username}</span>
-                        {!spotifyConnected ? (
-                            <button 
-                                onClick={handleSpotifyConnect}
-                                className="spotify-connect-btn"
-                            >
-                                 Connect Spotify
-                            </button>
-                        ) : (
-                            <div className="spotify-status">
-                                 Spotify Connected
-                            </div>
-                        )}
-                        <button onClick={onSignOut} className="sign-out-btn">
-                            Sign Out
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            {/* Dashboard Grid */}
-            <main className="analytics-grid">
-                {/* Portfolio Overview */}
-                <section className="portfolio-card">
-                    <h2> Portfolio Overview</h2>
-                    <div className="portfolio-summary">
-                        <div className="metric-card">
-                            <h3>Portfolio Value</h3>
-                            <span className="value">${dashboardData?.analytics?.portfolioValue}</span>
-                            <span className="growth positive">{dashboardData?.analytics?.growthRate}</span>
-                        </div>
-                        <div className="metric-card">
-                            <h3>Monthly Revenue</h3>
-                            <span className="value">${dashboardData?.analytics?.monthlyRevenue}</span>
-                        </div>
-                        <div className="metric-card">
-                            <h3>Total Tracks</h3>
-                            <span className="value">{dashboardData?.catalog?.totalTracks}</span>
-                        </div>
-                        <div className="metric-card">
-                            <h3>Risk Profile</h3>
-                            <span className="value">{dashboardData?.analytics?.riskProfile}</span>
-                        </div>
-                    </div>
-                    
-                    <div className="top-performers">
-                        <h4> Top Performing Tracks</h4>
-                        <div className="tracks-list">
-                            {dashboardData?.analytics?.topPerformers?.map((track, index) => (
-                                <div key={index} className="track-item">
-                                    <span className="track-name">{track.title}</span>
-                                    <span className="track-revenue">${track.revenue}</span>
-                                    <span className="track-roi positive">
-                                        {track.roi}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Spotify Analytics */}
-                <section className="spotify-card">
-                    <h2> Spotify Analytics</h2>
-                    <div className="spotify-metrics">
-                        <div className="metric-card">
-                            <h3>Monthly Listeners</h3>
-                            <span className="value">
-                                {dashboardData?.analytics?.spotify?.monthlyListeners?.toLocaleString()}
-                            </span>
-                        </div>
-                        <div className="metric-card">
-                            <h3>Followers</h3>
-                            <span className="value">
-                                {dashboardData?.analytics?.spotify?.followers?.toLocaleString()}
-                            </span>
-                        </div>
-                        <div className="metric-card">
-                            <h3>This Month Streams</h3>
-                            <span className="value">
-                                {dashboardData?.analytics?.spotify?.recentStreams?.thisMonth?.toLocaleString()}
-                            </span>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Market Trends */}
-                <section className="trends-card">
-                    <h2> Market Trends</h2>
-                    <div className="trends-overview">
-                        <div className="trend-metric">
-                            <h4> Viral Predictions</h4>
-                            <div className="platform-readiness">
-                                <div className="platform">TikTok: 3 tracks ready</div>
-                                <div className="platform">Instagram: 2 tracks ready</div>
-                                <div className="platform">YouTube: 4 tracks ready</div>
-                            </div>
-                        </div>
-                        
-                        <div className="trend-metric">
-                            <h4> Market Analysis</h4>
-                            <div className="market-score">
-                                Opportunity Score: <strong>75/100</strong>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Investment Recommendations */}
-                <section className="recommendations-card">
-                    <h2> Investment Recommendations</h2>
-                    <div className="recommendations-list">
-                        {dashboardData?.analytics?.recommendations?.map((rec, index) => (
-                            <div key={index} className={`recommendation-card priority-${rec.priority.toLowerCase()}`}>
-                                <div className="rec-header">
-                                    <span className="priority">{rec.priority} Priority</span>
-                                    <span className="timeline">{rec.timeline}</span>
-                                </div>
-                                <div className="rec-action">{rec.action}</div>
-                                <div className="rec-metrics">
-                                    <span className="investment">Investment: {rec.investment}</span>
-                                    <span className="roi">Expected ROI: {rec.expectedROI}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-            </main>
-        </div>
+      <div className="dashboard-loading">
+        <div className="loading-spinner"></div>
+        <p>Loading your artist dashboard...</p>
+        <small>Syncing your latest tracks and fan data...</small>
+      </div>
     );
+  }
+
+  if (error) {
+    return (
+      <div className="dashboard-error">
+        <p>Error loading dashboard data: {error}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <div className="dashboard-nav">
+          <div className="dashboard-logo">
+            <h1>Comprehensive Growth Dashboard</h1>
+          </div>
+          <div className="user-controls">
+            <span className="welcome-text">Welcome back, {username}</span>
+            <button onClick={onSignOut} className="sign-out-btn">
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main className="analytics-grid">
+        <section className="portfolio-card">
+          <h2>Your Music Business</h2>
+          <div className="portfolio-summary">
+            <div className="metric-card">
+              <h3>Total Portfolio Value</h3>
+              <span className="value">${dashboardData?.analytics?.portfolioValue}</span>
+            </div>
+            <div className="metric-card">
+              <h3>Monthly Income</h3>
+              <span className="value">${dashboardData?.analytics?.monthlyRevenue}</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="spotify-card">
+          <h2>Spotify Insights</h2>
+          <div className="spotify-summary">
+            <div className="metric-card">
+              <h3>Followers</h3>
+              <span className="value">{dashboardData?.spotify?.profile?.followers}</span>
+            </div>
+            <div className="metric-card">
+              <h3>Popularity</h3>
+              <span className="value">{dashboardData?.spotify?.profile?.popularity}/100</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="catalog-card">
+          <h2>Catalog Overview</h2>
+          <div className="catalog-summary">
+            <div className="metric-card">
+              <h3>Total Works</h3>
+              <span className="value">{dashboardData?.catalog?.totalWorks}</span>
+            </div>
+            <div className="metric-card">
+              <h3>Spotify Linked</h3>
+              <span className="value">{dashboardData?.catalog?.spotifyLinked}</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
 };
 
 export default Dashboard;

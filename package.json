@@ -1,36 +1,34 @@
 {
-  "name": "decoded-music-landing-page",
-  "version": "0.1.0",
+  "name": "decodedmusic-frontend",
+  "version": "1.0.0",
   "private": true,
-  "homepage": ".",
   "type": "module",
   "dependencies": {
-    "@aws-sdk/client-bedrock-runtime": "^3.830.0",
-    "@aws-sdk/client-lambda": "^3.830.0",
-    "@aws-sdk/client-s3": "^3.830.0",
-    "@aws-sdk/client-secrets-manager": "^3.830.0",
-    "aws-sdk": "^2.1692.0",
-    "ejs": "^3.1.10",
-    "express": "^5.1.0",
-    "express-session": "^1.18.1",
-    "node-fetch": "^2.7.0",
-    "oidc-client-ts": "^3.3.0",
+    "@aws-sdk/client-apigatewayv2": "^3.844.0",
+    "@aws-sdk/client-lambda": "^3.844.0",
+    "amazon-cognito-identity-js": "^6.3.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
-    "react-oidc-context": "^3.3.0",
-    "react-router-dom": "^6.23.0",
+    "react-router-dom": "^6.30.1",
     "react-scripts": "5.0.1"
   },
   "scripts": {
     "build": "react-scripts build",
-    "content-agent": "node scripts/dailyContentAgent.js",
+    "build-with-dashboard": "npm run integrate-dashboard && npm run build",
+    "deploy": "npm run build-with-dashboard && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1",
+    "deploy-complete": "npm run fix-dashboard && npm run build && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1",
     "eject": "react-scripts eject",
+    "fix-dashboard": "powershell -ExecutionPolicy Bypass -File ../FIXED-DASHBOARD-GENERATOR.ps1 && npm run integrate",
+    "fix-powershell": "powershell -ExecutionPolicy Bypass -File ../FIXED-FRONTEND-GENERATOR.ps1",
+    "health-check": "echo 'Check http://localhost:3000/health.json after running npm start'",
+    "integrate": "node scripts/complete-integration.js",
+    "integrate-dashboard": "node scripts/integrate-dashboard.js",
     "lint": "eslint . --fix",
-    "research": "node scripts/musicManagementResearcher.js",
-    "shorts-pipeline": "node scripts/youtubeShortsPipeline.js",
     "start": "react-scripts start",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "test-apis": "echo 'Open http://localhost:3000/api-test.html after running npm start'",
+    "test-backend": "node scripts/test-backend-connection.js"
   },
   "eslintConfig": {
     "extends": [
@@ -38,32 +36,23 @@
       "react-app/jest"
     ]
   },
+  "homepage": ".",
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ]
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.28.0",
-    "@babel/preset-react": "^7.27.1",
-    "@eslint/css": "^0.9.0",
     "@eslint/js": "^9.30.1",
-    "@eslint/json": "^0.12.0",
-    "@eslint/markdown": "^6.6.0",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
     "eslint": "^8.57.1",
-    "eslint-plugin-react": "^7.37.5",
-    "globals": "^16.3.0",
-    "typescript": "4.9.5"
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.37.5"
   }
 }

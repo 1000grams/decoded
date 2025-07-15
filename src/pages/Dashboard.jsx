@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import LogoutButton from '../components/LogoutButton.jsx';
 
 const Dashboard = () => {
@@ -7,26 +7,37 @@ const Dashboard = () => {
   const [apiResponse, setApiResponse] = useState(null);
 
   useEffect(() => {
-    // Step 1: Parse token from URL hash
-    const hash = window.location.hash;
-    const idToken = new URLSearchParams(hash.substring(1)).get('id_token');
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
 
-    if (idToken) {
-      localStorage.setItem('cognito_id_token', idToken);
-      window.history.replaceState({}, document.title, window.location.pathname);
-      setToken(idToken);
+    if (code) {
+      fetch("https://decodedmusic.com/api/auth/exchange", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          localStorage.setItem("authToken", data.access_token);
+          window.location.replace("/dashboard");
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('authToken');
+    if (!storedToken) {
+      window.location.href = '/login';
     } else {
-      const stored = localStorage.getItem('cognito_id_token');
-      if (stored) setToken(stored);
+      setToken(storedToken);
     }
   }, []);
 
   useEffect(() => {
     if (token) {
-      // Step 2: Use token to call secured backend (e.g. /api/dashboard)
       fetch("https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/dashboard", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('cognito_id_token')}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       })
@@ -41,11 +52,16 @@ const Dashboard = () => {
     }
   }, [token]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/login';
+  };
+
   if (!token) return <p>Loading token...</p>;
 
   return (
     <div className="dashboard">
-      <LogoutButton />
+      <button onClick={handleLogout} className="logout-button">Logout</button>
       <h2>Welcome to your dashboard</h2>
       {userEmail && <p>Logged in as: {userEmail}</p>}
       {apiResponse && (

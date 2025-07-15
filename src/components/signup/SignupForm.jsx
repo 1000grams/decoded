@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿mport React, { useState } from "react";
 
 export default function SignupForm({ type }) {
   const [form, setForm] = useState({

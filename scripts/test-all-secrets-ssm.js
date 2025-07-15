@@ -15,33 +15,33 @@ const ssmParams = ["/decoded/s3Bucket"];
 
 exports.handler = async () => {
   try {
-    // \ud83d\udd0d Fetch and log SSM Parameters
+    // 🔍 Fetch and log SSM Parameters
     for (const name of ssmParams) {
       try {
         const param = await ssm.getParameter({
           Name: name,
           WithDecryption: false,
         }).promise();
-        console.log(`\u2705 SSM Param [${name}]:`, param.Parameter.Value);
+        console.log(`✅ SSM Param [${name}]:`, param.Parameter.Value);
       } catch (err) {
-        console.error(`\u274c SSM Param [${name}] error:`, err.message);
+        console.error(`❌ SSM Param [${name}] error:`, err.message);
       }
     }
 
-    // \ud83d\udd0d Fetch and log each secret
+    // 🔍 Fetch and log each secret
     for (const name of secretNames) {
       try {
         const secret = await secretsManager.getSecretValue({
           SecretId: name,
         }).promise();
 
-        const parsed = secret.SecretString.startsWith("{")
+        const parsed = secret.SecretString && secret.SecretString.startsWith("{")
           ? JSON.parse(secret.SecretString)
           : secret.SecretString;
 
-        console.log(`\u2705 Secret [${name}]:`, parsed);
+        console.log(`✅ Secret [${name}]:`, parsed);
       } catch (err) {
-        console.error(`\u274c Secret [${name}] error:`, err.message);
+        console.error(`❌ Secret [${name}] error:`, err.message);
       }
     }
 
@@ -50,7 +50,7 @@ exports.handler = async () => {
       body: JSON.stringify({ message: "Secrets + Params test complete" }),
     };
   } catch (err) {
-    console.error("\ud83d\udca5 Unexpected error:", err.message);
+    console.error("💥 Unexpected error:", err.message);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: err.message }),

@@ -18,14 +18,10 @@ class CatalogService {
                 ...options
             });
 
-            if (!response.ok) {
-                throw new Error(`API Error: ${response.status} - ${response.statusText}`);
-            }
-
-            return await response.json();
+            return response.json();
         } catch (error) {
-            console.error(`Catalog API Error (${endpoint}):`, error);
-            throw error;
+            console.error('Error making request:', error);
+            return null;
         }
     }
 
@@ -117,4 +113,63 @@ class CatalogService {
                     releaseDate: '2024-02-01',
                     streams: 38000,
                     revenue: 2234,
-                    platforms: ['Spotify', 'Apple
+                    platforms: ['Spotify', 'Apple Music', 'YouTube'],
+                    mood: 'upbeat',
+                    genre: 'Dancehall',
+                    duration: '3:40',
+                    bpm: 135,
+                    key: 'D Minor'
+                },
+                {
+                    id: 3,
+                    title: 'Big Fish',
+                    album: 'Weekly Vibes',
+                    releaseDate: '2024-03-15',
+                    streams: 42000,
+                    revenue: 1987,
+                    platforms: ['Spotify', 'Apple Music', 'YouTube'],
+                    mood: 'confident',
+                    genre: 'Dancehall',
+                    duration: '3:35',
+                    bpm: 130,
+                    key: 'E Minor'
+                }
+            ],
+            analytics: {
+                portfolioValue: '45,782.33',
+                monthlyRevenue: '1,247.89',
+                growthRate: '+15.3%',
+                riskProfile: 'Medium-Low',
+                spotify: {
+                    monthlyListeners: 8500,
+                    followers: 1250,
+                    recentStreams: { thisMonth: 15000 }
+                },
+                topPerformers: [
+                    { title: 'Hump Day', revenue: '2,847', roi: '+18.5%' },
+                    { title: 'Friday Flex', revenue: '2,234', roi: '+12.3%' },
+                    { title: 'Big Fish', revenue: '1,956', roi: '+9.8%' }
+                ],
+                recommendations: [
+                    {
+                        priority: 'High',
+                        action: 'Focus on TikTok marketing for viral potential',
+                        timeline: '2-4 weeks',
+                        investment: '$500-1000',
+                        expectedROI: '15-25%'
+                    },
+                    {
+                        priority: 'Medium',
+                        action: 'Expand Spotify playlist placements',
+                        timeline: '1-2 months',
+                        investment: '$300-600',
+                        expectedROI: '10-18%'
+                    }
+                ]
+            },
+            lastUpdated: new Date().toISOString()
+        };
+    }
+}
+
+export default CatalogService;

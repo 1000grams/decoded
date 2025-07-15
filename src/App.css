@@ -1,4 +1,4 @@
-.App {
+﻿App {
   text-align: center;
 }
 
@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffff !important;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #111111 !important;
 }
 
 .App-link {
@@ -41,4 +41,13 @@
   height: 40px;
   width: auto;
   display: inline-block;
+}
+
+/* nav bar */
+.main-nav {
+  display: flex;
+  gap: 1rem;
+  background: #222;
+  padding: 0.5rem;
+  align-items: center;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PageLayout from '../layouts/PageLayout.js';
-import logo from '../assets/logo.png'; // Adjust path if needed
+import logo from '../assets/logo.png';
 
 const industryBuzzSummary = `This Week’s Industry Buzz: Summer Solstice
 
@@ -50,6 +50,21 @@ function BuzzPage() {
           <p style={{ fontSize: '1.15rem', color: '#60a5fa', marginBottom: 0, fontWeight: 600 }}>
             📲 Follow and Connect on <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#60a5fa', textDecoration: 'underline', fontWeight: 700 }}>discord</a>
           </p>
+          <a
+            href="https://auth.decodedmusic.com/login?client_id=5pb29tja8gkqm3jb43oimd5qjt&response_type=token&scope=email+openid+profile&redirect_uri=https://decodedmusic.com/dashboard"
+            style={{
+              background: 'linear-gradient(135deg, #00ff88 0%, #00d4ff 100%)',
+              border: 'none',
+              color: '#000',
+              padding: '0.5rem 1.5rem',
+              borderRadius: '0.5rem',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              textDecoration: 'none'
+            }}
+          >
+            🔑 Login
+          </a>
         </div>
       </section>
       <section style={{ background: 'linear-gradient(135deg, #1e293b 0%, #111827 100%)', color: '#fff', padding: '2.5rem 0' }}>

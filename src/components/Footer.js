@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-6 mt-8">
+    <footer className="bg-gray-900 text-orange-500 text-xs py-6 mt-8">
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         <div className="mb-4 md:mb-0 text-center md:text-left">
           &copy; {new Date().getFullYear()}&nbsp;
@@ -13,7 +13,8 @@ export default function Footer() {
             rel="noopener noreferrer"
           >
             DecodedMusic.com
-          </a>{" "}| Service Provided by AHA LLC
+          </a>{" "}
+          | Service Provided by AHA LLC
           <br />
           Contact:&nbsp;
           <a href="mailto:ops@decodedmusic.com" className="underline">
