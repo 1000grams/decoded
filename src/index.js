@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { AuthProvider } from "./context/AuthContext"; // Updated to reference AuthContext.js
+import App from "./App.js";
+import { AuthProvider } from "./context/AuthContext.js"; // Updated to include .js extension
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

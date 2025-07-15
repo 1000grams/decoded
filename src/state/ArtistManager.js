@@ -1,4 +1,4 @@
-import cognitoAuthService from '../services/CognitoAuthService';
+import cognitoAuthService from '../services/CognitoAuthService.js';
 
 let artistId = "defaultArtistId"; // Replace with dynamic logic if needed
 

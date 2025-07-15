@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getArtistId } from '../state/ArtistManager';
+import { getArtistId } from '../state/ArtistManager.js'; // Added .js extension for strict module resolution
 
 function SpotifyModule() {
   const [data, setData] = useState(null);

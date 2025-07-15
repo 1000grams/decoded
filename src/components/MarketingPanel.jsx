@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getArtistId } from '../state/ArtistManager';
+import { getArtistId, REACT_APP_BACKEND_API_URL } from '../state/ArtistManager.js';
 import axios from 'axios';
 
 export default function MarketingPanel({ user }) {
@@ -9,7 +9,7 @@ export default function MarketingPanel({ user }) {
   useEffect(() => {
     const fetchTrendData = async () => {
       try {
-        const response = await axios.get('https://6msaiqit9j.execute-api.us-east-1.amazonaws.com/DecodedMusicBackend', {
+        const response = await axios.get(`${REACT_APP_BACKEND_API_URL}/spotify-data`, {
           params: { artistId },
         });
         setTrendData(response.data);

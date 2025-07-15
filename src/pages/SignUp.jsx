@@ -1,5 +1,5 @@
-﻿mport React from "react";
-import SignupCTAExample from "../components/signup/SignupCTAExample";
+﻿import React from "react";
+import SignupForm from "../components/signup/SignupForm";
 
 export default function SignUp() {
   return (
@@ -28,7 +28,7 @@ export default function SignUp() {
           color: "#222", // Make text dark for contrast
         }}
       >
-        <SignupCTAExample />
+        <SignupForm />
       </div>
     </div>
   );

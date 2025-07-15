@@ -1,7 +1,5 @@
-﻿mport React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { DashboardAPI } from '../api/dashboard';
-
-const API_BASE = process.env.REACT_APP_API_BASE || '/api/dashboard';
 
 function Accounting() {
   const [summary, setSummary] = useState(null);
@@ -19,7 +17,7 @@ function Accounting() {
   }, []);
 
   const downloadCsv = () => {
-    window.location.href = `${API_BASE}/accounting/export?artist_id=RueDeVivre`;
+    window.location.href = `${DashboardAPI.API_ENDPOINTS.DASHBOARD_BASE}/accounting/export?artist_id=RueDeVivre`;
   };
 
   return (
@@ -40,11 +38,7 @@ function Accounting() {
             <div>Net Revenue: ${(summary.netRevenue / 100).toFixed(2)}</div>
           </div>
         ) : (
-          <svg width="300" height="150">
-            <rect x="10" y="50" width="40" height="80" fill="#32C1ED" />
-            <rect x="70" y="30" width="40" height="100" fill="#32C1ED" />
-            <rect x="130" y="70" width="40" height="60" fill="#32C1ED" />
-          </svg>
+          <div>Loading...</div>
         )}
       </div>
     </div>

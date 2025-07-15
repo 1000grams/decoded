@@ -6,6 +6,18 @@ import content from '../content/landingPage.json'; // Import content
 import SuggestionTile from '../components/SuggestionTile.jsx';
 import { FaDollarSign, FaChartLine, FaGem } from 'react-icons/fa';
 
+const subscriptionTiers = [
+  { name: 'Artist Starter', price: 19, description: 'Perfect for emerging artists.' },
+  { name: 'Pro Creator', price: 89, description: 'Ideal for professional creators.' },
+  { name: 'Industry Pro', price: 249, description: 'For industry professionals.' },
+];
+
+const brandPricingTiers = [
+  { name: 'Basic License', price: 49, description: 'Access to 10 tracks per month.' },
+  { name: 'Premium License', price: 149, description: 'Unlimited track access with premium support.' },
+  { name: 'Enterprise License', price: 499, description: 'Custom solutions for large-scale needs.' },
+];
+
 function Section4DynamicPricing() {
   return (
     <section className={styles.section} id="pricing-section">
@@ -56,6 +68,47 @@ function Section4DynamicPricing() {
              </ul>
         </div>
 
+        {/* Artist Subscription Plans */}
+        <div className={styles.subscriptionTiers}>
+          <h3 className={styles.headline}>For Artists</h3>
+          <div className={styles.tiersGrid}>
+            {subscriptionTiers.map((tier, index) => (
+              <div key={index} className={`${styles.tierCard} card`}>
+                <h4 className={styles.tierName}>{tier.name}</h4>
+                <p className={styles.tierPrice}>${tier.price}/month</p>
+                <p className={styles.tierDescription}>{tier.description}</p>
+                <Button variant="outline" color="accent">Choose {tier.name}</Button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Brand Licensing Plans */}
+        <div className={styles.brandPricingTiers}>
+          <h3 className={styles.headline}>For Brands</h3>
+          <div className={styles.tiersGrid}>
+            {brandPricingTiers.map((tier, index) => (
+              <div key={index} className={`${styles.tierCard} card`}>
+                <h4 className={styles.tierName}>{tier.name}</h4>
+                <p className={styles.tierPrice}>${tier.price}/month</p>
+                <p className={styles.tierDescription}>{tier.description}</p>
+                <Button variant="outline" color="accent">Explore {tier.name}</Button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Sample Tracks Section */}
+        <div className={styles.sampleTracks}>
+          <h3 className={styles.headline}>Sample Tracks</h3>
+          <p>Explore a curated selection of tracks available for licensing.</p>
+          <div className={styles.trackList}>
+            {/* Replace with dynamic track data */}
+            <div className={styles.trackItem}>Track 1 - Artist Name</div>
+            <div className={styles.trackItem}>Track 2 - Artist Name</div>
+            <div className={styles.trackItem}>Track 3 - Artist Name</div>
+          </div>
+        </div>
 
         <div className={styles.finalCta}>
            <Button variant="fill" color="accent" href={content.dynamicPricing.finalCtaHref}>

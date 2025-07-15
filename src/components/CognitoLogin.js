@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import cognitoAuthService from '../services/CognitoAuthService';
+import cognitoAuthService from '../services/CognitoAuthService.js';
 
 const CognitoLogin = ({ onAuthSuccess }) => {
     const [email, setEmail] = useState('');

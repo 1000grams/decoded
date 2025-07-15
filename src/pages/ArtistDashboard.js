@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DashboardAPI } from '../api/dashboard.js';
+import { DashboardAPI } from '../api/apiconfig.js';
 import { getCognitoTokenFromUrl } from '../utils/getCognitoToken.js';
 import SpotifyModule from '../components/SpotifyModule.js';
 import LogoutButton from '../components/LogoutButton.jsx';
@@ -19,48 +19,12 @@ function ArtistDashboard() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Cognito token extraction and dashboard API call
     const token = getCognitoTokenFromUrl();
     if (token) {
-      // Accounting endpoint
-      fetch(`${process.env.REACT_APP_DASHBOARD_ACCOUNTING}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => console.log('Dashboard:', data));
-      // Spotify endpoint
-      fetch(`${process.env.REACT_APP_SPOTIFY_API_URL}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => console.log('Spotify:', data));
+      DashboardAPI.getAccounting({ artistId: 'RueDeVivre' })
+        .then((data) => setAccounting(data))
+        .catch((err) => setError(err.message));
     }
-
-    // Handle Spotify code in URL (Authorization Code Flow)
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    if (code) {
-      // Exchange code for token (should be done via backend API)
-      // Example: await fetch('/api/spotify/exchange', { method: 'POST', body: JSON.stringify({ code }) })
-      // For now, just clear the code from the URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-      // You would store the token in localStorage after exchange
-    }
-
-    async function loadData() {
-      try {
-        const data = await DashboardAPI.getAccounting({ artistId: 'RueDeVivre' });
-        setAccounting(data);
-      } catch (err) {
-        setError('Failed to load dashboard data.');
-        console.error('dashboard fetch error', err);
-      }
-    }
-    loadData();
   }, []);
 
   const spotifyToken = window.localStorage.getItem('spotify_token');
@@ -93,12 +57,14 @@ function ArtistDashboard() {
         <p>You are logged in.</p>
         <LogoutButton />
         {error && <div style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
-        {accounting && (
+        {accounting ? (
           <div style={{ marginTop: '1rem' }}>
             <div>Total Revenue: {(accounting.totalRevenue / 100).toFixed(2)}</div>
             <div>Total Expenses: {(accounting.totalExpenses / 100).toFixed(2)}</div>
             <div>Net Revenue: {(accounting.netRevenue / 100).toFixed(2)}</div>
           </div>
+        ) : (
+          <p>Loading...</p>
         )}
       </div>
     </div>

@@ -6,10 +6,10 @@ console.log(' Fixing all CORS, service, and manifest issues...');
 console.log('============================================================');
 
 function copyGeneratedFiles() {
-    // Copy dashboard files from parent directory to public folder
+    // Copy dashboard files from the frontend/scripts directory to public folder
     const generatedFiles = [
-        { from: '../dashboard.html', to: 'public/dashboard.html' },
-        { from: '../dashboard.js', to: 'public/dashboard.js' },
+        { from: 'scripts/FRONTEND INTEGRATION.html', to: 'public/dashboard.html' },
+        { from: '../apiconfig.js', to: 'public/apiconfig.js' },
         { from: '../dashboard.css', to: 'public/dashboard.css' },
         { from: '../test-dashboard.html', to: 'public/test-dashboard.html' }
     ];
@@ -56,17 +56,18 @@ function createAPITestPage() {
     
     <script>
     const baseURL = 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
+    const artistId = localStorage.getItem('artist_id') || 'defaultArtistId'; // Dynamically fetch artist ID
     
     async function testAllAPIs() {
         const results = document.getElementById('results');
         results.innerHTML = '<h3> Testing all APIs...</h3>';
         
         const endpoints = [
-            { name: 'Catalog API', url: '/catalog?artistId=ruedevivre' },
-            { name: 'Analytics API', url: '/analytics?artistId=ruedevivre' },
-            { name: 'Portfolio API', url: '/accounting?artistId=ruedevivre' },
-            { name: 'Spotify API', url: '/spotify?artistId=ruedevivre' },
-            { name: 'Trends API', url: '/trends?artistId=ruedevivre' }
+            { "name": "Catalog API", "url": \`/catalog?artistId=\${artistId}\` },
+            { "name": "Analytics API", "url": \`/analytics?artistId=\${artistId}\` },
+            { "name": "Portfolio API", "url": \`/portfolio?artistId=\${artistId}\` }, // Corrected from /accounting to /portfolio
+            { "name": "Spotify API", "url": \`/spotify?artistId=\${artistId}\` },
+            { "name": "Trends API", "url": \`/trends?artistId=\${artistId}\` }
         ];
         
         for (const endpoint of endpoints) {
@@ -78,12 +79,12 @@ function createAPITestPage() {
     
     async function testCatalogOnly() {
         document.getElementById('results').innerHTML = '<h3> Testing Catalog API...</h3>';
-        await testEndpoint({ name: 'Catalog API', url: '/catalog?artistId=ruedevivre' });
+        await testEndpoint({ "name": "Catalog API", "url": \`/catalog?artistId=\${artistId}\` });
     }
     
     async function testAnalyticsOnly() {
         document.getElementById('results').innerHTML = '<h3> Testing Analytics API...</h3>';
-        await testEndpoint({ name: 'Analytics API', url: '/analytics?artistId=ruedevivre' });
+        await testEndpoint({ "name": "Analytics API", "url": \`/analytics?artistId=\${artistId}\` });
     }
     
     async function testEndpoint(endpoint) {

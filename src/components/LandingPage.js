@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
+import { getCognitoTokenFromUrl } from '../utils/getCognitoToken.js'; // Added .js extension for strict module resolution
 import './LandingPage.css';
 
 const LandingPage = () => {

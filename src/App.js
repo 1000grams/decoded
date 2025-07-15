@@ -2,22 +2,22 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.js';
 
-import CatalogService from './services/CatalogService';
-import AnalyticsService from './services/AnalyticsService';
+import CatalogService from './services/CatalogService.js';
+import AnalyticsService from './services/AnalyticsService.js';
 import SpotifyService from './services/SpotifyService.js';
 
 import LandingPage from './components/LandingPage.js';
-import Dashboard from './components/Dashboard.js';
+import Dashboard from './components/Dashboard.js'; // Corrected import path for Dashboard
 import CognitoLogin from './components/CognitoLogin.js';
 import MarketingPanel from './components/MarketingPanel.jsx';
 import CatalogPanel from './components/catalog/CatalogPanel.jsx';
 import AnalyticsPanel from './components/AnalyticsPanel.jsx';
-import BuzzPage from './pages/BuzzPage';
+import BuzzPage from './pages/BuzzPage.js'; // Added .js extension for strict module resolution
 import MarketingHub from './pages/MarketingHub.jsx';
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute.js'; // Added .js extension for strict module resolution
 import SpotifyModule from './components/SpotifyModule.js';
 
-import { getArtistId, setArtistId, setArtistIdFromUser } from './state/ArtistManager';
+import { getArtistId, setArtistId, setArtistIdFromUser } from './state/ArtistManager.js'; // Added .js extension for strict module resolution
 
 import './index.css';
 import './App.css';

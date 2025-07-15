@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import './Dashboard.css';
-import SpotifyModule from './SpotifyModule';
+import SpotifyModule from './SpotifyModule.js'; // Added .js extension for strict module resolution
 import * as jwtDecode from 'jwt-decode';
-import { getArtistId } from '../state/ArtistManager';
+import { getArtistId } from '../state/ArtistManager.js'; // Added .js extension for strict module resolution
+import { DashboardAPI } from '../api/apiconfig';
 
 const CognitoDomain = 'https://auth.decodedmusic.com';
 const ClientId = '5pb29tja8gkqm3jb43oimd5qjt';
@@ -50,26 +51,8 @@ const Dashboard = ({ username, onSignOut }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem('cognito_id_token');
-
-      if (!token) {
-        setError("No Cognito token found. Redirecting to login...");
-        setLoading(false);
-        return;
-      }
-
       try {
-        const res = await fetch(`https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod/dashboard`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        });
-
-        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
-        const data = await res.json();
-
+        const data = await DashboardAPI.getAnalytics({ artistId });
         setDashboardData(data);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -80,7 +63,7 @@ const Dashboard = ({ username, onSignOut }) => {
     };
 
     fetchData();
-  }, []);
+  }, [artistId]);
 
   if (!localStorage.getItem('cognito_id_token')) {
     // Ensure proper encoding of redirectUri in Cognito login URL

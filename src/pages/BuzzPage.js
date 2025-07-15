@@ -76,6 +76,42 @@ function BuzzPage() {
           <pre style={{ whiteSpace: 'pre-wrap', fontSize: '1.25rem', background: '#222b3a', color: '#e0e7ef', padding: '2rem', borderRadius: 16, lineHeight: 1.8, boxShadow: '0 2px 16px #2563eb22', fontFamily: 'Georgia, serif', fontWeight: 500 }}>{industryBuzzSummary}</pre>
         </div>
       </section>
+      <section style={{ background: '#1e293b', color: '#fff', padding: '2rem 0', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>Stay in the Loop with Decoded!</h2>
+        <p style={{ fontSize: '1rem', marginBottom: '1.5rem' }}>Get the latest buzz, updates, and exclusive insights delivered straight to your inbox.</p>
+        <form style={{ maxWidth: '400px', margin: '0 auto' }} onSubmit={(e) => {
+          e.preventDefault();
+          alert('Thank you for subscribing!');
+        }}>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            required
+            style={{
+              width: '100%',
+              padding: '0.8rem',
+              borderRadius: '8px',
+              border: '1px solid #2563eb',
+              marginBottom: '1rem',
+              fontSize: '1rem'
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              background: '#2563eb',
+              color: '#fff',
+              padding: '0.8rem 1.5rem',
+              borderRadius: '8px',
+              border: 'none',
+              fontSize: '1rem',
+              cursor: 'pointer'
+            }}
+          >
+            Subscribe
+          </button>
+        </form>
+      </section>
     </PageLayout>
   );
 }
