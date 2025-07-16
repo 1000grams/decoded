@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getArtistId } from '../state/ArtistManager.js'; // Added .js extension for strict module resolution
-import { runGrowthDashboard } from '../scripts/growth-dashboard-wrapper.js'; // Added .js extension for strict module resolution
+import { getArtistId } from '../state/ArtistManager.js';
+import { runGrowthDashboard } from '../scripts/growth-dashboard-wrapper.js';
 
 export default function AnalyticsPanel({ user }) {
   const artistId = getArtistId();

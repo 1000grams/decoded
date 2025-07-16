@@ -4,7 +4,7 @@ import './Dashboard.css';
 import SpotifyModule from './SpotifyModule.js'; // Added .js extension for strict module resolution
 import * as jwtDecode from 'jwt-decode';
 import { getArtistId } from '../state/ArtistManager.js'; // Added .js extension for strict module resolution
-import { DashboardAPI } from '../api/apiconfig';
+import { DashboardAPI } from '../api/apiconfig.js';
 
 const CognitoDomain = 'https://auth.decodedmusic.com';
 const ClientId = '5pb29tja8gkqm3jb43oimd5qjt';

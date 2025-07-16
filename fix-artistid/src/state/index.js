@@ -1,13 +1,13 @@
-import cognitoAuthService from '../services/CognitoAuthService';
+const cognitoAuthService = require('../services/CognitoAuthService');
 
 let artistId = "defaultArtistId"; // Replace with dynamic logic if needed
 
-export const getArtistId = () => artistId;
-export const setArtistId = (newId) => {
+const getArtistId = () => artistId;
+const setArtistId = (newId) => {
   artistId = newId;
 };
 
-export const setArtistIdFromUser = async () => {
+const setArtistIdFromUser = async () => {
   const user = await cognitoAuthService.getCurrentUser();
   const email = user.email;
   const artistId = mapEmailToArtistId(email);
@@ -21,3 +21,9 @@ function mapEmailToArtistId(email) {
   };
   return mapping[email] || 'defaultArtistId';
 }
+
+module.exports = {
+  getArtistId,
+  setArtistId,
+  setArtistIdFromUser
+};

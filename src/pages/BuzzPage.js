@@ -51,7 +51,7 @@ function BuzzPage() {
             📲 Follow and Connect on <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#60a5fa', textDecoration: 'underline', fontWeight: 700 }}>discord</a>
           </p>
           <a
-            href="https://auth.decodedmusic.com/login?client_id=5pb29tja8gkqm3jb43oimd5qjt&response_type=token&scope=email+openid+profile&redirect_uri=https://decodedmusic.com/dashboard"
+            href="https://auth.decodedmusic.com/login?client_id=5pb29tja8gkqm3jb43oimd5qjt&response_type=code&scope=openid+email+profile&redirect_uri=https://decodedmusic.com/dashboard"
             style={{
               background: 'linear-gradient(135deg, #00ff88 0%, #00d4ff 100%)',
               border: 'none',

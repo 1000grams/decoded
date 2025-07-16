@@ -7,6 +7,7 @@
     "@aws-sdk/client-apigatewayv2": "^3.844.0",
     "@aws-sdk/client-lambda": "^3.844.0",
     "amazon-cognito-identity-js": "^6.3.15",
+    "path-browserify": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
