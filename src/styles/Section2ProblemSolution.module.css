@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿* Use variables from global.css */
+=======
+/* Use variables from global.css */
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 .section {
   padding: 3rem 1rem; /* Use global variable */
   min-height: 480px;
@@ -42,9 +46,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+<<<<<<< HEAD
   color: #111 !important;
   opacity: 1 !important;
   font-weight: 500;
+=======
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 }
 /* Keep distinct borders if desired, example: */
 /* .problemBlock { border: 1px solid rgba(255, 0, 0, 0.2); } */

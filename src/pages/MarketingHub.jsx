@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿import React, { useEffect, useState } from 'react';
 import SuggestionTile from '../components/SuggestionTile.jsx';
 import { FaChartPie, FaBullhorn, FaCalendarAlt, FaFire } from 'react-icons/fa';
@@ -64,6 +65,13 @@ function MarketingHub() {
     ]);
   }, []);
 
+=======
+import React from 'react';
+import SuggestionTile from '../components/SuggestionTile.jsx';
+import { FaChartPie, FaBullhorn, FaCalendarAlt, FaFire } from 'react-icons/fa';
+
+function MarketingHub() {
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   return (
     <div
       style={{
@@ -74,7 +82,10 @@ function MarketingHub() {
         padding: '0',
       }}
     >
+<<<<<<< HEAD
       {/* Header Section */}
+=======
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
       <section
         style={{
           padding: '4rem 0 2rem 0',
@@ -93,6 +104,7 @@ function MarketingHub() {
             textShadow: '0 4px 32px #2563eb55, 0 2px 0 #fff2',
           }}
         >
+<<<<<<< HEAD
           Marketing Plan and Content Plan
         </h1>
       </section>
@@ -187,6 +199,22 @@ function MarketingHub() {
       </section>
 
       {/* Feature Cards Section */}
+=======
+          Marketing Hub
+        </h1>
+        <p
+          style={{
+            fontSize: '1.3rem',
+            color: '#e0e7ef',
+            maxWidth: 700,
+            margin: '0 auto 2.5rem auto',
+            fontWeight: 500,
+          }}
+        >
+          All your campaign data, tools, and insights—decoded for growth.
+        </p>
+      </section>
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
       <section
         style={{
           display: 'flex',
@@ -273,6 +301,7 @@ function MarketingHub() {
           <p style={{ color: '#222', fontSize: '1rem' }}>Ride the wave—automatically boost what’s hot.</p>
         </div>
       </section>
+<<<<<<< HEAD
 
       {/* Suggestion Tiles Section */}
       <div style={{ display: 'flex', gap: '1.2rem', margin: '2.5rem 0 0 0', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -333,6 +362,22 @@ function MarketingHub() {
           </tbody>
         </table>
       </section>
+=======
+      <div style={{ display: 'flex', gap: '1.2rem', margin: '2.5rem 0 0 0', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <SuggestionTile icon={<FaChartPie />}>
+          Unified campaign analytics
+        </SuggestionTile>
+        <SuggestionTile icon={<FaBullhorn />}>
+          Multi-channel marketing
+        </SuggestionTile>
+        <SuggestionTile icon={<FaCalendarAlt />}>
+          Automated scheduling
+        </SuggestionTile>
+        <SuggestionTile icon={<FaFire />}>
+          Real-time trend insights
+        </SuggestionTile>
+      </div>
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
     </div>
   );
 }

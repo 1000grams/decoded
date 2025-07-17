@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿mport React from "react";
+=======
+import React from "react";
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 import TrackCard from "./TrackCard";
 
 export default function TrackGrid({ tracks = [] }) {

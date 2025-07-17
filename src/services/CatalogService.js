@@ -18,10 +18,21 @@ class CatalogService {
                 ...options
             });
 
+<<<<<<< HEAD
             return response.json();
         } catch (error) {
             console.error('Error making request:', error);
             return null;
+=======
+            if (!response.ok) {
+                throw new Error(`API Error: ${response.status} - ${response.statusText}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error(`Catalog API Error (${endpoint}):`, error);
+            throw error;
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
         }
     }
 
@@ -113,6 +124,7 @@ class CatalogService {
                     releaseDate: '2024-02-01',
                     streams: 38000,
                     revenue: 2234,
+<<<<<<< HEAD
                     platforms: ['Spotify', 'Apple Music', 'YouTube'],
                     mood: 'upbeat',
                     genre: 'Dancehall',
@@ -173,3 +185,6 @@ class CatalogService {
 }
 
 export default CatalogService;
+=======
+                    platforms: ['Spotify', 'Apple
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e

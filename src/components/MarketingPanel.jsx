@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { getArtistId } from '../state/ArtistManager.js';
 import axios from 'axios';
@@ -28,4 +29,10 @@ export default function MarketingPanel({ user }) {
       <pre>{trendData ? JSON.stringify(trendData, null, 2) : 'Loading trend data...'}</pre>
     </div>
   );
+=======
+import React from 'react';
+
+export default function MarketingPanel({ user }) {
+  return <div>👋 Marketing data for {user?.username || 'Guest'}</div>;
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import SpotifyService from '../services/SpotifyService.js';
 
@@ -82,12 +83,69 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("mockToken");
     setUser(null);
     setAuthorized(false);
+=======
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import cognitoAuthService from '../services/CognitoAuthService';
+
+const AuthContext = createContext();
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [username, setUsername] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function checkAuthStatus() {
+      try {
+        const result = await cognitoAuthService.getCurrentUser();
+        if (result.success) {
+          setUser(result.user);
+          setUsername(result.username);
+          setIsAuthenticated(true);
+        }
+      } catch {
+        // ignore
+      }
+      setLoading(false);
+    }
+
+    checkAuthStatus();
+  }, []);
+
+  const signIn = async (email, password) => {
+    const result = await cognitoAuthService.signIn(email, password);
+    if (result.success) {
+      setUser(result.user);
+      setUsername(result.username);
+      setIsAuthenticated(true);
+    }
+    return result;
+  };
+
+  const signOut = async () => {
+    await cognitoAuthService.signOut();
+    setUser(null);
+    setUsername('');
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
     setIsAuthenticated(false);
   };
 
   return (
+<<<<<<< HEAD
     <AuthContext.Provider value={{ user, setUser, username, setUsername, login, logout, authorized, loading, isAuthenticated, setIsAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
 };
+=======
+    <AuthContext.Provider value={{ user, username, isAuthenticated, loading, signIn, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e

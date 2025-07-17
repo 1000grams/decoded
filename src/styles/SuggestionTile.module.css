@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿suggestionTile {
   background-color: #1e3a8a; /* Dark blue background */
   border-radius: 12px; /* Smaller border radius */
@@ -20,6 +21,28 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Enhanced shadow on hover */
 }
 
+=======
+.suggestionTile {
+  background-color: #f5f5f5;
+  border-radius: 18px;
+  padding: 18px 28px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  transition: background 0.18s cubic-bezier(.4,0,.2,1), box-shadow 0.18s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 2px 8px rgba(30,41,59,0.07);
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  margin: 0.5em 0;
+  border: none;
+}
+.suggestionTile:hover {
+  background-color: #e8e8e8;
+  box-shadow: 0 4px 16px rgba(30,41,59,0.10);
+}
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 .suggestionTileIcon {
   font-size: 1.5em;
   opacity: 0.7;

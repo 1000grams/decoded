@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿* Use variables from global.css */
+=======
+/* Use variables from global.css */
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 .section {
   padding: var(--section-padding-v) 1rem; /* Use global variable */
   background-color: var(--bg-color);

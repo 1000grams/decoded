@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "decodedmusic-frontend",
   "version": "1.0.0",
   "private": true,
@@ -22,6 +23,46 @@
   },
   "eslintConfig": {
     "extends": ["react-app", "react-app/jest"]
+=======
+  "name": "decoded-music-landing-page",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.830.0",
+    "@aws-sdk/client-lambda": "^3.830.0",
+    "@aws-sdk/client-s3": "^3.830.0",
+    "@aws-sdk/client-secrets-manager": "^3.830.0",
+    "aws-sdk": "^2.1692.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "node-fetch": "^2.7.0",
+    "oidc-client-ts": "^3.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0",
+    "react-oidc-context": "^3.3.0",
+    "react-router-dom": "^6.23.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "build": "react-scripts build",
+    "content-agent": "node scripts/dailyContentAgent.js",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --fix",
+    "research": "node scripts/musicManagementResearcher.js",
+    "shorts-pipeline": "node scripts/youtubeShortsPipeline.js",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   },
   "browserslist": {
     "production": [
@@ -36,9 +77,26 @@
     ]
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@eslint/js": "^9.30.1",
     "eslint": "^8.57.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.37.5"
+=======
+    "@babel/eslint-parser": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "@eslint/css": "^0.9.0",
+    "@eslint/js": "^9.30.1",
+    "@eslint/json": "^0.12.0",
+    "@eslint/markdown": "^6.6.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.3.0",
+    "typescript": "4.9.5"
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   }
 }

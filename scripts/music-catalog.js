@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Music Catalog System
 class MusicCatalog {
     constructor() {
@@ -5,16 +6,28 @@ class MusicCatalog {
         this.catalog = [];
         this.pitchTemplates = [];
         this.artistId = null; // Ensure artist_id is available
+=======
+﻿// Music Catalog System
+class MusicCatalog {
+    constructor() {
+        this.baseURL = 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
+        this.catalog = [];
+        this.pitchTemplates = [];
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
         this.init();
     }
 
     async init() {
+<<<<<<< HEAD
         this.artistId = await this.fetchArtistId();
+=======
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
         await this.loadCatalog();
         await this.loadPitchTemplates();
         this.renderCatalog();
     }
 
+<<<<<<< HEAD
     async fetchArtistId() {
         try {
             const response = await fetch(`${this.baseURL}/artist`, {
@@ -28,6 +41,8 @@ class MusicCatalog {
         }
     }
 
+=======
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
     async loadCatalog() {
         try {
             const token = localStorage.getItem('auth_token');
@@ -66,7 +81,10 @@ class MusicCatalog {
                 <div class="catalog-actions">
                     <button onclick="showAddTrack()" class="add-track-btn">Add Track</button>
                     <button onclick="showBulkPitch()" class="bulk-pitch-btn">Bulk Pitch</button>
+<<<<<<< HEAD
                     <a href="/pitcher" class="pitcher-link">Go to PITCHER</a>
+=======
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
                 </div>
             </div>
 
@@ -306,3 +324,20 @@ class MusicCatalog {
 
 // Global catalog instance
 window.musicCatalog = new MusicCatalog();
+<<<<<<< HEAD
+=======
+
+// Event handlers
+function showPitchModal(trackId) {
+    window.musicCatalog.showPitchModal(trackId);
+}
+
+function sendPitch(trackId) {
+    window.musicCatalog.sendPitch(trackId);
+}
+
+function playTrack(trackId) {
+    // Implement audio player functionality
+    console.log('Playing track:', trackId);
+}
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 ﻿import React from "react";
 import SignupForm from "../components/signup/SignupForm";
+=======
+import React from "react";
+import SignupCTAExample from "../components/signup/SignupCTAExample";
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 
 export default function SignUp() {
   return (
@@ -28,7 +33,11 @@ export default function SignUp() {
           color: "#222", // Make text dark for contrast
         }}
       >
+<<<<<<< HEAD
         <SignupForm />
+=======
+        <SignupCTAExample />
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
       </div>
     </div>
   );

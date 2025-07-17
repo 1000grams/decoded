@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿header {
+=======
+.header {
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   background-color: var(--bg-color);
   color: var(--text-color);
   padding: 1rem 0;

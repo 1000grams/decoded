@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿featureBlock {
+=======
+.featureBlock {
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   background-color: rgba(255, 255, 255, 0.05); /* Slightly lighter background for the block */
   padding: 1.5rem; /* Adjust padding */
   border-radius: 8px;
@@ -20,9 +24,13 @@
 
 .description {
   font-size: 1rem;
+<<<<<<< HEAD
   color: #111 !important;
   opacity: 1 !important;
   font-weight: 500;
+=======
+  color: rgba(255, 255, 255, 0.8); /* Slightly lighter text for body */
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   margin-bottom: 1.5rem; /* Space before potential button/link inside block */
   flex-grow: 1; /* Push content down if flex container */
 }

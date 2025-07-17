@@ -6,6 +6,7 @@ import content from '../content/landingPage.json'; // Import content
 import SuggestionTile from '../components/SuggestionTile.jsx';
 import { FaDollarSign, FaChartLine, FaGem } from 'react-icons/fa';
 
+<<<<<<< HEAD
 const subscriptionTiers = [
   { name: 'Artist Starter', price: 19, description: 'Perfect for emerging artists.' },
   { name: 'Pro Creator', price: 89, description: 'Ideal for professional creators.' },
@@ -18,6 +19,8 @@ const brandPricingTiers = [
   { name: 'Enterprise License', price: 499, description: 'Custom solutions for large-scale needs.' },
 ];
 
+=======
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 function Section4DynamicPricing() {
   return (
     <section className={styles.section} id="pricing-section">
@@ -68,6 +71,7 @@ function Section4DynamicPricing() {
              </ul>
         </div>
 
+<<<<<<< HEAD
         {/* Artist Subscription Plans */}
         <div className={styles.subscriptionTiers}>
           <h3 className={styles.headline}>For Artists</h3>
@@ -109,6 +113,8 @@ function Section4DynamicPricing() {
             <div className={styles.trackItem}>Track 3 - Artist Name</div>
           </div>
         </div>
+=======
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 
         <div className={styles.finalCta}>
            <Button variant="fill" color="accent" href={content.dynamicPricing.finalCtaHref}>

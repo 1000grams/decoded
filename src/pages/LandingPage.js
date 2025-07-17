@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React, { useEffect } from 'react';
 import { getCognitoTokenFromUrl } from '../utils/getCognitoToken';
 import PageLayout from '../layouts/PageLayout.js';
+=======
+import React from 'react';
+import PageLayout from '../layouts/PageLayout.js';
+import Section1Hero from '../sections/Section1Hero.js';
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 import Section2ProblemSolution from '../sections/Section2ProblemSolution.js';
 import Section3ArtistShowcase from '../sections/Section3ArtistShowcase.js';
 import Section4DynamicPricing from '../sections/Section4DynamicPricing.js';
@@ -9,6 +15,7 @@ import Section6Artists from '../sections/Section6Artists.js';
 import Section7Collaboration from '../sections/Section7Collaboration.js';
 import Section8AWS from '../sections/Section8AWS.js';
 import Section9CTA from '../sections/Section9CTA.js';
+<<<<<<< HEAD
 import SignupForm from '../components/SignupForm';
 
 function LandingPage() {
@@ -37,6 +44,13 @@ function LandingPage() {
           <SignupForm />
         </div>
       </section>
+=======
+
+function LandingPage() {
+  return (
+    <PageLayout>
+      <Section1Hero />
+>>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
       <Section2ProblemSolution />
       <Section3ArtistShowcase />
       <Section4DynamicPricing />
