@@ -65,6 +65,20 @@ class DynamoDBService {
         });
         return await response.json();
     }
+
+    // Save contact message
+    async saveContactMessage(data) {
+        const token = localStorage.getItem('cognito_id_token');
+        const response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/contact/save`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        });
+        return await response.json();
+    }
 }
 
 const dynamoDBServiceInstance = new DynamoDBService();

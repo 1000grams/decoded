@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import './Dashboard.css';
-import SpotifyModule from './SpotifyModule.js'; // Added .js extension for strict module resolution
+
+import SpotifyModule from './SpotifyModule.js';
+import CatalogPanel from './catalog/CatalogPanel.jsx';
+import AnalyticsPanel from './AnalyticsPanel.js';
+import MarketingHub from '../pages/MarketingHub.js';
+import LogoutButton from '../components/LogoutButton.jsx';
+
 import * as jwtDecode from 'jwt-decode';
-import { getArtistId } from '../state/ArtistManager.js'; // Added .js extension for strict module resolution
+import { getArtistId } from '../state/ArtistManager.js';
+import { useAuth } from '../context/AuthContext.js';
 import { DashboardAPI } from '../api/apiconfig.js';
 
 const CognitoDomain = 'https://auth.decodedmusic.com';
@@ -13,39 +20,26 @@ const Dashboard = ({ username, onSignOut }) => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [apiResponse, setApiResponse] = useState(null);
 
-  // Use artistId in API calls or data-fetching logic
-  const artistId = getArtistId();
+  const { user } = useAuth();
+  const artistId = getArtistId(user?.id);
 
   useEffect(() => {
-    const token = localStorage.getItem('cognito_id_token');
-    if (token) {
-      const decoded = jwtDecode(token);
-      console.log("Token expires at:", new Date(decoded.exp * 1000));
-    }
-  }, []);
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
 
-  // Added Cognito group verification
-  useEffect(() => {
-    const token = localStorage.getItem("cognito_id_token");
-    if (token) {
-      const decoded = JSON.parse(atob(token.split('.')[1]));
-      console.log("Cognito groups:", decoded["cognito:groups"]);
-
-      // Check if user belongs to the 'artist' group
-      if (!decoded["cognito:groups"]?.includes("artist")) {
-        console.error("User is not in the required Cognito group: artist");
-        setError("Access denied: You are not authorized to view this dashboard.");
-        setLoading(false);
-        return;
-      }
-
-      // Further check if 'rue_de_vivre' is associated with the 'artist' group
-      if (!decoded["cognito:groups"]?.includes("rue_de_vivre")) {
-        console.error("User is not in the required subgroup: rue_de_vivre");
-        setError("Access denied: You are not authorized to view this dashboard.");
-        setLoading(false);
-      }
+    if (code) {
+      fetch("https://decodedmusic.com/api/auth/exchange", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          localStorage.setItem("authToken", data.access_token);
+          window.location.replace("/dashboard");
+        });
     }
   }, []);
 
@@ -54,23 +48,25 @@ const Dashboard = ({ username, onSignOut }) => {
       try {
         const data = await DashboardAPI.getAnalytics({ artistId });
         setDashboardData(data);
-      } catch (error) {
-        console.error("Error fetching dashboard data:", error);
-        setError(error.message);
+        setApiResponse(data);
+      } catch (err) {
+        console.error("Dashboard data error:", err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
-    fetchData();
+    if (artistId) fetchData();
   }, [artistId]);
 
-  if (!localStorage.getItem('cognito_id_token')) {
-    // Ensure proper encoding of redirectUri in Cognito login URL
-    const redirectUri = encodeURIComponent("https://decodedmusic.com/dashboard");
-    const loginUrl = `https://${CognitoDomain}/login?client_id=${ClientId}&response_type=code&scope=openid+email+profile&redirect_uri=${redirectUri}`;
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/login';
+  };
 
-    return <Navigate to={loginUrl} />;
+  if (!localStorage.getItem('cognito_id_token')) {
+    const redirectUri = encodeURIComponent("https://decodedmusic.com/dashboard");
+    return <Navigate to={`${CognitoDomain}/login?client_id=${ClientId}&response_type=code&scope=openid+email+profile&redirect_uri=${redirectUri}`} />;
   }
 
   if (loading) {
@@ -93,19 +89,15 @@ const Dashboard = ({ username, onSignOut }) => {
 
   return (
     <div className="dashboard-container">
-      <header className="dashboard-header">
-        <div className="dashboard-nav">
-          <div className="dashboard-logo">
-            <h1>Comprehensive Growth Dashboard</h1>
-          </div>
-          <div className="user-controls">
-            <span className="welcome-text">Welcome back, {username}</span>
-            <button onClick={onSignOut} className="sign-out-btn">
-              Sign Out
-            </button>
-          </div>
+      <button onClick={handleLogout} className="logout-button">Logout</button>
+      <div className="artist-banner">
+        <h2>👤 {user?.name || 'Unknown Artist'}</h2>
+        <p><strong>Artist ID:</strong> {artistId}</p>
+        <p><strong>Spotify:</strong> <a href={user?.spotifyUrl} target="_blank" rel="noreferrer">View Profile</a></p>
+        <div className="user-controls">
+          <button onClick={onSignOut} className="sign-out-btn">Sign Out</button>
         </div>
-      </header>
+      </div>
 
       <main className="analytics-grid">
         <section className="portfolio-card">
@@ -150,6 +142,28 @@ const Dashboard = ({ username, onSignOut }) => {
           </div>
         </section>
       </main>
+
+      <div className="dashboard-grid">
+        <div className="catalog-column">
+          <CatalogPanel artistId={artistId} />
+        </div>
+        <div className="analytics-column">
+          <AnalyticsPanel artistId={artistId} />
+        </div>
+        <div className="spotify-column">
+          <SpotifyModule artistId={artistId} />
+        </div>
+      </div>
+
+      <div className="marketing-hub">
+        <MarketingHub artistId={artistId} />
+      </div>
+
+      {apiResponse && (
+        <div>
+          <pre>{JSON.stringify(apiResponse, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 };

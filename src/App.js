@@ -16,6 +16,7 @@ import BuzzPage from './pages/BuzzPage.js'; // Added .js extension for strict mo
 import MarketingHub from './pages/MarketingHub.jsx';
 import PrivateRoute from './components/PrivateRoute.js'; // Added .js extension for strict module resolution
 import SpotifyModule from './components/SpotifyModule.js';
+import ArtistDashboard from './pages/ArtistDashboard.js';
 
 import { getArtistId, setArtistId, setArtistIdFromUser } from './state/ArtistManager.js'; // Added .js extension for strict module resolution
 
@@ -179,7 +180,7 @@ function AppContent() {
         <Route path="/login" element={<Navigate to={`${cognitoDomain}/login?client_id=${clientId}&response_type=code&scope=openid+email+profile&redirect_uri=${redirectUri}`} replace />} />
 
         {/* Protected Routes */}
-        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+        <Route path="/dashboard" element={<PrivateRoute><ArtistDashboard /></PrivateRoute>} />
         <Route path="/marketing" element={<PrivateRoute><MarketingPanel user={user} /></PrivateRoute>} />
         <Route path="/catalog" element={<PrivateRoute><CatalogPanel /></PrivateRoute>} />
         <Route path="/analytics" element={<PrivateRoute><AnalyticsPanel user={user} /></PrivateRoute>} />

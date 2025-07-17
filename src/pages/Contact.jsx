@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import dynamoDBServiceInstance from '../services/DynamoDBService';
 
 const API_URL =
   process.env.REACT_APP_CONTACT_API_URL ||
@@ -13,16 +14,14 @@ export default function Contact() {
     e.preventDefault();
     setStatus("Sending...");
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (response.ok) {
-        setStatus("Thank you! We'll be in touch soon.");
-      } else {
-        throw new Error("Request failed");
-      }
+      const data = {
+        name: form.name,
+        email: form.email,
+        message: form.message,
+        submittedAt: new Date().toISOString(),
+      };
+      await dynamoDBServiceInstance.saveContactMessage(data);
+      setStatus("Thank you! We'll be in touch soon.");
     } catch (err) {
       window.localStorage.setItem(`contact_${Date.now()}`, JSON.stringify(form));
       setStatus("Saved locally (no backend)");

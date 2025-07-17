@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { DashboardAPI } from '../api/apiconfig.js';
 import { getCognitoTokenFromUrl } from '../utils/getCognitoToken.js';
+import { getArtistId } from '../state/ArtistManager.js';
 import SpotifyModule from '../components/SpotifyModule.js';
 import LogoutButton from '../components/LogoutButton.jsx';
 
-const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
-const REDIRECT_URI = process.env.REACT_APP_SPOTIFY_REDIRECT_URI ||
-  window.location.origin + '/dashboard';
+const CLIENT_ID = '5866a38ab59f46b2b8ceebfa17540d32';
+const CLIENT_SECRET = '1b88d0111feb49adbb15521ddf9d1ac8';
+const REDIRECT_URI = window.location.origin + '/dashboard';
 const SCOPES = ['user-read-private', 'user-read-email'];
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
 
@@ -17,11 +18,15 @@ const buildAuthUrl = () => {
 function ArtistDashboard() {
   const [accounting, setAccounting] = useState(null);
   const [error, setError] = useState('');
+  const [artistId, setArtistId] = useState(null);
 
   useEffect(() => {
     const token = getCognitoTokenFromUrl();
     if (token) {
-      DashboardAPI.getAccounting({ artistId: 'RueDeVivre' })
+      const id = getArtistId();
+      setArtistId(id);
+
+      DashboardAPI.getAccounting({ artistId: id })
         .then((data) => setAccounting(data))
         .catch((err) => setError(err.message));
     }
@@ -59,6 +64,7 @@ function ArtistDashboard() {
         {error && <div style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
         {accounting ? (
           <div style={{ marginTop: '1rem' }}>
+            <div>Artist ID: {artistId}</div>
             <div>Total Revenue: {(accounting.totalRevenue / 100).toFixed(2)}</div>
             <div>Total Expenses: {(accounting.totalExpenses / 100).toFixed(2)}</div>
             <div>Net Revenue: {(accounting.netRevenue / 100).toFixed(2)}</div>

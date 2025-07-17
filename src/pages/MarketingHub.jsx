@@ -11,7 +11,7 @@ function MarketingHub() {
   const [artistId, setArtistId] = useState('');
   const [weeklyGrowth, setWeeklyGrowth] = useState({ subscribers: 0, streams: 0 });
   const [metaLlamaResult, setMetaLlamaResult] = useState('');
-  const [contentPlan] = useState([]);
+  const [contentPlan, setContentPlan] = useState([]);
 
   useEffect(() => {
     async function fetchArtistId() {
@@ -42,6 +42,27 @@ function MarketingHub() {
 
     // Fetch weekly growth tracking data (mocked for now)
     setWeeklyGrowth({ subscribers: 120, streams: 4500 });
+
+    setContentPlan([
+      {
+        platform: 'Instagram',
+        contentIdea: 'Behind-the-scenes teaser',
+        goal: 'Engagement spike before release',
+        execution: 'Post reel with CTA to pre-save',
+      },
+      {
+        platform: 'Spotify',
+        contentIdea: 'Curated playlist update',
+        goal: 'Drive streams',
+        execution: 'Update bio with playlist link',
+      },
+      {
+        platform: 'YouTube Shorts',
+        contentIdea: 'Studio snippet',
+        goal: 'Fan connection',
+        execution: 'Drop 30-second beat breakdown',
+      },
+    ]);
   }, []);
 
   // Use artistId in API calls or data-fetching logic

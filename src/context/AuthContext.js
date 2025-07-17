@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import SpotifyService from '../services/SpotifyService.js';
 
 // Create context
 const AuthContext = createContext(null);
@@ -48,6 +49,17 @@ export const AuthProvider = ({ children }) => {
       checkArtistGroup(email).then((isAuth) => {
         console.log("✅ Group check:", isAuth); // Debug logging for group check
         setAuthorized(isAuth);
+      });
+
+      SpotifyService.getProfile(parsed.id).then((profile) => {
+        setUser((prevUser) => ({
+          ...prevUser,
+          artistName: profile.name,
+          artistId: profile.id,
+          spotifyUrl: profile.external_urls.spotify,
+        }));
+      }).catch((error) => {
+        console.error("Error fetching Spotify profile:", error);
       }).finally(() => {
         setLoading(false);
       });

@@ -1,10 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import MusicCatalog from '../../scripts/music-catalog';
 
 function App() {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    // Initialize MusicCatalog
+    window.musicCatalog = new MusicCatalog();
+  }, []);
 
   return (
     <>
@@ -28,6 +34,10 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <div>
+        <h1>Welcome to the Music Catalog</h1>
+        <div id="catalog-container"></div>
+      </div>
     </>
   )
 }

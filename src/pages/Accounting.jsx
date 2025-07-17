@@ -1,13 +1,21 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { DashboardAPI } from '../api/dashboard';
+import { getArtistId, getArtistName } from '../state/ArtistManager.js';
 
 function Accounting() {
   const [summary, setSummary] = useState(null);
+  const [artistId, setArtistId] = useState(null);
+  const [artistName, setArtistName] = useState(null);
 
   useEffect(() => {
     async function fetchAccounting() {
       try {
-        const data = await DashboardAPI.getAccounting({ artistId: 'RueDeVivre' });
+        const id = getArtistId();
+        const name = getArtistName();
+        setArtistId(id);
+        setArtistName(name);
+
+        const data = await DashboardAPI.getAccounting({ artistId: id });
         setSummary(data);
       } catch (err) {
         console.error('fetch accounting error', err);
@@ -17,12 +25,13 @@ function Accounting() {
   }, []);
 
   const downloadCsv = () => {
-    window.location.href = `${DashboardAPI.API_ENDPOINTS.DASHBOARD_BASE}/accounting/export?artist_id=RueDeVivre`;
+    window.location.href = `${DashboardAPI.API_ENDPOINTS.DASHBOARD_BASE}/accounting/export?artist_id=${artistId}`;
   };
 
   return (
     <div style={{ padding: '2rem' }}>
       <h1>Accounting</h1>
+      <h2>Artist: {artistName || 'Unknown Artist'}</h2>
       <div style={{ margin: '1rem 0' }}>
         <button
           onClick={downloadCsv}

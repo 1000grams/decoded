@@ -15,39 +15,24 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "build": "react-scripts build",
-    "build-with-dashboard": "npm run integrate-dashboard && npm run build",
-    "deploy": "npm run build-with-dashboard && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1",
-    "deploy-complete": "npm run fix-dashboard && npm run build && aws s3 sync build/ s3://decoded-genai-stack-webappne-websitebucket4326d7c2-jvplfkkey9mb --delete --region eu-central-1",
-    "eject": "react-scripts eject",
-    "fix-dashboard": "powershell -ExecutionPolicy Bypass -File ../FIXED-DASHBOARD-GENERATOR.ps1 && npm run integrate",
-    "fix-powershell": "powershell -ExecutionPolicy Bypass -File ../FIXED-FRONTEND-GENERATOR.ps1",
-    "health-check": "echo 'Check http://localhost:3000/health.json after running npm start'",
-    "integrate": "node scripts/complete-integration.js",
-    "integrate-dashboard": "node scripts/integrate-dashboard.js",
-    "lint": "eslint . --fix",
     "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-apis": "echo 'Open http://localhost:3000/api-test.html after running npm start'",
-    "test-backend": "node scripts/test-backend-connection.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app", "react-app/jest"]
   },
-  "homepage": ".",
   "browserslist": {
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ],
     "production": [
       ">0.2%",
       "not dead",
       "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   },
   "devDependencies": {
