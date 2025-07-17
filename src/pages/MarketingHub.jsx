@@ -65,9 +65,6 @@ function MarketingHub() {
     ]);
   }, []);
 
-  // Use artistId in API calls or data-fetching logic
-  const artistIdFromState = getArtistId();
-
   return (
     <div
       style={{

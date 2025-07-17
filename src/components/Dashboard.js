@@ -4,11 +4,9 @@ import './Dashboard.css';
 
 import SpotifyModule from './SpotifyModule.js';
 import CatalogPanel from './catalog/CatalogPanel.jsx';
-import AnalyticsPanel from './AnalyticsPanel.js';
-import MarketingHub from '../pages/MarketingHub.js';
-import LogoutButton from '../components/LogoutButton.jsx';
+import AnalyticsPanel from './AnalyticsPanel.jsx';
+import MarketingHub from '../pages/MarketingHub.jsx';
 
-import * as jwtDecode from 'jwt-decode';
 import { getArtistId } from '../state/ArtistManager.js';
 import { useAuth } from '../context/AuthContext.js';
 import { DashboardAPI } from '../api/apiconfig.js';

@@ -6,7 +6,6 @@ import SpotifyModule from '../components/SpotifyModule.js';
 import LogoutButton from '../components/LogoutButton.jsx';
 
 const CLIENT_ID = '5866a38ab59f46b2b8ceebfa17540d32';
-const CLIENT_SECRET = '1b88d0111feb49adbb15521ddf9d1ac8';
 const REDIRECT_URI = window.location.origin + '/dashboard';
 const SCOPES = ['user-read-private', 'user-read-email'];
 const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';

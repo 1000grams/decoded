@@ -7,18 +7,16 @@ import AnalyticsService from './services/AnalyticsService.js';
 import SpotifyService from './services/SpotifyService.js';
 
 import LandingPage from './components/LandingPage.js';
-import Dashboard from './components/Dashboard.js'; // Corrected import path for Dashboard
-import CognitoLogin from './components/CognitoLogin.js';
 import MarketingPanel from './components/MarketingPanel.jsx';
 import CatalogPanel from './components/catalog/CatalogPanel.jsx';
-import AnalyticsPanel from './components/AnalyticsPanel.jsx';
+import AnalyticsPanel from './components/AnalyticsPanel.jsx'; // Corrected file extension
 import BuzzPage from './pages/BuzzPage.js'; // Added .js extension for strict module resolution
 import MarketingHub from './pages/MarketingHub.jsx';
-import PrivateRoute from './components/PrivateRoute.js'; // Added .js extension for strict module resolution
+import PrivateRoute from './components/PrivateRoute.jsx'; // Corrected file extension
 import SpotifyModule from './components/SpotifyModule.js';
 import ArtistDashboard from './pages/ArtistDashboard.js';
 
-import { getArtistId, setArtistId, setArtistIdFromUser } from './state/ArtistManager.js'; // Added .js extension for strict module resolution
+import { getArtistId } from './state/ArtistManager.js';
 
 import './index.css';
 import './App.css';
