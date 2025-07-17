@@ -1,16 +1,31 @@
 // Music Catalog System
 class MusicCatalog {
     constructor() {
-        this.baseURL = 'https://2h2oj7u446.execute-api.eu-central-1.amazonaws.com/prod';
+        this.baseURL = 'https://9zlblaqwo0.execute-api.eu-central-1.amazonaws.com/prod';
         this.catalog = [];
         this.pitchTemplates = [];
+        this.artistId = null; // Ensure artist_id is available
         this.init();
     }
 
     async init() {
+        this.artistId = await this.fetchArtistId();
         await this.loadCatalog();
         await this.loadPitchTemplates();
         this.renderCatalog();
+    }
+
+    async fetchArtistId() {
+        try {
+            const response = await fetch(`${this.baseURL}/artist`, {
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('auth_token')}` }
+            });
+            const data = await response.json();
+            return data.artist_id || null;
+        } catch (error) {
+            console.error('Error fetching artist ID:', error);
+            return null;
+        }
     }
 
     async loadCatalog() {
@@ -51,6 +66,7 @@ class MusicCatalog {
                 <div class="catalog-actions">
                     <button onclick="showAddTrack()" class="add-track-btn">Add Track</button>
                     <button onclick="showBulkPitch()" class="bulk-pitch-btn">Bulk Pitch</button>
+                    <a href="/pitcher" class="pitcher-link">Go to PITCHER</a>
                 </div>
             </div>
 
