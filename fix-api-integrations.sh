@@ -71,13 +71,29 @@ fix_integration_and_cors() {
     --resource-id "$resourceId" \
     --http-method OPTIONS \
     --status-code 200 \
-    --response-parameters "{
-      \"method.response.header.Access-Control-Allow-Headers\": \"'Content-Type,X-Amz-Date,Authorization,X-Api-Key'\",
-      \"method.response.header.Access-Control-Allow-Methods\": \"'GET,POST,PUT,DELETE,OPTIONS'\",
-      \"method.response.header.Access-Control-Allow-Origin\": \"'*'\"
-    }" 2>/dev/null || echo "⚠️ OPTIONS integration response exists"
+    --response-parameters "{\n      \"method.response.header.Access-Control-Allow-Headers\": \"'Content-Type,X-Amz-Date,Authorization,X-Api-Key'\",\n      \"method.response.header.Access-Control-Allow-Methods\": \"'GET,POST,PUT,DELETE,OPTIONS'\",\n      \"method.response.header.Access-Control-Allow-Origin\": \"'*'\"\n    }" 2>/dev/null || echo "⚠️ OPTIONS integration response exists"
 
   echo "✅ Fixed: $apiId $path $method"
+}
+
+retry_deployment() {
+  local apiId=$1
+  local retries=5
+  local delay=5
+
+  for ((i=1; i<=retries; i++)); do
+    echo "🚀 Attempting deployment for API $apiId (Attempt $i/$retries)..."
+    if aws apigateway create-deployment --rest-api-id "$apiId" --stage-name prod; then
+      echo "✅ Deployed $apiId to prod"
+      return
+    else
+      echo "⚠️ Deployment failed, retrying in $delay seconds..."
+      sleep $delay
+      delay=$((delay * 2))
+    fi
+  done
+
+  echo "❌ Failed to deploy $apiId after $retries attempts"
 }
 
 # Run fixes
@@ -85,13 +101,8 @@ for key in "${!integrations[@]}"; do
   IFS=":" read -r apiId path method <<< "$key"
   lambda=${integrations[$key]}
   fix_integration_and_cors "$apiId" "$path" "$method" "$lambda"
-done
+  retry_deployment "$apiId"
 
-# Deploy all affected APIs
-echo "🚀 Deploying APIs to 'prod'..."
-for apiId in $(for key in "${!integrations[@]}"; do echo "$key" | cut -d: -f1; done | sort -u); do
-  aws apigateway create-deployment --rest-api-id "$apiId" --stage-name prod
-  echo "✅ Deployed $apiId to prod"
 done
 
 echo "🎉 All integrations and CORS headers fixed!"
