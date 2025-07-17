@@ -4,7 +4,6 @@ import { FaChartPie, FaBullhorn, FaCalendarAlt, FaFire } from 'react-icons/fa';
 import cognitoAuthService from '../services/CognitoAuthService';
 import { fetchArtistData } from '../services/ArtistService';
 import { generateContent } from '../services/BedrockService';
-import { getArtistId } from '../state/ArtistManager';
 import './MarketingHub.css';
 
 function MarketingHub() {
