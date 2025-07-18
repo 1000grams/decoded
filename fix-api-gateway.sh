@@ -24,6 +24,13 @@ declare -A routes=(
 
 methods=("GET" "POST" "PUT" "DELETE")
 
+# Routes that should use a single ANY method instead of separate verbs
+declare -A any_routes=(
+  ["/dashboard/analytics"]=1
+  ["/dashboard/spotify"]=1
+  ["/dashboard/streams"]=1
+)
+
 # ===== LOOP THROUGH ROUTES =====
 for path in "${!routes[@]}"; do
   lambdaName="$LAMBDA_PREFIX${routes[$path]}"
@@ -38,7 +45,13 @@ for path in "${!routes[@]}"; do
   fi
 
   # ===== CONNECT ROUTE TO LAMBDA =====
-  for method in "${methods[@]}"; do
+  if [[ -n "${any_routes[$path]}" ]]; then
+    method_list=("ANY")
+  else
+    method_list=("${methods[@]}")
+  fi
+
+  for method in "${method_list[@]}"; do
     # Check if method already exists
     existing=$(aws apigateway get-method --rest-api-id "$API_ID" --resource-id "$resourceId" --http-method "$method" --region "$REGION" 2>/dev/null || true)
     if [ -z "$existing" ]; then
