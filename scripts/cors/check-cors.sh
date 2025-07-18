@@ -14,6 +14,12 @@ ROUTES=$(aws apigateway get-resources \
   --query "items[?resourceMethods].{id:id,path:path,methods:keys(resourceMethods)}" \
   --output json)
 
+# Guard against empty or invalid output which can cause jq errors
+if ! echo "$ROUTES" | jq -e 'length > 0' >/dev/null 2>&1; then
+  echo "❌ Failed to fetch routes or no routes returned"
+  exit 1
+fi
+
 # Loop through each route and method
 for row in $(echo "$ROUTES" | jq -c '.[]'); do
   RESOURCE_ID=$(echo "$row" | jq -r '.id')
