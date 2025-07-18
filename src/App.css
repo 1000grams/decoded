@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿App {
-=======
 .App {
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   text-align: center;
 }
 
@@ -18,22 +14,14 @@
 }
 
 .App-header {
-<<<<<<< HEAD
-  background-color: #ffffff !important;
-=======
   background-color: #282c34;
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-<<<<<<< HEAD
-  color: #111111 !important;
-=======
   color: white;
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 }
 
 .App-link {
@@ -54,15 +42,3 @@
   width: auto;
   display: inline-block;
 }
-<<<<<<< HEAD
-
-/* nav bar */
-.main-nav {
-  display: flex;
-  gap: 1rem;
-  background: #222;
-  padding: 0.5rem;
-  align-items: center;
-}
-=======
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e

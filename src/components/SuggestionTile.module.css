@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿suggestionTile {
-=======
 .suggestionTile {
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   display: inline-flex;
   align-items: center;
   background: linear-gradient(90deg, #fff 60%, #f3f6fa 100%);

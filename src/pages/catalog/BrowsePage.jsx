@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿mport React, { useEffect, useState } from "react";
-=======
 import React, { useEffect, useState } from "react";
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 import SearchBar from "../../components/catalog/SearchBar";
 import FilterSidebar from "../../components/catalog/FilterSidebar";
 import TrackGrid from "../../components/catalog/TrackGrid";

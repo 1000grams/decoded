@@ -16,8 +16,4 @@ function Icon({ name, size = '24px', color = 'var(--accent-color)' }) {
   );
 }
 
-<<<<<<< HEAD
-export default Icon;
-=======
 export default Icon; 
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
