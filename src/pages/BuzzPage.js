@@ -1,10 +1,6 @@
 import React from 'react';
 import PageLayout from '../layouts/PageLayout.js';
-<<<<<<< HEAD
-import logo from '../assets/logo.png';
-=======
 import logo from '../assets/logo.png'; // Adjust path if needed
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 
 const industryBuzzSummary = `This Week’s Industry Buzz: Summer Solstice
 
@@ -54,24 +50,6 @@ function BuzzPage() {
           <p style={{ fontSize: '1.15rem', color: '#60a5fa', marginBottom: 0, fontWeight: 600 }}>
             📲 Follow and Connect on <a href="https://discord.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#60a5fa', textDecoration: 'underline', fontWeight: 700 }}>discord</a>
           </p>
-<<<<<<< HEAD
-          <a
-            href="https://auth.decodedmusic.com/login?client_id=5pb29tja8gkqm3jb43oimd5qjt&response_type=code&scope=openid+email+profile&redirect_uri=https://decodedmusic.com/dashboard"
-            style={{
-              background: 'linear-gradient(135deg, #00ff88 0%, #00d4ff 100%)',
-              border: 'none',
-              color: '#000',
-              padding: '0.5rem 1.5rem',
-              borderRadius: '0.5rem',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              textDecoration: 'none'
-            }}
-          >
-            🔑 Login
-          </a>
-=======
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
         </div>
       </section>
       <section style={{ background: 'linear-gradient(135deg, #1e293b 0%, #111827 100%)', color: '#fff', padding: '2.5rem 0' }}>
@@ -83,45 +61,6 @@ function BuzzPage() {
           <pre style={{ whiteSpace: 'pre-wrap', fontSize: '1.25rem', background: '#222b3a', color: '#e0e7ef', padding: '2rem', borderRadius: 16, lineHeight: 1.8, boxShadow: '0 2px 16px #2563eb22', fontFamily: 'Georgia, serif', fontWeight: 500 }}>{industryBuzzSummary}</pre>
         </div>
       </section>
-<<<<<<< HEAD
-      <section style={{ background: '#1e293b', color: '#fff', padding: '2rem 0', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1rem' }}>Stay in the Loop with Decoded!</h2>
-        <p style={{ fontSize: '1rem', marginBottom: '1.5rem' }}>Get the latest buzz, updates, and exclusive insights delivered straight to your inbox.</p>
-        <form style={{ maxWidth: '400px', margin: '0 auto' }} onSubmit={(e) => {
-          e.preventDefault();
-          alert('Thank you for subscribing!');
-        }}>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            required
-            style={{
-              width: '100%',
-              padding: '0.8rem',
-              borderRadius: '8px',
-              border: '1px solid #2563eb',
-              marginBottom: '1rem',
-              fontSize: '1rem'
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              background: '#2563eb',
-              color: '#fff',
-              padding: '0.8rem 1.5rem',
-              borderRadius: '8px',
-              border: 'none',
-              fontSize: '1rem',
-              cursor: 'pointer'
-            }}
-          >
-            Subscribe
-          </button>
-        </form>
-      </section>
-=======
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
     </PageLayout>
   );
 }

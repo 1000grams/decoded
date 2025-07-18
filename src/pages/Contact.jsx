@@ -1,17 +1,8 @@
-<<<<<<< HEAD
-﻿import React, { useState } from "react";
-import dynamoDBServiceInstance from '../services/DynamoDBService';
-
-const API_URL =
-  process.env.REACT_APP_CONTACT_API_URL ||
-  (process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}/contact` : "/api/contact");
-=======
 import React, { useState } from "react";
 
 const API_URL =
   process.env.REACT_APP_CONTACT_API_URL ||
   (process.env.REACT_APP_API_BASE ? `${process.env.REACT_APP_API_BASE}/contact` : "/api/contact");
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
@@ -22,16 +13,6 @@ export default function Contact() {
     e.preventDefault();
     setStatus("Sending...");
     try {
-<<<<<<< HEAD
-      const data = {
-        name: form.name,
-        email: form.email,
-        message: form.message,
-        submittedAt: new Date().toISOString(),
-      };
-      await dynamoDBServiceInstance.saveContactMessage(data);
-      setStatus("Thank you! We'll be in touch soon.");
-=======
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,7 +23,6 @@ export default function Contact() {
       } else {
         throw new Error("Request failed");
       }
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
     } catch (err) {
       window.localStorage.setItem(`contact_${Date.now()}`, JSON.stringify(form));
       setStatus("Saved locally (no backend)");

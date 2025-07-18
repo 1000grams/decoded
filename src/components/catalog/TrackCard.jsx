@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿mport React from "react";
-=======
 import React from "react";
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 import { Card, CardContent, CardFooter, Button } from "../ui";
 
 export default function TrackCard({ track }) {

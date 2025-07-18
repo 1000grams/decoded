@@ -1,66 +1,27 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import cognitoAuthService from '../services/CognitoAuthService.js';
-
-const CognitoLogin = ({ onAuthSuccess }) => {
-=======
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext.js';
 
 const CognitoLogin = () => {
     const { signIn } = useAuth();
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-<<<<<<< HEAD
-    useEffect(() => {
-        const checkCurrentUser = async () => {
-            try {
-                const result = await cognitoAuthService.getCurrentUser();
-                if (result.success) {
-                    console.log("✅ Current user detected:", result);
-                    onAuthSuccess(result.user, result.token, result.username);
-                }
-            } catch (error) {
-                console.log('No current user found');
-            }
-        };
-
-        checkCurrentUser();
-    }, [onAuthSuccess]);
-
-=======
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
     const handleSignIn = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
 
         try {
-<<<<<<< HEAD
-            const result = await cognitoAuthService.signIn(email, password);
-            console.log("✅ Logged in:", result);
-            
-            if (result.success) {
-                onAuthSuccess(result.user, result.token, result.username);
-            } else {
-=======
             const result = await signIn(email, password);
             if (!result.success) {
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
                 setError(result.error);
             }
         } catch (error) {
             setError('Login failed. Please try again.');
         }
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
         setLoading(false);
     };
 

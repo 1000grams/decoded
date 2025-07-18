@@ -1,10 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-<<<<<<< HEAD
-import Button from './Button.js'; // Added .js extension for strict module resolution
-=======
 import Button from './Button';
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
 import styles from '../styles/Button.module.css';
 
 describe('Button component', () => {

@@ -1,29 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "decodedmusic-frontend",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@aws-sdk/client-apigatewayv2": "^3.844.0",
-    "@aws-sdk/client-lambda": "^3.844.0",
-    "amazon-cognito-identity-js": "^6.3.15",
-    "path-browserify": "^1.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0",
-    "react-router-dom": "^6.30.1",
-    "react-scripts": "5.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
-=======
   "name": "decoded-music-landing-page",
   "version": "0.1.0",
   "private": true,
@@ -62,7 +37,6 @@
       "react-app",
       "react-app/jest"
     ]
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   },
   "browserslist": {
     "production": [
@@ -77,12 +51,6 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@eslint/js": "^9.30.1",
-    "eslint": "^8.57.1",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.37.5"
-=======
     "@babel/eslint-parser": "^7.28.0",
     "@babel/preset-react": "^7.27.1",
     "@eslint/css": "^0.9.0",
@@ -97,6 +65,5 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.3.0",
     "typescript": "4.9.5"
->>>>>>> 23d180db33d9b8ccfbbae5c78a31eb4c3edf3d9e
   }
 }
