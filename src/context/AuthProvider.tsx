@@ -24,8 +24,8 @@ const checkArtistGroup = async (email) => {
 
 // AuthProvider component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [authorized, setAuthorized] = useState(false);
+  const [user, setUser] = useState(null);        // Basic user info
+  const [authorized, setAuthorized] = useState(false); // Artist group check
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -68,5 +68,5 @@ class AnalyticsService {
   }
 }
 
-const instance = new AnalyticsService();
-export default instance;
+const analyticsInstance = new AnalyticsService();
+export default analyticsInstance;

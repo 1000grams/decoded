@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import cognitoAuthService from '../services/CognitoAuthService';
+import cognitoAuthService from '../services/CognitoAuthService.js';
 
 const AuthContext = createContext();
 
